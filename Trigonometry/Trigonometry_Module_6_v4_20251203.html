@@ -1,0 +1,3790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Technical Document Implementation v1.0 -->
+    
+    <!-- 
+    Document Provenance:
+      Title: An Introduction to Trigonometry and its Application
+      Module: 6 - Real-World Applications
+      Version: 4
+      Date: December 2025
+      Guidelines Version: Technical Document Implementation v1.8
+      
+      Version History:
+        v4 (2025-12-03): Added navigation structure
+          - Added module title page with lesson context
+          - Added module table of contents with full depth (h2 + h3)
+          - Added list of figures (18 titled figures, 20 JSXGraph boards)
+          - Added IDs to all h2 and h3 headings for linking
+        v3 (2025-11-28): Formatting updates
+        v1 (2025-11-25): Full v1.0 compliance update
+        v0.991 (2025-11-18): Encoding fixes, fullscreen support
+        
+      Figure Inventory (18 titled figures, 20 JSXGraph boards):
+        Fig. 6.2-1: Triangle Showing Law of Sines Setup
+        Fig. 6.2-2: The Ambiguous Case - Two Triangles from Same SSA Data
+        Fig. 6.2-3: Surveying Triangle for Practice Problem 1
+        Fig. 6.3-1: Triangle Showing Law of Cosines Setup
+        Fig. 6.3-2: Coordinate Geometry Derivation of Law of Cosines
+        Fig. 6.3-3: Parallelogram with Diagonal (Example 3)
+        Fig. 6.3-4: Triangle with Sides 5, 7, and 9 meters (Example 4)
+        Fig. 6.3-5: Ship Navigation Path (Practice Problem 2)
+        Fig. 6.4-1: Navigation Path with Bearings (Example 5)
+        Fig. 6.4-2: Aircraft Navigation Path (Practice Problem 3)
+        Fig. 6.5-1: Eratosthenes' Measurement of Earth's Circumference
+        Fig. 6.5-2: Surveying Across a Canyon (Example 6)
+        Fig. 6.6-1: Vector Decomposition into Components
+        Fig. 6.6-2: Initial Velocity Decomposition for Projectile Motion
+        Fig. 6.6-3: Projectile Trajectories at Different Launch Angles
+        Fig. 6.7-1: Simple Roof Truss (Example 9)
+        Fig. 6.7-2: Two-Segment Robot Arm Geometry
+        Fig. 6.9-1: Stellar Parallax - Earth's Orbital Motion Reveals Star Distance
+        Fig. A.1-1: Triangle for Law of Sines Proof
+        Fig. A.2-1: Triangle for Law of Cosines Proof
+      
+      Validation Status: PENDING (2025-12-03)
+        - STEM Whitelist: PENDING
+        - ftfy Encoding: PENDING
+        - Anchor Links: PENDING
+    -->
+    
+    <title>Trigonometry Module 6: Real-World Applications</title>
+    
+    
+    <!-- JSXGraph for geometric diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraph.css" />
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1e40af; 
+            border-bottom: 3px solid #3b82f6; 
+            padding-bottom: 10px; 
+        }
+        h2 { 
+            color: #1e40af; 
+            margin-top: 30px; 
+        }
+        h3 { 
+            color: #374151; 
+        }
+        .highlight { 
+            background-color: #dbeafe; 
+            padding: 15px; 
+            border-left: 4px solid #3b82f6; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .example { 
+            background-color: #d1fae5; 
+            padding: 15px; 
+            border-left: 4px solid #10b981; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .warning { 
+            background-color: #fef3c7; 
+            padding: 15px; 
+            border-left: 4px solid #f59e0b; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .historical { 
+            background-color: #fce7f3; 
+            padding: 15px; 
+            border-left: 4px solid #ec4899; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .problem {
+            background-color: #f0f9ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+            border-radius: 4px;
+        }
+        .solution {
+            background-color: #f0fdf4;
+            padding: 15px;
+            margin: 10px 0 15px 20px;
+            border-left: 4px solid #10b981;
+            border-radius: 4px;
+        }
+        .formula { 
+            text-align: center; 
+            font-size: 1.2em; 
+            margin: 20px 0; 
+            padding: 15px; 
+            background-color: #f3f4f6; 
+            border-radius: 4px; 
+        }
+        code { 
+            background-color: #f3f4f6; 
+            padding: 2px 6px; 
+            border-radius: 3px; 
+            font-family: 'Courier New', monospace; 
+        }
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .graph-container { 
+            margin: 30px 0; 
+            padding: 20px; 
+            background-color: #f9fafb; 
+            border-radius: 8px; 
+        }
+        .graph-title { 
+            font-weight: bold; 
+            color: #1e40af; 
+            margin-bottom: 10px; 
+            text-align: center; 
+        }
+        .graph-caption { 
+            font-size: 0.9em; 
+            color: #6b7280; 
+            margin-top: 10px; 
+            font-style: italic; 
+            text-align: center; 
+        }
+        .jxgbox {
+            max-width: 100%;
+            aspect-ratio: 3 / 2;
+            max-height: calc(100vmin - 2em);
+            padding: 12px;              /* v0.98: Prevents text clipping at edges */
+            box-sizing: border-box;     /* v0.98: Includes padding in dimensions */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            margin: 0 auto;
+        }
+        canvas {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+        }
+        ul, ol { margin-left: 20px; }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-weight: bold;
+        }
+        .appendix {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 3px solid #3b82f6;
+        }
+        
+        /* CRITICAL: MathJax display equations must not clip */
+        mjx-container[display="true"] {
+            overflow-x: auto;
+            overflow-y: visible;  /* CRITICAL: Must be 'visible' not 'hidden' to prevent clipping */
+            padding: 0.5em 0;
+            margin: 1em 0;
+        }
+        
+        /* v0.98: Mobile code wrapping for readability */
+        @media screen and (max-width: 768px) {
+            pre {
+                white-space: pre-wrap;      /* Wrap long lines on mobile */
+                word-break: break-all;      /* Break long words if necessary */
+                overflow-x: visible;        /* No horizontal scroll needed */
+            }
+        }
+
+        /* Module Title Page Styling */
+        .module-title-page {
+            text-align: center;
+            padding: 50px 20px;
+            margin: -40px -40px 30px -40px;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
+            border-bottom: 3px solid #3b82f6;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .module-title-page h1 {
+            font-size: 1.5em;
+            color: #1e40af;
+            border-bottom: none;
+            margin: 0 0 10px 0;
+            padding-bottom: 0;
+            line-height: 1.3;
+        }
+        
+        .module-title-page .module-subtitle {
+            font-size: 1.8em;
+            color: #1e40af;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .module-title-page .version {
+            font-size: 1.0em;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+        
+        /* Module Table of Contents Styling */
+        .module-toc {
+            background-color: #f0f9ff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin: 25px 0 30px 0;
+        }
+        
+        .module-toc h2 {
+            color: #1e40af;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        
+        .module-toc ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .module-toc > ul > li {
+            margin: 10px 0;
+        }
+        
+        .module-toc > ul > li > a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0em;
+        }
+        
+        .module-toc > ul > li > a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        .module-toc ul ul {
+            margin: 8px 0 8px 20px;
+            padding: 0;
+        }
+        
+        .module-toc ul ul li {
+            margin: 5px 0;
+        }
+        
+        .module-toc ul ul a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .module-toc ul ul a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        /* List of Figures Styling */
+        .figure-list {
+            background-color: #fefce8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #fde047;
+            margin: 0 0 35px 0;
+        }
+        
+        .figure-list h3 {
+            color: #854d0e;
+            margin: 0 0 12px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid #facc15;
+            padding-bottom: 8px;
+        }
+        
+        .figure-list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .figure-list li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .figure-list li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #ca8a04;
+            font-size: 0.8em;
+        }
+        
+        .figure-list a {
+            color: #92400e;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .figure-list a:hover {
+            text-decoration: underline;
+            color: #b45309;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- MODULE TITLE PAGE -->
+        <div class="module-title-page">
+            <h1>An Introduction to Trigonometry and its Application</h1>
+            <div class="module-subtitle">Module 6: Real-World Applications</div>
+            <div class="version">Version 1.0 — December 2025</div>
+        </div>
+
+        <!-- MODULE TABLE OF CONTENTS -->
+        <div class="module-toc">
+            <h2>In This Module</h2>
+            <ul>
+                <li><a href="#sec-6-1">6.1 Introduction: The Power of Solving General Triangles</a>
+                    <ul>
+                        <li><a href="#subsec-historical-context-spherical-to-planar">Historical Context: From Spherical to Planar Trigonometry</a></li>
+                        <li><a href="#subsec-classifying-triangles">Classifying Triangles: A Systematic Vocabulary</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-2">6.2 The Law of Sines</a>
+                    <ul>
+                        <li><a href="#subsec-law-of-sines-statement">The Statement</a></li>
+                        <li><a href="#subsec-when-to-use-law-of-sines">When to Use the Law of Sines</a></li>
+                        <li><a href="#subsec-understanding-why-law-of-sines-works">Understanding Why It Works</a></li>
+                        <li><a href="#subsec-the-ambiguous-case">The Ambiguous Case (SSA)</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-3">6.3 The Law of Cosines</a>
+                    <ul>
+                        <li><a href="#subsec-law-of-cosines-statement">The Statement</a></li>
+                        <li><a href="#subsec-when-to-use-law-of-cosines">When to Use the Law of Cosines</a></li>
+                        <li><a href="#subsec-understanding-why-law-of-cosines-works">Understanding Why It Works</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-4">6.4 Navigation Applications</a>
+                    <ul>
+                        <li><a href="#subsec-bearings-and-course">Bearings and Course</a></li>
+                        <li><a href="#subsec-age-of-exploration">The Age of Exploration and Trigonometry</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-5">6.5 Surveying and Triangulation</a>
+                    <ul>
+                        <li><a href="#subsec-triangulation-method">The Triangulation Method</a></li>
+                        <li><a href="#subsec-eratosthenes-survey">Eratosthenes and the First Trigonometric Survey</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-6">6.6 Physics Applications</a>
+                    <ul>
+                        <li><a href="#subsec-galileo-ballistics">Galileo and the Birth of Ballistics</a></li>
+                        <li><a href="#subsec-vector-components-forces">Vector Components and Forces</a></li>
+                        <li><a href="#subsec-distance-velocity-acceleration">Distance, Velocity, and Acceleration</a></li>
+                        <li><a href="#subsec-projectile-motion">Projectile Motion</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-7">6.7 Engineering Applications</a>
+                    <ul>
+                        <li><a href="#subsec-structural-analysis-trusses">Structural Analysis: Trusses and Bridges</a></li>
+                        <li><a href="#subsec-bridge-engineering-evolution">The Evolution of Bridge Engineering</a></li>
+                        <li><a href="#subsec-mechanical-linkages">Mechanical Linkages and Kinematics</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-8">6.8 Computer Graphics Applications</a>
+                    <ul>
+                        <li><a href="#subsec-2d-rotations">2D Rotations</a></li>
+                        <li><a href="#subsec-python-2d-rotation">Python Implementation: 2D Rotation</a></li>
+                        <li><a href="#subsec-3d-rotations">3D Rotations</a></li>
+                        <li><a href="#subsec-projection-3d-to-2d">Projection: From 3D to 2D</a></li>
+                        <li><a href="#subsec-birth-of-computer-graphics">The Birth of Computer Graphics</a></li>
+                        <li><a href="#subsec-python-3d-cube">Python Implementation: 3D Cube Rotation</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-9">6.9 Astronomy Applications</a>
+                    <ul>
+                        <li><a href="#subsec-parallax-stellar-distances">Parallax: Measuring Stellar Distances</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-6-10">6.10 Conclusion: The Unity of Trigonometric Applications</a></li>
+                <li><a href="#sec-appendix-a1">Appendix A.1: Proof of the Law of Sines</a>
+                    <ul>
+                        <li><a href="#subsec-special-cases">Special Cases</a></li>
+                        <li><a href="#subsec-complete-python-code">Complete Python Code</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-appendix-a2">Appendix A.2: Proof of the Law of Cosines</a>
+                    <ul>
+                        <li><a href="#subsec-how-to-run">How to Run</a></li>
+                        <li><a href="#subsec-understanding-the-code">Understanding the Code</a></li>
+                        <li><a href="#subsec-extension-ideas">Extension Ideas</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- LIST OF FIGURES -->
+        <div class="figure-list">
+            <h3>Figures in This Module</h3>
+            <ul>
+                <li><a href="#lawOfSinesTriangle">Fig. 6.2-1: Triangle Showing Law of Sines Setup</a></li>
+                <li><a href="#ambiguousCase">Fig. 6.2-2: The Ambiguous Case - Two Triangles from Same SSA Data</a></li>
+                <li><a href="#surveyingTriangle">Fig. 6.2-3: Surveying Triangle for Practice Problem 1</a></li>
+                <li><a href="#lawOfCosinesTriangle">Fig. 6.3-1: Triangle Showing Law of Cosines Setup</a></li>
+                <li><a href="#lawOfCosinesDerivation">Fig. 6.3-2: Coordinate Geometry Derivation of Law of Cosines</a></li>
+                <li><a href="#parallelogramDiagonal">Fig. 6.3-3: Parallelogram with Diagonal (Example 3)</a></li>
+                <li><a href="#triangle579">Fig. 6.3-4: Triangle with Sides 5, 7, and 9 meters (Example 4)</a></li>
+                <li><a href="#shipProblem2">Fig. 6.3-5: Ship Navigation Path (Practice Problem 2)</a></li>
+                <li><a href="#navigationExample5">Fig. 6.4-1: Navigation Path with Bearings (Example 5)</a></li>
+                <li><a href="#aircraftProblem3">Fig. 6.4-2: Aircraft Navigation Path (Practice Problem 3)</a></li>
+                <li><a href="#eratosthenes">Fig. 6.5-1: Eratosthenes' Measurement of Earth's Circumference</a></li>
+                <li><a href="#canyonSurvey">Fig. 6.5-2: Surveying Across a Canyon (Example 6)</a></li>
+                <li><a href="#vectorDecomp">Fig. 6.6-1: Vector Decomposition into Components</a></li>
+                <li><a href="#projectileV0">Fig. 6.6-2: Initial Velocity Decomposition for Projectile Motion</a></li>
+                <li><a href="#projectileChart">Fig. 6.6-3: Projectile Trajectories at Different Launch Angles</a></li>
+                <li><a href="#roofTruss">Fig. 6.7-1: Simple Roof Truss (Example 9)</a></li>
+                <li><a href="#robotArm">Fig. 6.7-2: Two-Segment Robot Arm Geometry</a></li>
+                <li><a href="#parallax">Fig. 6.9-1: Stellar Parallax - Earth's Orbital Motion Reveals Star Distance</a></li>
+                <li><a href="#lawOfSinesProof">Fig. A.1-1: Triangle for Law of Sines Proof</a></li>
+                <li><a href="#lawOfCosinesProof">Fig. A.2-1: Triangle for Law of Cosines Proof</a></li>
+            </ul>
+        </div>
+
+        <h1>Module 6: Real-World Applications</h1>
+
+        <h2 id="sec-6-1">6.1 Introduction: The Power of Solving General Triangles</h2>
+        
+        <p>
+            In the previous modules, we've built a comprehensive understanding of trigonometry: from right triangles and the unit circle, through graphing periodic functions, to manipulating complex identities. But there's one significant limitation we haven't yet addressed: most of our work has focused on <em>right triangles</em>—triangles with one 90° angle.
+        </p>
+
+        <p>
+            What about the vast majority of triangles that aren't right triangles? In the real world, when you're surveying land, navigating a ship, or analyzing forces in a bridge, the triangles you encounter are rarely convenient right triangles. You might know two sides and an angle, or three sides, or two angles and a side—but no right angle in sight.
+        </p>
+
+        <p>
+            This module introduces two powerful tools that extend trigonometry to <em>any</em> triangle: the <strong>Law of Sines</strong> and the <strong>Law of Cosines</strong>. These laws, developed over centuries by mathematicians from multiple cultures, unlock the full practical power of trigonometry. With them, we can solve real-world problems in navigation, surveying, physics, engineering, and even computer graphics.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-historical-context-spherical-to-planar">Historical Context: From Spherical to Planar Trigonometry</h3>
+            <p>
+                The laws we're about to study have deep historical roots. Islamic mathematicians of the 10th-13th centuries, working on problems in astronomy and geography, developed sophisticated versions of these laws for <em>spherical</em> triangles (triangles on the surface of a sphere—crucial for astronomy and navigation). <strong>Abu al-Wafa (940-998 CE)</strong> and <strong>Nasir al-Din al-Tusi (1201-1274)</strong> were pioneers in this work.
+            </p>
+            <p>
+                The planar (flat) versions we'll study—the forms most useful for everyday problems—were systematically developed during the European Renaissance. <strong>Regiomontanus (1436-1476)</strong>, a German mathematician and astronomer, published these laws in his landmark work <em>De Triangulis Omnimodis</em> (On Triangles of All Kinds) in 1464. This work became the foundation for Renaissance navigation and surveying.
+            </p>
+            <p>
+                The Age of Exploration (15th-17th centuries) created urgent practical demand for these tools. Portuguese and Spanish navigators needed to determine positions at sea, chart new trade routes, and create accurate maps. The Law of Sines and Law of Cosines became essential tools in the navigator's arsenal, alongside astronomical tables and the astrolabe.
+            </p>
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-classifying-triangles">Classifying Triangles: A Systematic Vocabulary</h3>
+            <p>
+                Before we dive into solving general triangles, let's establish clear terminology. Triangles can be classified using two independent properties: their side lengths and their interior angles. A triangle can be precisely named using one term from each category.
+            </p>
+            
+            <p><strong>Classification by Side Lengths:</strong></p>
+            <ul>
+                <li><strong>Scalene:</strong> All three sides have different lengths</li>
+                <li><strong>Isosceles:</strong> At least two sides are equal in length (the angles opposite those equal sides are also equal)</li>
+                <li><strong>Equilateral:</strong> All three sides are equal in length (all three interior angles are also equal, each measuring 60°)</li>
+            </ul>
+            
+            <p><strong>Classification by Interior Angles:</strong></p>
+            <p>(Remember: the three angles in any triangle always sum to 180°)</p>
+            <ul>
+                <li><strong>Acute:</strong> All three interior angles are acute (each less than 90°)</li>
+                <li><strong>Right:</strong> One interior angle is exactly 90° (the other two must be acute)</li>
+                <li><strong>Obtuse:</strong> One interior angle is obtuse (greater than 90°; the other two must be acute)</li>
+            </ul>
+            
+            <p><strong>Combining the Classifications:</strong></p>
+            <p>
+                The most precise way to describe a triangle is to combine a name from both systems. For example:
+            </p>
+            <ul>
+                <li>A <strong>right isosceles triangle</strong> has one 90° angle and two equal sides</li>
+                <li>An <strong>acute scalene triangle</strong> has all angles less than 90° and no equal sides</li>
+                <li>An <strong>obtuse isosceles triangle</strong> has one angle greater than 90° and two equal sides</li>
+            </ul>
+            
+            <p><strong>Note:</strong> Some combinations are impossible. For instance, you cannot have a "right equilateral triangle" because an equilateral triangle must have three 60° angles, while a right triangle must have one 90° angle—these requirements contradict each other.</p>
+        </div>
+
+        <h2 id="sec-6-2">6.2 The Law of Sines</h2>
+
+        <h3 id="subsec-law-of-sines-statement">The Statement</h3>
+
+        <p>
+            For any triangle with sides $a$, $b$, $c$ opposite to angles $A$, $B$, $C$ respectively:
+        </p>
+
+        <div class="formula">
+            $$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$$
+        </div>
+
+        <p>
+            Or equivalently (taking reciprocals):
+        </p>
+
+        <div class="formula">
+            $$\frac{\sin A}{a} = \frac{\sin B}{b} = \frac{\sin C}{c}$$
+        </div>
+
+        <p>
+            This remarkable relationship says that in <em>any</em> triangle, the ratio of a side length to the sine of its opposite angle is constant. This constant is actually $2R$, where $R$ is the radius of the circle that passes through all three vertices (the <strong>circumcircle</strong>), but we rarely need that fact for practical calculations.
+        </p>
+
+        <p>
+            An interesting geometric fact: for any three non-collinear points in a plane (that is, three points that don't all lie on the same straight line), there exists exactly one circle passing through all three points. This has been proven by geometers since ancient times—it's a fundamental theorem in Euclidean geometry. This circle is the circumcircle of the triangle formed by those three points, and its radius $R$ connects directly to the Law of Sines through the relationship $\displaystyle\frac{a}{\sin A} = 2R$.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.2-1: Triangle Showing Law of Sines Setup</div>
+            <div id="lawOfSinesTriangle" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Law of Sines Triangle
+            const board1 = JXG.JSXGraph.initBoard('lawOfSinesTriangle', {
+                boundingbox: [-1, 5, 9, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            const A1 = board1.create('point', [1, 1], {name: '', visible: false, fixed: true});
+            const B1 = board1.create('point', [7, 1], {name: '', visible: false, fixed: true});
+            const C1 = board1.create('point', [3, 4], {name: '', visible: false, fixed: true});
+            
+            const triangle1 = board1.create('polygon', [A1, B1, C1], {
+                fillColor: 'transparent',
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Labels for vertices
+            board1.create('text', [0.7, 0.7, '<b>A</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board1.create('text', [7.3, 0.7, '<b>B</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board1.create('text', [3, 4.4, '<b>C</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            
+            // Labels for sides (using midpoints)
+            board1.create('text', [4, 0.5, '<i>c</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board1.create('text', [5.2, 2.7, '<i>a</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board1.create('text', [1.8, 2.7, '<i>b</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+            // Angles (without automatic labels)
+            board1.create('angle', [B1, A1, C1], {
+                radius: 0.5,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board1.create('text', [1.7, 1.3, '<b>A</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            board1.create('angle', [C1, B1, A1], {
+                radius: 0.5,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board1.create('text', [6.3, 1.3, '<b>B</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            board1.create('angle', [A1, C1, B1], {
+                radius: 0.5,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board1.create('text', [3, 3.4, '<b>C</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                A general triangle ABC with sides a, b, c opposite angles A, B, C. The Law of Sines relates these through the equation a/sin(A) = b/sin(B) = c/sin(C).
+            </div>
+        </div>
+
+        <h3 id="subsec-when-to-use-law-of-sines">When to Use the Law of Sines</h3>
+
+        <p>
+            The Law of Sines is your tool of choice when you know:
+        </p>
+
+        <ul>
+            <li><strong>AAS (Angle-Angle-Side):</strong> Two angles and any side</li>
+            <li><strong>ASA (Angle-Side-Angle):</strong> Two angles and the side between them</li>
+            <li><strong>SSA (Side-Side-Angle):</strong> Two sides and an angle opposite one of them (but beware the ambiguous case!)</li>
+        </ul>
+
+        <h3 id="subsec-understanding-why-law-of-sines-works">Understanding Why It Works</h3>
+
+        <p>
+            Rather than diving into a formal proof here (see Appendix A if you're interested), let's build intuition for why this relationship makes sense.
+        </p>
+
+        <p>
+            Imagine you have a triangle and you know one complete side-angle pair: side $a$ and its opposite angle $A$. The ratio $a/\sin A$ tells you something fundamental about the triangle's size. Now, if you scale the entire triangle up or down, both $a$ and $\sin A$ change, but their <em>ratio</em> stays constant. This ratio is the same for all three side-angle pairs because they're all describing the same triangle at the same scale.
+        </p>
+
+        <p>
+            Think of it like this: $\sin A$ measures how "open" angle $A$ is (normalized to the unit circle), while $a$ measures how far side $a$ reaches. The ratio tells you how the triangle's size relates to the geometry of its angles.
+        </p>
+
+        <div class="example">
+            <p><strong>Example 1: Finding Unknown Sides (AAS Case)</strong></p>
+            <p>A triangle has angle $A = 40°$, angle $B = 60°$, and side $a = 15$ cm. Find side $b$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Using the Law of Sines:</p>
+            <p style="text-align: center;">$\displaystyle\frac{a}{\sin A} = \frac{b}{\sin B}$</p>
+            <p style="text-align: center;">$\displaystyle\frac{15}{\sin 40°} = \frac{b}{\sin 60°}$</p>
+            <p style="text-align: center;">$\displaystyle b = \frac{15 \cdot \sin 60°}{\sin 40°} = \frac{15 \cdot 0.8660}{0.6428} \approx 20.2$ cm</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 2: Finding Unknown Angles (ASA Case)</strong></p>
+            <p>A triangle has side $a = 8$ m, side $b = 10$ m, and angle $A = 50°$. Find angle $B$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Using the Law of Sines:</p>
+            <p style="text-align: center;">$\displaystyle\frac{\sin A}{a} = \frac{\sin B}{b}$</p>
+            <p style="text-align: center;">$\displaystyle\frac{\sin 50°}{8} = \frac{\sin B}{10}$</p>
+            <p style="text-align: center;">$\displaystyle\sin B = \frac{10 \cdot \sin 50°}{8} = \frac{10 \cdot 0.7660}{8} \approx 0.9575$</p>
+            <p style="text-align: center;">$B \approx \sin^{-1}(0.9575) \approx 73.1°$</p>
+        </div>
+
+        <div class="warning">
+            <h3 id="subsec-the-ambiguous-case">The Ambiguous Case (SSA)</h3>
+            <p>
+                When you know two sides and an angle opposite one of them (SSA), you might find zero, one, or even <em>two</em> valid triangles! This happens because an arc of a given radius can intersect a line at two different points.
+            </p>
+            <p>
+                For example, if you know sides $a$ and $b$ and angle $A$, when you use the Law of Sines to find $\sin B$, you might get a value like 0.5. But $\sin B = 0.5$ has two solutions in the range 0° to 180°: both $B = 30°$ and $B = 150°$ give the same sine value! Both might form valid triangles, or only one, or neither (if the sine calculation gives a value greater than 1).
+            </p>
+            <p>
+                Always check: does the sum of angles exceed 180°? Do the sides close to form a valid triangle? In practice, additional context (like knowing the triangle is acute or that certain angles must be less than 90°) usually resolves the ambiguity.
+            </p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.2-2: The Ambiguous Case - Two Triangles from Same SSA Data</div>
+                <div id="ambiguousCase" class="jxgbox"></div>
+
+            <script>
+            (function() {
+                // Ambiguous Case (SSA) Diagram
+                const board = JXG.JSXGraph.initBoard('ambiguousCase', {
+                    boundingbox: [-1, 5.5, 9, -0.5],
+                    axis: false,
+                    showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                    showCopyright: false,
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+                });
+                
+                // Given: Side c (base AB), angle A = 35°, and side a = 3.5 units
+                // This creates two possible positions for vertex C
+                
+                // Fixed points
+                const A = board.create('point', [1, 1], {name: '', visible: true, size: 3, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+                const B = board.create('point', [7, 1], {name: '', visible: true, size: 3, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+                
+                // Known angle A = 35° from horizontal (converted to radians)
+                const angleA = 35 * Math.PI / 180;
+                
+                // Ray from A at angle 35°
+                const rayEndX = 1 + 8 * Math.cos(angleA);
+                const rayEndY = 1 + 8 * Math.sin(angleA);
+                const rayEnd = board.create('point', [rayEndX, rayEndY], {name: '', visible: false, fixed: true});
+                
+                board.create('line', [A, rayEnd], {
+                    strokeColor: '#9ca3af',
+                    strokeWidth: 1.5,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Known side a = 3.5 (distance from B to C)
+                // Arc from B shows two possible positions for C
+                board.create('circle', [B, 3.5], {
+                    strokeColor: '#9ca3af',
+                    strokeWidth: 1,
+                    dash: 2,
+                    fillColor: 'transparent'
+                });
+                
+                // Calculate the two positions where circle intersects the ray
+                // Points on ray: (1 + t*cos(angleA), 1 + t*sin(angleA))
+                // Distance from B(7,1) must equal 3.5
+                // Solving: t^2 - 12*cos(angleA)*t + 23.75 = 0
+                const cos35 = Math.cos(angleA);
+                const sin35 = Math.sin(angleA);
+                const discriminant = 144 * cos35 * cos35 - 95;
+                const t1 = (12 * cos35 - Math.sqrt(discriminant)) / 2;
+                const t2 = (12 * cos35 + Math.sqrt(discriminant)) / 2;
+                
+                // Two possible positions for C (both on the ray from A)
+                // C1 (acute triangle): closer to A
+                const C1 = board.create('point', [1 + t1 * cos35, 1 + t1 * sin35], {name: '', visible: true, size: 3, fillColor: '#10b981', strokeColor: '#10b981', fixed: true});
+                
+                // C2 (obtuse triangle): farther from A
+                const C2 = board.create('point', [1 + t2 * cos35, 1 + t2 * sin35], {name: '', visible: true, size: 3, fillColor: '#f59e0b', strokeColor: '#f59e0b', fixed: true});
+                
+                // Triangle 1 (green - acute)
+                board.create('polygon', [A, B, C1], {
+                    fillColor: '#d1fae5',
+                    fillOpacity: 0.3,
+                    borders: {strokeColor: '#10b981', strokeWidth: 2.5}
+                });
+                
+                // Triangle 2 (amber - obtuse)
+                board.create('polygon', [A, B, C2], {
+                    fillColor: '#fef3c7',
+                    fillOpacity: 0.3,
+                    borders: {strokeColor: '#f59e0b', strokeWidth: 2.5}
+                });
+                
+                // Labels for vertices
+                board.create('text', [0.6, 0.7, '<b>A</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+                board.create('text', [7.3, 0.7, '<b>B</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+                board.create('text', [1 + t1 * cos35 - 0.3, 1 + t1 * sin35 + 0.3, '<b>C′</b>'], {fontSize: 16, color: '#10b981', fixed: true});
+                board.create('text', [1 + t2 * cos35 + 0.2, 1 + t2 * sin35 + 0.3, '<b>C″</b>'], {fontSize: 16, color: '#f59e0b', fixed: true});
+                
+                // Label the base (side c)
+                board.create('text', [4, 0.5, '<i>c</i> (known)'], {fontSize: 14, color: '#374151', fixed: true});
+                
+                // Label angle A
+                board.create('angle', [B, A, rayEnd], {
+                    radius: 0.7,
+                    strokeColor: '#1e40af',
+                    fillColor: 'transparent',
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                board.create('text', [1.8, 1.4, '<b>A = 35°</b> (known)'], {fontSize: 14, color: '#1e40af', fixed: true});
+                
+                // Label side a
+                board.create('text', [5.5, 2.3, '<i>a</i> (known)'], {fontSize: 14, color: '#374151', anchorX: 'middle', fixed: true});
+                
+                // Add explanatory notes
+                board.create('text', [4, 5, 'Same SSA data → Two different triangles!'], {fontSize: 15, color: '#dc2626', anchorX: 'middle', fixed: true});
+                board.create('text', [4, 4.6, 'Both C′ and C″ lie on the ray from A'], {fontSize: 12, color: '#6b7280', anchorX: 'middle', fixed: true});
+                
+            })();
+            </script>
+                <div class="graph-caption">
+                    Given side <i>c</i> (base AB), angle <i>A</i>, and side <i>a</i> (from B to C), there can be two valid triangles. The green triangle ABC′ and amber triangle ABC″ both satisfy the same SSA conditions, illustrating why this case is called "ambiguous."
+                </div>
+            </div>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 1:</strong> A surveyor measures a triangular plot of land. From point C, she measures angle C = 75° and side c = 120 meters. She also measures angle A = 45°. Find side a (the distance across from angle A).
+            
+            <div class="graph-container" style="margin-top: 15px;">
+                <div class="graph-title">Fig. 6.2-3: Surveying Triangle for Practice Problem 1</div>
+                <div id="surveyingTriangle" class="jxgbox"></div>
+
+            <script>
+            (function() {
+                // Surveying Triangle for Practice Problem 1
+                const board = JXG.JSXGraph.initBoard('surveyingTriangle', {
+                    boundingbox: [-0.5, 4.5, 7.5, -0.5],
+                    axis: false,
+                    showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                    showCopyright: false,
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+                });
+                
+                // Given: Angle A = 45°, Angle C = 75°, side c = 120m
+                // Angle B = 180° - 45° - 75° = 60°
+                
+                // Place vertices to create appropriate angles
+                // A at origin, B along x-axis
+                const A = board.create('point', [1, 1], {name: '', visible: false, fixed: true});
+                const B = board.create('point', [6, 1], {name: '', visible: false, fixed: true});
+                
+                // C positioned to create the correct angles
+                // Using angle A = 45° and angle B = 60° to position C
+                const C = board.create('point', [2.5, 3.5], {name: '', visible: false, fixed: true});
+                
+                // Draw the triangle
+                board.create('polygon', [A, B, C], {
+                    fillColor: '#dbeafe',
+                    fillOpacity: 0.3,
+                    borders: {strokeColor: '#3b82f6', strokeWidth: 2.5}
+                });
+                
+                // Vertex labels
+                board.create('text', [0.6, 0.7, '<b>A</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+                board.create('text', [6.3, 0.7, '<b>B</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+                board.create('text', [2.5, 3.9, '<b>C</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+                
+                // Side labels with measurements
+                board.create('text', [3.5, 0.5, '<i>c</i> = 120 m'], {fontSize: 15, color: '#10b981', anchorX: 'middle', fixed: true});
+                board.create('text', [4.6, 2.5, '<i>a</i> = ?'], {fontSize: 15, color: '#dc2626', anchorX: 'middle', fixed: true});
+                board.create('text', [1.4, 2.5, '<i>b</i>'], {fontSize: 15, color: '#374151', fixed: true});
+                
+                // Angle at A (45°)
+                board.create('angle', [B, A, C], {
+                    radius: 0.6,
+                    strokeColor: '#10b981',
+                    fillColor: '#d1fae5',
+                    fillOpacity: 0.3,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                board.create('text', [1.7, 1.4, '<b>45°</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+                
+                // Angle at C (75°)
+                board.create('angle', [A, C, B], {
+                    radius: 0.6,
+                    strokeColor: '#10b981',
+                    fillColor: '#d1fae5',
+                    fillOpacity: 0.3,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                board.create('text', [2.5, 3.0, '<b>75°</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+                
+                // Angle at B (calculated: 60°)
+                board.create('angle', [C, B, A], {
+                    radius: 0.6,
+                    strokeColor: '#9ca3af',
+                    fillColor: 'transparent',
+                    strokeWidth: 1.5,
+                    dash: 2,
+                    withLabel: false
+                });
+                board.create('text', [5.4, 1.4, '60°'], {fontSize: 13, color: '#6b7280', fixed: true});
+                
+                // Add "Known" and "Unknown" labels
+                board.create('text', [3.5, 4.2, 'Known: C = 75°, A = 45°, c = 120 m'], {fontSize: 14, color: '#10b981', anchorX: 'middle', fixed: true});
+                board.create('text', [3.5, 3.8, 'Find: side a'], {fontSize: 14, color: '#dc2626', anchorX: 'middle', fixed: true});
+                
+            })();
+            </script>
+                <div class="graph-caption">
+                    Surveying triangle with known angle A = 45°, angle C = 75°, and side c = 120 meters. We need to find side a using the Law of Sines.
+                </div>
+            </div>
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <p style="margin: 8px 0;">We have angles A and C, so we can find angle B: B = 180° - 75° - 45° = 60°</p>
+            <p style="margin: 8px 0;">Using Law of Sines: $\displaystyle\frac{a}{\sin A} = \frac{c}{\sin C}$</p>
+            <p style="margin: 8px 0;">$\displaystyle a = \frac{c \cdot \sin A}{\sin C} = \frac{120 \cdot \sin 45°}{\sin 75°}$</p>
+            <p style="margin: 8px 0;">$\displaystyle a = \frac{120 \cdot 0.7071}{0.9659} \approx 87.8$ meters</p>
+        </div>
+
+        <h2 id="sec-6-3">6.3 The Law of Cosines</h2>
+
+        <h3 id="subsec-law-of-cosines-statement">The Statement</h3>
+
+        <p>
+            For any triangle with sides $a$, $b$, $c$ opposite to angles $A$, $B$, $C$ respectively:
+        </p>
+
+        <div class="formula">
+            $$a^2 = b^2 + c^2 - 2bc \cos A$$
+            $$b^2 = a^2 + c^2 - 2ac \cos B$$
+            $$c^2 = a^2 + b^2 - 2ab \cos C$$
+        </div>
+
+        <p>
+            Each form relates three sides and one angle. Notice something familiar? If angle $C = 90°$, then $\cos C = 0$, and the third equation becomes $c^2 = a^2 + b^2$—the Pythagorean Theorem! The Law of Cosines is a <em>generalization</em> of the Pythagorean Theorem that works for any triangle.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.3-1: Triangle Showing Law of Cosines Setup</div>
+            <div id="lawOfCosinesTriangle" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Law of Cosines Triangle
+            const board2 = JXG.JSXGraph.initBoard('lawOfCosinesTriangle', {
+                boundingbox: [-1, 5, 9, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            const A2 = board2.create('point', [1, 1], {name: '', visible: false, fixed: true});
+            const B2 = board2.create('point', [7, 1], {name: '', visible: false, fixed: true});
+            const C2 = board2.create('point', [2.5, 4], {name: '', visible: false, fixed: true});
+            
+            const triangle2 = board2.create('polygon', [A2, B2, C2], {
+                fillColor: 'transparent',
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Labels for vertices
+            board2.create('text', [0.7, 0.7, '<b>A</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board2.create('text', [7.3, 0.7, '<b>B</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board2.create('text', [2.5, 4.4, '<b>C</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            
+            // Labels for sides
+            board2.create('text', [4, 0.5, '<i>c</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board2.create('text', [5, 2.7, '<i>a</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board2.create('text', [1.5, 2.7, '<i>b</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+            // Highlight angle C
+            board2.create('angle', [A2, C2, B2], {
+                radius: 0.6,
+                strokeColor: '#f59e0b',
+                fillColor: '#fef3c7',
+                fillOpacity: 0.3,
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board2.create('text', [2.5, 3.3, '<b>C</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                A general triangle showing how the Law of Cosines c² = a² + b² - 2ab·cos(C) relates all three sides and one angle. When C = 90°, this reduces to the Pythagorean Theorem.
+            </div>
+        </div>
+
+        <h3 id="subsec-when-to-use-law-of-cosines">When to Use the Law of Cosines</h3>
+
+        <p>
+            The Law of Cosines is your tool of choice when you know:
+        </p>
+
+        <ul>
+            <li><strong>SAS (Side-Angle-Side):</strong> Two sides and the angle between them</li>
+            <li><strong>SSS (Side-Side-Side):</strong> All three sides (use it to find angles)</li>
+        </ul>
+
+        <h3 id="subsec-understanding-why-law-of-cosines-works">Understanding Why It Works</h3>
+
+        <p>
+            The Law of Cosines emerges from coordinate geometry and the distance formula. Imagine placing your triangle in a coordinate system with vertex $C$ at the origin and side $b$ along the positive x-axis. Then vertex $A$ is at $(b, 0)$, and vertex $B$ is at coordinates $(a \cos C, a \sin C)$.
+        </p>
+
+        <p>
+            Using the distance formula to find the distance from $A$ to $B$ (which is side $c$), and doing some algebra, leads directly to the Law of Cosines. The $-2ab \cos C$ term is the "correction factor" that accounts for the angle between the two sides. When the angle is 90°, this term vanishes (since $\cos 90° = 0$), and you're left with the Pythagorean Theorem.
+        </p>
+
+        <p>
+            Intuitively, the cosine term accounts for how much the two sides "close together" or "spread apart." An acute angle (positive cosine) makes the opposite side shorter than it would be in a right triangle. An obtuse angle (negative cosine) makes the opposite side longer.
+        </p>
+        
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.3-2: Coordinate Geometry Derivation of Law of Cosines</div>
+            <div id="lawOfCosinesDerivation" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Law of Cosines Coordinate Geometry Derivation
+            const board = JXG.JSXGraph.initBoard('lawOfCosinesDerivation', {
+                boundingbox: [-0.5, 4.5, 7, -0.5],
+                axis: true,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Set up coordinate system with C at origin
+            // Let b = 6, a = 4, angle C = 50° for visualization
+            const b = 5;
+            const a = 3.5;
+            const angleCRad = 50 * Math.PI / 180;
+            
+            // Vertices according to the coordinate system described
+            const C = board.create('point', [0, 0], {name: '', visible: true, size: 3, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+            const A = board.create('point', [b, 0], {name: '', visible: true, size: 3, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+            const B = board.create('point', [a * Math.cos(angleCRad), a * Math.sin(angleCRad)], {name: '', visible: true, size: 3, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+            
+            // Draw the triangle
+            board.create('polygon', [C, A, B], {
+                fillColor: '#dbeafe',
+                fillOpacity: 0.3,
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2.5}
+            });
+            
+            // Vertex labels
+            board.create('text', [-0.3, -0.3, '<b>C (0, 0)</b>'], {fontSize: 15, color: '#1e40af', fixed: true});
+            board.create('text', [b + 0.3, -0.3, '<b>A (b, 0)</b>'], {fontSize: 15, color: '#1e40af', fixed: true});
+            board.create('text', [a * Math.cos(angleCRad) - 0.8, a * Math.sin(angleCRad) + 0.3, '<b>B (a cos C, a sin C)</b>'], {fontSize: 15, color: '#1e40af', fixed: true});
+            
+            // Side labels
+            board.create('text', [b/2, -0.35, '<i>b</i>'], {fontSize: 16, color: '#10b981', anchorX: 'middle', fixed: true});
+            board.create('text', [(a * Math.cos(angleCRad))/2 - 0.3, (a * Math.sin(angleCRad))/2 + 0.2, '<i>a</i>'], {fontSize: 16, color: '#10b981', anchorX: 'middle', fixed: true});
+            board.create('text', [(b + a * Math.cos(angleCRad))/2 + 0.3, (a * Math.sin(angleCRad))/2, '<i>c = ?</i>'], {fontSize: 16, color: '#dc2626', anchorX: 'middle', fixed: true});
+            
+            // Angle C
+            board.create('angle', [A, C, B], {
+                radius: 0.8,
+                strokeColor: '#f59e0b',
+                fillColor: '#fef3c7',
+                fillOpacity: 0.3,
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board.create('text', [0.9, 0.3, '<b>C</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+            // Draw dashed lines to show B's coordinates
+            board.create('line', [[a * Math.cos(angleCRad), 0], [a * Math.cos(angleCRad), a * Math.sin(angleCRad)]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board.create('line', [[0, a * Math.sin(angleCRad)], [a * Math.cos(angleCRad), a * Math.sin(angleCRad)]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Coordinate labels for B
+            board.create('text', [a * Math.cos(angleCRad), -0.35, '<i>a cos C</i>'], {fontSize: 13, color: '#6b7280', anchorX: 'middle', fixed: true});
+            board.create('text', [-0.5, a * Math.sin(angleCRad), '<i>a sin C</i>'], {fontSize: 13, color: '#6b7280', anchorX: 'right', fixed: true});
+            
+            // Add derivation text
+            board.create('text', [3.5, 4.2, 'Distance formula: c² = (b - a cos C)² + (0 - a sin C)²'], {fontSize: 13, color: '#374151', anchorX: 'middle', fixed: true});
+            board.create('text', [3.5, 3.8, 'Expanding: c² = b² - 2ab cos C + a² cos²C + a² sin²C'], {fontSize: 13, color: '#374151', anchorX: 'middle', fixed: true});
+            board.create('text', [3.5, 3.4, 'Since cos²C + sin²C = 1: c² = a² + b² - 2ab cos C ✓'], {fontSize: 13, color: '#10b981', anchorX: 'middle', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                Coordinate geometry setup for deriving the Law of Cosines. By placing C at the origin, A at (b, 0), and B at (a cos C, a sin C), the distance formula yields c² = a² + b² - 2ab cos C.
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 3: Finding the Third Side (SAS Case)</strong></p>
+            <p>A parallelogram has two adjacent sides of length 8 cm and 12 cm, with an angle of 60° between them. Find the length of the diagonal connecting the opposite vertices.</p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.3-3: Parallelogram with Diagonal (Example 3)</div>
+                <div id="parallelogramDiagonal" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Parallelogram Diagonal Diagram
+            const board7 = JXG.JSXGraph.initBoard('parallelogramDiagonal', {
+                boundingbox: [-1, 6, 11, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Parallelogram vertices (calculated to ensure parallel sides)
+            // A at (1,1), B at (7,1) gives base of 6 units (scaled from 12cm)
+            // With 60° angle and side of 8cm (scaled to 4 units), D is at:
+            // D = A + (4*cos(60°), 4*sin(60°)) = (1,1) + (2, 3.46) = (3, 4.46)
+            // For parallelogram: C = B + vector(AD) = (7,1) + (2, 3.46) = (9, 4.46)
+            const P1 = board7.create('point', [1, 1], {name: '', visible: false, fixed: true});
+            const P2 = board7.create('point', [7, 1], {name: '', visible: false, fixed: true});
+            const P3 = board7.create('point', [9, 4.46], {name: '', visible: false, fixed: true});
+            const P4 = board7.create('point', [3, 4.46], {name: '', visible: false, fixed: true});
+            
+            // Draw parallelogram
+            board7.create('polygon', [P1, P2, P3, P4], {
+                fillColor: '#dbeafe',
+                fillOpacity: 0.3,
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Draw diagonal
+            board7.create('line', [P1, P3], {
+                strokeColor: '#dc2626',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Vertex labels
+            board7.create('text', [0.5, 0.7, '<b>A</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+            board7.create('text', [7.3, 0.7, '<b>B</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+            board7.create('text', [9.3, 4.8, '<b>C</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+            board7.create('text', [2.6, 4.8, '<b>D</b>'], {fontSize: 16, color: '#1e40af', fixed: true});
+            
+            // Side labels
+            board7.create('text', [4, 0.5, '12 cm'], {fontSize: 14, color: '#3b82f6', fixed: true});
+            board7.create('text', [1.5, 2.8, '8 cm'], {fontSize: 14, color: '#3b82f6', fixed: true});
+            board7.create('text', [4.5, 3.0, '<span style="color: #dc2626;">c = ?</span>'], {fontSize: 14, fixed: true});
+            
+            // Angle at A
+            board7.create('angle', [P2, P1, P4], {
+                radius: 0.8,
+                strokeColor: '#f59e0b',
+                fillColor: '#fef3c7',
+                fillOpacity: 0.3,
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board7.create('text', [2.0, 1.5, '<b>60°</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    A parallelogram with sides 8 cm and 12 cm and a 60° angle. The diagonal forms a triangle that we can solve using the Law of Cosines.
+                </div>
+            </div>
+            
+            <p><strong>Solution:</strong></p>
+            <p>The diagonal forms a triangle with the two sides. Using $c^2 = a^2 + b^2 - 2ab \cos C$:</p>
+            <p style="text-align: center;">$c^2 = 8^2 + 12^2 - 2(8)(12)\cos 60°$</p>
+            <p style="text-align: center;">$c^2 = 64 + 144 - 192(0.5) = 208 - 96 = 112$</p>
+            <p style="text-align: center;">$c = \sqrt{112} \approx 10.6$ cm</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 4: Finding an Angle (SSS Case)</strong></p>
+            <p>A triangle has sides of length 5 m, 7 m, and 9 m. Find the largest angle.</p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.3-4: Triangle with Sides 5, 7, and 9 meters (Example 4)</div>
+                <div id="triangle579" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Triangle 5-7-9 Diagram
+            const board8 = JXG.JSXGraph.initBoard('triangle579', {
+                boundingbox: [-1, 5, 9, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Calculate positions for a triangle with sides 5, 7, 9
+            // Place one vertex at origin, one at (7, 0)
+            // Use Law of Cosines to find the third vertex
+            // 5^2 = 7^2 + 9^2 - 2(7)(9)cos(A)
+            // cos(A) = (49 + 81 - 25) / (2*7*9) = 105/126 = 0.833
+            // A ≈ 33.6°
+            const T1 = board8.create('point', [1, 1], {name: '', visible: false, fixed: true});
+            const T2 = board8.create('point', [8, 1], {name: '', visible: false, fixed: true});
+            const T3 = board8.create('point', [3.5, 4.2], {name: '', visible: false, fixed: true});
+            
+            board8.create('polygon', [T1, T2, T3], {
+                fillColor: 'transparent',
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Vertex labels
+            board8.create('text', [0.6, 0.7, '<b>A</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board8.create('text', [8.3, 0.7, '<b>B</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board8.create('text', [3.5, 4.6, '<b>C</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            
+            // Side labels
+            board8.create('text', [4.5, 0.5, '9 m'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board8.create('text', [6.0, 2.8, '5 m'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board8.create('text', [2.0, 2.8, '7 m'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+            // Highlight the largest angle
+            board8.create('angle', [T1, T3, T2], {
+                radius: 0.6,
+                strokeColor: '#f59e0b',
+                fillColor: '#fef3c7',
+                fillOpacity: 0.4,
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board8.create('text', [3.5, 3.6, '<b>C ≈ 95.7°</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    A scalene triangle with sides 5 m, 7 m, and 9 m. The largest angle (opposite the 9 m side) is obtuse.
+                </div>
+            </div>
+            
+            <p><strong>Solution:</strong></p>
+            <p>The largest angle is opposite the longest side (9 m). Using $c^2 = a^2 + b^2 - 2ab \cos C$:</p>
+            <p style="text-align: center;">$9^2 = 5^2 + 7^2 - 2(5)(7)\cos C$</p>
+            <p style="text-align: center;">$81 = 25 + 49 - 70\cos C$</p>
+            <p style="text-align: center;">$81 = 74 - 70\cos C$</p>
+            <p style="text-align: center;">$7 = -70\cos C$</p>
+            <p style="text-align: center;">$\cos C = -7/70 = -0.1$</p>
+            <p style="text-align: center;">$C = \cos^{-1}(-0.1) \approx 95.7°$</p>
+            <p>This is an obtuse angle, as we'd expect for the largest angle in a scalene triangle.</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 2:</strong> A ship sails 30 km on a bearing of 40° east of north, then changes course and sails 45 km on a bearing of 130° east of north. How far is the ship from its starting point? (Hint: Find the angle between the two legs of the journey first, then use the Law of Cosines.)
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.3-5: Ship Navigation Path (Practice Problem 2)</div>
+            <div id="shipProblem2" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Ship Problem 2 Diagram
+            // Calculate coordinates first to determine boundingbox
+            // First leg: 30 km at bearing 40° → angle1 = 50° from x-axis
+            const angle1_rad = (90 - 40) * Math.PI / 180;
+            const pt1_x = 30 * Math.cos(angle1_rad);  // ≈ 19.3
+            const pt1_y = 30 * Math.sin(angle1_rad);  // ≈ 23.0
+            
+            // Second leg: 45 km at bearing 130° → angle2 = -40° from x-axis  
+            const angle2_rad = (90 - 130) * Math.PI / 180;
+            const final_x = pt1_x + 45 * Math.cos(angle2_rad);  // ≈ 19.3 + 34.5 ≈ 53.8
+            const final_y = pt1_y + 45 * Math.sin(angle2_rad);  // ≈ 23.0 - 28.9 ≈ -5.9
+            
+            // Boundingbox needs to include: origin (0,0), point1 (19.3, 23), final (53.8, -5.9)
+            // Add margins: x from -5 to 60, y from -10 to 30
+            // Format: [xmin, ymax, xmax, ymin]
+            const board9 = JXG.JSXGraph.initBoard('shipProblem2', {
+                boundingbox: [-5, 30, 60, -12],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw compass rose (simplified)
+            board9.create('arrow', [[0, 0], [0, 8]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                lastArrow: {type: 2, size: 5},
+                fixed: true});
+            board9.create('text', [0.5, 8.5, '<i>N</i>'], {fontSize: 14, color: '#9ca3af', fixed: true});
+            
+            // Starting point (port)
+            const port = board9.create('point', [0, 0], {
+                name: '',
+                size: 6,
+                fillColor: '#10b981',
+                strokeColor: '#059669',
+                fixed: true
+            });
+            board9.create('text', [-2, -1, '<b>Port</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            // First leg: 30 km at bearing 40° (40° clockwise from north)
+            // In standard coordinates: 90° - 40° = 50° from x-axis
+            const angle1 = (90 - 40) * Math.PI / 180;
+            const point1 = board9.create('point', [30 * Math.cos(angle1), 30 * Math.sin(angle1)], {
+                name: '',
+                size: 5,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            
+            board9.create('arrow', [[0, 0], [30 * Math.cos(angle1), 30 * Math.sin(angle1)]], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board9.create('text', [10, 20, '30 km at 40°'], {fontSize: 13, color: '#3b82f6', fixed: true});
+            
+            // Second leg: 45 km at bearing 130° (130° clockwise from north)
+            // In standard coordinates: 90° - 130° = -40° from x-axis
+            const angle2 = (90 - 130) * Math.PI / 180;
+            const finalX = 30 * Math.cos(angle1) + 45 * Math.cos(angle2);
+            const finalY = 30 * Math.sin(angle1) + 45 * Math.sin(angle2);
+            const finalPoint = board9.create('point', [finalX, finalY], {
+                name: '',
+                size: 6,
+                fillColor: '#dc2626',
+                strokeColor: '#b91c1c',
+                fixed: true
+            });
+            board9.create('text', [finalX + 1, finalY - 2, '<b>Final</b>'], {fontSize: 14, color: '#dc2626', fixed: true});
+            
+            board9.create('arrow', [[30 * Math.cos(angle1), 30 * Math.sin(angle1)], [finalX, finalY]], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board9.create('text', [33, 10, '45 km at 130°'], {fontSize: 13, color: '#f59e0b', fixed: true});
+            
+            // Return path (dashed)
+            board9.create('line', [port, finalPoint], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board9.create('text', [finalX/2 - 3, finalY/2, 'd ≈ 54.1 km'], {fontSize: 13, color: '#6b7280', fixed: true});
+            
+            // Right angle indicator
+            board9.create('angle', [finalPoint, point1, port], {
+                type: 'square',
+                orthoType: 'square',
+                radius: 2,
+                fillColor: '#10b981',
+                strokeColor: '#10b981',
+                withLabel: false
+            });
+            board9.create('text', [18, 22, '90°'], {fontSize: 12, color: '#10b981', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                Ship travels 30 km at bearing 40°, then 45 km at bearing 130°. The angle between the two legs is 90°, forming a right triangle.
+            </div>
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>The angle between the two legs is 130° - 40° = 90°. We have a right triangle! But let's use the Law of Cosines as practice.
+            <br>Using $c^2 = a^2 + b^2 - 2ab \cos C$:
+            <br>$c^2 = 30^2 + 45^2 - 2(30)(45)\cos 90°$
+            <br>$c^2 = 900 + 2025 - 2700(0) = 2925$
+            <br>$c = \sqrt{2925} \approx 54.1$ km
+            <br>(Notice that with the 90° angle, this reduces to the Pythagorean Theorem, as expected!)
+        </div>
+
+        <h2 id="sec-6-4">6.4 Navigation Applications</h2>
+
+        <p>
+            Trigonometry has been essential to navigation for thousands of years. From ancient Polynesian voyagers using star paths across the Pacific, to medieval Arab navigators using astrolabes, to modern GPS systems, the underlying mathematics remains fundamentally trigonometric.
+        </p>
+
+        <h3 id="subsec-bearings-and-course">Bearings and Course</h3>
+
+        <p>
+            In navigation, a <strong>bearing</strong> is a direction measured clockwise from north. A bearing of 90° means due east, 180° means due south, and so on. When a ship or aircraft travels on a bearing and then changes course, the path forms a triangle that we can solve using our laws.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-age-of-exploration">The Age of Exploration and Trigonometry</h3>
+            <p>
+                During the 15th-17th centuries, European powers competed to find new trade routes to Asia. Portuguese navigators, sponsored by Prince Henry the Navigator (1394-1460), pioneered systematic navigation techniques. They combined Arab astronomical knowledge, improved compass technology, and trigonometric calculations to sail farther from land than ever before.
+            </p>
+            <p>
+                The British <strong>Longitude Prize</strong> of 1714 offered £20,000 (millions in today's money) for a method to determine longitude at sea within 30 nautical miles. While John Harrison ultimately won with his chronometer, the mathematical problem spurred decades of work on lunar distance methods—which required solving complex spherical triangles using trigonometry.
+            </p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 5: Dead Reckoning Navigation</strong></p>
+            <p>A ship starts at port and sails 80 km on a bearing of 65°. It then changes course and sails 100 km on a bearing of 130°. How far is the ship from port, and what is the bearing from port to the ship's current position?</p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.4-1: Navigation Path with Bearings (Example 5)</div>
+                <div id="navigationExample5" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Navigation Example 5 Diagram
+            // Calculate coordinates to determine proper boundingbox
+            // First leg: 80 km at bearing 65° → angle = 25° from x-axis
+            const ex5_bear1 = (90 - 65) * Math.PI / 180;
+            const ex5_pt1X = 80 * Math.cos(ex5_bear1);  // ≈ 72.5
+            const ex5_pt1Y = 80 * Math.sin(ex5_bear1);  // ≈ 33.8
+            
+            // Second leg: 100 km at bearing 130° → angle = -40° from x-axis
+            const ex5_bear2 = (90 - 130) * Math.PI / 180;
+            const ex5_finalX = ex5_pt1X + 100 * Math.cos(ex5_bear2);  // ≈ 72.5 + 76.6 ≈ 149
+            const ex5_finalY = ex5_pt1Y + 100 * Math.sin(ex5_bear2);  // ≈ 33.8 - 64.3 ≈ -30.5
+            
+            // Boundingbox: x from -10 to 160, y from -40 to 45
+            // Format: [xmin, ymax, xmax, ymin]
+            const board10 = JXG.JSXGraph.initBoard('navigationExample5', {
+                boundingbox: [-10, 45, 160, -40],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw compass rose
+            board10.create('arrow', [[0, 0], [0, 15]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                lastArrow: {type: 2, size: 5},
+                fixed: true});
+            board10.create('text', [1, 16, '<i>N</i>'], {fontSize: 14, color: '#9ca3af', fixed: true});
+            
+            // Starting point (port)
+            const port2 = board10.create('point', [0, 0], {
+                name: '',
+                size: 6,
+                fillColor: '#10b981',
+                strokeColor: '#059669',
+                fixed: true
+            });
+            board10.create('text', [-6, -3, '<b>Port (P)</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            // First leg: 80 km at bearing 65°
+            const bear1 = (90 - 65) * Math.PI / 180;
+            const pt1X = 80 * Math.cos(bear1);
+            const pt1Y = 80 * Math.sin(bear1);
+            const navPt1 = board10.create('point', [pt1X, pt1Y], {
+                name: '',
+                size: 5,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            
+            board10.create('arrow', [[0, 0], [pt1X, pt1Y]], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board10.create('text', [15, 50, '80 km, bearing 65°'], {fontSize: 13, color: '#3b82f6', fixed: true});
+            
+            // Second leg: 100 km at bearing 130°
+            const bear2 = (90 - 130) * Math.PI / 180;
+            const finalNavX = pt1X + 100 * Math.cos(bear2);
+            const finalNavY = pt1Y + 100 * Math.sin(bear2);
+            const navFinal = board10.create('point', [finalNavX, finalNavY], {
+                name: '',
+                size: 6,
+                fillColor: '#dc2626',
+                strokeColor: '#b91c1c',
+                fixed: true
+            });
+            board10.create('text', [finalNavX + 2, finalNavY - 3, '<b>Ship (S)</b>'], {fontSize: 14, color: '#dc2626', fixed: true});
+            
+            board10.create('arrow', [[pt1X, pt1Y], [finalNavX, finalNavY]], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board10.create('text', [60, 60, '100 km, bearing 130°'], {fontSize: 13, color: '#f59e0b', fixed: true});
+            
+            // Return path (dashed)
+            board10.create('line', [port2, navFinal], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board10.create('text', [finalNavX/2 + 5, finalNavY/2 + 5, 'd ≈ 98.2 km'], {fontSize: 13, color: '#6b7280', fixed: true});
+            
+            // Angle at port
+            board10.create('angle', [navPt1, port2, navFinal], {
+                radius: 8,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    Ship travels from port (P) 80 km at bearing 65°, then 100 km at bearing 130°. The triangle formed allows us to calculate distance and bearing back to port.
+                </div>
+            </div>
+            
+            <p><strong>Solution:</strong></p>
+            <p><em>Part 1: Distance from port</em></p>
+            <p>The angle between the two legs of the journey is 130° - 65° = 65°. Using the Law of Cosines:</p>
+            <p style="text-align: center;">$d^2 = 80^2 + 100^2 - 2(80)(100)\cos 65°$</p>
+            <p style="text-align: center;">$d^2 = 6400 + 10000 - 16000(0.4226) \approx 9638$</p>
+            <p style="text-align: center;">$d \approx 98.2$ km</p>
+            <p><em>Part 2: Bearing from port</em></p>
+            <p>We need the angle at the port. Using the Law of Sines: $\displaystyle\frac{\sin \theta}{100} = \frac{\sin 65°}{98.2}$</p>
+            <p>$\sin \theta = \frac{100 \cdot 0.9063}{98.2} \approx 0.923$, so $\theta \approx 67.4°$</p>
+            <p>The bearing is approximately 65° + 67.4° ≈ 132.4° from north (southeast)</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 3:</strong> An aircraft flies 200 km on a bearing of 320°, then 150 km on a bearing of 50°. Find the distance and bearing from the starting point to the final position.
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.4-2: Aircraft Navigation Path (Practice Problem 3)</div>
+            <div id="aircraftProblem3" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Aircraft Problem 3 Diagram
+            // Calculate coordinates first
+            // First leg: 200 km at bearing 320° → angle = 230° from x-axis = (90-320)°
+            const air_bear1 = (90 - 320) * Math.PI / 180;
+            const air_pt1X = 200 * Math.cos(air_bear1);  // ≈ -128.6
+            const air_pt1Y = 200 * Math.sin(air_bear1);  // ≈ 153.2
+            
+            // Second leg: 150 km at bearing 50° → angle = 40° from x-axis
+            const air_bear2 = (90 - 50) * Math.PI / 180;
+            const air_finalX = air_pt1X + 150 * Math.cos(air_bear2);  // ≈ -128.6 + 114.9 ≈ -13.7
+            const air_finalY = air_pt1Y + 150 * Math.sin(air_bear2);  // ≈ 153.2 + 96.4 ≈ 249.6
+            
+            // Boundingbox: expanded to prevent lower-right vertex cutoff
+            // Format: [xmin, ymax, xmax, ymin]
+            const board11 = JXG.JSXGraph.initBoard('aircraftProblem3', {
+                boundingbox: [-150, 270, 30, -25],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw compass rose
+            board11.create('arrow', [[0, 0], [0, 25]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                lastArrow: {type: 2, size: 5},
+                fixed: true});
+            board11.create('text', [2, 27, '<i>N</i>'], {fontSize: 14, color: '#9ca3af', fixed: true});
+            
+            // Starting point
+            const start3 = board11.create('point', [0, 0], {
+                name: '',
+                size: 6,
+                fillColor: '#10b981',
+                strokeColor: '#059669',
+                fixed: true
+            });
+            board11.create('text', [-15, -8, '<b>Start</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            // First leg: 200 km at bearing 320° (northwest)
+            const airBear1 = (90 - 320) * Math.PI / 180;
+            const airPt1X = 200 * Math.cos(airBear1);
+            const airPt1Y = 200 * Math.sin(airBear1);
+            const airPt1 = board11.create('point', [airPt1X, airPt1Y], {
+                name: '',
+                size: 5,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            
+            board11.create('arrow', [[0, 0], [airPt1X, airPt1Y]], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board11.create('text', [-100, 90, '200 km, bearing 320°'], {fontSize: 13, color: '#3b82f6', fixed: true});
+            
+            // Second leg: 150 km at bearing 50° (northeast)
+            const airBear2 = (90 - 50) * Math.PI / 180;
+            const airFinalX = airPt1X + 150 * Math.cos(airBear2);
+            const airFinalY = airPt1Y + 150 * Math.sin(airBear2);
+            const airFinal = board11.create('point', [airFinalX, airFinalY], {
+                name: '',
+                size: 6,
+                fillColor: '#dc2626',
+                strokeColor: '#b91c1c',
+                fixed: true
+            });
+            board11.create('text', [airFinalX + 5, airFinalY - 5, '<b>Final</b>'], {fontSize: 14, color: '#dc2626', fixed: true});
+            
+            board11.create('arrow', [[airPt1X, airPt1Y], [airFinalX, airFinalY]], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board11.create('text', [-60, 160, '150 km, bearing 50°'], {fontSize: 13, color: '#f59e0b', fixed: true});
+            
+            // Return path (dashed)
+            board11.create('line', [start3, airFinal], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board11.create('text', [airFinalX/2 + 10, airFinalY/2, 'd = 250 km'], {fontSize: 13, color: '#6b7280', fixed: true});
+            
+            // Right angle indicator
+            board11.create('angle', [airFinal, airPt1, start3], {
+                type: 'square',
+                orthoType: 'square',
+                radius: 8,
+                fillColor: '#10b981',
+                strokeColor: '#10b981',
+                withLabel: false
+            });
+            board11.create('text', [-105, 130, '90°'], {fontSize: 12, color: '#10b981', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                Aircraft flies 200 km at bearing 320° (northwest), then 150 km at bearing 50° (northeast). The paths are perpendicular, forming a right triangle.
+            </div>
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>The angle between the two legs is calculated by noting the interior angle: 360° - 320° + 50° = 90° (they're perpendicular!)
+            <br>Distance: $d = \sqrt{200^2 + 150^2} = \sqrt{62500} = 250$ km
+            <br>For the bearing, we need the angle from the starting point. Using $\tan \theta = 150/200 = 0.75$, we get $\theta \approx 36.9°$
+            <br>The bearing from start to end is: 320° + 36.9° = 356.9° (almost due north)
+        </div>
+
+        <h2 id="sec-6-5">6.5 Surveying and Triangulation</h2>
+
+        <p>
+            Surveying—measuring and mapping land—is one of the oldest applications of trigonometry. The Egyptians used it to re-establish property boundaries after Nile floods. Today, surveyors still use the same fundamental principles, just with more sophisticated instruments.
+        </p>
+
+        <h3 id="subsec-triangulation-method">The Triangulation Method</h3>
+
+        <p>
+            The key insight in surveying is that you can measure distances you can't physically reach by measuring angles and one known distance. If you can see a distant point from two locations whose distance apart you know, you can calculate the distance to that point by solving a triangle.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-eratosthenes-survey">Eratosthenes and the First Trigonometric Survey</h3>
+            <p>
+                Around 240 BCE, the Greek mathematician <strong>Eratosthenes</strong> calculated the Earth's circumference using what was essentially a trigonometric survey. He knew that at noon on the summer solstice, the sun was directly overhead in Syene (modern Aswan), casting no shadow. At the same time in Alexandria (about 800 km north), the sun made an angle of about 7.2° from vertical.
+            </p>
+            <p>
+                Eratosthenes realized that this 7.2° represented the angle subtended by the 800 km distance at Earth's center. Using the relationship $\text{circumference} = 360° \times \frac{\text{arc length}}{\text{angle}}$, he calculated Earth's circumference as approximately 40,000 km—remarkably close to the modern value of 40,075 km!
+            </p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.5-1: Eratosthenes' Measurement of Earth's Circumference</div>
+                <div id="eratosthenes" class="jxgbox"></div>
+
+            <script>
+            (function() {
+                // Eratosthenes Measurement Diagram
+                const board = JXG.JSXGraph.initBoard('eratosthenes', {
+                    boundingbox: [-4, 6, 6, -6],
+                    axis: false,
+                    showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                    showCopyright: false,
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+                });
+                
+                // Earth's center and surface (simplified as circle)
+                const earthRadius = 4;
+                const center = board.create('point', [0, 0], {name: '', visible: false, fixed: true});
+                
+                // Draw Earth as a circle
+                const earth = board.create('circle', [center, earthRadius], {
+                    strokeColor: '#3b82f6',
+                    strokeWidth: 2,
+                    fillColor: '#dbeafe',
+                    fillOpacity: 0.2
+                });
+                
+                // Angle for the arc between Alexandria and Syene: 7.2° ≈ 0.126 radians
+                const angleDiff = 7.2 * Math.PI / 180;
+                
+                // Syene position (bottom, sun directly overhead)
+                const syeneAngle = -Math.PI / 2; // 270° (south)
+                const syeneX = earthRadius * Math.cos(syeneAngle);
+                const syeneY = earthRadius * Math.sin(syeneAngle);
+                const syene = board.create('point', [syeneX, syeneY], {name: '', visible: true, size: 3, fillColor: '#f59e0b', strokeColor: '#f59e0b', fixed: true});
+                
+                // Alexandria position (7.2° north of Syene)
+                const alexAngle = syeneAngle + angleDiff;
+                const alexX = earthRadius * Math.cos(alexAngle);
+                const alexY = earthRadius * Math.sin(alexAngle);
+                const alex = board.create('point', [alexX, alexY], {name: '', visible: true, size: 3, fillColor: '#10b981', strokeColor: '#10b981', fixed: true});
+                
+                // Sun rays (parallel, coming from top-right)
+                const rayAngle = Math.PI / 6; // 30° from horizontal for visibility
+                const rayLength = 3;
+                
+                // Sun ray at Syene (vertical, no shadow)
+                board.create('arrow', [
+                    [syeneX + rayLength * Math.cos(Math.PI/2), syeneY + rayLength * Math.sin(Math.PI/2)],
+                    [syeneX, syeneY]
+                ], {
+                    strokeColor: '#fbbf24',
+                    strokeWidth: 2.5,
+                    lastArrow: {type: 2, size: 8},
+                    fixed: true
+                });
+                
+                // Sun ray at Alexandria (7.2° from vertical)
+                board.create('arrow', [
+                    [alexX + rayLength * Math.cos(Math.PI/2), alexY + rayLength * Math.sin(Math.PI/2)],
+                    [alexX, alexY]
+                ], {
+                    strokeColor: '#fbbf24',
+                    strokeWidth: 2.5,
+                    lastArrow: {type: 2, size: 8},
+                    fixed: true
+                });
+                
+                // Radial lines from center to cities
+                board.create('line', [center, syene], {
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1.5,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                board.create('line', [center, alex], {
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1.5,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Vertical reference line at Alexandria to show 7.2° angle
+                const verticalEndX = alexX;
+                const verticalEndY = alexY + 2;
+                board.create('line', [[alexX, alexY], [verticalEndX, verticalEndY]], {
+                    strokeColor: '#9ca3af',
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // 7.2° angle at Alexandria (between vertical and sun ray)
+                const vertRef = board.create('point', [verticalEndX, verticalEndY], {name: '', visible: false, fixed: true});
+                const sunRayRef = board.create('point', [alexX + 2 * Math.cos(Math.PI/2), alexY + 2 * Math.sin(Math.PI/2)], {name: '', visible: false, fixed: true});
+                
+                board.create('angle', [sunRayRef, alex, vertRef], {
+                    radius: 0.6,
+                    strokeColor: '#dc2626',
+                    fillColor: '#fecaca',
+                    fillOpacity: 0.4,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                
+                // 7.2° angle at Earth's center
+                board.create('angle', [syene, center, alex], {
+                    radius: 1.2,
+                    strokeColor: '#dc2626',
+                    fillColor: '#fecaca',
+                    fillOpacity: 0.4,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                
+                // Labels
+                board.create('text', [syeneX - 1.2, syeneY - 0.5, '<b>Syene</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+                board.create('text', [alexX - 1.5, alexY + 0.3, '<b>Alexandria</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+                board.create('text', [0, 0, '<b>Earth\'s<br>Center</b>'], {fontSize: 13, color: '#374151', anchorX: 'middle', anchorY: 'middle', fixed: true});
+                
+                // Angle labels
+                board.create('text', [alexX + 0.9, alexY + 0.8, '<b>7.2°</b>'], {fontSize: 13, color: '#dc2626', fixed: true});
+                board.create('text', [0.3, -1.5, '<b>7.2°</b>'], {fontSize: 13, color: '#dc2626', fixed: true});
+                
+                // Arc label
+                board.create('text', [1.2, -3.5, '~800 km'], {fontSize: 13, color: '#3b82f6', fixed: true});
+                
+                // Sun label
+                board.create('text', [-1.5, 5.5, '<b>Parallel Sun Rays</b>'], {fontSize: 14, color: '#fbbf24', anchorX: 'middle', fixed: true});
+                
+                // Explanation text
+                board.create('text', [0, -5.5, 'Same angle at center and surface → Circumference = 360° × (800 km / 7.2°)'], {fontSize: 12, color: '#374151', anchorX: 'middle', fixed: true});
+                
+            })();
+            </script>
+                <div class="graph-caption">
+                    Eratosthenes' measurement showing parallel sun rays creating a 7.2° shadow angle in Alexandria while the sun is directly overhead in Syene. The same 7.2° angle at Earth's center corresponds to the 800 km distance, allowing calculation of Earth's circumference.
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 6: Measuring Across a Canyon</strong></p>
+            <p>A surveyor needs to find the distance across a canyon. She sets up two positions 100 m apart along the canyon edge. From position A, the angle to a landmark on the opposite side is 65°. From position B, the angle to the same landmark is 70°. Find the distances from each position to the landmark.</p>
+            
+            <div class="graph-container">
+                <div class="graph-title">Fig. 6.5-2: Surveying Across a Canyon (Example 6)</div>
+                <div id="canyonSurvey" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Canyon Survey Diagram
+            const board12 = JXG.JSXGraph.initBoard('canyonSurvey', {
+                boundingbox: [-1, 6, 11, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Canyon edges (just visual indication)
+            board12.create('line', [[0, 1], [10, 1]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            board12.create('line', [[0, 4.5], [10, 4.5]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            board12.create('text', [0.5, 2.7, '<i>Canyon</i>'], {fontSize: 14, color: '#9ca3af', style: 'italic', fixed: true});
+            
+            // Survey positions on near side
+            const posA = board12.create('point', [2, 1], {
+                name: '',
+                size: 6,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            board12.create('text', [1.6, 0.5, '<b>A</b>'], {fontSize: 16, color: '#3b82f6', fixed: true});
+            
+            const posB = board12.create('point', [8, 1], {
+                name: '',
+                size: 6,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            board12.create('text', [8.4, 0.5, '<b>B</b>'], {fontSize: 16, color: '#3b82f6', fixed: true});
+            
+            // Distance between A and B
+            board12.create('line', [posA, posB], {
+                strokeColor: '#10b981',
+                strokeWidth: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board12.create('text', [5, 0.6, '100 m'], {fontSize: 14, color: '#10b981', fixed: true});
+            
+            // Landmark on far side
+            const landmark = board12.create('point', [4, 4.5], {
+                name: '',
+                size: 6,
+                fillColor: '#dc2626',
+                strokeColor: '#b91c1c',
+                fixed: true
+            });
+            board12.create('text', [4.3, 4.8, '<b>L</b>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+            // Sight lines
+            board12.create('line', [posA, landmark], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board12.create('text', [2.5, 3.0, 'd<sub>A</sub>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+            board12.create('line', [posB, landmark], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board12.create('text', [6.5, 3.0, 'd<sub>B</sub>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+            // Angles
+            board12.create('angle', [posB, posA, landmark], {
+                radius: 0.6,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board12.create('text', [2.8, 1.5, '65°'], {fontSize: 13, color: '#10b981', fixed: true});
+            
+            board12.create('angle', [landmark, posB, posA], {
+                radius: 0.6,
+                strokeColor: '#10b981',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board12.create('text', [7.2, 1.5, '70°'], {fontSize: 13, color: '#10b981', fixed: true});
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    Two surveying positions (A and B) 100 m apart sight a landmark (L) across the canyon. The angles from each position allow calculation of the distances.
+                </div>
+            </div>
+            
+            <p><strong>Solution:</strong></p>
+            <p>We know one side (100 m) and two angles. The third angle is 180° - 65° - 70° = 45°.</p>
+            <p>Using the Law of Sines to find distance from A: $\displaystyle\frac{d_A}{\sin 70°} = \frac{100}{\sin 45°}$</p>
+            <p>$\displaystyle d_A = \frac{100 \cdot \sin 70°}{\sin 45°} = \frac{100 \cdot 0.9397}{0.7071} \approx 133$ m</p>
+        </div>
+
+        <h2 id="sec-6-6">6.6 Physics Applications</h2>
+
+        <p>
+            Physics is deeply interwoven with trigonometry. Whenever we deal with motion that isn't in a straight line, or forces that aren't aligned with coordinate axes, trigonometry provides the mathematical language to describe what's happening.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-galileo-ballistics">Galileo and the Birth of Ballistics</h3>
+            <p>
+                <strong>Galileo Galilei (1564-1642)</strong> revolutionized our understanding of projectile motion. Before Galileo, people believed (following Aristotle) that projectiles had a "violent" motion followed by "natural" motion—essentially that cannonballs flew straight for a while, then dropped straight down.
+            </p>
+            <p>
+                Through careful experiments, Galileo demonstrated that projectile motion could be understood as two independent motions: constant horizontal velocity and accelerated vertical motion due to gravity. This insight required decomposing velocity vectors into components—a fundamentally trigonometric operation.
+            </p>
+            <p>
+                Galileo showed that the optimal launch angle for maximum range (ignoring air resistance) is 45°, a result that follows from trigonometric analysis of the range equation. This work laid the foundation for both classical mechanics and the practical science of ballistics.
+            </p>
+        </div>
+
+        <h3 id="subsec-vector-components-forces">Vector Components and Forces</h3>
+
+        <p>
+            To understand projectile motion and other physics applications, we first need to understand <strong>vectors</strong>. A vector is a quantity that has both <em>magnitude</em> (size) and <em>direction</em>. Examples include force, velocity, acceleration, and displacement. This is different from a <strong>scalar</strong>, which has only magnitude (like temperature, mass, or time).
+        </p>
+
+        <p>
+            The power of trigonometry in physics comes from our ability to decompose vectors into perpendicular components. Any vector can be broken down into components along the x and y axes (or any two perpendicular directions). This decomposition is the key to solving complex physics problems.
+        </p>
+<div class="graph-container">
+    <div class="graph-title">Fig. 6.6-1: Vector Decomposition into Components</div>
+    <div id="vectorDecomp" class="jxgbox"></div>
+
+<script>
+(function() {
+    // Vector Decomposition Diagram
+    const board = JXG.JSXGraph.initBoard('vectorDecomp', {
+        boundingbox: [-0.5, 4.5, 5.5, -0.5],
+        axis: true,
+        showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+        showCopyright: false,
+        pan: {enabled: false},
+        zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+    });
+    
+    // Origin
+    const origin = board.create('point', [0, 0], {name: '', visible: false, fixed: true});
+    
+    // Vector with magnitude 4 at angle 40°
+    const magnitude = 4;
+    const angle = 40 * Math.PI / 180;
+    const vectorEndX = magnitude * Math.cos(angle);
+    const vectorEndY = magnitude * Math.sin(angle);
+    const vectorEnd = board.create('point', [vectorEndX, vectorEndY], {name: '', visible: false, fixed: true});
+    
+    // Main vector (blue arrow)
+    board.create('arrow', [origin, vectorEnd], {
+        strokeColor: '#1e40af',
+        strokeWidth: 4,
+        lastArrow: {type: 2, size: 12},
+        fixed: true
+    });
+    
+    // Label for main vector
+    board.create('text', [vectorEndX/2 - 0.4, vectorEndY/2 + 0.3, '<b>F</b> (or <b>v</b>)'], {fontSize: 16, color: '#1e40af', fixed: true});
+    
+    // X-component (green arrow along x-axis)
+    const xComp = board.create('point', [vectorEndX, 0], {name: '', visible: false, fixed: true});
+    board.create('arrow', [origin, xComp], {
+        strokeColor: '#10b981',
+        strokeWidth: 3,
+        lastArrow: {type: 2, size: 10},
+        fixed: true
+    });
+    board.create('text', [vectorEndX/2, -0.35, '<b>F<sub>x</sub></b> = F cos θ'], {fontSize: 14, color: '#10b981', anchorX: 'middle', fixed: true});
+    
+    // Y-component (red arrow along y-axis)
+    const yComp = board.create('point', [vectorEndX, vectorEndY], {name: '', visible: false, fixed: true});
+    board.create('arrow', [[vectorEndX, 0], yComp], {
+        strokeColor: '#dc2626',
+        strokeWidth: 3,
+        lastArrow: {type: 2, size: 10},
+        fixed: true
+    });
+    board.create('text', [vectorEndX + 0.35, vectorEndY/2, '<b>F<sub>y</sub></b> = F sin θ'], {fontSize: 14, color: '#dc2626', anchorX: 'left', anchorY: 'middle', fixed: true});
+    
+    // Dashed lines forming rectangle
+    board.create('line', [[vectorEndX, 0], [vectorEndX, vectorEndY]], {
+        strokeColor: '#9ca3af',
+        strokeWidth: 1,
+        dash: 2,
+        straightFirst: false,
+        straightLast: false,
+                fixed: true});
+    board.create('line', [[0, vectorEndY], [vectorEndX, vectorEndY]], {
+        strokeColor: '#9ca3af',
+        strokeWidth: 1,
+        dash: 2,
+        straightFirst: false,
+        straightLast: false
+    });
+    
+    // Angle arc
+    const horizRef = board.create('point', [2, 0], {name: '', visible: false, fixed: true});
+    board.create('angle', [horizRef, origin, vectorEnd], {
+        radius: 0.7,
+        strokeColor: '#f59e0b',
+        fillColor: '#fef3c7',
+        fillOpacity: 0.3,
+        strokeWidth: 2,
+        withLabel: false
+    });
+    board.create('text', [0.9, 0.3, '<b>θ</b>'], {fontSize: 16, color: '#f59e0b', fixed: true});
+    
+    // Axis labels
+    board.create('text', [5.2, -0.2, '<i>x</i>'], {fontSize: 14, color: '#374151', fixed: true});
+    board.create('text', [-0.2, 4.2, '<i>y</i>'], {fontSize: 14, color: '#374151', fixed: true});
+    
+    // Magnitude label
+    board.create('text', [vectorEndX/2 + 0.5, vectorEndY/2 - 0.2, 'magnitude F'], {fontSize: 12, color: '#6b7280', fixed: true});
+    
+})();
+</script>
+    <div class="graph-caption">
+        A vector with magnitude F at angle θ can be decomposed into perpendicular components: F<sub>x</sub> = F cos θ (horizontal) and F<sub>y</sub> = F sin θ (vertical). This works for any vector quantity—force, velocity, acceleration, etc.
+    </div>
+</div>
+
+        <p>
+            Given a vector with magnitude $F$ (or $v$ for velocity) at angle $\theta$ from the positive x-axis:
+        </p>
+
+        <div class="formula">
+            $$F_x = F \cos \theta \quad \text{(x-component)}$$
+            $$F_y = F \sin \theta \quad \text{(y-component)}$$
+        </div>
+
+        <p>
+            Conversely, given components $F_x$ and $F_y$, we can find the magnitude and direction:
+        </p>
+
+        <div class="formula">
+            $$F = \sqrt{F_x^2 + F_y^2} \quad \text{(magnitude)}$$
+            $$\theta = \tan^{-1}\left(\frac{F_y}{F_x}\right) \quad \text{(direction)}$$
+        </div>
+
+        <h3 id="subsec-distance-velocity-acceleration">Distance, Velocity, and Acceleration</h3>
+
+        <p>
+            Before we dive into projectile motion, let's briefly review three fundamental concepts in physics: distance, velocity, and acceleration. These are related but distinct:
+        </p>
+
+        <ul>
+            <li><strong>Distance (or displacement):</strong> How far an object has moved, measured in meters (m)</li>
+            <li><strong>Velocity:</strong> The rate of change of distance, measured in meters per second (m/s). Velocity = distance / time</li>
+            <li><strong>Acceleration:</strong> The rate of change of velocity, measured in meters per second squared (m/s²). Acceleration = change in velocity / time</li>
+        </ul>
+
+        <p>
+            A full mathematical treatment of these relationships requires calculus (which we'll explore in a future module). For now, we can work with some simplified relationships:
+        </p>
+
+        <ul>
+            <li>For <em>constant</em> velocity: $d = vt$ (distance equals velocity times time)</li>
+            <li>For <em>constant</em> acceleration starting from rest: $d = \frac{1}{2}at^2$ (distance grows with the square of time)</li>
+            <li>For motion with constant acceleration: $v = v_0 + at$ (velocity equals initial velocity plus acceleration times time)</li>
+            <li>A very useful equation: $v^2 = v_0^2 + 2ad$ (relates velocities, acceleration, and distance without needing time)</li>
+        </ul>
+
+        <p>
+            The key insight for projectile motion is that <strong>horizontal</strong> and <strong>vertical</strong> motions are <em>independent</em>. Horizontally, there's no acceleration (ignoring air resistance), so horizontal velocity stays constant. Vertically, there's constant downward acceleration due to gravity ($g \approx 9.8$ m/s²).
+        </p>
+
+        <h3 id="subsec-projectile-motion">Projectile Motion</h3>
+
+        <p>
+            Now we're ready to analyze projectile motion. When an object is launched at an angle, its initial velocity $v_0$ must be decomposed into horizontal and vertical components. This decomposition is the key to understanding the parabolic path.
+        </p>
+<div class="graph-container">
+    <div class="graph-title">Fig. 6.6-2: Initial Velocity Decomposition for Projectile Motion</div>
+    <div id="projectileV0" class="jxgbox"></div>
+
+<script>
+(function() {
+    // Projectile v0 Decomposition Diagram
+    const board = JXG.JSXGraph.initBoard('projectileV0', {
+        boundingbox: [-0.5, 3.5, 7, -1],
+        axis: false,
+        showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+        showCopyright: false,
+        pan: {enabled: false},
+        zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+    });
+    
+    // Ground line
+    board.create('line', [[0, 0], [6.5, 0]], {
+        strokeColor: '#9ca3af',
+        strokeWidth: 2,
+        straightFirst: false,
+        straightLast: false
+    });
+    board.create('text', [6.9, -0.1, 'ground'], {fontSize: 12, color: '#6b7280', anchorX: 'right', fixed: true});
+    
+    // Launch point
+    const launch = board.create('point', [1, 0], {name: '', visible: true, size: 5, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+    board.create('text', [0.7, -0.4, '<b>Launch point</b>'], {fontSize: 13, color: '#1e40af', fixed: true});
+    
+    // Initial velocity vector v<sub>0</sub>
+    const v0_magnitude = 3.5;
+    const theta = 50 * Math.PI / 180;
+    const v0_endX = 1 + v0_magnitude * Math.cos(theta);
+    const v0_endY = v0_magnitude * Math.sin(theta);
+    const v0_end = board.create('point', [v0_endX, v0_endY], {name: '', visible: false, fixed: true});
+    
+    // Draw v<sub>0</sub> vector
+    board.create('arrow', [launch, v0_end], {
+        strokeColor: '#1e40af',
+        strokeWidth: 4,
+        lastArrow: {type: 2, size: 12},
+        fixed: true
+    });
+    board.create('text', [(1 + v0_endX)/2 - 0.5, v0_endY/2 + 0.3, '<b>v<sub>0</sub></b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+    
+    // Horizontal component v<sub>0x</sub>
+    const v0x_end = board.create('point', [v0_endX, 0], {name: '', visible: false, fixed: true});
+    board.create('arrow', [launch, v0x_end], {
+        strokeColor: '#10b981',
+        strokeWidth: 3,
+        lastArrow: {type: 2, size: 10},
+        fixed: true
+    });
+    board.create('text', [(1 + v0_endX)/2, -0.45, '<b>v<sub>0x</sub> = v<sub>0</sub> cos θ</b>'], {fontSize: 15, color: '#10b981', anchorX: 'middle', fixed: true});
+    board.create('text', [(1 + v0_endX)/2, -0.75, '(constant during flight)'], {fontSize: 11, color: '#10b981', anchorX: 'middle', fixed: true});
+    
+    // Vertical component v<sub>0y</sub>
+    const v0y_start = board.create('point', [v0_endX, 0], {name: '', visible: false, fixed: true});
+    board.create('arrow', [v0y_start, v0_end], {
+        strokeColor: '#dc2626',
+        strokeWidth: 3,
+        lastArrow: {type: 2, size: 10},
+        fixed: true
+    });
+    board.create('text', [v0_endX + 0.4, v0_endY/2, '<b>v<sub>0y</sub> = v<sub>0</sub> sin θ</b>'], {fontSize: 15, color: '#dc2626', anchorX: 'left', anchorY: 'middle', fixed: true});
+    board.create('text', [v0_endX + 0.4, v0_endY/2 - 0.35, '(decreases due to gravity)'], {fontSize: 11, color: '#dc2626', anchorX: 'left', anchorY: 'middle', fixed: true});
+    
+    // Dashed rectangle
+    board.create('line', [[v0_endX, 0], [v0_endX, v0_endY]], {
+        strokeColor: '#9ca3af',
+        strokeWidth: 1,
+        dash: 2,
+        straightFirst: false,
+        straightLast: false
+    });
+    board.create('line', [[1, v0_endY], [v0_endX, v0_endY]], {
+        strokeColor: '#9ca3af',
+        strokeWidth: 1,
+        dash: 2,
+        straightFirst: false,
+        straightLast: false
+    });
+    
+    // Launch angle θ
+    const horizRef = board.create('point', [3, 0], {name: '', visible: false, fixed: true});
+    board.create('angle', [horizRef, launch, v0_end], {
+        radius: 0.6,
+        strokeColor: '#f59e0b',
+        fillColor: '#fef3c7',
+        fillOpacity: 0.3,
+        strokeWidth: 2,
+        withLabel: false
+    });
+    board.create('text', [1.7, 0.25, '<b>θ</b>'], {fontSize: 16, color: '#f59e0b', fixed: true});
+    
+    // Parabolic trajectory (sketch)
+    const trajectoryPoints = [];
+    for (let t = 0; t <= 10; t += 0.5) {
+        const x = 1 + 0.5 * t;
+        const y = 0.3 * t - 0.03 * t * t;
+        if (y >= 0 && x <= 6.5) {
+            trajectoryPoints.push([x, y]);
+        }
+    }
+    
+    if (trajectoryPoints.length > 1) {
+        for (let i = 0; i < trajectoryPoints.length - 1; i++) {
+            board.create('line', [trajectoryPoints[i], trajectoryPoints[i+1]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1.5,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+        }
+    }
+    
+    // Key insight box
+    board.create('text', [3.5, 3.2, 'Key Insight: Horizontal and vertical motions are independent!'], {fontSize: 13, color: '#374151', anchorX: 'middle', fixed: true});
+    board.create('text', [3.5, 2.8, 'Horizontal: constant velocity (v<sub>0x</sub>)'], {fontSize: 12, color: '#10b981', anchorX: 'middle', fixed: true});
+    board.create('text', [3.5, 2.5, 'Vertical: accelerated motion (gravity affects v<sub>0y</sub>)'], {fontSize: 12, color: '#dc2626', anchorX: 'middle', fixed: true});
+    
+})();
+</script>
+    <div class="graph-caption">
+        For projectile motion, the initial velocity v<sub>0</sub> at angle θ is decomposed into horizontal (v<sub>0x</sub> = v<sub>0</sub> cos θ) and vertical (v<sub>0y</sub> = v<sub>0</sub> sin θ) components. The horizontal component remains constant throughout flight, while the vertical component changes due to gravity.
+    </div>
+</div>
+
+        <p>
+            The initial velocity $v_0$ at launch angle $\theta$ decomposes as:
+        </p>
+
+        <div class="formula">
+            $$v_{0x} = v_0 \cos \theta \quad \text{(horizontal component)}$$
+            $$v_{0y} = v_0 \sin \theta \quad \text{(vertical component)}$$
+        </div>
+
+        <p>
+            Now let's derive the three key equations for projectile motion. We'll use basic physics relationships and a bit of algebra—no calculus needed!
+        </p>
+
+        <div class="highlight">
+            <h4>Derivation 1: Maximum Height</h4>
+            <p>
+                At the peak of the trajectory, the vertical velocity becomes zero. Using the equation $v^2 = v_0^2 + 2ad$ (where $a = -g$ because gravity acts downward):
+            </p>
+            <p style="text-align: center;">$0^2 = v_{0y}^2 - 2gh_{\text{max}}$</p>
+            <p style="text-align: center;">$h_{\text{max}} = \displaystyle\frac{v_{0y}^2}{2g} = \frac{(v_0 \sin \theta)^2}{2g} = \frac{v_0^2 \sin^2 \theta}{2g}$</p>
+            <p>
+                The maximum height depends on the square of the vertical component of initial velocity.
+            </p>
+        </div>
+
+        <div class="highlight">
+            <h4>Derivation 2: Time of Flight</h4>
+            <p>
+                The projectile takes time $t_{\text{up}}$ to reach maximum height (where vertical velocity becomes zero). Using $v = v_0 + at$:
+            </p>
+            <p style="text-align: center;">$0 = v_{0y} - gt_{\text{up}}$</p>
+            <p style="text-align: center;">$t_{\text{up}} = \displaystyle\frac{v_{0y}}{g} = \frac{v_0 \sin \theta}{g}$</p>
+            <p>
+                By symmetry, the time to fall back down equals the time to go up, so total time of flight is:
+            </p>
+            <p style="text-align: center;">$t_{\text{total}} = 2t_{\text{up}} = \displaystyle\frac{2v_0 \sin \theta}{g}$</p>
+        </div>
+
+        <div class="highlight">
+            <h4>Derivation 3: Range (Horizontal Distance)</h4>
+            <p>
+                The range is the horizontal distance traveled. Since horizontal velocity is constant:
+            </p>
+            <p style="text-align: center;">$R = v_{0x} \times t_{\text{total}} = (v_0 \cos \theta) \times \left(\displaystyle\frac{2v_0 \sin \theta}{g}\right)$</p>
+            <p style="text-align: center;">$R = \displaystyle\frac{2v_0^2 \cos \theta \sin \theta}{g}$</p>
+            <p>
+                Using the double-angle identity $\sin(2\theta) = 2\sin\theta\cos\theta$:
+            </p>
+            <p style="text-align: center;">$R = \displaystyle\frac{v_0^2 \sin(2\theta)}{g}$</p>
+            <p>
+                <strong>Why is 45° optimal?</strong> The sine function reaches its maximum value of 1 when its argument is 90°. So $\sin(2\theta)$ is maximum when $2\theta = 90°$, which means $\theta = 45°$. At this angle, you get the perfect balance between vertical height (which gives you time in the air) and horizontal velocity (which determines how far you travel during that time).
+            </p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 7: Cannon Trajectory</strong></p>
+            <p>A cannon fires a projectile with initial speed 100 m/s at an angle of 30° above horizontal. Find: (a) the maximum height reached, (b) the time of flight, and (c) the range.</p>
+            <p><strong>Solution:</strong></p>
+            <p><em>(a) Maximum height:</em></p>
+            <p>$\displaystyle h_{\text{max}} = \frac{v_0^2 \sin^2 \theta}{2g} = \frac{(100)^2 \sin^2 30°}{2(9.8)} = \frac{10000 (0.5)^2}{19.6} = \frac{2500}{19.6} \approx 128$ m</p>
+            <p><em>(b) Time of flight:</em> $t = \displaystyle\frac{2v_0 \sin \theta}{g} = \frac{2(100)(0.5)}{9.8} \approx 10.2$ seconds</p>
+            <p><em>(c) Range:</em> $R = \displaystyle\frac{v_0^2 \sin(2\theta)}{g} = \frac{10000 \sin 60°}{9.8} = \frac{10000(0.866)}{9.8} \approx 884$ m</p>
+        </div>
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.6-3: Projectile Trajectories at Different Launch Angles</div>
+            <div id="projectileChart" class="jxgbox" style="width:100%; max-width:600px; aspect-ratio:3/2; margin:20px auto;"></div>
+
+        <script>
+        (function() {
+            // JSXGraph projectile trajectories
+            const board = JXG.JSXGraph.initBoard('projectileChart', {
+                boundingbox: [-5, 45, 105, -5],
+                axis: true,
+                showNavigation: false,
+                showCopyright: false,
+                showFullscreen: true,
+                fullscreen: {symbol: '\u26F6', scale: 0.95},
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+
+            // Physics parameters
+            const v0 = 30;  // initial velocity m/s
+            const g = 9.8;  // gravity m/s²
+
+            // Create parametric trajectory curve for given angle
+            function createTrajectory(angle_deg, color, width) {
+                const angle_rad = angle_deg * Math.PI / 180;
+                const v0x = v0 * Math.cos(angle_rad);
+                const v0y = v0 * Math.sin(angle_rad);
+                const t_flight = 2 * v0y / g;
+
+                board.create('curve', [
+                    function(t) { return v0x * t; },                    // x(t)
+                    function(t) { return v0y * t - 0.5 * g * t * t; },  // y(t)
+                    0,          // t_min
+                    t_flight    // t_max
+                ], {
+                    strokeColor: color,
+                    strokeWidth: width,
+                    fixed: true
+                });
+            }
+
+            // 30° trajectory - green
+            createTrajectory(30, '#10b981', 2);
+
+            // 45° trajectory - blue (max range, thicker)
+            createTrajectory(45, '#3b82f6', 3);
+
+            // 60° trajectory - red
+            createTrajectory(60, '#dc2626', 2);
+
+            // Add labels near each trajectory endpoint
+            board.create('text', [78, 8, '30°'], {fontSize: 12, color: '#10b981', fixed: true});
+            board.create('text', [88, 20, '45°'], {fontSize: 12, color: '#3b82f6', fixed: true});
+            board.create('text', [48, 32, '60°'], {fontSize: 12, color: '#dc2626', fixed: true});
+
+        })();
+        </script>
+            <div class="graph-caption">
+                Parabolic paths of projectiles launched at 30°, 45°, and 60° with the same initial speed. The 45° launch achieves maximum range, while steeper angles reach greater heights but shorter distances.
+            </div>
+        </div>
+        <div class="problem">
+            <strong>Practice Problem 4:</strong> A soccer ball is kicked with initial velocity 20 m/s at an angle of 40° above horizontal. (a) What are the horizontal and vertical components of the initial velocity? (b) What is the maximum height reached? (c) How long is the ball in the air?
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br><em>(a) Components:</em>
+            <br>$v_{0x} = 20 \cos 40° = 20(0.766) = 15.3$ m/s
+            <br>$v_{0y} = 20 \sin 40° = 20(0.643) = 12.9$ m/s
+            <br><em>(b) Maximum height:</em>
+            <br>$h_{\text{max}} = \displaystyle\frac{v_{0y}^2}{2g} = \frac{(12.9)^2}{2(9.8)} = \frac{166.4}{19.6} \approx 8.5$ m
+            <br><em>(c) Time in air:</em>
+            <br>$t = \displaystyle\frac{2v_{0y}}{g} = \frac{2(12.9)}{9.8} \approx 2.6$ seconds
+        </div>
+        <h2 id="sec-6-7">6.7 Engineering Applications</h2>
+
+        <p>
+            Engineers use trigonometry constantly to analyze structures, design mechanical systems, and solve problems involving forces, angles, and distances. From bridges to skyscrapers to robotic arms, trigonometry is essential for turning designs into reality.
+        </p>
+
+        <h3 id="subsec-structural-analysis-trusses">Structural Analysis: Trusses and Bridges</h3>
+
+        <p>
+            A <strong>truss</strong> is a structure made of triangular units connected at joints. Triangles are inherently rigid—unlike rectangles, which can collapse into parallelograms, a triangle's shape is locked once you fix its side lengths. This makes trusses ideal for bridges, roofs, and towers.
+        </p>
+
+        <p>
+            To analyze a truss, engineers break down forces at each joint using trigonometry. Each member of the truss is either in <em>tension</em> (being pulled apart) or <em>compression</em> (being pushed together). By resolving forces into components and requiring equilibrium at each joint, we can calculate the internal forces in every member.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-bridge-engineering-evolution">The Evolution of Bridge Engineering</h3>
+            <p>
+                Modern bridge engineering began in the 19th century with the work of engineers like <strong>Thomas Telford (1757-1834)</strong> and <strong>Isambard Kingdom Brunel (1806-1859)</strong>. Brunel's <em>Royal Albert Bridge</em> (1859) spanning the River Tamar in England showcased innovative use of lenticular trusses, with every angle and force calculated using trigonometry.
+            </p>
+            <p>
+                The <strong>Eiffel Tower</strong> (1889), designed by engineer <strong>Gustave Eiffel</strong>, is essentially a giant truss. Eiffel's team performed meticulous trigonometric calculations to ensure each of the tower's 18,000 iron pieces would fit perfectly and that wind forces could be safely distributed throughout the structure. At 300 meters tall, it was the world's tallest structure for 41 years and remains a testament to precise engineering.
+            </p>
+            <p>
+                Modern suspension bridges like the <em>Golden Gate Bridge</em> (1937) use trigonometry to calculate cable tensions, anchor forces, and load distributions. Every cable angle affects how forces are transferred to the towers and anchorages.
+            </p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 9: Simple Truss Analysis</strong></p>
+            <p>A simple triangular roof truss has a horizontal bottom member of 8 m and two sloped roof members meeting at a peak 3 m above the center. Each sloped member makes an angle θ with the horizontal. If a vertical load of 5000 N is applied at the peak, find the force in each sloped member.</p>
+            <p><strong>Solution:</strong></p>
+            <p>First, find the angle: $\tan \theta = \displaystyle\frac{3}{4} = 0.75$, so $\theta = \tan^{-1}(0.75) \approx 36.9°$</p>
+            <p>At the peak, the vertical load must be balanced by the vertical components of the forces in the two sloped members. By symmetry, each sloped member carries half the load vertically:</p>
+            <p>$F \sin \theta = 2500$ N</p>
+            <p>$F = \displaystyle\frac{2500}{\sin 36.9°} = \frac{2500}{0.6} \approx 4167$ N (compression in each member)</p>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.7-1: Simple Roof Truss (Example 9)</div>
+            <div id="roofTruss" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Roof Truss Diagram
+            const board4 = JXG.JSXGraph.initBoard('roofTruss', {
+                boundingbox: [-1, 4.5, 9, -0.5],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            const left = board4.create('point', [1, 0], {name: '', visible: false, fixed: true});
+            const right = board4.create('point', [7, 0], {name: '', visible: false, fixed: true});
+            const peak = board4.create('point', [4, 3], {name: '', visible: false, fixed: true});
+            
+            // Truss members
+            board4.create('line', [left, peak], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            board4.create('line', [right, peak], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            board4.create('line', [left, right], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Support points
+            board4.create('point', [1, 0], {
+                name: '',
+                size: 6,
+                fillColor: '#6b7280',
+                strokeColor: '#374151',
+                fixed: true
+            });
+            board4.create('point', [7, 0], {
+                name: '',
+                size: 6,
+                fillColor: '#6b7280',
+                strokeColor: '#374151',
+                fixed: true
+            });
+            
+            // Load at peak
+            board4.create('arrow', [[4, 3], [4, 1.5]], {
+                strokeColor: '#dc2626',
+                strokeWidth: 3,
+                lastArrow: {type: 2, size: 8},
+                fixed: true});
+            board4.create('text', [4.3, 2.2, '<b>5000 N</b>'], {fontSize: 14, color: '#dc2626', fixed: true});
+            
+            // Dimension labels
+            board4.create('text', [4, -0.3, '<b>8 m</b>'], {fontSize: 14, color: '#6b7280', fixed: true});
+            board4.create('text', [4.5, 1.5, '<b>3 m</b>'], {fontSize: 14, color: '#6b7280', fixed: true});
+            
+            // Angle
+            board4.create('angle', [right, left, peak], {
+                radius: 0.7,
+                strokeColor: '#f59e0b',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board4.create('text', [1.8, 0.5, '<b>θ</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                A triangular roof truss with a vertical load at the peak. The sloped members are in compression, while the horizontal member is in tension. Trigonometry allows us to calculate the forces in each member.
+            </div>
+        </div>
+
+        <h3 id="subsec-mechanical-linkages">Mechanical Linkages and Kinematics</h3>
+
+        <p>
+            Robotic arms, car suspensions, and countless other mechanical systems use linkages—connected rigid members that move relative to each other. Analyzing these systems requires tracking how angles and positions change as the system moves, which is fundamentally a trigonometric problem.
+        </p>
+
+        <div class="problem">
+            <strong>Practice Problem 6:</strong> A robotic arm has two segments: a 1.5 m segment connected to a fixed base, and a 1.0 m segment connected to the end of the first. If the first segment makes an angle of 60° with horizontal and the second makes an angle of 30° with horizontal, what is the height and horizontal distance of the robot's "hand" (the end of the second segment) from the base?
+            
+            <div class="graph-container" style="margin-top: 15px;">
+                <div class="graph-title">Fig. 6.7-2: Two-Segment Robot Arm Geometry</div>
+                <div id="robotArm" class="jxgbox"></div>
+
+            <script>
+            (function() {
+                // Robot Arm Diagram
+                const board = JXG.JSXGraph.initBoard('robotArm', {
+                    boundingbox: [-0.5, 3, 3.5, -0.5],
+                    axis: true,
+                    showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                    showCopyright: false,
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+                });
+                
+                // Base position (origin)
+                const base = board.create('point', [0, 0], {name: '', visible: true, size: 5, fillColor: '#1e40af', strokeColor: '#1e40af', fixed: true});
+                
+                // First segment: 1.5m at 60° from horizontal
+                const angle1 = 60 * Math.PI / 180;
+                const seg1Length = 1.5;
+                const joint1X = seg1Length * Math.cos(angle1);
+                const joint1Y = seg1Length * Math.sin(angle1);
+                const joint1 = board.create('point', [joint1X, joint1Y], {name: '', visible: true, size: 4, fillColor: '#10b981', strokeColor: '#10b981', fixed: true});
+                
+                // Second segment: 1.0m at 30° from horizontal
+                const angle2 = 30 * Math.PI / 180;
+                const seg2Length = 1.0;
+                const handX = joint1X + seg2Length * Math.cos(angle2);
+                const handY = joint1Y + seg2Length * Math.sin(angle2);
+                const hand = board.create('point', [handX, handY], {name: '', visible: true, size: 5, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true});
+                
+                // Draw the segments as arrows
+                board.create('arrow', [base, joint1], {
+                    strokeColor: '#3b82f6',
+                    strokeWidth: 4,
+                    lastArrow: {type: 2, size: 10},
+                    fixed: true
+                });
+                
+                board.create('arrow', [joint1, hand], {
+                    strokeColor: '#f59e0b',
+                    strokeWidth: 4,
+                    lastArrow: {type: 2, size: 10},
+                    fixed: true
+                });
+                
+                // Horizontal reference line
+                board.create('line', [[0, 0], [2.5, 0]], {
+                    strokeColor: '#9ca3af',
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Angle 1 (60° from horizontal at base)
+                const horizRef1 = board.create('point', [1, 0], {name: '', visible: false, fixed: true});
+                board.create('angle', [horizRef1, base, joint1], {
+                    radius: 0.4,
+                    strokeColor: '#3b82f6',
+                    fillColor: '#dbeafe',
+                    fillOpacity: 0.3,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                board.create('text', [0.5, 0.15, '<b>60°</b>'], {fontSize: 13, color: '#3b82f6', fixed: true});
+                
+                // Angle 2 (30° from horizontal at joint)
+                const horizRef2 = board.create('point', [joint1X + 1, joint1Y], {name: '', visible: false, fixed: true});
+                board.create('angle', [horizRef2, joint1, hand], {
+                    radius: 0.3,
+                    strokeColor: '#f59e0b',
+                    fillColor: '#fef3c7',
+                    fillOpacity: 0.3,
+                    strokeWidth: 2,
+                    withLabel: false
+                });
+                board.create('text', [joint1X + 0.35, joint1Y + 0.12, '<b>30°</b>'], {fontSize: 13, color: '#f59e0b', fixed: true});
+                
+                // Labels for points
+                board.create('text', [-0.2, -0.15, '<b>Base</b>'], {fontSize: 14, color: '#1e40af', fixed: true});
+                board.create('text', [joint1X - 0.15, joint1Y + 0.15, '<b>Joint</b>'], {fontSize: 14, color: '#10b981', fixed: true});
+                board.create('text', [handX + 0.1, handY + 0.15, '<b>Hand</b>'], {fontSize: 14, color: '#dc2626', fixed: true});
+                
+                // Segment length labels
+                board.create('text', [joint1X/2 - 0.2, joint1Y/2 + 0.15, '1.5 m'], {fontSize: 13, color: '#3b82f6', fixed: true});
+                board.create('text', [(joint1X + handX)/2, (joint1Y + handY)/2 + 0.15, '1.0 m'], {fontSize: 13, color: '#f59e0b', fixed: true});
+                
+                // Dashed lines showing components
+                // Vertical line from hand to x-axis
+                board.create('line', [[handX, 0], [handX, handY]], {
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Horizontal line from origin to hand x-position
+                board.create('line', [[0, 0], [handX, 0]], {
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Component labels
+                board.create('text', [handX/2, -0.25, 'x = ?'], {fontSize: 13, color: '#6b7280', anchorX: 'middle', fixed: true});
+                board.create('text', [handX + 0.25, handY/2, 'y = ?'], {fontSize: 13, color: '#6b7280', anchorX: 'left', anchorY: 'middle', fixed: true});
+                
+                // Problem statement reminder
+                board.create('text', [1.75, 2.75, 'Find: Total horizontal and vertical displacement'], {fontSize: 13, color: '#374151', anchorX: 'middle', fixed: true});
+                
+            })();
+            </script>
+                <div class="graph-caption">
+                    Two-segment robot arm with first segment 1.5 m at 60° from horizontal, and second segment 1.0 m at 30° from horizontal. The hand position is found by adding the vector components from both segments.
+                </div>
+            </div>
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>We need to add the displacement vectors from each segment.
+            <br><em>First segment contributions:</em>
+            <br>$x_1 = 1.5 \cos 60° = 1.5(0.5) = 0.75$ m
+            <br>$y_1 = 1.5 \sin 60° = 1.5(0.866) = 1.30$ m
+            <br><em>Second segment contributions:</em>
+            <br>$x_2 = 1.0 \cos 30° = 1.0(0.866) = 0.87$ m
+            <br>$y_2 = 1.0 \sin 30° = 1.0(0.5) = 0.50$ m
+            <br><em>Total position:</em>
+            <br>Horizontal: $x_{\text{total}} = 0.75 + 0.87 = 1.62$ m from base
+            <br>Vertical: $y_{\text{total}} = 1.30 + 0.50 = 1.80$ m above base
+        </div>
+
+        <h2 id="sec-6-8">6.8 Computer Graphics Applications</h2>
+
+        <p>
+            Every 3D video game, animated movie, CAD program, and virtual reality application relies heavily on trigonometry. When you rotate an object, project 3D coordinates onto a 2D screen, or calculate lighting and shadows, you're using trigonometric transformations.
+        </p>
+
+        <p>
+            This is an area of particular relevance for anyone interested in programming and building visual applications. Let's explore some fundamental computer graphics operations and see how they're implemented.
+        </p>
+
+        <h3 id="subsec-2d-rotations">2D Rotations</h3>
+
+        <p>
+            The most basic graphics operation is rotating a point around the origin. If you have a point at coordinates $(x, y)$ and want to rotate it by angle $\theta$ counterclockwise around the origin, the new coordinates $(x', y')$ are given by:
+        </p>
+
+        <div class="formula">
+            $$x' = x \cos \theta - y \sin \theta$$
+            $$y' = x \sin \theta + y \cos \theta$$
+        </div>
+
+        <p>
+            This is often written in matrix form as a <strong>rotation matrix</strong>:
+        </p>
+
+        <div class="formula">
+            $$\begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} \cos \theta & -\sin \theta \\ \sin \theta & \cos \theta \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}$$
+        </div>
+
+        <p>
+            <em>Note: Matrices and matrix multiplication are beyond the scope of this lesson. For now, you can think of a matrix as a shorthand way to represent vectors—rows or columns of numbers for the vector components. The key point is that rotation transformations can be expressed using sine and cosine functions in this organized format.</em>
+        </p>
+
+        <p>
+            In computer graphics, every transformation (rotation, scaling, translation) can be represented as matrix multiplication, allowing complex sequences of transformations to be composed by multiplying matrices together.
+        </p>
+
+        <h3 id="subsec-python-2d-rotation">Python Implementation: 2D Rotation</h3>
+
+        <p>
+            Here's a simple Python implementation of 2D rotation. This code rotates a square around the origin and displays the result:
+        </p>
+
+        <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def rotate_2d(points, angle_degrees):
+    """
+    Rotate a set of 2D points around the origin.
+    
+    Args:
+        points: numpy array of shape (n, 2) containing x,y coordinates
+        angle_degrees: rotation angle in degrees (counterclockwise)
+    
+    Returns:
+        numpy array of rotated points
+    """
+    # Convert angle to radians
+    theta = np.radians(angle_degrees)
+    
+    # Create rotation matrix
+    rotation_matrix = np.array([
+        [np.cos(theta), -np.sin(theta)],
+        [np.sin(theta),  np.cos(theta)]
+    ])
+    
+    # Apply rotation to each point (matrix multiplication)
+    rotated_points = points @ rotation_matrix.T
+    
+    return rotated_points
+
+# Example: rotate a square
+# Define square corners
+square = np.array([
+    [1, 1],   # top right
+    [-1, 1],  # top left
+    [-1, -1], # bottom left
+    [1, -1],  # bottom right
+    [1, 1]    # close the square
+])
+
+# Rotate by 30 degrees
+rotated_square = rotate_2d(square, 30)
+
+# Plot both squares
+plt.figure(figsize=(8, 8))
+plt.plot(square[:, 0], square[:, 1], 'b-o', label='Original', linewidth=2)
+plt.plot(rotated_square[:, 0], rotated_square[:, 1], 'r-o', 
+         label='Rotated 30°', linewidth=2)
+plt.grid(True, alpha=0.3)
+plt.axis('equal')
+plt.xlabel('x')
+plt.ylabel('y')
+plt.legend()
+plt.title('2D Rotation Using Trigonometry')
+plt.show()</code></pre>
+
+        <p>
+            <strong>To run this code:</strong> Save it as a <code>.py</code> file (e.g., <code>rotate_2d.py</code>) and run with <code>python3 rotate_2d.py</code>. You'll need numpy and matplotlib installed. See the Appendix below for complete instructions on installing required libraries and running Python programs.
+        </p>
+
+        <h3 id="subsec-3d-rotations">3D Rotations</h3>
+
+        <p>
+            In 3D graphics (games, animation, CAD), we need to rotate objects around the x, y, and z axes. Each axis has its own rotation matrix. For rotation by angle $\theta$ around the z-axis (like spinning a top):
+        </p>
+
+        <div class="formula">
+            $$\begin{bmatrix} x' \\ y' \\ z' \end{bmatrix} = \begin{bmatrix} \cos \theta & -\sin \theta & 0 \\ \sin \theta & \cos \theta & 0 \\ 0 & 0 & 1 \end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix}$$
+        </div>
+
+        <p>
+            Notice that this is just the 2D rotation matrix expanded to 3D, where the z-coordinate stays unchanged. Rotations around x and y axes follow similar patterns, using trigonometric functions to transform the appropriate coordinate pairs.
+        </p>
+
+        <h3 id="subsec-projection-3d-to-2d">Projection: From 3D to 2D</h3>
+
+        <p>
+            To display a 3D object on a 2D screen, we need to project the 3D coordinates onto a 2D plane. This projection involves using the angles between points making up the 3D object and the 2D screen. By now, you can probably see that this would involve sines and cosines. A full treatment is too complicated for this lesson—it requires understanding perspective transformations and how cameras work mathematically. Here, we just wanted to point out that trigonometry enables programmers to project 3D points onto a 2D plane, which is essential for everything from video games to CAD software.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-birth-of-computer-graphics">The Birth of Computer Graphics</h3>
+            <p>
+                Modern computer graphics began with <strong>Ivan Sutherland's</strong> revolutionary PhD thesis at MIT in 1963. His <em>Sketchpad</em> system allowed users to draw and manipulate geometric shapes on a screen using a light pen. Sutherland implemented the mathematical transformations we've discussed—rotations, translations, and projections—in real-time on a computer, something never done before.
+            </p>
+            <p>
+                In the 1970s, <strong>Jim Blinn</strong> and <strong>Turner Whitted</strong> developed realistic lighting models and ray tracing, both heavily dependent on trigonometry. When light hits a surface at an angle θ, the reflected intensity depends on $\cos \theta$—this simple trigonometric relationship creates realistic shading in 3D graphics.
+            </p>
+            <p>
+                Today, every frame of every video game performs millions of trigonometric calculations to rotate objects, project them onto the screen, and calculate lighting. Graphics Processing Units (GPUs) are optimized specifically for these matrix and trigonometric operations, performing them thousands of times faster than general-purpose CPUs.
+            </p>
+        </div>
+
+        <h3 id="subsec-python-3d-cube">Python Implementation: 3D Cube Rotation</h3>
+
+        <p>
+            Here's a more ambitious example: rotating a 3D cube and projecting it onto a 2D screen. This demonstrates the core of how 3D graphics engines work:
+        </p>
+
+        <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+def rotate_3d_z(points, angle_degrees):
+    """Rotate 3D points around the z-axis."""
+    theta = np.radians(angle_degrees)
+    rotation_matrix = np.array([
+        [np.cos(theta), -np.sin(theta), 0],
+        [np.sin(theta),  np.cos(theta), 0],
+        [0, 0, 1]
+    ])
+    return points @ rotation_matrix.T
+
+def rotate_3d_y(points, angle_degrees):
+    """Rotate 3D points around the y-axis."""
+    theta = np.radians(angle_degrees)
+    rotation_matrix = np.array([
+        [np.cos(theta), 0, np.sin(theta)],
+        [0, 1, 0],
+        [-np.sin(theta), 0, np.cos(theta)]
+    ])
+    return points @ rotation_matrix.T
+
+def project_orthographic(points_3d):
+    """Project 3D points to 2D by dropping z-coordinate."""
+    return points_3d[:, :2]
+
+# Define a cube (vertices in 3D)
+cube = np.array([
+    [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],  # back face
+    [-1, -1, 1],  [1, -1, 1],  [1, 1, 1],  [-1, 1, 1]   # front face
+])
+
+# Define edges connecting vertices
+edges = [
+    [0, 1], [1, 2], [2, 3], [3, 0],  # back face
+    [4, 5], [5, 6], [6, 7], [7, 4],  # front face
+    [0, 4], [1, 5], [2, 6], [3, 7]   # connecting edges
+]
+
+# Create animation
+fig, ax = plt.subplots(figsize=(8, 8))
+ax.set_xlim(-2, 2)
+ax.set_ylim(-2, 2)
+ax.set_aspect('equal')
+ax.grid(True, alpha=0.3)
+ax.set_title('3D Cube Rotation (Orthographic Projection)')
+
+def animate(frame):
+    ax.clear()
+    ax.set_xlim(-2, 2)
+    ax.set_ylim(-2, 2)
+    ax.set_aspect('equal')
+    ax.grid(True, alpha=0.3)
+    
+    # Rotate cube
+    rotated = rotate_3d_y(rotate_3d_z(cube, frame * 2), frame * 3)
+    
+    # Project to 2D
+    projected = project_orthographic(rotated)
+    
+    # Draw edges
+    for edge in edges:
+        points = projected[edge]
+        ax.plot(points[:, 0], points[:, 1], 'b-', linewidth=2)
+    
+    # Draw vertices
+    ax.plot(projected[:, 0], projected[:, 1], 'ro', markersize=8)
+    
+    ax.set_title(f'3D Cube Rotation - Frame {frame}')
+
+# Create animation (uncomment to run)
+# anim = FuncAnimation(fig, animate, frames=180, interval=50, repeat=True)
+# plt.show()
+
+# For static display, just show one frame
+animate(30)
+plt.show()</code></pre>
+
+        <p>
+            <strong>To run this code:</strong> Save as a <code>.py</code> file and run with <code>python3 filename.py</code>. This example requires numpy and matplotlib. For the animated version, uncomment the animation lines. See the Appendix below for complete instructions on installing required libraries and running Python programs.
+        </p>
+
+        <p>
+            A complete implementation with perspective projection and user interaction is provided in <strong>Appendix B</strong>. That version creates a more sophisticated 3D viewer where you can control the rotation with keyboard input.
+        </p>
+
+        <div class="problem">
+            <strong>Practice Problem 7:</strong> A point in 3D space has coordinates (3, 4, 5). Rotate it 45° around the z-axis. What are its new coordinates?
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using the z-axis rotation formulas with θ = 45°:
+            <br>$x' = 3 \cos 45° - 4 \sin 45° = 3(0.707) - 4(0.707) = 2.12 - 2.83 = -0.71$
+            <br>$y' = 3 \sin 45° + 4 \cos 45° = 3(0.707) + 4(0.707) = 2.12 + 2.83 = 4.95$
+            <br>$z' = 5$ (unchanged)
+            <br>New coordinates: approximately $(-0.71, 4.95, 5)$
+        </div>
+
+        <h2 id="sec-6-9">6.9 Astronomy Applications</h2>
+
+        <p>
+            Astronomy is where trigonometry began its journey thousands of years ago, and it remains essential today. From measuring distances to stars to predicting planetary positions to tracking satellites, trigonometry is the mathematical language of the cosmos.
+        </p>
+
+        <h3 id="subsec-parallax-stellar-distances">Parallax: Measuring Stellar Distances</h3>
+
+        <p>
+            <strong>Parallax</strong> is the apparent shift in position of an object when viewed from different locations. Hold your finger at arm's length and alternate closing each eye—your finger appears to jump against the background. That's parallax.
+        </p>
+
+        <p>
+            Astronomers use the same principle to measure distances to nearby stars. As Earth orbits the Sun, a nearby star appears to shift position against the distant background stars. By measuring this angular shift and knowing Earth's orbital diameter, we can calculate the star's distance using trigonometry.
+        </p>
+
+        <p>
+            If a star shows a parallax angle of $p$ (measured in arcseconds) when observed from opposite sides of Earth's orbit, its distance $d$ in parsecs is:
+        </p>
+
+        <div class="formula">
+            $$d = \frac{1}{p}$$
+        </div>
+        
+        <div class="graph-container">
+            <div class="graph-title">Fig. 6.9-1: Stellar Parallax - Earth's Orbital Motion Reveals Star Distance</div>
+            <div id="parallax" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Parallax Diagram
+            const board = JXG.JSXGraph.initBoard('parallax', {
+                boundingbox: [-4.5, 8, 4.5, -1.5],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Sun at center
+            const sun = board.create('point', [0, 0], {name: '', visible: true, size: 8, fillColor: '#fbbf24', strokeColor: '#f59e0b', fixed: true});
+            board.create('text', [0, -0.5, '<b>Sun</b>'], {fontSize: 14, color: '#f59e0b', anchorX: 'middle', fixed: true});
+            
+            // Earth's orbit (ellipse approximated as circle for simplicity)
+            const orbitRadius = 2;
+            board.create('circle', [sun, orbitRadius], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1,
+                dash: 2,
+                fillColor: 'transparent'
+            });
+            board.create('text', [0, -1.2, 'Earth\'s Orbit'], {fontSize: 12, color: '#6b7280', anchorX: 'middle', fixed: true});
+            
+            // Earth at two positions (6 months apart)
+            const earth1 = board.create('point', [-orbitRadius, 0], {name: '', visible: true, size: 5, fillColor: '#3b82f6', strokeColor: '#2563eb', fixed: true});
+            const earth2 = board.create('point', [orbitRadius, 0], {name: '', visible: true, size: 5, fillColor: '#3b82f6', strokeColor: '#2563eb', fixed: true});
+            
+            board.create('text', [-orbitRadius - 0.3, -0.5, '<b>Earth</b><br>(January)'], {fontSize: 12, color: '#3b82f6', anchorX: 'right', fixed: true});
+            board.create('text', [orbitRadius + 0.3, -0.5, '<b>Earth</b><br>(July)'], {fontSize: 12, color: '#3b82f6', anchorX: 'left', fixed: true});
+            
+            // Nearby star (much farther away - shown closer for diagram)
+            const starDistance = 6.5;
+            const star = board.create('point', [0, starDistance], {name: '', visible: true, size: 6, fillColor: '#dc2626', strokeColor: '#b91c1c', fixed: true});
+            board.create('text', [0, starDistance + 0.4, '<b>Nearby Star</b>'], {fontSize: 14, color: '#dc2626', anchorX: 'middle', fixed: true});
+            
+            // Background stars (distant, appear fixed)
+            const bgStars = [
+                [-3, 7], [-2.5, 6.5], [-3.5, 6.8],
+                [3, 7], [2.5, 6.5], [3.5, 6.8],
+                [-1.5, 7.5], [1.5, 7.5]
+            ];
+            bgStars.forEach(pos => {
+                board.create('point', pos, {name: '', visible: true, size: 2, fillColor: '#9ca3af', strokeColor: '#9ca3af', fixed: true});
+            });
+            board.create('text', [0, 7.8, 'Distant Background Stars (fixed)'], {fontSize: 11, color: '#6b7280', anchorX: 'middle', fixed: true});
+            
+            // Lines of sight from Earth positions to star
+            board.create('line', [earth1, star], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 1.5,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            board.create('line', [earth2, star], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 1.5,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Baseline (Earth's orbital diameter)
+            board.create('line', [earth1, earth2], {
+                strokeColor: '#10b981',
+                strokeWidth: 2.5,
+                straightFirst: false,
+                straightLast: false
+            });
+            board.create('text', [0, 0.5, '2 AU (baseline)'], {fontSize: 12, color: '#10b981', anchorX: 'middle', fixed: true});
+            
+            // Parallax angle at star (exaggerated for visibility)
+            board.create('angle', [earth1, star, earth2], {
+                radius: 0.8,
+                strokeColor: '#dc2626',
+                fillColor: '#fecaca',
+                fillOpacity: 0.4,
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board.create('text', [0, starDistance - 1.2, '<b>Parallax angle p</b>'], {fontSize: 13, color: '#dc2626', anchorX: 'middle', fixed: true});
+            
+            // Distance label
+            board.create('line', [[0, 0], [0, starDistance]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 1,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board.create('text', [0.3, starDistance/2, '<i>d</i> = distance'], {fontSize: 13, color: '#374151', anchorX: 'left', anchorY: 'middle', fixed: true});
+            
+            // Formula reminder
+            board.create('text', [0, -1.3, 'd = 1/p  (when p in arcseconds, d in parsecs)'], {fontSize: 13, color: '#374151', anchorX: 'middle', fixed: true});
+            
+            // Note about scale
+            board.create('text', [0, 0.9, '(Diagram not to scale - stars are much farther!)'], {fontSize: 10, color: '#9ca3af', anchorX: 'middle', fixed: true});
+            
+        })();
+        </script>
+            <div class="graph-caption">
+                Stellar parallax: As Earth moves from January to July (opposite sides of its orbit), a nearby star appears to shift position against the distant background stars. The parallax angle <i>p</i> and the baseline (2 AU) form a triangle whose geometry gives the relationship d = 1/p, where distance is in parsecs when parallax is in arcseconds.
+            </div>
+        </div>
+
+        <p>
+            One parsec equals about 3.26 light-years or 3.09 × 10¹³ km. This inverse relationship means that smaller parallax angles correspond to greater distances—nearby stars show larger parallax shifts.
+        </p>
+
+        <div class="problem">
+            <strong>Practice Problem 8:</strong> The star Alpha Centauri shows a parallax angle of 0.742 arcseconds. How far away is it in parsecs and in light-years?
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Distance in parsecs: $d = 1/0.742 \approx 1.35$ parsecs
+            <br>Distance in light-years: $1.35 \times 3.26 \approx 4.40$ light-years
+            <br>(Alpha Centauri is indeed Earth's nearest stellar neighbor after the Sun!)
+        </div>
+
+        <h2 id="sec-6-10">6.10 Conclusion: The Unity of Trigonometric Applications</h2>
+
+        <p>
+            In this module, we've journeyed through six centuries and six continents, from Renaissance navigators to modern graphics programmers. We've seen trigonometry solve problems in navigation, surveying, physics, engineering, computer science, and astronomy. The tools we've explored—the Law of Sines and Law of Cosines—extend the power of trigonometry from right triangles to any triangle, unlocking solutions to countless real-world problems.
+        </p>
+
+        <p>
+            What's remarkable is the unity underlying all these applications. Whether we're:
+        </p>
+
+        <ul>
+            <li>Calculating the trajectory of a projectile</li>
+            <li>Rotating a 3D model in a video game</li>
+            <li>Determining the forces in a bridge truss</li>
+            <li>Finding distances across a canyon</li>
+            <li>Measuring the distance to a star</li>
+        </ul>
+
+        <p>
+            ...we're using the same fundamental mathematical relationships: the connection between angles and ratios, the decomposition of vectors into components, the properties of triangles and circles. The ancient Babylonians who first divided the circle into 360 degrees would be astonished to see their angular measurements powering smartphone graphics and satellite navigation.
+        </p>
+
+        <div class="highlight">
+            <p><strong>Looking Forward</strong></p>
+            <p>
+                Module 7 will explore even more advanced topics: inverse trigonometric functions, an introduction to Fourier series (the deep idea we previewed in Module 1), connections to complex numbers through Euler's formula, and a glimpse of spherical trigonometry. These topics show how the simple ratios we started with in Module 2 connect to some of the most profound ideas in mathematics.
+            </p>
+            <p>
+                But the applications we've studied in this module aren't just examples—they're the reason trigonometry continues to be essential in the 21st century. Every engineer, physicist, programmer, and astronomer uses these tools daily. The problems have changed from measuring pyramids to rendering virtual worlds, but the mathematics remains as powerful as ever.
+            </p>
+        </div>
+
+        <!-- Appendices -->
+        <div class="appendix">
+            <h1>Appendix A: Formal Proofs of the Laws</h1>
+
+            <h2 id="sec-appendix-a1">A.1 Proof of the Law of Sines</h2>
+
+            <p>
+                We'll prove that $\displaystyle\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$ for any triangle.
+            </p>
+
+            <div class="graph-container">
+                <div class="graph-title">Fig. A.1-1: Triangle for Law of Sines Proof</div>
+                <div id="lawOfSinesProof" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Law of Sines Proof Diagram
+            const board5 = JXG.JSXGraph.initBoard('lawOfSinesProof', {
+                boundingbox: [-1, 5, 9, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            const A5 = board5.create('point', [1, 1], {name: '', visible: false, fixed: true});
+            const B5 = board5.create('point', [7, 1], {name: '', visible: false, fixed: true});
+            const C5 = board5.create('point', [3, 4], {name: '', visible: false, fixed: true});
+            const D5 = board5.create('point', [3, 1], {name: '', visible: false, fixed: true});
+            
+            // Triangle
+            board5.create('polygon', [A5, B5, C5], {
+                fillColor: 'transparent',
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Altitude (dashed)
+            board5.create('line', [C5, D5], {
+                strokeColor: '#10b981',
+                strokeWidth: 2,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Right angle marker at D
+            board5.create('angle', [A5, D5, C5], {
+                type: 'square',
+                orthoType: 'square',
+                radius: 0.3,
+                fillColor: '#10b981',
+                strokeColor: '#10b981',
+                withLabel: false
+            });
+            
+            // Labels
+            board5.create('text', [0.7, 0.7, '<b>A</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board5.create('text', [7.3, 0.7, '<b>B</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board5.create('text', [3, 4.4, '<b>C</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            board5.create('text', [3.3, 0.7, '<b>D</b>'], {fontSize: 18, color: '#1e40af', fixed: true});
+            
+            // Height label
+            board5.create('text', [3.3, 2.5, '<i>h</i>'], {fontSize: 16, color: '#10b981', fixed: true});
+            
+            // Side labels
+            board5.create('text', [5.2, 2.7, '<i>a</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board5.create('text', [1.8, 2.7, '<i>b</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    Triangle ABC with altitude h from vertex C to side c. The altitude creates two right triangles that allow us to relate the sides and angles.
+                </div>
+            </div>
+
+            <p>
+                <strong>Proof:</strong>
+            </p>
+
+            <p>
+                Consider a triangle ABC. Draw an altitude (perpendicular line) from vertex C down to side c, meeting it at point D. Let the length of this altitude be h.
+            </p>
+
+            <p>
+                This altitude creates two right triangles: ACD and BCD.
+            </p>
+
+            <p>
+                In right triangle ACD:
+            </p>
+            <p style="text-align: center;">$\sin A = \displaystyle\frac{h}{b}$</p>
+            <p style="text-align: center;">Therefore: $h = b \sin A$ ... (equation 1)</p>
+
+            <p>
+                In right triangle BCD:
+            </p>
+            <p style="text-align: center;">$\sin B = \displaystyle\frac{h}{a}$</p>
+            <p style="text-align: center;">Therefore: $h = a \sin B$ ... (equation 2)</p>
+
+            <p>
+                Since both expressions equal h, we can set them equal:
+            </p>
+            <p style="text-align: center;">$b \sin A = a \sin B$</p>
+
+            <p>
+                Dividing both sides by $\sin A \sin B$:
+            </p>
+            <p style="text-align: center;">$\displaystyle\frac{b}{\sin B} = \frac{a}{\sin A}$</p>
+
+            <p>
+                By drawing an altitude from a different vertex, we can similarly prove that $\displaystyle\frac{c}{\sin C} = \frac{a}{\sin A}$, completing the proof.
+            </p>
+
+            <p>
+                Note: This proof works even if the triangle is obtuse (has an angle greater than 90°). In that case, the altitude falls outside the triangle, but the sine relationships still hold.
+            </p>
+
+            <h2 id="sec-appendix-a2">A.2 Proof of the Law of Cosines</h2>
+
+            <p>
+                We'll prove that $c^2 = a^2 + b^2 - 2ab \cos C$ for any triangle.
+            </p>
+
+            <div class="graph-container">
+                <div class="graph-title">Fig. A.2-1: Triangle for Law of Cosines Proof</div>
+                <div id="lawOfCosinesProof" class="jxgbox"></div>
+
+        <script>
+        (function() {
+            // Law of Cosines Proof Diagram
+            const board6 = JXG.JSXGraph.initBoard('lawOfCosinesProof', {
+                boundingbox: [-1, 5, 9, -1],
+                axis: false,
+                showNavigation: false,
+    showFullscreen: true,
+    fullscreen: {
+        symbol: '\u26F6',
+        scale: 0.95
+    },
+                showCopyright: false,
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                drag: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw coordinate axes (light)
+            board6.create('arrow', [[0, 0], [8, 0]], {
+                strokeColor: '#d1d5db',
+                strokeWidth: 1,
+                lastArrow: {type: 2, size: 5},
+                fixed: true});
+            board6.create('arrow', [[0, 0], [0, 4.5]], {
+                strokeColor: '#d1d5db',
+                strokeWidth: 1,
+                lastArrow: {type: 2, size: 5},
+                fixed: true});
+            board6.create('text', [8.2, 0, '<i>x</i>'], {fontSize: 14, color: '#9ca3af', fixed: true});
+            board6.create('text', [0, 4.7, '<i>y</i>'], {fontSize: 14, color: '#9ca3af', fixed: true});
+            
+            // Triangle vertices
+            const C6 = board6.create('point', [0, 0], {name: '', size: 4, fillColor: '#1e40af', fixed: true});
+            const A6 = board6.create('point', [6, 0], {name: '', size: 4, fillColor: '#1e40af', fixed: true});
+            const B6 = board6.create('point', [2, 3.5], {name: '', size: 4, fillColor: '#1e40af', fixed: true});
+            
+            // Triangle
+            board6.create('polygon', [C6, A6, B6], {
+                fillColor: 'transparent',
+                borders: {strokeColor: '#3b82f6', strokeWidth: 2}
+            });
+            
+            // Labels
+            board6.create('text', [-0.4, -0.3, '<b>C (0,0)</b>'], {fontSize: 14, color: '#1e40af', fixed: true});
+            board6.create('text', [6, -0.4, '<b>A (b,0)</b>'], {fontSize: 14, color: '#1e40af', fixed: true});
+            board6.create('text', [2, 3.9, '<b>B (a cos C, a sin C)</b>'], {fontSize: 14, color: '#1e40af', fixed: true});
+            
+            // Side labels
+            board6.create('text', [1.0, 1.9, '<i>a</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board6.create('text', [3.0, -0.4, '<i>b</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            board6.create('text', [4.2, 1.9, '<i>c</i>'], {fontSize: 16, color: '#dc2626', fixed: true});
+            
+            // Angle C
+            board6.create('angle', [A6, C6, B6], {
+                radius: 1.0,
+                strokeColor: '#f59e0b',
+                fillColor: 'transparent',
+                strokeWidth: 2,
+                withLabel: false
+            });
+            board6.create('text', [1.2, 0.3, '<b>C</b>'], {fontSize: 14, color: '#f59e0b', fixed: true});
+            
+        })();
+        </script>
+                <div class="graph-caption">
+                    Triangle ABC positioned in a coordinate system with C at the origin and A on the positive x-axis. The coordinates of B lead directly to the Law of Cosines.
+                </div>
+            </div>
+
+            <p>
+                <strong>Proof using coordinate geometry:</strong>
+            </p>
+
+            <p>
+                Place the triangle in a coordinate system with vertex C at the origin and vertex A on the positive x-axis at coordinates (b, 0).
+            </p>
+
+            <p>
+                Vertex B is at distance a from C at angle C from the positive x-axis. Therefore, B has coordinates:
+            </p>
+            <p style="text-align: center;">$B = (a \cos C, a \sin C)$</p>
+
+            <p>
+                The distance from A to B (which is side c) can be found using the distance formula:
+            </p>
+
+            <p style="text-align: center;">$c^2 = (a \cos C - b)^2 + (a \sin C - 0)^2$</p>
+
+            <p>
+                Expanding the first term:
+            </p>
+            <p style="text-align: center;">$c^2 = a^2 \cos^2 C - 2ab \cos C + b^2 + a^2 \sin^2 C$</p>
+
+            <p>
+                Rearranging:
+            </p>
+            <p style="text-align: center;">$c^2 = a^2(\cos^2 C + \sin^2 C) + b^2 - 2ab \cos C$</p>
+
+            <p>
+                Using the Pythagorean identity $\cos^2 C + \sin^2 C = 1$:
+            </p>
+            <p style="text-align: center;">$c^2 = a^2 + b^2 - 2ab \cos C$</p>
+
+            <p>
+                This completes the proof. The other two forms follow by relabeling vertices.
+            </p>
+
+            <h3 id="subsec-special-cases">Special Cases</h3>
+
+            <p>
+                <strong>When C = 90°:</strong> Since $\cos 90° = 0$, the formula becomes $c^2 = a^2 + b^2$, which is the Pythagorean Theorem.
+            </p>
+
+            <p>
+                <strong>When C is acute (less than 90°):</strong> $\cos C$ is positive, so the $-2ab \cos C$ term makes c² smaller than $a^2 + b^2$. The sides "close together" more than they would for a right triangle.
+            </p>
+
+            <p>
+                <strong>When C is obtuse (greater than 90°):</strong> $\cos C$ is negative, so the $-2ab \cos C$ term becomes positive, making c² larger than $a^2 + b^2$. The sides "spread apart" more than they would for a right triangle.
+            </p>
+        </div>
+
+        <div class="appendix">
+            <h1>Appendix B: Interactive 3D Graphics Demo</h1>
+
+            <p>
+                This appendix provides a complete Python program for an interactive 3D graphics viewer. The program demonstrates rotation, projection, and real-time rendering—all built on trigonometric transformations.
+            </p>
+
+            <p>
+                <strong>Features:</strong>
+            </p>
+            <ul>
+                <li>3D cube that rotates continuously</li>
+                <li>Keyboard controls to change rotation axes and speed</li>
+                <li>Toggle between orthographic and perspective projection</li>
+                <li>Displays rotation angles in real-time</li>
+            </ul>
+
+            <h3 id="subsec-complete-python-code">Complete Python Code</h3>
+
+            <pre><code>"""
+Interactive 3D Graphics Demo
+Demonstrates trigonometric transformations in computer graphics
+
+Controls:
+- 'x': Toggle rotation around x-axis
+- 'y': Toggle rotation around y-axis  
+- 'z': Toggle rotation around z-axis
+- 'p': Toggle perspective/orthographic projection
+- '+'/'-': Increase/decrease rotation speed
+- 'q': Quit
+
+Requirements: numpy, matplotlib
+Install with: pip install numpy matplotlib
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import sys
+
+class Graphics3D:
+    def __init__(self):
+        """Initialize the 3D graphics viewer."""
+        # Cube vertices
+        self.cube = np.array([
+            [-1, -1, -1], [1, -1, -1], [1, 1, -1], [-1, 1, -1],
+            [-1, -1, 1],  [1, -1, 1],  [1, 1, 1],  [-1, 1, 1]
+        ])
+        
+        # Cube edges (pairs of vertex indices)
+        self.edges = [
+            [0, 1], [1, 2], [2, 3], [3, 0],  # back face
+            [4, 5], [5, 6], [6, 7], [7, 4],  # front face
+            [0, 4], [1, 5], [2, 6], [3, 7]   # connecting edges
+        ]
+        
+        # Rotation state
+        self.angles = {'x': 0, 'y': 0, 'z': 0}
+        self.rotating = {'x': False, 'y': True, 'z': True}
+        self.rotation_speed = 2.0
+        self.use_perspective = True
+        
+        # Set up the figure
+        self.fig, self.ax = plt.subplots(figsize=(10, 10))
+        self.fig.canvas.mpl_connect('key_press_event', self.on_key)
+        
+    def rotate_x(self, points, angle_degrees):
+        """Rotate points around the x-axis."""
+        theta = np.radians(angle_degrees)
+        matrix = np.array([
+            [1, 0, 0],
+            [0, np.cos(theta), -np.sin(theta)],
+            [0, np.sin(theta), np.cos(theta)]
+        ])
+        return points @ matrix.T
+    
+    def rotate_y(self, points, angle_degrees):
+        """Rotate points around the y-axis."""
+        theta = np.radians(angle_degrees)
+        matrix = np.array([
+            [np.cos(theta), 0, np.sin(theta)],
+            [0, 1, 0],
+            [-np.sin(theta), 0, np.cos(theta)]
+        ])
+        return points @ matrix.T
+    
+    def rotate_z(self, points, angle_degrees):
+        """Rotate points around the z-axis."""
+        theta = np.radians(angle_degrees)
+        matrix = np.array([
+            [np.cos(theta), -np.sin(theta), 0],
+            [np.sin(theta), np.cos(theta), 0],
+            [0, 0, 1]
+        ])
+        return points @ matrix.T
+    
+    def project(self, points_3d):
+        """
+        Project 3D points to 2D.
+        Uses perspective projection if enabled, orthographic otherwise.
+        """
+        if self.use_perspective:
+            # Perspective projection
+            # Move points away from camera (add to z)
+            z = points_3d[:, 2] + 5
+            # Avoid division by zero
+            z = np.where(z > 0.1, z, 0.1)
+            # Project
+            scale = 3.0 / z
+            x = points_3d[:, 0] * scale
+            y = points_3d[:, 1] * scale
+            return np.column_stack([x, y])
+        else:
+            # Orthographic projection - just drop z coordinate
+            return points_3d[:, :2]
+    
+    def on_key(self, event):
+        """Handle keyboard input."""
+        if event.key == 'x':
+            self.rotating['x'] = not self.rotating['x']
+            print(f"X rotation: {'ON' if self.rotating['x'] else 'OFF'}")
+        elif event.key == 'y':
+            self.rotating['y'] = not self.rotating['y']
+            print(f"Y rotation: {'ON' if self.rotating['y'] else 'OFF'}")
+        elif event.key == 'z':
+            self.rotating['z'] = not self.rotating['z']
+            print(f"Z rotation: {'ON' if self.rotating['z'] else 'OFF'}")
+        elif event.key == 'p':
+            self.use_perspective = not self.use_perspective
+            proj_type = 'Perspective' if self.use_perspective else 'Orthographic'
+            print(f"Projection: {proj_type}")
+        elif event.key in ['+', '=']:
+            self.rotation_speed *= 1.5
+            print(f"Speed: {self.rotation_speed:.1f}")
+        elif event.key in ['-', '_']:
+            self.rotation_speed /= 1.5
+            print(f"Speed: {self.rotation_speed:.1f}")
+        elif event.key == 'q':
+            plt.close(self.fig)
+            sys.exit(0)
+    
+    def update(self, frame):
+        """Update function called for each animation frame."""
+        # Clear the axes
+        self.ax.clear()
+        self.ax.set_xlim(-2.5, 2.5)
+        self.ax.set_ylim(-2.5, 2.5)
+        self.ax.set_aspect('equal')
+        self.ax.grid(True, alpha=0.3)
+        
+        # Update rotation angles
+        if self.rotating['x']:
+            self.angles['x'] += self.rotation_speed
+        if self.rotating['y']:
+            self.angles['y'] += self.rotation_speed
+        if self.rotating['z']:
+            self.angles['z'] += self.rotation_speed
+        
+        # Apply rotations
+        rotated = self.cube.copy()
+        if self.angles['x'] != 0:
+            rotated = self.rotate_x(rotated, self.angles['x'])
+        if self.angles['y'] != 0:
+            rotated = self.rotate_y(rotated, self.angles['y'])
+        if self.angles['z'] != 0:
+            rotated = self.rotate_z(rotated, self.angles['z'])
+        
+        # Project to 2D
+        projected = self.project(rotated)
+        
+        # Draw edges with depth-based coloring
+        for edge in self.edges:
+            # Calculate average z-depth for this edge
+            z_depth = (rotated[edge[0], 2] + rotated[edge[1], 2]) / 2
+            # Color based on depth (darker = farther)
+            color_intensity = (z_depth + 2) / 4  # normalize to 0-1
+            color_intensity = np.clip(color_intensity, 0.3, 1.0)
+            color = (0, 0, color_intensity)
+            
+            points = projected[edge]
+            self.ax.plot(points[:, 0], points[:, 1], 
+                        color=color, linewidth=2)
+        
+        # Draw vertices
+        self.ax.plot(projected[:, 0], projected[:, 1], 
+                    'ro', markersize=6)
+        
+        # Create title with current state
+        proj_type = 'Perspective' if self.use_perspective else 'Orthographic'
+        title = f'3D Cube - {proj_type} Projection\n'
+        title += f'Angles: X={self.angles["x"]:.0f}° '
+        title += f'Y={self.angles["y"]:.0f}° '
+        title += f'Z={self.angles["z"]:.0f}°'
+        self.ax.set_title(title, fontsize=12)
+        
+        # Add control hints
+        control_text = ('Controls: x/y/z = toggle rotation | '
+                       'p = projection | +/- = speed | q = quit')
+        self.ax.text(0.5, -0.1, control_text, 
+                    transform=self.ax.transAxes,
+                    ha='center', fontsize=9, style='italic')
+    
+    def run(self):
+        """Start the animation."""
+        print("Interactive 3D Graphics Demo")
+        print("============================")
+        print("Controls:")
+        print("  x, y, z : Toggle rotation around that axis")
+        print("  p       : Toggle perspective/orthographic projection")
+        print("  +, -    : Increase/decrease rotation speed")
+        print("  q       : Quit")
+        print("\nStarting animation...")
+        
+        anim = FuncAnimation(self.fig, self.update, 
+                           frames=None, interval=50, 
+                           repeat=True, cache_frame_data=False)
+        plt.show()
+
+if __name__ == "__main__":
+    viewer = Graphics3D()
+    viewer.run()</code></pre>
+
+            <h3 id="subsec-how-to-run">How to Run</h3>
+
+            <ol>
+                <li>Save the code above to a file named <code>graphics3d.py</code></li>
+                <li>Make sure you have the required libraries:
+                    <pre><code>pip install numpy matplotlib</code></pre>
+                </li>
+                <li>Run the program:
+                    <pre><code>python graphics3d.py</code></pre>
+                </li>
+                <li>Use the keyboard controls to interact with the 3D cube</li>
+            </ol>
+
+            <h3 id="subsec-understanding-the-code">Understanding the Code</h3>
+
+            <p>
+                The program demonstrates several key concepts:
+            </p>
+
+            <ul>
+                <li><strong>Rotation Matrices:</strong> The <code>rotate_x</code>, <code>rotate_y</code>, and <code>rotate_z</code> methods implement the trigonometric rotation matrices we discussed. Each uses sine and cosine to transform coordinates.</li>
+                
+                <li><strong>Projection:</strong> The <code>project</code> method implements both orthographic (simple 2D drop) and perspective (division by depth) projection.</li>
+                
+                <li><strong>Depth Sorting:</strong> The code colors edges based on their z-coordinate to create a simple depth effect—edges farther away are darker.</li>
+                
+                <li><strong>Real-time Updates:</strong> The <code>update</code> method is called many times per second, recalculating rotations and projections to create smooth animation.</li>
+            </ul>
+
+            <h3 id="subsec-extension-ideas">Extension Ideas</h3>
+
+            <p>
+                Try modifying the code to:
+            </p>
+            <ul>
+                <li>Add more complex 3D shapes (pyramids, spheres approximated by polyhedra)</li>
+                <li>Implement rotation around arbitrary axes</li>
+                <li>Add lighting calculations (surfaces facing a light source are brighter)</li>
+                <li>Create multiple objects with different rotation rates</li>
+                <li>Implement a simple "camera" that can move through 3D space</li>
+            </ul>
+
+            <p>
+                This demo shows that sophisticated 3D graphics are built on the same trigonometric foundations we've been studying throughout this course. From the Pythagorean theorem to sine and cosine functions to rotation matrices, every piece contributes to creating immersive 3D worlds!
+            </p>
+        </div>
+
+    </div>
+
+    </script>
+</body>
+</html>

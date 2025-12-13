@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 
+    Document Provenance:
+      Title: An Introduction to Trigonometry and its Application
+      Module: 5 - Trigonometric Identities
+      Version: 5
+      Date: December 2025
+      Guidelines Version: Technical Document Implementation v1.8
+      
+      Version History:
+        v5 (2025-12-03): Added navigation structure
+          - Added module title page with lesson context
+          - Added module table of contents with full depth (h2 + h3)
+          - Added list of figures (6 JSXGraph diagrams)
+          - Added IDs to all h2 and h3 headings for linking
+        v4 (2025-11-28): Formatting updates
+        v2 (2025-11-25): Full v1.0 compliance (MathJax v4, JSXGraph conversion)
+        v1: Original module
+      
+      Figure Inventory (6 JSXGraph diagrams):
+        Fig. 5.2-1: Geometric Proof of the Pythagorean Identity
+        Fig. 5.4-1: Example of an Even Function: f(x) = x²
+        Fig. 5.4-2: Example of an Odd Function: f(x) = x³
+        Fig. 5.4-3: Even and Odd Behavior on the Unit Circle
+        Fig. 5.6-1: Geometric Intuition for cos(A - B)
+        Fig. 5.7-1: Visualizing sin(2θ) = 2sin(θ)cos(θ)
+      
+      Validation Status: PASSED (2025-12-03)
+        - STEM Whitelist: PASS
+        - ftfy Encoding: PASS
+        - Anchor Links: PASS (41 references, 55 IDs)
+    -->
+    <title>An Introduction to Trigonometry: Module 5 - Trigonometric Identities</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true
+    },
+    chtml: {
+        displayOverflow: 'linebreak',
+        displayAlign: 'left',
+        scale: 1,
+        minScale: 0.5,
+        linebreaks: {
+            inline: true,
+            width: '100%',
+            lineleading: 0.2
+        }
+    },
+    options: {
+        enableMenu: true,
+        menuOptions: {
+            settings: {
+                assistiveMml: true
+            }
+        }
+    }
+};
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- JSXGraph for geometric diagrams -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1e40af; border-bottom: 3px solid #3b82f6; padding-bottom: 10px; }
+        h2 { color: #1e40af; margin-top: 30px; }
+        h3 { color: #374151; }
+        .highlight { background-color: #dbeafe; padding: 15px; border-left: 4px solid #3b82f6; margin: 20px 0; border-radius: 4px; }
+        .example { background-color: #d1fae5; padding: 15px; border-left: 4px solid #10b981; margin: 20px 0; border-radius: 4px; }
+        .warning { background-color: #fef3c7; padding: 15px; border-left: 4px solid #f59e0b; margin: 20px 0; border-radius: 4px; }
+        .historical { background-color: #fce7f3; padding: 15px; border-left: 4px solid #ec4899; margin: 20px 0; border-radius: 4px; }
+        .formula { text-align: center; font-size: 1.2em; margin: 20px 0; padding: 15px; background-color: #f3f4f6; border-radius: 4px; }
+        code { background-color: #f3f4f6; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; }
+        /* Figure container and numbering */
+        .graph-container { 
+            margin: 30px auto; 
+            padding: 20px; 
+            background-color: #f9fafb; 
+            border-radius: 8px;
+            text-align: center;
+            max-width: 800px;
+        }
+        .graph-title { 
+            font-weight: bold; 
+            color: #1e40af; 
+            margin-bottom: 15px; 
+            text-align: center; 
+        }
+        .graph-caption { 
+            font-size: 0.9em; 
+            color: #6b7280; 
+            margin-top: 10px; 
+            font-style: italic; 
+            text-align: center; 
+        }
+        .jxgbox {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            margin: 0 auto;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        canvas {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+        }
+        ul, ol { margin-left: 20px; }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-weight: bold;
+        }
+        .problem {
+            background-color: #f0f9ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+            border-radius: 4px;
+        }
+        .solution {
+            background-color: #f0fdf4;
+            padding: 15px;
+            margin: 10px 0 15px 20px;
+            border-left: 4px solid #10b981;
+            border-radius: 4px;
+        }
+
+        /* Mobile-specific adjustments */
+        @media (max-width: 768px) {
+            .jxgbox {
+                max-width: 100%;
+                padding: 12px;
+            }
+            
+            code, pre {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+        }
+
+        /* Module Title Page Styling */
+        .module-title-page {
+            text-align: center;
+            padding: 50px 20px;
+            margin: -40px -40px 30px -40px;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
+            border-bottom: 3px solid #3b82f6;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .module-title-page h1 {
+            font-size: 1.5em;
+            color: #1e40af;
+            border-bottom: none;
+            margin: 0 0 10px 0;
+            padding-bottom: 0;
+            line-height: 1.3;
+        }
+        
+        .module-title-page .module-subtitle {
+            font-size: 1.8em;
+            color: #1e40af;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .module-title-page .version {
+            font-size: 1.0em;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+        
+        /* Module Table of Contents Styling */
+        .module-toc {
+            background-color: #f0f9ff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin: 25px 0 30px 0;
+        }
+        
+        .module-toc h2 {
+            color: #1e40af;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        
+        .module-toc ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .module-toc > ul > li {
+            margin: 10px 0;
+        }
+        
+        .module-toc > ul > li > a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0em;
+        }
+        
+        .module-toc > ul > li > a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        .module-toc ul ul {
+            margin: 8px 0 8px 20px;
+            padding: 0;
+        }
+        
+        .module-toc ul ul li {
+            margin: 5px 0;
+        }
+        
+        .module-toc ul ul a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .module-toc ul ul a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        /* List of Figures Styling */
+        .figure-list {
+            background-color: #fefce8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #fde047;
+            margin: 0 0 35px 0;
+        }
+        
+        .figure-list h3 {
+            color: #854d0e;
+            margin: 0 0 12px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid #facc15;
+            padding-bottom: 8px;
+        }
+        
+        .figure-list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .figure-list li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .figure-list li::before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #ca8a04;
+            font-size: 0.8em;
+        }
+        
+        .figure-list a {
+            color: #92400e;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .figure-list a:hover {
+            text-decoration: underline;
+            color: #b45309;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- MODULE TITLE PAGE -->
+        <div class="module-title-page">
+            <h1>An Introduction to Trigonometry and its Application</h1>
+            <div class="module-subtitle">Module 5: Trigonometric Identities</div>
+            <div class="version">Version 1.0 — December 3, 2025</div>
+        </div>
+
+        <!-- MODULE TABLE OF CONTENTS -->
+        <div class="module-toc">
+            <h2>In This Module</h2>
+            <ul>
+                <li><a href="#sec-5-1">5.1 What Are Identities and Why Do They Matter?</a>
+                    <ul>
+                        <li><a href="#subsec-understanding-identities">Understanding Identities</a></li>
+                        <li><a href="#subsec-why-identities-matter-three-compelling-reasons">Why Identities Matter: Three Compelling Reasons</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-2">5.2 The Pythagorean Identities</a>
+                    <ul>
+                        <li><a href="#subsec-the-fundamental-identity">The Fundamental Identity</a></li>
+                        <li><a href="#subsec-two-related-pythagorean-identities">Two Related Pythagorean Identities</a></li>
+                        <li><a href="#subsec-using-the-pythagorean-identities">Using the Pythagorean Identities</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-3">5.3 Reciprocal and Quotient Identities</a></li>
+                <li><a href="#sec-5-4">5.4 Even-Odd Identities</a>
+                    <ul>
+                        <li><a href="#subsec-visualizing-even-and-odd-functions">Visualizing Even and Odd Functions</a></li>
+                        <li><a href="#subsec-visualizing-symmetry-on-the-unit-circle">Visualizing Symmetry on the Unit Circle</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-5">5.5 Cofunction Identities</a>
+                    <ul>
+                        <li><a href="#subsec-the-complementary-angle-connection">The Complementary Angle Connection</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-6">5.6 Sum and Difference Formulas</a>
+                    <ul>
+                        <li><a href="#subsec-the-cosine-of-a-difference">The Cosine of a Difference</a></li>
+                        <li><a href="#subsec-deriving-the-other-sum-and-difference-formulas">Deriving the Other Sum and Difference Formulas</a></li>
+                        <li><a href="#subsec-using-sum-and-difference-formulas">Using Sum and Difference Formulas</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-7">5.7 Double Angle Formulas</a>
+                    <ul>
+                        <li><a href="#subsec-deriving-double-angle-formulas">Deriving Double Angle Formulas</a></li>
+                        <li><a href="#subsec-applications-of-double-angle-formulas">Applications of Double Angle Formulas</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-8">5.8 Half Angle Formulas</a>
+                    <ul>
+                        <li><a href="#subsec-deriving-the-half-angle-formulas">Deriving the Half Angle Formulas</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-9">5.9 Product-to-Sum and Sum-to-Product Formulas</a>
+                    <ul>
+                        <li><a href="#subsec-the-product-to-sum-formulas">The Product-to-Sum Formulas</a></li>
+                        <li><a href="#subsec-sum-to-product-formulas">Sum-to-Product Formulas</a></li>
+                        <li><a href="#subsec-modern-applications">Modern Applications</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-5-10">5.10 Solving Trigonometric Equations</a>
+                    <ul>
+                        <li><a href="#subsec-basic-strategy-for-solving-trigonometric-equations">Basic Strategy for Solving Trigonometric Equations</a></li>
+                        <li><a href="#subsec-understanding-general-solutions">Understanding General Solutions</a></li>
+                        <li><a href="#subsec-type-1-basic-equations-with-interval-restrictions">Type 1: Basic Equations with Interval Restrictions</a></li>
+                        <li><a href="#subsec-type-2-equations-requiring-identities">Type 2: Equations Requiring Identities</a></li>
+                        <li><a href="#subsec-type-3-equations-with-multiple-angles">Type 3: Equations with Multiple Angles</a></li>
+                        <li><a href="#subsec-type-4-equations-requiring-factoring">Type 4: Equations Requiring Factoring</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-summary-your-trigonometric-identity-toolkit">Summary: Your Trigonometric Identity Toolkit</a>
+                    <ul>
+                        <li><a href="#subsec-final-practice-problems">Final Practice Problems</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- LIST OF FIGURES -->
+        <div class="figure-list">
+            <h3>Figures in This Module</h3>
+            <ul>
+                <li><a href="#jxgbox-pythagorean">Fig. 5.2-1: Geometric Proof of the Pythagorean Identity</a></li>
+                <li><a href="#evenFunctionChart">Fig. 5.4-1: Example of an Even Function: f(x) = x²</a></li>
+                <li><a href="#oddFunctionChart">Fig. 5.4-2: Example of an Odd Function: f(x) = x³</a></li>
+                <li><a href="#jxgbox-evenodd">Fig. 5.4-3: Even and Odd Behavior on the Unit Circle</a></li>
+                <li><a href="#jxgbox-cossum">Fig. 5.6-1: Geometric Intuition for cos(A - B)</a></li>
+                <li><a href="#doubleAngleChart">Fig. 5.7-1: Visualizing sin(2θ) = 2sin(θ)cos(θ)</a></li>
+            </ul>
+        </div>
+
+        <p>
+            In the previous modules, we've learned how to calculate trigonometric functions for various angles, interpret them geometrically using the unit circle, and visualize their periodic behavior through graphs. We've seen that these functions have specific values at certain angles—for instance, $\sin 30° = 1/2$ and $\cos 45° = \sqrt{2}/2$. But trigonometry reveals something deeper: there are fundamental relationships <em>between</em> these functions that are always true, regardless of the angle.
+        </p>
+
+        <p>
+            These relationships are called <strong>trigonometric identities</strong>. Unlike equations that are true only for specific values of the variable, identities are true for <em>all</em> values where both sides are defined. They're not just mathematical curiosities—they're essential tools that mathematicians, scientists, and engineers use daily to simplify expressions, solve equations, and reveal hidden connections.
+        </p>
+
+        <h2 id="sec-5-1">5.1 What Are Identities and Why Do They Matter?</h2>
+
+        <h3 id="subsec-understanding-identities">Understanding Identities</h3>
+
+        <p>
+            An identity is an equation that is true for all values of the variable(s) involved. For example, the algebraic identity $(x + y)^2 = x^2 + 2xy + y^2$ is true regardless of what numbers $x$ and $y$ represent. Similarly, trigonometric identities express relationships that hold for all angles (or at least for all angles where the functions are defined).
+        </p>
+
+        <div class="example">
+            <p><strong>Example: Comparing Equations and Identities</strong></p>
+            <p><strong>Equation:</strong> $\sin \theta = 0.5$ is true only for specific angles like $\theta = 30°, 150°, 390°$, etc.</p>
+            <p><strong>Identity:</strong> $\sin^2 \theta + \cos^2 \theta = 1$ is true for <em>every</em> angle $\theta$.</p>
+        </div>
+
+        <h3 id="subsec-why-identities-matter-three-compelling-reasons">Why Identities Matter: Three Compelling Reasons</h3>
+
+        <p><strong>1. Simplification and Problem Solving</strong></p>
+
+        <p>
+            Identities let us transform complicated trigonometric expressions into simpler, more manageable forms. In calculus, for instance, you might need to integrate an expression like $\sin^2 x$. Direct integration is difficult, but using the identity $\sin^2 x = \frac{1 - \cos 2x}{2}$ transforms it into something readily integrable. Engineers use identities constantly to simplify formulas describing waves, vibrations, and alternating currents.
+        </p>
+
+        <p><strong>2. Revealing Mathematical Structure</strong></p>
+
+        <p>
+            Identities show us that seemingly different expressions are actually the same thing in disguise. This reveals deep connections in mathematics. For example, the sum formula $\sin(A + B) = \sin A \cos B + \cos A \sin B$ shows how the sine of a sum relates to the sines and cosines of individual angles. This isn't just a computational trick—it reflects fundamental properties of rotation and periodic motion.
+        </p>
+
+        <p><strong>3. Historical Context: The Development of Trigonometric Identities</strong></p>
+
+        <p>
+            The systematic study of trigonometric identities spans cultures and centuries. Greek astronomers like Ptolemy (c. 100-170 CE) knew some basic relationships, but the golden age of identity development came during the Islamic Golden Age (800-1400 CE).
+        </p>
+
+        <p>
+            <strong>Abu al-Wafa (940-998 CE)</strong>, a Persian mathematician and astronomer working in Baghdad, made groundbreaking contributions to trigonometry. He was the first to systematically develop the tangent function and discover many angle addition formulas. Abu al-Wafa was particularly concerned with accurate astronomical calculations, and his work on identities made complex computations more tractable. His treatise <em>Almagest of Abu al-Wafa</em> contains some of the earliest derivations of sum and difference formulas.
+        </p>
+
+        <p>
+            <strong>Leonhard Euler (1707-1783)</strong> later brought modern notation and systematic organization to trigonometry. In his monumental <em>Introduction to the Analysis of the Infinite</em> (1748), Euler established the notation and relationships we use today, connecting trigonometric functions with complex numbers and exponential functions through his famous formula $e^{i\theta} = \cos \theta + i \sin \theta$.
+        </p>
+
+        <h2 id="sec-5-2">5.2 The Pythagorean Identities</h2>
+
+        <h3 id="subsec-the-fundamental-identity">The Fundamental Identity</h3>
+
+        <p>
+            The most important trigonometric identity comes directly from the Pythagorean theorem. Recall from Module 3 that any point on the unit circle has coordinates $(\cos \theta, \sin \theta)$, where $\theta$ is the angle from the positive x-axis. Since the point lies on a circle of radius 1, the distance from the origin to the point equals 1.
+        </p>
+
+        <p>
+            Using the distance formula (which is just the Pythagorean theorem):
+        </p>
+
+        <div class="formula">
+            $\sqrt{(\cos \theta)^2 + (\sin \theta)^2} = 1$
+        </div>
+
+        <p>
+            Squaring both sides gives us:
+        </p>
+
+        <div class="formula">
+            $\sin^2 \theta + \cos^2 \theta = 1$
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-the-fundamental-pythagorean-identity">The Fundamental Pythagorean Identity</h3>
+            <p style="text-align: center; font-size: 1.3em; margin: 15px 0;">
+                $\sin^2 \theta + \cos^2 \theta = 1$
+            </p>
+            <p>
+                This identity is true for <strong>every</strong> angle $\theta$. It's called a Pythagorean identity because it comes from the Pythagorean theorem applied to the unit circle.
+            </p>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.2-1: Geometric Proof of the Pythagorean Identity</div>
+            <div id="jxgbox-pythagorean" class="jxgbox" style="width:100%; max-width:500px; aspect-ratio:1; margin:20px auto;"></div>
+            <div class="graph-caption">
+                On the unit circle, a point at angle θ has coordinates (cos θ, sin θ). 
+                By the Pythagorean theorem, cos²θ + sin²θ equals the square of the radius, which is 1.
+            </div>
+        </div>
+
+        <h3 id="subsec-two-related-pythagorean-identities">Two Related Pythagorean Identities</h3>
+
+        <p>
+            From the fundamental identity, we can derive two more Pythagorean identities by dividing through by $\cos^2 \theta$ or $\sin^2 \theta$.
+        </p>
+
+        <p><strong>Dividing by $\cos^2 \theta$:</strong></p>
+
+        <p>
+            Starting with $\sin^2 \theta + \cos^2 \theta = 1$, divide every term by $\cos^2 \theta$:
+        </p>
+
+        <p style="text-align: center;">
+            $\frac{\sin^2 \theta}{\cos^2 \theta} + \frac{\cos^2 \theta}{\cos^2 \theta} = \frac{1}{\cos^2 \theta}$
+        </p>
+
+        <p>
+            Using the definitions $\tan \theta = \frac{\sin \theta}{\cos \theta}$ and $\sec \theta = \frac{1}{\cos \theta}$:
+        </p>
+
+        <div class="formula">
+            $\tan^2 \theta + 1 = \sec^2 \theta$
+        </div>
+
+        <p>
+            Or, rearranging:
+        </p>
+
+        <div class="formula">
+            $1 + \tan^2 \theta = \sec^2 \theta$
+        </div>
+
+        <p><strong>Dividing by $\sin^2 \theta$:</strong></p>
+
+        <p>
+            Similarly, dividing the fundamental identity by $\sin^2 \theta$:
+        </p>
+
+        <div class="formula">
+            $1 + \cot^2 \theta = \csc^2 \theta$
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-the-three-pythagorean-identities">The Three Pythagorean Identities</h3>
+            <ol>
+                <li>$\sin^2 \theta + \cos^2 \theta = 1$</li>
+                <li>$1 + \tan^2 \theta = \sec^2 \theta$</li>
+                <li>$1 + \cot^2 \theta = \csc^2 \theta$</li>
+            </ol>
+            <p>
+                These three identities are among the most frequently used in trigonometry. Memorize them—they're worth it!
+            </p>
+        </div>
+
+        <h3 id="subsec-using-the-pythagorean-identities">Using the Pythagorean Identities</h3>
+
+        <div class="example">
+            <p><strong>Example 1: Finding $\cos \theta$ given $\sin \theta$</strong></p>
+            <p>If $\sin \theta = 3/5$ and $\theta$ is in Quadrant I, find $\cos \theta$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Using $\sin^2 \theta + \cos^2 \theta = 1$:</p>
+            <p style="text-align: center;">$(3/5)^2 + \cos^2 \theta = 1$</p>
+            <p style="text-align: center;">$9/25 + \cos^2 \theta = 1$</p>
+            <p style="text-align: center;">$\cos^2 \theta = 1 - 9/25 = 16/25$</p>
+            <p style="text-align: center;">$\cos \theta = \pm 4/5$</p>
+            <p>Since $\theta$ is in Quadrant I where cosine is positive: $\cos \theta = 4/5$</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 2: Simplifying an Expression</strong></p>
+            <p>Simplify: $\frac{1 - \sin^2 \theta}{\cos \theta}$</p>
+            <p><strong>Solution:</strong></p>
+            <p>From the Pythagorean identity, we know $1 - \sin^2 \theta = \cos^2 \theta$:</p>
+            <p style="text-align: center;">$\frac{1 - \sin^2 \theta}{\cos \theta} = \frac{\cos^2 \theta}{\cos \theta} = \cos \theta$</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 1:</strong> If $\cos \theta = -5/13$ and $\theta$ is in Quadrant II, find $\sin \theta$ and $\tan \theta$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using $\sin^2 \theta + \cos^2 \theta = 1$:
+            <br>$\sin^2 \theta + (-5/13)^2 = 1$
+            <br>$\sin^2 \theta = 1 - 25/169 = 144/169$
+            <br>$\sin \theta = \pm 12/13$
+            <br>In Quadrant II, sine is positive, so $\sin \theta = 12/13$
+            <br>Then $\tan \theta = \frac{\sin \theta}{\cos \theta} = \frac{12/13}{-5/13} = -\frac{12}{5}$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 2:</strong> Simplify: $\sec^2 x - \tan^2 x$
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using the identity $1 + \tan^2 x = \sec^2 x$:
+            <br>$\sec^2 x - \tan^2 x = 1$
+        </div>
+
+        <h2 id="sec-5-3">5.3 Reciprocal and Quotient Identities</h2>
+
+        <p>
+            These identities follow directly from the definitions of the trigonometric functions. They're straightforward but essential for converting between functions.
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-reciprocal-identities">Reciprocal Identities</h3>
+            <p style="text-align: center;">
+                $\csc \theta = \frac{1}{\sin \theta}$ &nbsp;&nbsp;&nbsp; 
+                $\sec \theta = \frac{1}{\cos \theta}$ &nbsp;&nbsp;&nbsp; 
+                $\cot \theta = \frac{1}{\tan \theta}$
+            </p>
+            <h3 style="margin-top: 20px;">Quotient Identities</h3>
+            <p style="text-align: center;">
+                $\tan \theta = \frac{\sin \theta}{\cos \theta}$ &nbsp;&nbsp;&nbsp;&nbsp; 
+                $\cot \theta = \frac{\cos \theta}{\sin \theta}$
+            </p>
+        </div>
+
+        <p>
+            These might seem obvious, but they're incredibly useful for transforming expressions. Often, converting everything to sines and cosines using these identities makes simplification much easier.
+        </p>
+
+        <div class="example">
+            <p><strong>Example: Simplifying Using Quotient Identities</strong></p>
+            <p>Simplify: $\tan \theta \cos \theta$</p>
+            <p><strong>Solution:</strong></p>
+            <p style="text-align: center;">$\tan \theta \cos \theta = \frac{\sin \theta}{\cos \theta} \cdot \cos \theta = \sin \theta$</p>
+        </div>
+
+        <h2 id="sec-5-4">5.4 Even-Odd Identities</h2>
+
+        <p>
+            A function $f$ is termed <strong>even</strong> if $f(x) = f(-x)$ for all $x$ in its domain, and <strong>odd</strong> if $f(x) = -f(-x)$ for all $x$ in its domain. Even functions are symmetric about the y-axis, while odd functions are symmetric about the origin. The trigonometric functions have specific even-odd properties that lead to important identities.
+        </p>
+
+        <h3 id="subsec-visualizing-even-and-odd-functions">Visualizing Even and Odd Functions</h3>
+
+        <p>
+            Before we look at the trigonometric functions specifically, let's understand what even and odd symmetry looks like graphically.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.4-1: Example of an Even Function: f(x) = x²</div>
+            <div id="evenFunctionChart" class="jxgbox" style="width:100%; max-width:700px; aspect-ratio:7/4; margin:20px auto;"></div>
+            <div class="graph-caption">
+                An even function is symmetric about the y-axis. Notice that f(-2) = f(2) = 4, 
+                and more generally f(-x) = f(x) for all x.
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.4-2: Example of an Odd Function: f(x) = x³</div>
+            <div id="oddFunctionChart" class="jxgbox" style="width:100%; max-width:700px; aspect-ratio:7/4; margin:20px auto;"></div>
+            <div class="graph-caption">
+                An odd function is symmetric about the origin. Notice that f(-2) = -f(2): 
+                if (2, 8) is on the graph, then (-2, -8) is also on the graph.
+            </div>
+        </div>
+
+        <h3 id="subsec-visualizing-symmetry-on-the-unit-circle">Visualizing Symmetry on the Unit Circle</h3>
+
+        <p>
+            Consider an angle $\theta$ and its negative $-\theta$. On the unit circle, $-\theta$ is the reflection of $\theta$ across the x-axis. The point at angle $\theta$ has coordinates $(\cos \theta, \sin \theta)$, while the point at angle $-\theta$ has coordinates $(\cos(-\theta), \sin(-\theta))$.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.4-3: Even and Odd Behavior on the Unit Circle</div>
+            <div id="jxgbox-evenodd" class="jxgbox" style="width:100%; max-width:500px; aspect-ratio:1; margin:20px auto;"></div>
+            <div class="graph-caption">
+                Comparing points at angle θ and -θ on the unit circle. Notice that cos(-θ) = cos(θ) 
+                (x-coordinates match), but sin(-θ) = -sin(θ) (y-coordinates are opposites).
+            </div>
+        </div>
+
+        <p>
+            From the diagram, we can see:
+        </p>
+
+        <ul>
+            <li>The x-coordinates are the same: $\cos(-\theta) = \cos \theta$</li>
+            <li>The y-coordinates are opposites: $\sin(-\theta) = -\sin \theta$</li>
+        </ul>
+
+        <div class="highlight">
+            <h3 id="subsec-even-odd-identities">Even-Odd Identities</h3>
+            <p><strong>Cosine is an even function:</strong></p>
+            <p style="text-align: center; font-size: 1.2em;">$\cos(-\theta) = \cos \theta$</p>
+            <p><strong>Sine is an odd function:</strong></p>
+            <p style="text-align: center; font-size: 1.2em;">$\sin(-\theta) = -\sin \theta$</p>
+            <p><strong>Tangent is an odd function:</strong></p>
+            <p style="text-align: center; font-size: 1.2em;">$\tan(-\theta) = -\tan \theta$</p>
+            <p>(The tangent identity follows from the sine and cosine identities: $\tan(-\theta) = \frac{\sin(-\theta)}{\cos(-\theta)} = \frac{-\sin \theta}{\cos \theta} = -\tan \theta$)</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example: Using Even-Odd Identities</strong></p>
+            <p>Simplify: $\cos(-45°) + \sin(-30°)$</p>
+            <p><strong>Solution:</strong></p>
+            <p>Using the even-odd identities:</p>
+            <p style="text-align: center;">$\cos(-45°) + \sin(-30°) = \cos(45°) + (-\sin(30°))$</p>
+            <p style="text-align: center;">$= \frac{\sqrt{2}}{2} - \frac{1}{2}$</p>
+            <p style="text-align: center;">$= \frac{\sqrt{2} - 1}{2}$</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 3:</strong> If $\sin \theta = 0.6$, what is $\sin(-\theta)$?
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using the odd function property of sine:
+            <br>$\sin(-\theta) = -\sin \theta = -0.6$
+        </div>
+
+        <h2 id="sec-5-5">5.5 Cofunction Identities</h2>
+
+        <p>
+            There's an interesting relationship between sine and cosine, and between tangent and cotangent, that involves <strong>complementary angles</strong>—angles that add up to 90°.
+        </p>
+
+        <h3 id="subsec-the-complementary-angle-connection">The Complementary Angle Connection</h3>
+
+        <p>
+            In a right triangle, if one of the acute angles is $\theta$, then the other acute angle must be $90° - \theta$ (since the three angles must sum to 180°, and one angle is already 90°). The side that is "opposite" to angle $\theta$ is "adjacent" to angle $90° - \theta$, and vice versa.
+        </p>
+
+        <p>
+            This geometric relationship leads to a beautiful connection:
+        </p>
+
+        <div class="formula">
+            $\sin \theta = \cos(90° - \theta)$
+            <br><br>
+            $\cos \theta = \sin(90° - \theta)$
+        </div>
+
+        <p>
+            In other words, the sine of an angle equals the cosine of its complement—which is exactly why "cosine" is called "cosine": it's the sine of the <strong>co</strong>mplementary angle!
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-etymology-why-cosine-cotangent-and-cosecant">Etymology: Why "Cosine," "Cotangent," and "Cosecant"?</h3>
+            <p>
+                The "co-" prefix in cosine, cotangent, and cosecant literally means "complement's." When early mathematicians organized these functions, they recognized that:
+            </p>
+            <ul>
+                <li>The <strong>cosine</strong> of an angle $A$ is equal to the <strong>sine</strong> of the angle complementary to $A$</li>
+                <li>The <strong>cotangent</strong> of an angle $A$ is equal to the <strong>tangent</strong> of the angle complementary to $A$</li>
+                <li>The <strong>cosecant</strong> of an angle $A$ is equal to the <strong>secant</strong> of the angle complementary to $A$</li>
+            </ul>
+            <p>
+                This naming convention, which seems arbitrary at first, actually encodes a fundamental geometric relationship. The term "cosinus" appeared in Edmund Gunter's Canon triangulorum (1620), though the relationship was understood much earlier by Islamic mathematicians.
+            </p>
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-cofunction-identities-in-degrees">Cofunction Identities (in degrees)</h3>
+            <p style="text-align: center;">
+                $\sin \theta = \cos(90° - \theta)$ &nbsp;&nbsp;&nbsp; $\cos \theta = \sin(90° - \theta)$
+                <br><br>
+                $\tan \theta = \cot(90° - \theta)$ &nbsp;&nbsp;&nbsp; $\cot \theta = \tan(90° - \theta)$
+                <br><br>
+                $\sec \theta = \csc(90° - \theta)$ &nbsp;&nbsp;&nbsp; $\csc \theta = \sec(90° - \theta)$
+            </p>
+            <h3 style="margin-top: 20px;">Cofunction Identities (in radians)</h3>
+            <p style="text-align: center;">
+                $\sin \theta = \cos(\frac{\pi}{2} - \theta)$ &nbsp;&nbsp;&nbsp; $\cos \theta = \sin(\frac{\pi}{2} - \theta)$
+            </p>
+            <p>(and similarly for the other functions)</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example: Using Cofunction Identities</strong></p>
+            <p>Find $\sin 70°$ if you know that $\cos 20° \approx 0.9397$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Since $70° = 90° - 20°$, we can use the cofunction identity:</p>
+            <p style="text-align: center;">$\sin 70° = \cos(90° - 70°) = \cos 20° \approx 0.9397$</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 4:</strong> Simplify: $\sin(90° - x) \cos x + \cos(90° - x) \sin x$
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using cofunction identities: $\sin(90° - x) = \cos x$ and $\cos(90° - x) = \sin x$
+            <br>$\cos x \cdot \cos x + \sin x \cdot \sin x = \cos^2 x + \sin^2 x = 1$
+        </div>
+
+        <h2 id="sec-5-6">5.6 Sum and Difference Formulas</h2>
+
+        <p>
+            One of the most powerful sets of identities tells us how to find the sine, cosine, or tangent of a sum or difference of angles. These formulas might seem complicated at first, but they're incredibly useful and have elegant geometric derivations.
+        </p>
+
+        <h3 id="subsec-the-cosine-of-a-difference">The Cosine of a Difference</h3>
+
+        <p>
+            Let's start with the formula for $\cos(A - B)$. While the full geometric proof is intricate, we can understand the key insight through a diagram. Consider two angles $A$ and $B$ on the unit circle, and think about the angle between them, which is $A - B$.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.6-1: Geometric Intuition for cos(A - B)</div>
+            <div id="jxgbox-cossum" class="jxgbox" style="width:100%; max-width:550px; aspect-ratio:1; margin:20px auto;"></div>
+            <div class="graph-caption">
+                Two points on the unit circle at angles A and B. The distance between them 
+                depends on the angle difference A - B, leading to the cosine difference formula.
+            </div>
+        </div>
+
+        <p>
+            Through careful geometric analysis (using the distance formula for points on the unit circle), we arrive at:
+        </p>
+
+        <div class="formula">
+            $\cos(A - B) = \cos A \cos B + \sin A \sin B$
+        </div>
+
+        <p>
+            From this fundamental formula, we can derive all the other sum and difference formulas by clever substitutions.
+        </p>
+
+        <h3 id="subsec-deriving-the-other-sum-and-difference-formulas">Deriving the Other Sum and Difference Formulas</h3>
+
+        <p><strong>Cosine of a sum:</strong> Replace $B$ with $-B$ in the difference formula and use even-odd identities:</p>
+
+        <p style="text-align: center;">
+            $\cos(A + B) = \cos(A - (-B)) = \cos A \cos(-B) + \sin A \sin(-B)$
+            <br>
+            $= \cos A \cos B - \sin A \sin B$
+        </p>
+
+        <p><strong>Sine of a sum:</strong> Use the cofunction identity $\sin \theta = \cos(90° - \theta)$:</p>
+
+        <p style="text-align: center;">
+            $\sin(A + B) = \cos(90° - (A + B)) = \cos((90° - A) - B)$
+            <br>
+            $= \cos(90° - A)\cos B + \sin(90° - A)\sin B$
+            <br>
+            $= \sin A \cos B + \cos A \sin B$
+        </p>
+
+        <p><strong>Sine of a difference:</strong> Replace $B$ with $-B$:</p>
+
+        <p style="text-align: center;">
+            $\sin(A - B) = \sin A \cos B - \cos A \sin B$
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-sum-and-difference-formulas">Sum and Difference Formulas</h3>
+            <p><strong>Cosine:</strong></p>
+            <p style="text-align: center;">
+                $\cos(A + B) = \cos A \cos B - \sin A \sin B$
+                <br>
+                $\cos(A - B) = \cos A \cos B + \sin A \sin B$
+            </p>
+            <p><strong>Sine:</strong></p>
+            <p style="text-align: center;">
+                $\sin(A + B) = \sin A \cos B + \cos A \sin B$
+                <br>
+                $\sin(A - B) = \sin A \cos B - \cos A \sin B$
+            </p>
+            <p><strong>Tangent:</strong></p>
+            <p style="text-align: center;">
+                $\tan(A + B) = \frac{\tan A + \tan B}{1 - \tan A \tan B}$
+                <br>
+                $\tan(A - B) = \frac{\tan A - \tan B}{1 + \tan A \tan B}$
+            </p>
+        </div>
+
+        <div class="warning">
+            <p><strong>Common Mistake Alert!</strong></p>
+            <p>It is NOT true that $\sin(A + B) = \sin A + \sin B$. The sine of a sum is <strong>not</strong> the sum of the sines!</p>
+            <p>For example: $\sin(30° + 60°) = \sin 90° = 1$, but $\sin 30° + \sin 60° = 0.5 + 0.866 = 1.366 \neq 1$</p>
+        </div>
+
+        <h3 id="subsec-using-sum-and-difference-formulas">Using Sum and Difference Formulas</h3>
+
+        <div class="example">
+            <p><strong>Example 1: Finding Exact Values</strong></p>
+            <p>Find the exact value of $\sin 75°$ without a calculator.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Notice that $75° = 45° + 30°$, and we know the exact values for these angles.</p>
+            <p>Using $\sin(A + B) = \sin A \cos B + \cos A \sin B$:</p>
+            <p style="text-align: center;">
+                $\sin 75° = \sin(45° + 30°)$
+                <br>
+                $= \sin 45° \cos 30° + \cos 45° \sin 30°$
+                <br>
+                $= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2}$
+                <br>
+                $= \frac{\sqrt{6}}{4} + \frac{\sqrt{2}}{4} = \frac{\sqrt{6} + \sqrt{2}}{4}$
+            </p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 2: Simplifying Expressions</strong></p>
+            <p>Simplify: $\sin x \cos 2x + \cos x \sin 2x$</p>
+            <p><strong>Solution:</strong></p>
+            <p>This matches the pattern of $\sin(A + B) = \sin A \cos B + \cos A \sin B$ with $A = x$ and $B = 2x$:</p>
+            <p style="text-align: center;">$\sin x \cos 2x + \cos x \sin 2x = \sin(x + 2x) = \sin 3x$</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 5:</strong> Find the exact value of $\cos 15°$ using a difference formula.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Let $15° = 45° - 30°$
+            <br>Using $\cos(A - B) = \cos A \cos B + \sin A \sin B$:
+            <br>$\cos 15° = \cos(45° - 30°) = \cos 45° \cos 30° + \sin 45° \sin 30°$
+            <br>$= \frac{\sqrt{2}}{2} \cdot \frac{\sqrt{3}}{2} + \frac{\sqrt{2}}{2} \cdot \frac{1}{2}$
+            <br>$= \frac{\sqrt{6}}{4} + \frac{\sqrt{2}}{4} = \frac{\sqrt{6} + \sqrt{2}}{4}$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 6:</strong> Prove that $\cos(180° - \theta) = -\cos \theta$
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using the cosine difference formula:
+            <br>$\cos(180° - \theta) = \cos 180° \cos \theta + \sin 180° \sin \theta$
+            <br>$= (-1)(\cos \theta) + (0)(\sin \theta) = -\cos \theta$
+        </div>
+
+        <h2 id="sec-5-7">5.7 Double Angle Formulas</h2>
+
+        <p>
+            A special case of the sum formulas occurs when both angles are the same: $A = B$. These "double angle formulas" appear frequently in calculus, physics, and engineering.
+        </p>
+
+        <h3 id="subsec-deriving-double-angle-formulas">Deriving Double Angle Formulas</h3>
+
+        <p>
+            Starting with the sine sum formula and setting $A = B = \theta$:
+        </p>
+
+        <p style="text-align: center;">
+            $\sin(2\theta) = \sin(\theta + \theta) = \sin \theta \cos \theta + \cos \theta \sin \theta$
+            <br>
+            $= 2\sin \theta \cos \theta$
+        </p>
+
+        <p>
+            For cosine, starting with the cosine sum formula:
+        </p>
+
+        <p style="text-align: center;">
+            $\cos(2\theta) = \cos(\theta + \theta) = \cos \theta \cos \theta - \sin \theta \sin \theta$
+            <br>
+            $= \cos^2 \theta - \sin^2 \theta$
+        </p>
+
+        <p>
+            This formula for $\cos(2\theta)$ can be rewritten in two other useful forms using the Pythagorean identity $\sin^2 \theta + \cos^2 \theta = 1$:
+        </p>
+
+        <p><strong>Form 2:</strong> Replace $\sin^2 \theta$ with $1 - \cos^2 \theta$:</p>
+        <p style="text-align: center;">
+            $\cos(2\theta) = \cos^2 \theta - (1 - \cos^2 \theta) = 2\cos^2 \theta - 1$
+        </p>
+
+        <p><strong>Form 3:</strong> Replace $\cos^2 \theta$ with $1 - \sin^2 \theta$:</p>
+        <p style="text-align: center;">
+            $\cos(2\theta) = (1 - \sin^2 \theta) - \sin^2 \theta = 1 - 2\sin^2 \theta$
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-double-angle-formulas">Double Angle Formulas</h3>
+            <p style="text-align: center;">
+                $\sin(2\theta) = 2\sin \theta \cos \theta$
+            </p>
+            <p style="text-align: center;">
+                $\cos(2\theta) = \cos^2 \theta - \sin^2 \theta$
+                <br>
+                $\cos(2\theta) = 2\cos^2 \theta - 1$
+                <br>
+                $\cos(2\theta) = 1 - 2\sin^2 \theta$
+            </p>
+            <p style="text-align: center;">
+                $\tan(2\theta) = \frac{2\tan \theta}{1 - \tan^2 \theta}$
+            </p>
+            <p>The three forms of the cosine double angle formula are all equivalent—use whichever is most convenient for the problem at hand.</p>
+        </div>
+
+        <h3 id="subsec-applications-of-double-angle-formulas">Applications of Double Angle Formulas</h3>
+
+        <div class="example">
+            <p><strong>Example 1: Calculating Double Angles</strong></p>
+            <p>If $\sin \theta = 3/5$ and $\theta$ is in Quadrant I, find $\sin(2\theta)$ and $\cos(2\theta)$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>First, find $\cos \theta$ using the Pythagorean identity:</p>
+            <p style="text-align: center;">$\cos^2 \theta = 1 - \sin^2 \theta = 1 - 9/25 = 16/25$</p>
+            <p>Since $\theta$ is in Quadrant I: $\cos \theta = 4/5$</p>
+            <p>Now use the double angle formulas:</p>
+            <p style="text-align: center;">$\sin(2\theta) = 2\sin \theta \cos \theta = 2 \cdot \frac{3}{5} \cdot \frac{4}{5} = \frac{24}{25}$</p>
+            <p style="text-align: center;">$\cos(2\theta) = \cos^2 \theta - \sin^2 \theta = \frac{16}{25} - \frac{9}{25} = \frac{7}{25}$</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 2: Simplifying with Double Angle Formulas</strong></p>
+            <p>Express $\sin^2 \theta$ in terms of $\cos(2\theta)$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Start with $\cos(2\theta) = 1 - 2\sin^2 \theta$ and solve for $\sin^2 \theta$:</p>
+            <p style="text-align: center;">$2\sin^2 \theta = 1 - \cos(2\theta)$</p>
+            <p style="text-align: center;">$\sin^2 \theta = \frac{1 - \cos(2\theta)}{2}$</p>
+            <p>This identity is extremely useful in calculus for integrating $\sin^2 \theta$!</p>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 5.7-1: Visualizing sin(2θ) = 2sin(θ)cos(θ)</div>
+            <div id="doubleAngleChart" class="jxgbox" style="width:100%; max-width:700px; aspect-ratio:7/4; margin:20px auto;"></div>
+            <div class="graph-caption">
+                The graph shows sin(θ) (blue), sin(2θ) (red), and 2sin(θ)cos(θ) (green dashed). 
+                Since by the double angle formula sin(2θ) = 2sin(θ)cos(θ), those two curves completely 
+                coincide, resulting in the single red/green curve shown.
+            </div>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 7:</strong> If $\cos \theta = -4/5$ and $\theta$ is in Quadrant II, find $\sin(2\theta)$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>First find $\sin \theta$: $\sin^2 \theta = 1 - \cos^2 \theta = 1 - 16/25 = 9/25$
+            <br>In Quadrant II, sine is positive: $\sin \theta = 3/5$
+            <br>$\sin(2\theta) = 2\sin \theta \cos \theta = 2 \cdot \frac{3}{5} \cdot \left(-\frac{4}{5}\right) = -\frac{24}{25}$
+        </div>
+
+        <h2 id="sec-5-8">5.8 Half Angle Formulas</h2>
+
+        <p>
+            The half angle formulas allow us to express trigonometric functions of $\theta/2$ in terms of $\theta$. They're derived directly from the double angle formulas by a clever substitution.
+        </p>
+
+        <h3 id="subsec-deriving-the-half-angle-formulas">Deriving the Half Angle Formulas</h3>
+
+        <p>
+            Start with the double angle formula $\cos(2\alpha) = 1 - 2\sin^2 \alpha$. Let $\alpha = \theta/2$, so $2\alpha = \theta$:
+        </p>
+
+        <p style="text-align: center;">
+            $\cos \theta = 1 - 2\sin^2(\theta/2)$
+        </p>
+
+        <p>
+            Solving for $\sin(\theta/2)$:
+        </p>
+
+        <p style="text-align: center;">
+            $2\sin^2(\theta/2) = 1 - \cos \theta$
+            <br>
+            $\sin^2(\theta/2) = \frac{1 - \cos \theta}{2}$
+            <br>
+            $\sin(\theta/2) = \pm\sqrt{\frac{1 - \cos \theta}{2}}$
+        </p>
+
+        <p>
+            Similarly, using $\cos(2\alpha) = 2\cos^2 \alpha - 1$:
+        </p>
+
+        <p style="text-align: center;">
+            $\cos(\theta/2) = \pm\sqrt{\frac{1 + \cos \theta}{2}}$
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-half-angle-formulas">Half Angle Formulas</h3>
+            <p style="text-align: center;">
+                $\sin(\theta/2) = \pm\sqrt{\frac{1 - \cos \theta}{2}}$
+            </p>
+            <p style="text-align: center;">
+                $\cos(\theta/2) = \pm\sqrt{\frac{1 + \cos \theta}{2}}$
+            </p>
+            <p style="text-align: center;">
+                $\tan(\theta/2) = \frac{\sin \theta}{1 + \cos \theta} = \frac{1 - \cos \theta}{\sin \theta}$
+            </p>
+            <p>The sign (+ or -) depends on which quadrant $\theta/2$ lies in.</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example: Using Half Angle Formulas</strong></p>
+            <p>Find the exact value of $\sin 22.5°$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Notice that $22.5° = 45°/2$, so we can use the half angle formula with $\theta = 45°$:</p>
+            <p style="text-align: center;">
+                $\sin 22.5° = \sin(45°/2) = \sqrt{\frac{1 - \cos 45°}{2}}$
+            </p>
+            <p>(We use the positive square root since $22.5°$ is in Quadrant I)</p>
+            <p style="text-align: center;">
+                $= \sqrt{\frac{1 - \frac{\sqrt{2}}{2}}{2}} = \sqrt{\frac{2 - \sqrt{2}}{4}} = \frac{\sqrt{2 - \sqrt{2}}}{2}$
+            </p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 8:</strong> Find $\cos 15°$ using a half angle formula.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Since $15° = 30°/2$, use $\cos(\theta/2) = \sqrt{\frac{1 + \cos \theta}{2}}$ with $\theta = 30°$:
+            <br>$\cos 15° = \sqrt{\frac{1 + \cos 30°}{2}} = \sqrt{\frac{1 + \frac{\sqrt{3}}{2}}{2}} = \sqrt{\frac{2 + \sqrt{3}}{4}} = \frac{\sqrt{2 + \sqrt{3}}}{2}$
+        </div>
+
+        <h2 id="sec-5-9">5.9 Product-to-Sum and Sum-to-Product Formulas</h2>
+
+        <h3 id="subsec-the-product-to-sum-formulas">The Product-to-Sum Formulas</h3>
+
+        <p>
+            These formulas are derived by adding or subtracting the sum and difference formulas. For example, adding $\sin(A + B) = \sin A \cos B + \cos A \sin B$ and $\sin(A - B) = \sin A \cos B - \cos A \sin B$ gives:
+        </p>
+
+        <p style="text-align: center;">
+            $\sin(A + B) + \sin(A - B) = 2\sin A \cos B$
+        </p>
+
+        <p>
+            Rearranging:
+        </p>
+
+        <p style="text-align: center;">
+            $\sin A \cos B = \frac{1}{2}[\sin(A + B) + \sin(A - B)]$
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-product-to-sum-formulas">Product-to-Sum Formulas</h3>
+            <p style="text-align: center;">
+                $\sin A \cos B = \frac{1}{2}[\sin(A + B) + \sin(A - B)]$
+            </p>
+            <p style="text-align: center;">
+                $\cos A \sin B = \frac{1}{2}[\sin(A + B) - \sin(A - B)]$
+            </p>
+            <p style="text-align: center;">
+                $\cos A \cos B = \frac{1}{2}[\cos(A + B) + \cos(A - B)]$
+            </p>
+            <p style="text-align: center;">
+                $\sin A \sin B = \frac{1}{2}[\cos(A - B) - \cos(A + B)]$
+            </p>
+        </div>
+
+        <h3 id="subsec-sum-to-product-formulas">Sum-to-Product Formulas</h3>
+
+        <p>
+            By substituting $A = (x + y)/2$ and $B = (x - y)/2$ into the product-to-sum formulas, we get the sum-to-product formulas:
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-sum-to-product-formulas-summary">Sum-to-Product Formulas</h3>
+            <p style="text-align: center;">
+                $\sin x + \sin y = 2\sin\left(\frac{x + y}{2}\right)\cos\left(\frac{x - y}{2}\right)$
+            </p>
+            <p style="text-align: center;">
+                $\sin x - \sin y = 2\cos\left(\frac{x + y}{2}\right)\sin\left(\frac{x - y}{2}\right)$
+            </p>
+            <p style="text-align: center;">
+                $\cos x + \cos y = 2\cos\left(\frac{x + y}{2}\right)\cos\left(\frac{x - y}{2}\right)$
+            </p>
+            <p style="text-align: center;">
+                $\cos x - \cos y = -2\sin\left(\frac{x + y}{2}\right)\sin\left(\frac{x - y}{2}\right)$
+            </p>
+        </div>
+
+        <h3 id="subsec-modern-applications">Modern Applications</h3>
+
+        <p>
+            The sum-to-product formulas remain important in modern applications, particularly in <strong>signal processing</strong>. When analyzing audio or radio signals, engineers often need to understand what happens when waves of different frequencies interact. The sum-to-product formulas explain phenomena like:
+        </p>
+
+        <ul>
+            <li><strong>Beats:</strong> When two sound waves of slightly different frequencies combine, you hear a periodic variation in loudness (the "beat frequency")</li>
+            <li><strong>Amplitude modulation (AM radio):</strong> Information is encoded by varying the amplitude of a carrier wave</li>
+            <li><strong>Heterodyning:</strong> Converting high-frequency signals to lower frequencies for easier processing</li>
+        </ul>
+
+        <div class="problem">
+            <strong>Practice Problem 9:</strong> Express $\sin 5x \cos 3x$ as a sum or difference.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Using the product-to-sum formula $\sin A \cos B = \frac{1}{2}[\sin(A + B) + \sin(A - B)]$:
+            <br>$\sin 5x \cos 3x = \frac{1}{2}[\sin(5x + 3x) + \sin(5x - 3x)]$
+            <br>$= \frac{1}{2}[\sin 8x + \sin 2x]$
+        </div>
+
+        <h2 id="sec-5-10">5.10 Solving Trigonometric Equations</h2>
+
+        <p>
+            Now that we have a toolkit of identities, we can tackle trigonometric equations—equations where the unknown appears inside trigonometric functions. The strategy often involves using identities to simplify the equation to a form we can solve.
+        </p>
+
+        <h3 id="subsec-basic-strategy-for-solving-trigonometric-equations">Basic Strategy for Solving Trigonometric Equations</h3>
+
+        <ol>
+            <li><strong>Isolate the trigonometric function</strong> if possible</li>
+            <li><strong>Use identities to simplify</strong> the equation, often converting to a single trigonometric function</li>
+            <li><strong>Solve for the angle</strong> using reference angles and the unit circle</li>
+            <li><strong>Find all solutions in the specified interval</strong> (or general solutions if no interval is specified)</li>
+            <li><strong>Check for extraneous solutions</strong> that might have been introduced during algebraic manipulation</li>
+        </ol>
+
+        <div class="warning">
+            <p><strong>Important:</strong> Trigonometric equations typically have <em>infinitely many solutions</em> because of periodicity. Unless the problem specifies an interval (like $0° \leq \theta < 360°$), you should give the <strong>general solution</strong> that accounts for all possible solutions.</p>
+        </div>
+
+        <h3 id="subsec-understanding-general-solutions">Understanding General Solutions</h3>
+
+        <div class="example">
+            <p><strong>Example 1: General Solution (All Solutions)</strong></p>
+            <p>Solve $\sin \theta = \frac{1}{2}$ for all values of $\theta$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>First, find solutions in one complete period $[0°, 360°)$:</p>
+            <ul>
+                <li>$\theta = 30°$ (Quadrant I)</li>
+                <li>$\theta = 150°$ (Quadrant II)</li>
+            </ul>
+            <p>Since sine has period $360°$, we can add any multiple of $360°$ to these solutions:</p>
+            <p style="text-align: center; font-size: 1.1em;">
+                <strong>General solution:</strong> $\theta = 30° + 360°n$ or $\theta = 150° + 360°n$, where $n$ is any integer
+            </p>
+            <p>In radians: $\theta = \frac{\pi}{6} + 2\pi n$ or $\theta = \frac{5\pi}{6} + 2\pi n$</p>
+            <p>This captures <em>all infinitely many</em> solutions: ..., -330°, -210°, 30°, 150°, 390°, 510°, ...</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 2: General Solution for a Quadratic</strong></p>
+            <p>Solve $\sin^2 \theta + \sin \theta - 2 = 0$ for all values of $\theta$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>This is a quadratic equation in $\sin \theta$. Let $u = \sin \theta$:</p>
+            <p style="text-align: center;">$u^2 + u - 2 = 0$</p>
+            <p>Factor:</p>
+            <p style="text-align: center;">$(u + 2)(u - 1) = 0$</p>
+            <p>So $u = -2$ or $u = 1$</p>
+            <p>Since $\sin \theta = u$:</p>
+            <ul>
+                <li>$\sin \theta = -2$ has no solution (sine values must be between -1 and 1)</li>
+                <li>$\sin \theta = 1$ gives $\theta = 90°$ in the first period</li>
+            </ul>
+            <p style="text-align: center; font-size: 1.1em;">
+                <strong>General solution:</strong> $\theta = 90° + 360°n$, where $n$ is any integer
+            </p>
+            <p>In radians: $\theta = \frac{\pi}{2} + 2\pi n$</p>
+        </div>
+
+        <h3 id="subsec-type-1-basic-equations-with-interval-restrictions">Type 1: Basic Equations with Interval Restrictions</h3>
+
+        <p>
+            When a problem specifies an interval, we find the general solution first, then select only those solutions that fall within the given interval.
+        </p>
+
+        <div class="example">
+            <p><strong>Example 3: Solution in a Specified Interval</strong></p>
+            <p>Solve $2\sin \theta - 1 = 0$ for $0° \leq \theta < 360°$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>First, isolate $\sin \theta$:</p>
+            <p style="text-align: center;">$2\sin \theta = 1$</p>
+            <p style="text-align: center;">$\sin \theta = \frac{1}{2}$</p>
+            <p>From the unit circle, $\sin \theta = 1/2$ when:</p>
+            <ul>
+                <li>$\theta = 30°$ (Quadrant I)</li>
+                <li>$\theta = 150°$ (Quadrant II)</li>
+            </ul>
+            <p>Therefore: $\theta = 30°, 150°$</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 4: Using Reference Angles</strong></p>
+            <p>Solve $\cos \theta = -\frac{\sqrt{3}}{2}$ for $0 \leq \theta < 2\pi$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>The reference angle is $\pi/6$ (where $\cos(\pi/6) = \sqrt{3}/2$).</p>
+            <p>Since cosine is negative in Quadrants II and III:</p>
+            <ul>
+                <li>Quadrant II: $\theta = \pi - \pi/6 = 5\pi/6$</li>
+                <li>Quadrant III: $\theta = \pi + \pi/6 = 7\pi/6$</li>
+            </ul>
+            <p>Therefore: $\theta = \frac{5\pi}{6}, \frac{7\pi}{6}$</p>
+        </div>
+
+        <h3 id="subsec-type-2-equations-requiring-identities">Type 2: Equations Requiring Identities</h3>
+
+        <div class="example">
+            <p><strong>Example 5: Converting to a Single Function</strong></p>
+            <p>Solve $2\cos^2 \theta + \sin \theta - 1 = 0$ for $0° \leq \theta < 360°$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Use the Pythagorean identity $\cos^2 \theta = 1 - \sin^2 \theta$:</p>
+            <p style="text-align: center;">$2(1 - \sin^2 \theta) + \sin \theta - 1 = 0$</p>
+            <p style="text-align: center;">$2 - 2\sin^2 \theta + \sin \theta - 1 = 0$</p>
+            <p style="text-align: center;">$-2\sin^2 \theta + \sin \theta + 1 = 0$</p>
+            <p>Multiply by -1:</p>
+            <p style="text-align: center;">$2\sin^2 \theta - \sin \theta - 1 = 0$</p>
+            <p>Factor (or use quadratic formula):</p>
+            <p style="text-align: center;">$(2\sin \theta + 1)(\sin \theta - 1) = 0$</p>
+            <p>So $\sin \theta = -1/2$ or $\sin \theta = 1$</p>
+            <ul>
+                <li>$\sin \theta = 1$: $\theta = 90°$</li>
+                <li>$\sin \theta = -1/2$: $\theta = 210°, 330°$ (Quadrants III and IV)</li>
+            </ul>
+            <p>Therefore: $\theta = 90°, 210°, 330°$</p>
+        </div>
+
+        <h3 id="subsec-type-3-equations-with-multiple-angles">Type 3: Equations with Multiple Angles</h3>
+
+        <div class="example">
+            <p><strong>Example 6: Double Angle Equation</strong></p>
+            <p>Solve $\sin(2\theta) = \frac{1}{2}$ for $0° \leq \theta < 360°$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Let $u = 2\theta$. Then we're solving $\sin u = 1/2$.</p>
+            <p>The general solution for $\sin u = 1/2$ is $u = 30° + 360°k$ or $u = 150° + 360°k$ where $k$ is any integer.</p>
+            <p>Since $u = 2\theta$:</p>
+            <p style="text-align: center;">$2\theta = 30° + 360°k$ or $2\theta = 150° + 360°k$</p>
+            <p style="text-align: center;">$\theta = 15° + 180°k$ or $\theta = 75° + 180°k$</p>
+            <p>For $0° \leq \theta < 360°$:</p>
+            <ul>
+                <li>From $\theta = 15° + 180°k$: $\theta = 15°$ (k=0) and $\theta = 195°$ (k=1)</li>
+                <li>From $\theta = 75° + 180°k$: $\theta = 75°$ (k=0) and $\theta = 255°$ (k=1)</li>
+            </ul>
+            <p>Therefore: $\theta = 15°, 75°, 195°, 255°$</p>
+        </div>
+
+        <div class="example">
+            <p><strong>Example 7: Using Double Angle Formula</strong></p>
+            <p>Solve $\cos(2x) = \sin x$ for $0 \leq x < 2\pi$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Use the double angle formula $\cos(2x) = 1 - 2\sin^2 x$:</p>
+            <p style="text-align: center;">$1 - 2\sin^2 x = \sin x$</p>
+            <p style="text-align: center;">$2\sin^2 x + \sin x - 1 = 0$</p>
+            <p>Factor:</p>
+            <p style="text-align: center;">$(2\sin x - 1)(\sin x + 1) = 0$</p>
+            <p>So $\sin x = 1/2$ or $\sin x = -1$</p>
+            <ul>
+                <li>$\sin x = 1/2$: $x = \pi/6, 5\pi/6$</li>
+                <li>$\sin x = -1$: $x = 3\pi/2$</li>
+            </ul>
+            <p>Therefore: $x = \frac{\pi}{6}, \frac{5\pi}{6}, \frac{3\pi}{2}$</p>
+        </div>
+
+        <h3 id="subsec-type-4-equations-requiring-factoring">Type 4: Equations Requiring Factoring</h3>
+
+        <div class="example">
+            <p><strong>Example 8: Factoring by Grouping</strong></p>
+            <p>Solve $\sin \theta \cos \theta = \sin \theta$ for $0° \leq \theta < 360°$.</p>
+            <p><strong>Solution:</strong></p>
+            <p>Move everything to one side:</p>
+            <p style="text-align: center;">$\sin \theta \cos \theta - \sin \theta = 0$</p>
+            <p>Factor out $\sin \theta$:</p>
+            <p style="text-align: center;">$\sin \theta(\cos \theta - 1) = 0$</p>
+            <p>So either $\sin \theta = 0$ or $\cos \theta - 1 = 0$:</p>
+            <ul>
+                <li>$\sin \theta = 0$: $\theta = 0°, 180°$</li>
+                <li>$\cos \theta = 1$: $\theta = 0°$</li>
+            </ul>
+            <p>Therefore: $\theta = 0°, 180°$ (note that 0° satisfies both conditions)</p>
+        </div>
+
+        <div class="warning">
+            <p><strong>Common Mistake:</strong> Never divide both sides of an equation by a trigonometric expression like $\sin \theta$ or $\cos \theta$—you might lose solutions! Always factor instead.</p>
+            <p>In Example 7, if we had divided by $\sin \theta$, we would have lost the solutions where $\sin \theta = 0$.</p>
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 10:</strong> Solve $2\cos^2 \theta - \cos \theta = 0$ for $0° \leq \theta < 360°$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Factor: $\cos \theta(2\cos \theta - 1) = 0$
+            <br>So $\cos \theta = 0$ or $\cos \theta = 1/2$
+            <br>$\cos \theta = 0$: $\theta = 90°, 270°$
+            <br>$\cos \theta = 1/2$: $\theta = 60°, 300°$
+            <br>Therefore: $\theta = 60°, 90°, 270°, 300°$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 11:</strong> Solve $\tan^2 x - 3 = 0$ for $0 \leq x < 2\pi$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>$\tan^2 x = 3$, so $\tan x = \pm\sqrt{3}$
+            <br>$\tan x = \sqrt{3}$: $x = \pi/3, 4\pi/3$
+            <br>$\tan x = -\sqrt{3}$: $x = 2\pi/3, 5\pi/3$
+            <br>Therefore: $x = \frac{\pi}{3}, \frac{2\pi}{3}, \frac{4\pi}{3}, \frac{5\pi}{3}$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 12:</strong> Solve $\sin(2\theta) + \cos \theta = 0$ for $0° \leq \theta < 360°$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Use $\sin(2\theta) = 2\sin \theta \cos \theta$:
+            <br>$2\sin \theta \cos \theta + \cos \theta = 0$
+            <br>Factor: $\cos \theta(2\sin \theta + 1) = 0$
+            <br>$\cos \theta = 0$: $\theta = 90°, 270°$
+            <br>$\sin \theta = -1/2$: $\theta = 210°, 330°$
+            <br>Therefore: $\theta = 90°, 210°, 270°, 330°$
+        </div>
+
+        <h2 id="sec-summary-your-trigonometric-identity-toolkit">Summary: Your Trigonometric Identity Toolkit</h2>
+
+        <p>
+            We've covered a comprehensive set of trigonometric identities. Here's a summary of the most important ones:
+        </p>
+
+        <table style="width: 100%; font-size: 0.95em;">
+            <tr>
+                <th colspan="2" style="background-color: #1e40af; color: white;">Pythagorean Identities</th>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    $\sin^2 \theta + \cos^2 \theta = 1$<br>
+                    $1 + \tan^2 \theta = \sec^2 \theta$<br>
+                    $1 + \cot^2 \theta = \csc^2 \theta$
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #1e40af; color: white;">Even-Odd Identities</th>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    $\sin(-\theta) = -\sin \theta$<br>
+                    $\cos(-\theta) = \cos \theta$<br>
+                    $\tan(-\theta) = -\tan \theta$
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #1e40af; color: white;">Sum and Difference Formulas</th>
+            </tr>
+            <tr>
+                <td style="text-align: center;">$\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$</td>
+                <td style="text-align: center;">$\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$</td>
+            </tr>
+            <tr>
+                <th colspan="2" style="background-color: #1e40af; color: white;">Double Angle Formulas</th>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    $\sin(2\theta) = 2\sin \theta \cos \theta$<br>
+                    $\cos(2\theta) = \cos^2 \theta - \sin^2 \theta = 2\cos^2 \theta - 1 = 1 - 2\sin^2 \theta$
+                </td>
+            </tr>
+        </table>
+
+        <div class="highlight">
+            <h3 id="subsec-key-takeaways">Key Takeaways</h3>
+            <ul>
+                <li>Identities are equations that are true for all values (where defined), unlike equations which are true only for specific values</li>
+                <li>The Pythagorean identity $\sin^2 \theta + \cos^2 \theta = 1$ is fundamental and follows directly from the unit circle definition</li>
+                <li>Sum and difference formulas allow us to find exact values for angles like 15°, 75°, etc.</li>
+                <li>Double and half angle formulas are special cases derived from sum formulas</li>
+                <li>Product-to-sum formulas enabled practical computation before calculators and remain important in signal processing</li>
+                <li>When solving trigonometric equations, use identities to simplify to a single function when possible, and always factor rather than divide</li>
+            </ul>
+        </div>
+
+        <div class="historical">
+            <h3 id="subsec-from-ancient-geometry-to-modern-applications">From Ancient Geometry to Modern Applications</h3>
+            <p>
+                The identities we've studied represent more than 2,000 years of mathematical development. From the ancient Greeks understanding the geometry of circles, through Islamic mathematicians' systematic development of angle formulas for astronomical computation, to Euler's elegant organization using modern notation, these relationships have evolved from practical tools into fundamental mathematical structures.
+            </p>
+            <p>
+                Today, these same identities that helped ancient astronomers track planets and medieval navigators cross oceans are embedded in the algorithms that compress your music, encrypt your data, and power your smartphone. They're used in everything from designing earthquake-resistant buildings to analyzing quantum mechanical wave functions.
+            </p>
+            <p>
+                In the next module, we'll see these identities in action as we explore real-world applications where trigonometry solves practical problems.
+            </p>
+        </div>
+
+        <h3 id="subsec-final-practice-problems">Final Practice Problems</h3>
+
+        <div class="problem">
+            <strong>Practice Problem 13:</strong> Prove the identity: $\frac{1 - \cos(2\theta)}{\sin(2\theta)} = \tan \theta$
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Start with the left side and use double angle formulas:
+            <br>$\frac{1 - \cos(2\theta)}{\sin(2\theta)} = \frac{1 - (1 - 2\sin^2 \theta)}{2\sin \theta \cos \theta}$
+            <br>$= \frac{2\sin^2 \theta}{2\sin \theta \cos \theta} = \frac{\sin \theta}{\cos \theta} = \tan \theta$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 14:</strong> Simplify: $\cos^4 x - \sin^4 x$
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Factor as a difference of squares:
+            <br>$\cos^4 x - \sin^4 x = (\cos^2 x + \sin^2 x)(\cos^2 x - \sin^2 x)$
+            <br>$= (1)(\cos^2 x - \sin^2 x) = \cos(2x)$
+            <br>(using the Pythagorean identity and double angle formula)
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 15:</strong> Solve $\cos^2 x - \sin^2 x = \sin x$ for $0 \leq x < 2\pi$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>Use the double angle formula $\cos^2 x - \sin^2 x = \cos(2x)$:
+            <br>$\cos(2x) = \sin x$
+            <br>Use $\cos(2x) = 1 - 2\sin^2 x$:
+            <br>$1 - 2\sin^2 x = \sin x$
+            <br>$2\sin^2 x + \sin x - 1 = 0$
+            <br>$(2\sin x - 1)(\sin x + 1) = 0$
+            <br>$\sin x = 1/2$ or $\sin x = -1$
+            <br>$\sin x = 1/2$: $x = \pi/6, 5\pi/6$
+            <br>$\sin x = -1$: $x = 3\pi/2$
+            <br>Therefore: $x = \frac{\pi}{6}, \frac{5\pi}{6}, \frac{3\pi}{2}$
+        </div>
+
+        <div class="problem">
+            <strong>Practice Problem 16:</strong> If $\sin \theta = 4/5$ and $90° < \theta < 180°$, find the exact value of $\sin(2\theta)$, $\cos(2\theta)$, and $\tan(2\theta)$.
+        </div>
+
+        <div class="solution">
+            <strong>Solution:</strong>
+            <br>First find $\cos \theta$: $\cos^2 \theta = 1 - (4/5)^2 = 1 - 16/25 = 9/25$
+            <br>Since $\theta$ is in Quadrant II: $\cos \theta = -3/5$
+            <br><br>
+            $\sin(2\theta) = 2\sin \theta \cos \theta = 2(4/5)(-3/5) = -24/25$
+            <br><br>
+            $\cos(2\theta) = \cos^2 \theta - \sin^2 \theta = 9/25 - 16/25 = -7/25$
+            <br><br>
+            $\tan(2\theta) = \frac{\sin(2\theta)}{\cos(2\theta)} = \frac{-24/25}{-7/25} = \frac{24}{7}$
+        </div>
+
+    </div>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            
+            // Even Function Graph: f(x) = x²
+            // JSXGraph conversion of evenFunctionChart
+            (function() {
+                const board = JXG.JSXGraph.initBoard('evenFunctionChart', {
+                    boundingbox: [-3.30, 9.50, 3.30, -1.50],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // f(x) = x² - blue parabola
+                board.create('functiongraph', [
+                    function(x) { return x * x; },
+                    -3, 3
+                ], {
+                    strokeColor: '#3b82f6',
+                    strokeWidth: 2,
+                    fixed: true
+                });
+            })();
+
+            // Odd Function Graph: f(x) = x³
+            // JSXGraph conversion of oddFunctionChart
+            (function() {
+                const board = JXG.JSXGraph.initBoard('oddFunctionChart', {
+                    boundingbox: [-2.75, 16.50, 2.75, -16.50],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // f(x) = x³ - green cubic
+                board.create('functiongraph', [
+                    function(x) { return x * x * x; },
+                    -2.5, 2.5
+                ], {
+                    strokeColor: '#10b981',
+                    strokeWidth: 2,
+                    fixed: true
+                });
+            })();
+            
+            // Pythagorean Identity Diagram
+            (function() {
+                const board = JXG.JSXGraph.initBoard('jxgbox-pythagorean', {
+                    boundingbox: [-1.5, 1.5, 1.5, -1.5],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    grid: false,
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // Unit circle
+                board.create('circle', [[0, 0], 1], {
+                    strokeColor: '#1e40af',
+                    strokeWidth: 2,
+                    fillColor: 'transparent'
+                });
+
+                // Angle (40 degrees = 0.698 radians)
+                const angle = 0.698;
+                const cos_val = Math.cos(angle);
+                const sin_val = Math.sin(angle);
+
+                // Point on circle
+                const P = board.create('point', [cos_val, sin_val], {
+                    name: '',
+                    size: 4,
+                    fillColor: '#ef4444',
+                    strokeColor: '#dc2626',
+                    fixed: true
+                });
+
+                // Origin
+                const O = board.create('point', [0, 0], {
+                    name: '',
+                    visible: false,
+                    fixed: true
+                });
+
+                // Line from origin to P (radius)
+                board.create('line', [O, P], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#10b981',
+                    strokeWidth: 2
+                });
+
+                // Perpendicular to x-axis
+                const foot = board.create('point', [cos_val, 0], {
+                    name: '',
+                    size: 3,
+                    fillColor: '#3b82f6',
+                    strokeColor: '#1e40af',
+                    fixed: true
+                });
+
+                board.create('line', [P, foot], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1,
+                    dash: 2
+                });
+
+                board.create('line', [O, foot], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#6b7280',
+                    strokeWidth: 1,
+                    dash: 2
+                });
+
+                // Angle arc
+                board.create('angle', [foot, O, P], {
+                    radius: 0.3,
+                    strokeColor: '#ef4444',
+                    fillColor: 'rgba(239, 68, 68, 0.1)',
+                    withLabel: false
+                });
+
+                // Labels
+                board.create('text', [cos_val + 0.15, sin_val + 0.1, '<b>P(cos θ, sin θ)</b>'], {
+                    fontSize: 14,
+                    color: '#1e40af',
+                    anchorX: 'left',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+
+                board.create('text', [cos_val/2 - 0.1, -0.15, '<b>cos θ</b>'], {
+                    fontSize: 14,
+                    color: '#3b82f6',
+                    anchorX: 'middle',
+                    anchorY: 'top',
+                    fixed: true
+                });
+
+                board.create('text', [cos_val + 0.15, sin_val/2, '<b>sin θ</b>'], {
+                    fontSize: 14,
+                    color: '#3b82f6',
+                    anchorX: 'left',
+                    anchorY: 'middle',
+                    fixed: true
+                });
+
+                board.create('text', [cos_val/2 - 0.15, sin_val/2 + 0.05, '<b>1</b>'], {
+                    fontSize: 14,
+                    color: '#10b981',
+                    anchorX: 'right',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+
+                board.create('text', [0.35, 0.1, '<b>θ</b>'], {
+                    fontSize: 14,
+                    color: '#ef4444',
+                    anchorX: 'left',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+            })();
+
+            // Even-Odd Identity Diagram
+            (function() {
+                const board = JXG.JSXGraph.initBoard('jxgbox-evenodd', {
+                    boundingbox: [-1.5, 1.5, 1.5, -1.5],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    grid: false,
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // Unit circle
+                board.create('circle', [[0, 0], 1], {
+                    strokeColor: '#1e40af',
+                    strokeWidth: 2,
+                    fillColor: 'transparent'
+                });
+
+                // Angle (50 degrees = 0.873 radians)
+                const angle = 0.873;
+                const cos_val = Math.cos(angle);
+                const sin_val = Math.sin(angle);
+
+                // Point at angle θ
+                const P1 = board.create('point', [cos_val, sin_val], {
+                    name: '',
+                    size: 4,
+                    fillColor: '#10b981',
+                    strokeColor: '#059669',
+                    fixed: true
+                });
+
+                // Point at angle -θ
+                const P2 = board.create('point', [cos_val, -sin_val], {
+                    name: '',
+                    size: 4,
+                    fillColor: '#ef4444',
+                    strokeColor: '#dc2626',
+                    fixed: true
+                });
+
+                const O = board.create('point', [0, 0], {
+                    name: '',
+                    visible: false,
+                    fixed: true
+                });
+
+                // Lines from origin
+                board.create('line', [O, P1], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#10b981',
+                    strokeWidth: 2
+                });
+
+                board.create('line', [O, P2], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#ef4444',
+                    strokeWidth: 2
+                });
+
+                // Perpendiculars to x-axis
+                const foot = board.create('point', [cos_val, 0], {
+                    name: '',
+                    size: 2,
+                    fillColor: '#6b7280',
+                    strokeColor: '#4b5563',
+                    fixed: true
+                });
+
+                board.create('line', [P1, foot], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#10b981',
+                    strokeWidth: 1,
+                    dash: 2
+                });
+
+                board.create('line', [P2, foot], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#ef4444',
+                    strokeWidth: 1,
+                    dash: 2
+                });
+
+                // Angle arcs
+                board.create('angle', [foot, O, P1], {
+                    radius: 0.4,
+                    strokeColor: '#10b981',
+                    fillColor: 'rgba(16, 185, 129, 0.1)',
+                    withLabel: false
+                });
+
+                board.create('angle', [P2, O, foot], {
+                    radius: 0.35,
+                    strokeColor: '#ef4444',
+                    fillColor: 'rgba(239, 68, 68, 0.1)',
+                    withLabel: false
+                });
+
+                // Labels
+                board.create('text', [cos_val + 0.15, sin_val, '<b>(cos θ, sin θ)</b>'], {
+                    fontSize: 13,
+                    color: '#10b981',
+                    anchorX: 'left',
+                    anchorY: 'middle',
+                    fixed: true
+                });
+
+                board.create('text', [cos_val + 0.15, -sin_val, '<b>(cos(-θ), sin(-θ))</b>'], {
+                    fontSize: 13,
+                    color: '#ef4444',
+                    anchorX: 'left',
+                    anchorY: 'middle',
+                    fixed: true
+                });
+
+                board.create('text', [0.4, 0.2, '<b>θ</b>'], {
+                    fontSize: 14,
+                    color: '#10b981',
+                    anchorX: 'left',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+
+                board.create('text', [0.35, -0.15, '<b>-θ</b>'], {
+                    fontSize: 14,
+                    color: '#ef4444',
+                    anchorX: 'left',
+                    anchorY: 'top',
+                    fixed: true
+                });
+            })();
+
+            // Sum Formula Diagram
+            (function() {
+                const board = JXG.JSXGraph.initBoard('jxgbox-cossum', {
+                    boundingbox: [-1.5, 1.5, 1.5, -1.5],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    grid: false,
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // Unit circle
+                board.create('circle', [[0, 0], 1], {
+                    strokeColor: '#1e40af',
+                    strokeWidth: 2,
+                    fillColor: 'transparent'
+                });
+
+                // Two angles
+                const angleA = 0.9;  // about 52 degrees
+                const angleB = 0.5;  // about 29 degrees
+
+                const cosA = Math.cos(angleA);
+                const sinA = Math.sin(angleA);
+                const cosB = Math.cos(angleB);
+                const sinB = Math.sin(angleB);
+
+                // Points
+                const O = board.create('point', [0, 0], {
+                    name: '',
+                    visible: false,
+                    fixed: true
+                });
+
+                const PA = board.create('point', [cosA, sinA], {
+                    name: '',
+                    size: 4,
+                    fillColor: '#10b981',
+                    strokeColor: '#059669',
+                    fixed: true
+                });
+
+                const PB = board.create('point', [cosB, sinB], {
+                    name: '',
+                    size: 4,
+                    fillColor: '#ef4444',
+                    strokeColor: '#dc2626',
+                    fixed: true
+                });
+
+                // Lines to points
+                board.create('line', [O, PA], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#10b981',
+                    strokeWidth: 2
+                });
+
+                board.create('line', [O, PB], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#ef4444',
+                    strokeWidth: 2
+                });
+
+                // Distance between points
+                board.create('line', [PA, PB], {
+                    straightFirst: false,
+                    straightLast: false,
+                    strokeColor: '#8b5cf6',
+                    strokeWidth: 2,
+                    dash: 2
+                });
+
+                // Angle arcs
+                const startPt = board.create('point', [1, 0], {
+                    name: '',
+                    visible: false,
+                    fixed: true
+                });
+
+                board.create('angle', [startPt, O, PB], {
+                    radius: 0.35,
+                    strokeColor: '#ef4444',
+                    fillColor: 'rgba(239, 68, 68, 0.1)',
+                    withLabel: false
+                });
+
+                board.create('angle', [startPt, O, PA], {
+                    radius: 0.5,
+                    strokeColor: '#10b981',
+                    fillColor: 'rgba(16, 185, 129, 0.1)',
+                    withLabel: false
+                });
+
+                // Labels
+                board.create('text', [cosA + 0.1, sinA + 0.1, '<b>A</b>'], {
+                    fontSize: 16,
+                    color: '#10b981',
+                    anchorX: 'left',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+
+                board.create('text', [cosB + 0.1, sinB - 0.05, '<b>B</b>'], {
+                    fontSize: 16,
+                    color: '#ef4444',
+                    anchorX: 'left',
+                    anchorY: 'top',
+                    fixed: true
+                });
+
+                board.create('text', [(cosA + cosB)/2, (sinA + sinB)/2 + 0.15, '<b>A - B</b>'], {
+                    fontSize: 14,
+                    color: '#8b5cf6',
+                    anchorX: 'middle',
+                    anchorY: 'bottom',
+                    fixed: true
+                });
+            })();
+
+            // Double Angle Graph
+            // JSXGraph conversion of doubleAngleChart
+            (function() {
+                const board = JXG.JSXGraph.initBoard('doubleAngleChart', {
+                    boundingbox: [-0.2, 1.65, (2*Math.PI) + 0.2, -1.65],
+                    axis: true,
+                    showCopyright: false,
+                    showNavigation: false,
+                    showFullscreen: true,
+                    fullscreen: {symbol: '\u26F6', scale: 0.95},
+                    drag: {enabled: false},
+                    pan: {enabled: false},
+                    zoom: {enabled: false},
+                    keyboard: {enabled: false}
+                });
+
+                // sin(θ) - blue
+                board.create('functiongraph', [
+                    function(x) { return Math.sin(x); },
+                    0, 2*Math.PI
+                ], {
+                    strokeColor: '#3b82f6',
+                    strokeWidth: 2,
+                    fixed: true
+                });
+
+                // sin(2θ) - red
+                board.create('functiongraph', [
+                    function(x) { return Math.sin(2 * x); },
+                    0, 2*Math.PI
+                ], {
+                    strokeColor: '#ef4444',
+                    strokeWidth: 2,
+                    fixed: true
+                });
+
+                // 2sin(θ)cos(θ) - green dashed
+                board.create('functiongraph', [
+                    function(x) { return 2 * Math.sin(x) * Math.cos(x); },
+                    0, 2*Math.PI
+                ], {
+                    strokeColor: '#10b981',
+                    strokeWidth: 2,
+                    dash: 2,
+                    fixed: true
+                });
+            })();
+
+        });
+    </script>
+</body>
+</html>

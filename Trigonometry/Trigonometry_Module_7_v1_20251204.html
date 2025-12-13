@@ -1,0 +1,3167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- Technical Document Implementation v1.8 -->
+    
+    <!-- 
+    Document Provenance:
+      Source: Trigonometry_Module_7a_v6_20251129.html (restructured)
+      Created: 2025-12-04 UTC
+      Guidelines Version: Technical Document Implementation v1.8
+      
+      Version History:
+        v1 (2025-12-04): Restructured from Module 7a - renumbered sections, split Fourier
+                         content into 7.4 (series) and 7.5 (transform/FFT), merged synthesis
+                         and summary into 7.6, removed career paths (moved to Module 8);
+                         Added navigation infrastructure (title page, TOC, figure list,
+                         program list, section IDs for intra-document linking)
+        
+      Previous History (as Module 7a):
+        v6 (2025-11-29): Fixed MathJax URL (removed /es5/ path error)
+        v5 (2025-11-29): Full v1.7 compliance - MathJax v4/CHTML, pinned library versions
+        v4 (2025-11-29): Fixed JSXGraph static settings (drag/pan/zoom/keyboard disabled)
+        v3 (2025-11-28): Content refinements, new JSXGraph figures for complex operations
+        v2 (2025-11-28): Initial module with Fourier series content
+        
+      Validation Status: PASSED (2025-12-04)
+        - ftfy encoding check: PASS
+        - STEM whitelist validation: PASS
+        - TOC link integrity: PASS (52 links, 68 IDs)
+        
+      Figure Inventory (11 figures):
+        Fig. 7.2-1: The Complex Plane (JSXGraph)
+        Fig. 7.2-1b: Complex Addition as Vector Addition (JSXGraph)
+        Fig. 7.2-1c: Complex Multiplication as Rotation and Scaling (JSXGraph)
+        Fig. 7.2-1d: Magnitude as Distance from Origin (JSXGraph)
+        Fig. 7.2-2: Polar Form of Complex Numbers (JSXGraph)
+        Fig. 7.3-1: Complex Exponentials Trace Circles (JSXGraph)
+        Fig. 7.4-1: Square Wave Approximation - 1 term (Plotly)
+        Fig. 7.4-2: Square Wave Approximation - 3 terms (Plotly)
+        Fig. 7.4-3: Square Wave Approximation - 5 terms (Plotly)
+        Fig. 7.4-4: Square Wave Approximation - 10 terms (Plotly)
+        Fig. 7.4-5: Sawtooth Wave Fourier Approximation (Plotly)
+      
+      Program Inventory (3 programs):
+        Program 7.3-1: Euler's Formula Visualization
+        Program 7.4-1: Fourier Series Computation and Visualization
+        Program 7.5-1: FFT Signal Analysis
+        
+      Section Structure:
+        7.1 Introduction: Completing the Mathematical Landscape
+        7.2 Complex Numbers: Beyond the Real Number Line
+        7.3 Euler's Formula: The Crown Jewel of Mathematics
+        7.4 Fourier Series: Any Wave is a Sum of Sine Waves
+        7.5 The Fourier Transform and FFT
+        7.6 Synthesis and Summary
+    -->
+    
+    <title>Trigonometry Module 7: Complex Numbers and Fourier Analysis</title>
+    
+    <!-- Plotly.js 2.35.2 for function plots -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    
+    <!-- JSXGraph 1.4.6 for geometric diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1e40af; 
+            border-bottom: 3px solid #3b82f6; 
+            padding-bottom: 10px; 
+        }
+        h2 { 
+            color: #1e40af; 
+            margin-top: 30px; 
+        }
+        h3 { 
+            color: #374151; 
+        }
+        .highlight { 
+            background-color: #dbeafe; 
+            padding: 15px; 
+            border-left: 4px solid #3b82f6; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .example { 
+            background-color: #d1fae5; 
+            padding: 15px; 
+            border-left: 4px solid #10b981; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .warning { 
+            background-color: #fef3c7; 
+            padding: 15px; 
+            border-left: 4px solid #f59e0b; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .historical { 
+            background-color: #fce7f3; 
+            padding: 15px; 
+            border-left: 4px solid #ec4899; 
+            margin: 20px 0; 
+            border-radius: 4px; 
+        }
+        .problem {
+            background-color: #f0f9ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+            border-radius: 4px;
+        }
+        .solution {
+            background-color: #f0fdf4;
+            padding: 15px;
+            margin: 10px 0 15px 20px;
+            border-left: 4px solid #10b981;
+            border-radius: 4px;
+        }
+        .formula { 
+            text-align: center; 
+            font-size: 1.2em; 
+            margin: 20px 0; 
+            padding: 15px; 
+            background-color: #f3f4f6; 
+            border-radius: 4px; 
+        }
+        code { 
+            background-color: #f3f4f6; 
+            padding: 2px 6px; 
+            border-radius: 3px; 
+            font-family: 'Courier New', monospace; 
+        }
+        pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+        .graph-container { 
+            margin: 30px 0; 
+            padding: 20px; 
+            background-color: #f9fafb; 
+            border-radius: 8px; 
+        }
+        
+        /* Fullscreen styles for Plotly graph containers (per guidelines 2.3.8) */
+        .graph-container:fullscreen {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            padding: 20px;
+            box-sizing: border-box;
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        .graph-container:fullscreen .graph-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .graph-container:fullscreen .graph-caption {
+            font-size: 1.1em;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        /* Force Plotly div to expand - !important overrides inline styles */
+        .graph-container:fullscreen .plotly-graph {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: 80vh !important;
+            flex-grow: 1;
+        }
+        
+        /* Override the wrapper div constraints in fullscreen */
+        .graph-container:fullscreen .plotly-wrapper {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin: 0 !important;
+        }
+        .graph-title { 
+            font-weight: bold; 
+            color: #1e40af; 
+            margin-bottom: 10px; 
+            text-align: center; 
+        }
+        .graph-caption { 
+            font-size: 0.9em; 
+            color: #6b7280; 
+            margin-top: 10px; 
+            font-style: italic; 
+            text-align: center; 
+        }
+        .jxgbox {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            margin: 0 auto;
+            max-width: 100%;
+            height: auto !important;
+            padding: 12px;
+        }
+        canvas {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            max-width: 100%;
+            height: auto !important;
+        }
+        
+        /* Responsive adjustments for mobile devices */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+            h3 {
+                font-size: 1.1em;
+            }
+            .formula {
+                font-size: 1em;
+                overflow-x: auto;
+                overflow-y: hidden;
+            }
+            .example, .solution, .problem, .highlight, .warning, .historical {
+                overflow-x: auto;
+            }
+            pre {
+                font-size: 0.75em;
+                overflow-x: auto;
+            }
+            .graph-container {
+                padding: 10px;
+                overflow-x: auto;
+            }
+            .jxgbox {
+                width: 100% !important;
+                max-width: 100%;
+            }
+            canvas {
+                width: 100% !important;
+                max-width: 100%;
+            }
+            /* Scale down equations on mobile */
+            .MathJax {
+                font-size: 90% !important;
+            }
+            /* Make tables scrollable */
+            table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+            }
+        }
+        
+        /* Extra small screens (phones in portrait) */
+        @media screen and (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            h1 {
+                font-size: 1.3em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .formula {
+                font-size: 0.9em;
+            }
+            .MathJax {
+                font-size: 85% !important;
+            }
+            pre {
+                font-size: 0.7em;
+            }
+        }
+        
+        ul, ol { margin-left: 20px; }
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #dbeafe;
+            color: #1e40af;
+            font-weight: bold;
+        }
+
+        /* Module Title Page Styling */
+        .module-title-page {
+            text-align: center;
+            padding: 50px 20px;
+            margin: -40px -40px 30px -40px;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%);
+            border-bottom: 3px solid #3b82f6;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .module-title-page h1 {
+            font-size: 1.5em;
+            color: #1e40af;
+            border-bottom: none;
+            margin: 0 0 10px 0;
+            padding-bottom: 0;
+            line-height: 1.3;
+        }
+        
+        .module-title-page .module-subtitle {
+            font-size: 1.8em;
+            color: #1e40af;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        
+        .module-title-page .version {
+            font-size: 1.0em;
+            color: #6b7280;
+            margin-top: 20px;
+        }
+        
+        /* Module Table of Contents Styling */
+        .module-toc {
+            background-color: #f0f9ff;
+            padding: 20px 25px;
+            border-radius: 8px;
+            border-left: 4px solid #3b82f6;
+            margin: 25px 0 30px 0;
+        }
+        
+        .module-toc h2 {
+            color: #1e40af;
+            margin: 0 0 15px 0;
+            font-size: 1.3em;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        
+        .module-toc ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .module-toc > ul > li {
+            margin: 10px 0;
+        }
+        
+        .module-toc > ul > li > a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.0em;
+        }
+        
+        .module-toc > ul > li > a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        .module-toc ul ul {
+            margin: 8px 0 8px 20px;
+            padding: 0;
+        }
+        
+        .module-toc ul ul li {
+            margin: 5px 0;
+        }
+        
+        .module-toc ul ul a {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .module-toc ul ul a:hover {
+            text-decoration: underline;
+            color: #3b82f6;
+        }
+        
+        /* List of Figures Styling */
+        .figure-list {
+            background-color: #fefce8;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #fde047;
+            margin: 0 0 35px 0;
+        }
+        
+        .figure-list h3 {
+            color: #854d0e;
+            margin: 0 0 12px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid #facc15;
+            padding-bottom: 8px;
+        }
+        
+        .figure-list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .figure-list li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .figure-list li::before {
+            content: "\25B6";
+            position: absolute;
+            left: 0;
+            color: #ca8a04;
+            font-size: 0.8em;
+        }
+        
+        .figure-list a {
+            color: #92400e;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .figure-list a:hover {
+            text-decoration: underline;
+            color: #b45309;
+        }
+        
+        /* Program List Styling */
+        .program-list {
+            background-color: #f0fdf4;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #86efac;
+            margin: 0 0 35px 0;
+        }
+        
+        .program-list h3 {
+            color: #166534;
+            margin: 0 0 12px 0;
+            font-size: 1.1em;
+            border-bottom: 1px solid #22c55e;
+            padding-bottom: 8px;
+        }
+        
+        .program-list ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        
+        .program-list li {
+            margin: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .program-list li::before {
+            content: "\25B6";
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-size: 0.8em;
+        }
+        
+        .program-list a {
+            color: #15803d;
+            text-decoration: none;
+            font-size: 0.95em;
+        }
+        
+        .program-list a:hover {
+            text-decoration: underline;
+            color: #166534;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- MODULE TITLE PAGE -->
+        <div class="module-title-page">
+            <h1>An Introduction to Trigonometry and its Application</h1>
+            <div class="module-subtitle">Module 7: Complex Numbers and Fourier Analysis</div>
+            <div class="version">Version 1.0 &mdash; December 2025</div>
+        </div>
+
+        <!-- MODULE TABLE OF CONTENTS -->
+        <div class="module-toc">
+            <h2>In This Module</h2>
+            <ul>
+                <li><a href="#sec-7-1">7.1 Introduction: Completing the Mathematical Landscape</a>
+                    <ul>
+                        <li><a href="#subsec-mathematical-maturity">A Note on Mathematical Maturity</a></li>
+                        <li><a href="#subsec-module-7-overview">What We'll Cover in Module 7</a></li>
+                        <li><a href="#subsec-running-python">Running the Python Code Examples</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-7-2">7.2 Complex Numbers: Beyond the Real Number Line</a>
+                    <ul>
+                        <li><a href="#subsec-problem-complex">The Problem That Led to Complex Numbers</a></li>
+                        <li><a href="#subsec-historical-complex">The Historical Development of Complex Numbers</a></li>
+                        <li><a href="#subsec-imaginary-unit">The Imaginary Unit i</a></li>
+                        <li><a href="#subsec-complex-form">Complex Numbers: a + bi</a></li>
+                        <li><a href="#subsec-arithmetic-complex">Arithmetic with Complex Numbers</a></li>
+                        <li><a href="#subsec-complex-plane">The Complex Plane</a></li>
+                        <li><a href="#subsec-magnitude">Magnitude and the Pythagorean Theorem</a></li>
+                        <li><a href="#subsec-polar-form">Polar Form: Connecting to Trigonometry</a></li>
+                        <li><a href="#subsec-polar-matters">Why Polar Form Matters: Multiplication Becomes Addition!</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-7-3">7.3 Euler's Formula: The Crown Jewel of Mathematics</a>
+                    <ul>
+                        <li><a href="#subsec-beautiful-equation">The Most Beautiful Equation</a></li>
+                        <li><a href="#subsec-euler-discovery">How Did Euler Discover This Formula?</a></li>
+                        <li><a href="#subsec-euler-matters">Why Euler's Formula Matters</a></li>
+                        <li><a href="#subsec-inverse-euler">Inverse Relationships from Euler's Formula</a></li>
+                        <li><a href="#subsec-ac-circuits">Application: Understanding AC Circuits</a></li>
+                        <li><a href="#subsec-quantum">Application: Quantum Mechanics</a></li>
+                        <li><a href="#subsec-euler-python">Python Visualization: Seeing Euler's Formula in Action</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-7-4">7.4 Fourier Series: Any Wave is a Sum of Sine Waves</a>
+                    <ul>
+                        <li><a href="#subsec-fourier-intro">Connecting Back to Module 1</a></li>
+                        <li><a href="#subsec-central-idea">The Central Idea</a></li>
+                        <li><a href="#subsec-why-sines">Why Sines and Cosines? Periodicity</a></li>
+                        <li><a href="#subsec-standard-case">The Standard Case: Period 2&pi;</a></li>
+                        <li><a href="#subsec-square-wave">Visual Understanding: Building a Square Wave</a></li>
+                        <li><a href="#subsec-gibbs">The Gibbs Phenomenon</a></li>
+                        <li><a href="#subsec-sawtooth">Another Example: Sawtooth Wave</a></li>
+                        <li><a href="#subsec-different-periods">Different Periods: A Practical Example</a></li>
+                        <li><a href="#subsec-complex-exponentials">Using Complex Exponentials: A Simpler Form</a></li>
+                        <li><a href="#subsec-fourier-python">Python Code: Computing and Visualizing Fourier Series</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-7-5">7.5 The Fourier Transform and FFT</a>
+                    <ul>
+                        <li><a href="#subsec-fft">The Fast Fourier Transform (FFT)</a></li>
+                        <li><a href="#subsec-fft-python">Python Example: Using FFT</a></li>
+                        <li><a href="#subsec-fourier-transform">From Fourier Series to Fourier Transform</a></li>
+                    </ul>
+                </li>
+                <li><a href="#sec-7-6">7.6 Synthesis and Summary</a>
+                    <ul>
+                        <li><a href="#subsec-deep-connections">The Deep Connections</a></li>
+                        <li><a href="#subsec-what-learned">What We've Learned</a></li>
+                        <li><a href="#subsec-before-module-8">Before Moving to Module 8</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <!-- LIST OF FIGURES -->
+        <div class="figure-list">
+            <h3>Figures in This Module</h3>
+            <ul>
+                <li><a href="#complexPlane">Fig. 7.2-1: The Complex Plane</a></li>
+                <li><a href="#complexAddition">Fig. 7.2-1b: Complex Addition as Vector Addition</a></li>
+                <li><a href="#complexMultiplication">Fig. 7.2-1c: Complex Multiplication as Rotation and Scaling</a></li>
+                <li><a href="#complexMagnitude">Fig. 7.2-1d: Magnitude as Distance from Origin</a></li>
+                <li><a href="#polarForm">Fig. 7.2-2: Polar Form of Complex Numbers</a></li>
+                <li><a href="#eulerCircle">Fig. 7.3-1: Complex Exponentials Trace Circles</a></li>
+                <li><a href="#squareWave1">Fig. 7.4-1: Square Wave Approximation (1 term)</a></li>
+                <li><a href="#squareWave3">Fig. 7.4-2: Square Wave Approximation (3 terms)</a></li>
+                <li><a href="#squareWave5">Fig. 7.4-3: Square Wave Approximation (5 terms)</a></li>
+                <li><a href="#squareWave10">Fig. 7.4-4: Square Wave Approximation (10 terms)</a></li>
+                <li><a href="#sawtoothWave">Fig. 7.4-5: Sawtooth Wave Fourier Approximation</a></li>
+            </ul>
+        </div>
+
+        <!-- LIST OF PROGRAMS -->
+        <div class="program-list">
+            <h3>Python Programs in This Module</h3>
+            <ul>
+                <li><a href="#subsec-euler-python">Program 7.3-1: Euler's Formula Visualization</a></li>
+                <li><a href="#subsec-fourier-python">Program 7.4-1: Fourier Series Computation and Visualization</a></li>
+                <li><a href="#subsec-fft-python">Program 7.5-1: FFT Signal Analysis</a></li>
+            </ul>
+        </div>
+
+        <h1>Module 7: Complex Numbers and Fourier Analysis</h1>
+
+        <h2 id="sec-7-1">7.1 Introduction: Completing the Mathematical Landscape</h2>
+        
+        <p>
+            We've come a long way in our trigonometric journey. We started with simple ratios in right triangles, discovered that sine and cosine describe circles and waves, learned how to transform and manipulate these functions, and applied them to solve real-world problems in navigation, surveying, and physics. But there's a deeper level to this story—one that reveals why trigonometric functions are truly fundamental to mathematics and the universe itself.
+        </p>
+
+        <p>
+            This module explores two of the most profound connections in all of mathematics: the relationship between <strong>exponential functions and trigonometry through complex numbers</strong>, and the revolutionary insight that <strong>any repeating pattern can be built from sine and cosine waves</strong> (Fourier series). These aren't just abstract mathematical curiosities—they're the foundation of modern technology, from the smartphone in your pocket to the physics underlying quantum mechanics.
+        </p>
+
+        <div class="warning">
+            <h3 id="subsec-mathematical-maturity">A Note on Mathematical Maturity</h3>
+            <p>
+                Full understanding of these topics traditionally requires calculus, which we haven't covered yet. However, we can build strong intuition and understand the key ideas conceptually. Think of this module as:
+            </p>
+            <ul>
+                <li><strong>A preview</strong> of where trigonometry leads in higher mathematics</li>
+                <li><strong>Motivation</strong> for studying calculus (which will be our next major lesson)</li>
+                <li><strong>A bridge</strong> connecting the concrete triangle problems we started with to the abstract but powerful mathematics used in modern science and engineering</li>
+            </ul>
+            <p>
+                Don't worry if everything doesn't click immediately. The goal is exposure to big ideas and building intuition, not technical mastery. That will come with calculus.
+            </p>
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-module-7-overview">What We'll Cover in Module 7</h3>
+            <ul>
+                <li><strong>Complex Numbers:</strong> A revolutionary extension of the number system that connects exponentials, trigonometry, and circles in one elegant formula</li>
+                <li><strong>Euler's Formula:</strong> The equation $e^{i\theta} = \cos\theta + i\sin\theta$, called "the most beautiful equation in mathematics"</li>
+                <li><strong>Fourier Series:</strong> The remarkable discovery that any repeating pattern is just a sum of sine and cosine waves—the foundation of signal processing, audio compression, image compression, and wireless communications</li>
+                <li><strong>Python Visualizations:</strong> Interactive code to help you see these abstract concepts in action</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3 id="subsec-running-python">Running the Python Code Examples</h3>
+            <p>
+                This module includes Python code that creates visualizations and performs calculations. To run these examples, you'll need:
+            </p>
+            <p><strong>Required software:</strong></p>
+            <ul>
+                <li><strong>Python 3.x</strong> — Download from <a href="https://www.python.org">python.org</a> if not already installed</li>
+                <li><strong>NumPy</strong> — For numerical computations</li>
+                <li><strong>Matplotlib</strong> — For creating graphs and animations</li>
+            </ul>
+            <p><strong>Installing the libraries:</strong> Open a terminal or command prompt and run:</p>
+            <pre><code>pip install numpy matplotlib</code></pre>
+            <p><strong>Running the code:</strong></p>
+            <ul>
+                <li><strong>Option 1 (Script):</strong> Copy the code into a file with a <code>.py</code> extension (e.g., <code>euler_visualization.py</code>), then run it with <code>python euler_visualization.py</code></li>
+                <li><strong>Option 2 (Jupyter Notebook):</strong> If you have Jupyter installed, paste the code into a notebook cell and run it. This is particularly nice for interactive exploration.</li>
+                <li><strong>Option 3 (Online):</strong> Use an online Python environment like <a href="https://colab.research.google.com">Google Colab</a> (free, runs in your browser)</li>
+            </ul>
+            <p>
+                Don't worry if you encounter errors — debugging is part of learning to code! Common issues include typos and missing libraries.
+            </p>
+        </div>
+
+        <h2 id="sec-7-2">7.2 Complex Numbers: Beyond the Real Number Line</h2>
+
+        <h3 id="subsec-problem-complex">The Problem That Led to Complex Numbers</h3>
+
+        <p>
+            For thousands of years, mathematics dealt exclusively with what we now call "real numbers"—the familiar numbers on the number line, including positive numbers, negative numbers, zero, fractions, and irrational numbers like $\sqrt{2}$ and $\pi$. But mathematicians kept running into a frustrating problem.
+        </p>
+
+        <p>
+            Consider this simple equation:
+        </p>
+
+        <div class="formula">
+            $$x^2 = -1$$
+        </div>
+
+        <p>
+            What number, when squared, gives $-1$? We know that:
+        </p>
+        <ul>
+            <li>$1^2 = 1$ (positive)</li>
+            <li>$(-1)^2 = 1$ (also positive)</li>
+            <li>In fact, squaring <em>any</em> real number always gives a positive result (or zero)</li>
+        </ul>
+
+        <p>
+            So the equation $x^2 = -1$ has no solution among the real numbers. For centuries, mathematicians simply said "this equation has no solution" and moved on.
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-historical-complex">The Historical Development of Complex Numbers</h3>
+            
+            <p><strong>16th Century Italy: The Cubic Formula Crisis</strong></p>
+            <p>
+                The story really begins with Italian mathematicians trying to solve cubic equations (equations like $x^3 + px = q$). In 1545, <strong>Gerolamo Cardano</strong> published formulas for solving cubic equations in his book <em>Ars Magna</em>. But there was a strange problem: the formulas sometimes required taking square roots of negative numbers as intermediate steps, even when the final answer was a perfectly real number!
+            </p>
+
+            <p>
+                For example, to solve $x^3 = 15x + 4$, Cardano's formula would produce something involving $\sqrt{-121}$ in the middle of the calculation. The mathematicians were baffled. They called these "impossible" or "imaginary" numbers. Cardano himself wrote that working with them felt like "mental torture."
+            </p>
+
+            <p><strong>Rafael Bombelli (1526-1572): Taking the Plunge</strong></p>
+            <p>
+                Bombelli, another Italian mathematician, was the first to seriously work with these "imaginary" numbers. He realized that if you follow the algebraic rules consistently—treating $\sqrt{-1}$ as a new kind of number that behaves algebraically like any other number—you could navigate through Cardano's formulas and arrive at correct real answers. He published these ideas in his book <em>L'Algebra</em> (1572).
+            </p>
+
+            <p><strong>René Descartes (1637): The Name "Imaginary"</strong></p>
+            <p>
+                Descartes coined the term "imaginary numbers" in his <em>La Géométrie</em>, and unfortunately the name stuck—even though these numbers are no more "imaginary" than negative numbers or irrational numbers. They're all equally real mathematical objects; they just exist in different mathematical spaces.
+            </p>
+
+            <p><strong>Leonhard Euler (1707-1783): Systematic Foundation</strong></p>
+            <p>
+                Euler, the most prolific mathematician in history, systematized the notation and properties of complex numbers. In 1748, he introduced the notation $i$ for $\sqrt{-1}$ (from the Italian word "immaginario"). Most importantly, he discovered the stunning formula that connects complex numbers to trigonometry:
+            </p>
+            <div class="formula">
+                $$e^{i\theta} = \cos\theta + i\sin\theta$$
+            </div>
+            <p>
+                This formula, which we'll explore deeply, revealed that complex numbers aren't a strange add-on to mathematics—they're fundamental to the structure of mathematics itself.
+            </p>
+
+            <p><strong>Carl Friedrich Gauss (1777-1855): Geometric Interpretation</strong></p>
+            <p>
+                Gauss developed the geometric interpretation of complex numbers as points in a plane, though this idea was independently discovered by several mathematicians. This geometric view finally made complex numbers "real" in the sense that mathematicians could visualize them, work with them geometrically, and understand their behavior intuitively.
+            </p>
+
+            <p><strong>19th-20th Centuries: From Curiosity to Foundation</strong></p>
+            <p>
+                By the 1800s, complex numbers had proven themselves essential in physics (electromagnetism, wave mechanics), engineering (AC circuit analysis, control theory), and pure mathematics (complex analysis, number theory). In the 20th century, they became indispensable in quantum mechanics—the fundamental theory describing atomic behavior. Today, no serious physics or engineering is done without complex numbers.
+            </p>
+        </div>
+
+        <h3 id="subsec-imaginary-unit">The Imaginary Unit $i$</h3>
+
+        <p>
+            Modern mathematics embraces the solution to $x^2 = -1$ by defining a new number, called the <strong>imaginary unit</strong> and denoted by $i$ (or $j$ in electrical engineering to avoid confusion with current):
+        </p>
+
+        <div class="formula">
+            $$i = \sqrt{-1}$$
+            <br>
+            or equivalently:
+            <br>
+            $$i^2 = -1$$
+        </div>
+
+        <p>
+            This single definition opens up an entirely new world of mathematics. Just as negative numbers extend the number line to include solutions to equations like $x + 5 = 0$, and fractions extend it to include solutions to equations like $3x = 1$, the imaginary unit $i$ extends our number system to include solutions to $x^2 = -1$ and many other equations that previously had no solutions.
+        </p>
+
+        <h3 id="subsec-complex-form">Complex Numbers: $a + bi$</h3>
+
+        <p>
+            A <strong>complex number</strong> has the form:
+        </p>
+
+        <div class="formula">
+            $$z = a + bi$$
+        </div>
+
+        <p>Where:</p>
+        <ul>
+            <li>$a$ is called the <strong>real part</strong> of $z$ (written as $\text{Re}(z) = a$)</li>
+            <li>$b$ is called the <strong>imaginary part</strong> of $z$ (written as $\text{Im}(z) = b$)</li>
+            <li>Both $a$ and $b$ are ordinary real numbers</li>
+        </ul>
+
+        <div class="example">
+            <h3 id="subsec-examples-complex">Examples of Complex Numbers</h3>
+            <ul>
+                <li>$3 + 4i$ has real part 3 and imaginary part 4</li>
+                <li>$-2 + i$ has real part $-2$ and imaginary part 1</li>
+                <li>$5i$ has real part 0 and imaginary part 5 (purely imaginary)</li>
+                <li>$7$ has real part 7 and imaginary part 0 (purely real—every real number is also a complex number!)</li>
+                <li>$-i$ has real part 0 and imaginary part $-1$</li>
+            </ul>
+        </div>
+
+        <h3 id="subsec-arithmetic-complex">Arithmetic with Complex Numbers</h3>
+
+        <p>
+            Complex numbers follow familiar algebraic rules. You add, subtract, and multiply them just like polynomials, remembering that $i^2 = -1$.
+        </p>
+
+        <div class="example">
+            <h3 id="subsec-addition">Addition</h3>
+            <p>Add the real parts together and the imaginary parts together:</p>
+            <div class="formula">
+                $$(3 + 4i) + (1 + 2i) = (3+1) + (4+2)i = 4 + 6i$$
+            </div>
+        </div>
+
+        <div class="example">
+            <h3 id="subsec-multiplication">Multiplication</h3>
+            <p>Use the distributive property (FOIL) and remember $i^2 = -1$:</p>
+            <div class="formula">
+                \begin{align}
+                (3 + 4i)(1 + 2i) &= 3 \cdot 1 + 3 \cdot 2i + 4i \cdot 1 + 4i \cdot 2i \\
+                &= 3 + 6i + 4i + 8i^2 \\
+                &= 3 + 10i + 8(-1) \\
+                &= 3 + 10i - 8 \\
+                &= -5 + 10i
+                \end{align}
+            </div>
+        </div>
+
+        <p>
+            Notice something remarkable in that last example: we multiplied two complex numbers (neither of which was a real number) and got another complex number. The system is <em>closed</em> under multiplication—multiplying complex numbers gives you complex numbers.
+        </p>
+
+        <h3 id="subsec-complex-plane">The Complex Plane</h3>
+
+        <p>
+            The breakthrough that made complex numbers truly comprehensible was visualizing them geometrically. Just as real numbers correspond to points on a line (the number line), <strong>complex numbers correspond to points in a plane</strong>, called the <strong>complex plane</strong> or <strong>Argand diagram</strong>.
+        </p>
+
+        <p>
+            The complex number $z = a + bi$ corresponds to the point with coordinates $(a, b)$:
+        </p>
+        <ul>
+            <li>The <strong>horizontal axis</strong> (usually called the <strong>real axis</strong>) represents the real part</li>
+            <li>The <strong>vertical axis</strong> (usually called the <strong>imaginary axis</strong>) represents the imaginary part</li>
+        </ul>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.2-1: The Complex Plane</div>
+            <div id="complexPlane" class="jxgbox" style="max-width:600px; width:100%; aspect-ratio: 1/1;"></div>
+            <div class="graph-caption">
+                Complex numbers as points in the plane. The complex number $z = a + bi$ corresponds to the point $(a, b)$. 
+                Pure real numbers lie on the horizontal axis, pure imaginary numbers on the vertical axis, 
+                and general complex numbers fill the entire plane.
+            </div>
+        </div>
+
+        <p>
+            This geometric interpretation is powerful because it connects complex number arithmetic to geometric operations:
+        </p>
+        <ul>
+            <li><strong>Addition</strong> corresponds to vector addition (tip-to-tail)</li>
+            <li><strong>Multiplication</strong> corresponds to rotation and scaling</li>
+            <li>The <strong>magnitude</strong> of a complex number is its distance from the origin</li>
+        </ul>
+
+        <p>
+            Let's visualize each of these operations:
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.2-1b: Complex Addition as Vector Addition</div>
+            <div id="complexAddition" class="jxgbox" style="max-width:500px; width:100%; aspect-ratio: 1/1;"></div>
+            <div class="graph-caption">
+                Adding complex numbers $v = 2 + i$ and $w = 1 + 2i$ using the tip-to-tail method. 
+                Place $w$ at the tip of $v$ to find $v + w = 3 + 3i$. The parallelogram law also applies: 
+                the sum is the diagonal of the parallelogram formed by $v$ and $w$.
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.2-1c: Complex Multiplication as Rotation and Scaling</div>
+            <div id="complexMultiplication" class="jxgbox" style="max-width:600px; width:100%; aspect-ratio: 4/3;"></div>
+            <div class="graph-caption">
+                Multiplying $z = 2 + i$ by different factors. By a real number (2): scales without rotating. 
+                By $i$: rotates 90° counterclockwise. By a complex number ($1 + i$): both rotates (by 45°) and scales (by $\sqrt{2}$).
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.2-1d: Magnitude as Distance from Origin</div>
+            <div id="complexMagnitude" class="jxgbox" style="max-width:500px; width:100%; aspect-ratio: 1/1;"></div>
+            <div class="graph-caption">
+                The magnitude $|z|$ of a complex number $z = a + bi$ is its distance from the origin: $|z| = \sqrt{a^2 + b^2}$. 
+                This is the Pythagorean theorem applied to the right triangle with legs $a$ and $b$.
+            </div>
+        </div>
+
+        <h3 id="subsec-magnitude">Magnitude and the Pythagorean Theorem</h3>
+
+        <p>
+            The <strong>magnitude</strong> (or <strong>modulus</strong> or <strong>absolute value</strong>) of a complex number $z = a + bi$ is its distance from the origin in the complex plane. By the Pythagorean theorem:
+        </p>
+
+        <div class="formula">
+            $$|z| = |a + bi| = \sqrt{a^2 + b^2}$$
+        </div>
+
+        <p>
+            Look familiar? This is exactly the same formula we used for finding the hypotenuse of a right triangle! The connection between complex numbers and trigonometry is already appearing.
+        </p>
+
+        <div class="example">
+            <h3 id="subsec-computing-magnitudes">Computing Magnitudes</h3>
+            <ul>
+                <li>$|3 + 4i| = \sqrt{3^2 + 4^2} = \sqrt{9 + 16} = \sqrt{25} = 5$</li>
+                <li>$|1 + i| = \sqrt{1^2 + 1^2} = \sqrt{2}$</li>
+                <li>$|5i| = \sqrt{0^2 + 5^2} = 5$</li>
+                <li>$|-7| = \sqrt{(-7)^2 + 0^2} = 7$</li>
+            </ul>
+        </div>
+
+        <h3 id="subsec-polar-form">Polar Form: Connecting to Trigonometry</h3>
+
+        <p>
+            Here's where everything comes together. Instead of describing a point in the complex plane using rectangular coordinates $(a, b)$, we can use <strong>polar coordinates</strong> $(r, \theta)$:
+        </p>
+        <ul>
+            <li>$r$ is the distance from the origin (the magnitude: $r = |z| = \sqrt{a^2 + b^2}$)</li>
+            <li>$\theta$ is the angle from the positive real axis (called the <strong>argument</strong> of $z$)</li>
+        </ul>
+
+        <p>
+            From our work with the unit circle, we know how to convert between rectangular and polar coordinates:
+        </p>
+
+        <div class="formula">
+            $$a = r\cos\theta$$
+            $$b = r\sin\theta$$
+        </div>
+
+        <p>
+            Therefore, the complex number $z = a + bi$ can be written as:
+        </p>
+
+        <div class="formula">
+            $$z = r\cos\theta + (r\sin\theta)i = r(\cos\theta + i\sin\theta)$$
+        </div>
+
+        <p>
+            This is called the <strong>polar form</strong> of a complex number. The expression $(\cos\theta + i\sin\theta)$ appears so frequently that it's often abbreviated as $\text{cis}(\theta)$.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.2-2: Polar Form of Complex Numbers</div>
+            <div id="polarForm" class="jxgbox" style="max-width:600px; width:100%; aspect-ratio: 1/1;"></div>
+            <div class="graph-caption">
+                The complex number $z = a + bi$ in polar form: $z = r(\cos\theta + i\sin\theta)$ where $r = \sqrt{a^2 + b^2}$ 
+                is the magnitude and $\theta$ is the angle (argument). This representation connects complex numbers directly to 
+                trigonometry and the unit circle.
+            </div>
+        </div>
+
+        <div class="example">
+            <h3 id="subsec-converting-polar">Converting to Polar Form</h3>
+            <p>Convert $z = 1 + i$ to polar form.</p>
+            <div class="solution">
+                <p><strong>Step 1:</strong> Find the magnitude:</p>
+                <div class="formula">
+                    $$r = \sqrt{1^2 + 1^2} = \sqrt{2}$$
+                </div>
+                
+                <p><strong>Step 2:</strong> Find the angle (using arctangent):</p>
+                <div class="formula">
+                    $$\theta = \arctan\left(\frac{b}{a}\right) = \arctan\left(\frac{1}{1}\right) = \arctan(1) = \frac{\pi}{4} \text{ radians} = 45°$$
+                </div>
+                
+                <p><strong>Step 3:</strong> Write in polar form:</p>
+                <div class="formula">
+                    $$z = \sqrt{2}\left(\cos\frac{\pi}{4} + i\sin\frac{\pi}{4}\right)$$
+                </div>
+                
+                <p>We can verify: $\sqrt{2}\cos(45°) = \sqrt{2} \cdot \frac{\sqrt{2}}{2} = 1$ and $\sqrt{2}\sin(45°) = \sqrt{2} \cdot \frac{\sqrt{2}}{2} = 1$, giving us $1 + i$. ✓</p>
+            </div>
+        </div>
+
+        <h3 id="subsec-polar-matters">Why Polar Form Matters: Multiplication Becomes Addition!</h3>
+
+        <p>
+            Here's something remarkable. When you multiply two complex numbers in polar form:
+        </p>
+
+        <div class="formula">
+            $$z_1 = r_1(\cos\theta_1 + i\sin\theta_1)$$
+            $$z_2 = r_2(\cos\theta_2 + i\sin\theta_2)$$
+        </div>
+
+        <p>
+            The result is:
+        </p>
+
+        <div class="formula">
+            $$z_1 \cdot z_2 = r_1r_2(\cos(\theta_1 + \theta_2) + i\sin(\theta_1 + \theta_2))$$
+        </div>
+
+        <p>
+            In other words:
+        </p>
+        <ul>
+            <li>The <strong>magnitudes multiply</strong>: $|z_1z_2| = |z_1| \cdot |z_2|$</li>
+            <li>The <strong>angles add</strong>: $\arg(z_1z_2) = \arg(z_1) + \arg(z_2)$</li>
+        </ul>
+
+        <p>
+            This is exactly the same property that makes logarithms useful! Remember: $\log(ab) = \log a + \log b$ turns multiplication into addition. Complex numbers in polar form have the same miraculous property, but geometrically: multiplying two complex numbers means <em>rotating one by the angle of the other and scaling by the magnitude of the other</em>.
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-geometric-mult">Geometric Interpretation of Multiplication</h3>
+            <p>
+                Multiplying by a complex number $z = r(\cos\theta + i\sin\theta)$ corresponds to:
+            </p>
+            <ul>
+                <li><strong>Rotating</strong> by angle $\theta$</li>
+                <li><strong>Scaling</strong> by factor $r$</li>
+            </ul>
+            <p>
+                For example, multiplying by $i$ (which has $r=1$ and $\theta=90°$) rotates any complex number by 90° counterclockwise without changing its size. That's why $i \cdot i = i^2 = -1$: rotating 90° twice gives you 180°, which is the negative real axis!
+            </p>
+        </div>
+
+        <h2 id="sec-7-3">7.3 Euler's Formula: The Crown Jewel of Mathematics</h2>
+
+        <h3 id="subsec-beautiful-equation">The Most Beautiful Equation</h3>
+
+        <p>
+            We've seen that complex numbers in polar form are written as $r(\cos\theta + i\sin\theta)$. But there's a much more elegant way to write this. Leonhard Euler discovered in 1748 that this expression is intimately connected to the exponential function. His formula is:
+        </p>
+
+        <div class="formula" style="background-color: #fce7f3; border: 2px solid #ec4899;">
+            $$e^{i\theta} = \cos\theta + i\sin\theta$$
+        </div>
+
+        <p>
+            This is <strong>Euler's formula</strong>, and it's considered one of the most beautiful equations in mathematics. It connects five of the most important numbers in mathematics:
+        </p>
+        <ul>
+            <li>$e \approx 2.71828$ (the base of natural logarithms)</li>
+            <li>$i = \sqrt{-1}$ (the imaginary unit)</li>
+            <li>$\pi \approx 3.14159$ (the circle constant)</li>
+            <li>$1$ (the multiplicative identity)</li>
+            <li>$0$ (the additive identity)</li>
+        </ul>
+
+        <p>
+            By setting $\theta = \pi$ in Euler's formula, we get:
+        </p>
+
+        <div class="formula" style="background-color: #fce7f3; border: 2px solid #ec4899;">
+            $$e^{i\pi} = \cos\pi + i\sin\pi = -1 + 0i = -1$$
+        </div>
+
+        <p>
+            Rearranging:
+        </p>
+
+        <div class="formula" style="background-color: #fce7f3; border: 2px solid #ec4899;">
+            $$e^{i\pi} + 1 = 0$$
+        </div>
+
+        <p>
+            This equation, sometimes called <strong>Euler's identity</strong>, brings together all five fundamental constants in one simple, symmetric equation. The physicist Richard Feynman called it "the most remarkable formula in mathematics." The mathematician Keith Devlin wrote: "Like a Shakespearean sonnet that captures the very essence of love, or a painting that brings out the beauty of the human form that is far more than just skin deep, Euler's equation reaches down into the very depths of existence."
+        </p>
+
+        <div class="historical">
+            <h3 id="subsec-euler-discovery">How Did Euler Discover This Formula?</h3>
+            <p>
+                The full proof of Euler's formula requires calculus (specifically, infinite series called Taylor series), which we'll cover in our calculus lesson. But here's a conceptual sketch of the idea:
+            </p>
+            
+            <p>
+                In calculus, you learn that many functions can be written as infinite sums (called Taylor series or power series). The three functions in Euler's formula all have such representations:
+            </p>
+
+            <div class="formula">
+                $$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + \frac{x^5}{5!} + \cdots$$
+            </div>
+
+            <div class="formula">
+                $$\cos x = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \frac{x^6}{6!} + \cdots$$
+            </div>
+
+            <div class="formula">
+                $$\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \frac{x^7}{7!} + \cdots$$
+            </div>
+
+            <p>
+                Now, what if we replace $x$ with $i\theta$ in the exponential series? Using the fact that $i^2 = -1$, $i^3 = -i$, $i^4 = 1$, and so on:
+            </p>
+
+            <div class="formula">
+                \begin{align}
+                e^{i\theta} &= 1 + (i\theta) + \frac{(i\theta)^2}{2!} + \frac{(i\theta)^3}{3!} + \frac{(i\theta)^4}{4!} + \frac{(i\theta)^5}{5!} + \cdots \\
+                &= 1 + i\theta + \frac{i^2\theta^2}{2!} + \frac{i^3\theta^3}{3!} + \frac{i^4\theta^4}{4!} + \frac{i^5\theta^5}{5!} + \cdots \\
+                &= 1 + i\theta - \frac{\theta^2}{2!} - \frac{i\theta^3}{3!} + \frac{\theta^4}{4!} + \frac{i\theta^5}{5!} + \cdots
+                \end{align}
+            </div>
+
+            <p>
+                Now separate the real terms from the imaginary terms:
+            </p>
+
+            <div class="formula">
+                \begin{align}
+                e^{i\theta} &= \left(1 - \frac{\theta^2}{2!} + \frac{\theta^4}{4!} - \cdots\right) + i\left(\theta - \frac{\theta^3}{3!} + \frac{\theta^5}{5!} - \cdots\right) \\
+                &= \cos\theta + i\sin\theta
+                \end{align}
+            </div>
+
+            <p>
+                The real part is exactly the series for $\cos\theta$, and the imaginary part is exactly the series for $\sin\theta$! This is how Euler discovered the formula.
+            </p>
+
+            <p>
+                Don't worry if you don't fully follow this derivation yet—it requires calculus concepts we haven't covered. The important point is that Euler's formula isn't arbitrary; it follows logically from the fundamental properties of exponentials and trigonometric functions. We'll revisit this in detail when we study calculus.
+            </p>
+        </div>
+
+        <h3 id="subsec-euler-matters">Why Euler's Formula Matters</h3>
+
+        <p>
+            Euler's formula reveals that <strong>exponentials and trigonometric functions are intimately connected</strong> when we allow complex numbers. Formulas involving complex exponentials can be converted into formulas using sines and cosines, and vice versa. This isn't just a notational convenience—it reflects a deep mathematical unity.
+        </p>
+
+        <p>
+            The unit circle—that foundation of trigonometry we studied in Module 3—is just the set of all complex numbers of magnitude 1, which can be written as $e^{i\theta}$ for different values of $\theta$. As $\theta$ increases from 0 to $2\pi$, the point $e^{i\theta}$ traces out the unit circle exactly once, counterclockwise. When $\theta$ exceeds $2\pi$, we continue winding counterclockwise around the same circle—$e^{i(2\pi + \phi)}$ is the same point as $e^{i\phi}$. Similarly, negative values of $\theta$ trace the circle clockwise.
+        </p>
+
+        <p>
+            Using Euler's formula, the polar form of a complex number becomes beautifully simple:
+        </p>
+
+        <div class="formula">
+            $$z = r(\cos\theta + i\sin\theta) = re^{i\theta}$$
+        </div>
+
+        <p>
+            This exponential form has enormous advantages:
+        </p>
+        <ul>
+            <li><strong>Multiplication is trivial:</strong> $(r_1e^{i\theta_1})(r_2e^{i\theta_2}) = r_1r_2 e^{i(\theta_1+\theta_2)}$</li>
+            <li><strong>Powers follow the usual exponential rules:</strong> $(re^{i\theta})^n = r^ne^{in\theta}$</li>
+            <li><strong>It connects to differential equations:</strong> Many physical systems (oscillations, waves, circuits) are described by differential equations whose solutions involve $e^{i\omega t}$</li>
+        </ul>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.3-1: Complex Exponentials Trace Circles</div>
+            <div id="eulerCircle" class="jxgbox" style="max-width:500px; width:100%; aspect-ratio: 1/1; margin: 0 auto;"></div>
+            <div class="graph-caption">
+                The complex exponential $e^{i\theta}$ traces out the unit circle as $\theta$ varies from 0 to $2\pi$. 
+                The real part gives $\cos\theta$ and the imaginary part gives $\sin\theta$. This visualization shows 
+                why Euler's formula unifies circular motion, trigonometry, and exponential functions into one elegant concept.
+            </div>
+        </div>
+
+        <h3 id="subsec-inverse-euler">Inverse Relationships from Euler's Formula</h3>
+
+        <p>
+            Euler's formula also gives us elegant ways to express sine and cosine in terms of complex exponentials. By writing Euler's formula for both $\theta$ and $-\theta$:
+        </p>
+
+        <div class="formula">
+            $$e^{i\theta} = \cos\theta + i\sin\theta$$
+            $$e^{-i\theta} = \cos(-\theta) + i\sin(-\theta) = \cos\theta - i\sin\theta$$
+        </div>
+
+        <p>
+            Adding these two equations:
+        </p>
+
+        <div class="formula">
+            $$e^{i\theta} + e^{-i\theta} = 2\cos\theta$$
+            $$\cos\theta = \frac{e^{i\theta} + e^{-i\theta}}{2}$$
+        </div>
+
+        <p>
+            Subtracting them:
+        </p>
+
+        <div class="formula">
+            $$e^{i\theta} - e^{-i\theta} = 2i\sin\theta$$
+            $$\sin\theta = \frac{e^{i\theta} - e^{-i\theta}}{2i}$$
+        </div>
+
+        <p>
+            These formulas reveal that sine and cosine are just combinations of complex exponentials. This perspective is incredibly useful in physics and engineering because exponentials are easier to work with mathematically than trigonometric functions—especially when solving differential equations.
+        </p>
+
+        <div class="example">
+            <h3 id="subsec-ac-circuits">Application: Understanding AC Circuits</h3>
+            <p>
+                In electrical engineering, AC (alternating current) voltages and currents vary sinusoidally with time. The key quantities are:
+            </p>
+            <ul>
+                <li>$V(t)$ = voltage as a function of time</li>
+                <li>$I(t)$ = current as a function of time</li>
+                <li>$\omega$ = angular frequency (related to ordinary frequency $f$ by $\omega = 2\pi f$)</li>
+                <li>$V_0$, $I_0$ = peak amplitudes</li>
+            </ul>
+            <p>
+                A typical AC voltage might be $V(t) = V_0\cos(\omega t)$. When analyzing circuits with resistors, capacitors, and inductors, calculating with cosines and sines directly—using trigonometric identities for every addition and differentiation—becomes tedious and error-prone.
+            </p>
+            <p>
+                <strong>The trick:</strong> Notice that $\cos(\omega t) = \text{Re}[e^{i\omega t}]$ (the real part of the complex exponential). Engineers work with the complex exponential $e^{i\omega t}$ throughout the calculation, then take the real part at the very end.
+            </p>
+            <p>
+                <strong>Why does this work?</strong> The key is <em>linearity</em>. For any linear operation $L$ (like adding signals, differentiating, or passing through a linear circuit):
+            </p>
+            <div class="formula">
+                $$\text{Re}[L(e^{i\omega t})] = L(\text{Re}[e^{i\omega t}]) = L(\cos(\omega t))$$
+            </div>
+            <p>
+                In plain language: for linear systems, you get the same answer whether you (a) work with cosines directly, or (b) work with complex exponentials and take the real part at the end. Since exponentials are far easier to manipulate—$\frac{d}{dt}e^{i\omega t} = i\omega e^{i\omega t}$ is just multiplication!—engineers always choose option (b).
+            </p>
+            <p>
+                This technique, called <strong>phasor analysis</strong>, transforms complicated calculus problems into algebra with complex numbers. Every electrical engineer uses this daily. The same idea appears throughout physics wherever waves and oscillations occur.
+            </p>
+        </div>
+
+        <div class="example">
+            <h3 id="subsec-quantum">Application: Quantum Mechanics</h3>
+            <p>
+                At the atomic scale, particles don't have definite positions—instead, they have <em>probabilities</em> of being found in different locations. In the 1920s, Erwin Schrödinger discovered something remarkable: if he represented these probabilities using <strong>complex-valued wave functions</strong>, he could compute predictions that matched experiment with extraordinary precision.
+            </p>
+            <p>
+                The wave function $\psi(x,t)$ is typically a complex exponential:
+            </p>
+            <div class="formula">
+                $$\psi(x,t) = A e^{i(kx - \omega t)}$$
+            </div>
+            <p>
+                The probability of finding the particle at position $x$ is related to $|\psi(x,t)|^2$—the squared magnitude of this complex number. Euler's formula is essential here: it connects the complex exponential to oscillating sines and cosines, which describe the wave-like behavior of matter.
+            </p>
+            <p>
+                This was profound. Before Schrödinger, quantum mechanics was a collection of ad-hoc rules. His wave equation, built on complex numbers and Euler's formula, transformed quantum mechanics into a systematic, predictive science—the foundation of modern chemistry, electronics, and our understanding of matter itself.
+            </p>
+        </div>
+
+        <h3 id="subsec-euler-python">Python Visualization: Seeing Euler's Formula in Action</h3>
+
+        <p>
+            Let's write Python code to visualize how $e^{i\theta}$ traces the unit circle and how its real and imaginary parts produce cosine and sine waves. (See "Running the Python Code Examples" at the start of this module for setup instructions.)
+        </p>
+
+        <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# Create figure with subplots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6))
+
+# Subplot 1: Complex plane - unit circle
+ax1.set_xlim(-1.5, 1.5)
+ax1.set_ylim(-1.5, 1.5)
+ax1.set_aspect('equal')
+ax1.grid(True, alpha=0.3)
+ax1.axhline(y=0, color='k', linewidth=0.5)
+ax1.axvline(x=0, color='k', linewidth=0.5)
+ax1.set_xlabel('Real Part (cos θ)', fontsize=12)
+ax1.set_ylabel('Imaginary Part (sin θ)', fontsize=12)
+ax1.set_title('$e^{iθ}$ in the Complex Plane', fontsize=14)
+
+# Draw unit circle
+theta_circle = np.linspace(0, 2*np.pi, 100)
+ax1.plot(np.cos(theta_circle), np.sin(theta_circle), 
+         'b-', alpha=0.3, linewidth=2, label='Unit Circle')
+
+# Subplot 2: Sine and Cosine waves
+ax2.set_xlim(0, 2*np.pi)
+ax2.set_ylim(-1.5, 1.5)
+ax2.grid(True, alpha=0.3)
+ax2.axhline(y=0, color='k', linewidth=0.5)
+ax2.set_xlabel('θ (radians)', fontsize=12)
+ax2.set_ylabel('Value', fontsize=12)
+ax2.set_title('Real and Imaginary Parts vs θ', fontsize=14)
+
+# Plot full cosine and sine curves
+theta_full = np.linspace(0, 2*np.pi, 200)
+ax2.plot(theta_full, np.cos(theta_full), 'b-', alpha=0.3, 
+         linewidth=2, label='cos(θ) = Re($e^{iθ}$)')
+ax2.plot(theta_full, np.sin(theta_full), 'r-', alpha=0.3, 
+         linewidth=2, label='sin(θ) = Im($e^{iθ}$)')
+
+# Initialize animated elements
+point, = ax1.plot([], [], 'ro', markersize=10, label='$e^{iθ}$')
+radius_line, = ax1.plot([], [], 'g-', linewidth=2)
+cos_proj, = ax1.plot([], [], 'b--', linewidth=1.5)
+sin_proj, = ax1.plot([], [], 'r--', linewidth=1.5)
+
+cos_point, = ax2.plot([], [], 'bo', markersize=8)
+sin_point, = ax2.plot([], [], 'ro', markersize=8)
+theta_line, = ax2.plot([], [], 'g-', linewidth=2, alpha=0.7)
+
+ax1.legend(loc='upper right')
+ax2.legend(loc='upper right')
+
+def init():
+    point.set_data([], [])
+    radius_line.set_data([], [])
+    cos_proj.set_data([], [])
+    sin_proj.set_data([], [])
+    cos_point.set_data([], [])
+    sin_point.set_data([], [])
+    theta_line.set_data([], [])
+    return point, radius_line, cos_proj, sin_proj, cos_point, sin_point, theta_line
+
+def animate(frame):
+    theta = frame * 2 * np.pi / 100  # 0 to 2π over 100 frames
+    
+    # Compute e^(i*theta) = cos(theta) + i*sin(theta)
+    z = np.exp(1j * theta)
+    real_part = z.real  # cos(theta)
+    imag_part = z.imag  # sin(theta)
+    
+    # Update complex plane plot
+    point.set_data([real_part], [imag_part])
+    radius_line.set_data([0, real_part], [0, imag_part])
+    cos_proj.set_data([real_part, real_part], [0, imag_part])
+    sin_proj.set_data([0, real_part], [imag_part, imag_part])
+    
+    # Update sine/cosine plot
+    cos_point.set_data([theta], [real_part])
+    sin_point.set_data([theta], [imag_part])
+    theta_line.set_data([theta, theta], [-1.5, 1.5])
+    
+    # Add text annotation
+    ax1.set_title(f'$e^{{i\\theta}}$ in Complex Plane (θ = {theta:.2f} rad)', 
+                  fontsize=14)
+    
+    return point, radius_line, cos_proj, sin_proj, cos_point, sin_point, theta_line
+
+# Create animation
+anim = FuncAnimation(fig, animate, init_func=init, frames=100, 
+                     interval=50, blit=True, repeat=True)
+
+plt.tight_layout()
+plt.show()
+
+# Static version showing several positions
+fig2, ax = plt.subplots(figsize=(8, 8))
+ax.set_xlim(-1.5, 1.5)
+ax.set_ylim(-1.5, 1.5)
+ax.set_aspect('equal')
+ax.grid(True, alpha=0.3)
+ax.axhline(y=0, color='k', linewidth=0.5)
+ax.axvline(x=0, color='k', linewidth=0.5)
+ax.set_xlabel('Real Part', fontsize=12)
+ax.set_ylabel('Imaginary Part', fontsize=12)
+ax.set_title('$e^{iθ}$ for Various Angles', fontsize=14)
+
+# Draw unit circle
+ax.plot(np.cos(theta_circle), np.sin(theta_circle), 
+        'b-', alpha=0.3, linewidth=2)
+
+# Plot several key angles
+angles = [0, np.pi/6, np.pi/4, np.pi/3, np.pi/2, 
+          2*np.pi/3, 3*np.pi/4, 5*np.pi/6, np.pi]
+colors = plt.cm.rainbow(np.linspace(0, 1, len(angles)))
+
+for theta, color in zip(angles, colors):
+    z = np.exp(1j * theta)
+    ax.plot([0, z.real], [0, z.imag], 'o-', color=color, 
+            linewidth=2, markersize=8)
+    ax.text(z.real*1.15, z.imag*1.15, f'θ={theta:.2f}', 
+            fontsize=9, ha='center')
+
+plt.tight_layout()
+plt.show()
+
+# Demonstrating Euler's identity: e^(iπ) = -1
+print("Verifying Euler's Formula:")
+print(f"e^(iπ) = {np.exp(1j * np.pi)}")
+print(f"This should be approximately -1")
+print()
+print(f"e^(i*π/2) = {np.exp(1j * np.pi/2)}")
+print(f"This should be approximately i")
+print()
+print(f"e^(i*2π) = {np.exp(1j * 2*np.pi)}")
+print(f"This should be approximately 1")</code></pre>
+
+        <p>
+            This code creates two visualizations:
+        </p>
+        <ol>
+            <li>An animated plot showing how $e^{i\theta}$ traces the unit circle while simultaneously showing the cosine and sine waves being generated</li>
+            <li>A static plot showing $e^{i\theta}$ for various angles, demonstrating how different angles correspond to different points on the unit circle</li>
+        </ol>
+
+        <p>
+            Try running this code! Watch how the complex exponential smoothly traces the circle while its real part oscillates as cosine and its imaginary part oscillates as sine. This is Euler's formula in motion.
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-key-takeaway-euler">Key Takeaway: Complex Numbers Unite Exponentials and Trigonometry</h3>
+            <p>
+                Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$ reveals a profound truth: exponential functions and trigonometric functions are not separate mathematical entities—they're different views of the same underlying phenomenon. Complex numbers are the bridge that connects them.
+            </p>
+            <p>
+                This isn't just mathematical beauty for its own sake. This unification is the foundation of:
+            </p>
+            <ul>
+                <li>Quantum mechanics (wave-particle duality, Schrödinger equation)</li>
+                <li>Signal processing (analyzing and manipulating signals)</li>
+                <li>Control theory (designing stable systems)</li>
+                <li>Electrical engineering (AC circuit analysis)</li>
+                <li>And as we'll see next, Fourier series and transforms</li>
+            </ul>
+        </div>
+
+        <h2 id="sec-7-4">7.4 Fourier Series: Any Wave is a Sum of Sine Waves</h2>
+
+        <h3 id="subsec-fourier-intro">Connecting Back to Module 1</h3>
+
+        <p>
+            Remember in Module 1, section 1.5, we discussed Fourier's revolutionary discovery? We introduced the idea that <strong>any repeating pattern—no matter how complex—can be built from sine and cosine waves</strong>. This wasn't obvious when Joseph Fourier first proposed it in 1807 while studying heat flow. In fact, leading mathematicians like Lagrange initially rejected his work!
+        </p>
+
+        <p>
+            But Fourier was right. His insight turned out to be one of the most important discoveries in the history of mathematics and science. It's the foundation of:
+        </p>
+        <ul>
+            <li><strong>Audio technology:</strong> MP3 compression, audio synthesis, noise cancellation</li>
+            <li><strong>Image processing:</strong> JPEG compression, image filtering, facial recognition</li>
+            <li><strong>Communications:</strong> Radio, television, WiFi, cellular networks, satellite communications</li>
+            <li><strong>Medical imaging:</strong> MRI scans, CT scans</li>
+            <li><strong>Astronomy:</strong> Analyzing light from distant stars and galaxies</li>
+            <li><strong>Quantum mechanics:</strong> Understanding atomic spectra and wave functions</li>
+        </ul>
+
+        <p>
+            In this section, we'll go deeper into Fourier series—understanding what they are mathematically, seeing them in action, and grasping why they're so universally applicable.
+        </p>
+
+        <h3 id="subsec-central-idea">The Central Idea</h3>
+
+        <p>
+            Fourier's revolutionary claim can be stated simply: <strong>nearly any "well-behaved" function can be approximated as closely as you like by adding together sine and cosine waves</strong>. The more waves you add, the better the approximation becomes.
+        </p>
+
+        <p>
+            But what does "well-behaved" mean? This is where mathematical precision matters. In the 1820s, the German mathematician Peter Gustav Lejeune Dirichlet identified conditions that guarantee the Fourier series converges to the original function:
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-dirichlet">Dirichlet Conditions (Informal Statement)</h3>
+            <p>A function $f(x)$ can be represented by a Fourier series if:</p>
+            <ul>
+                <li><strong>Bounded:</strong> The function stays between some fixed values—imagine horizontal lines $y = M$ and $y = -M$ that the graph never crosses</li>
+                <li><strong>Finite discontinuities:</strong> The function may have "jumps" (sudden changes in value), but only finitely many in each period. At jump points, the series converges to the midpoint of the jump.</li>
+                <li><strong>Finite extrema:</strong> The function has only finitely many peaks and valleys in each period (it doesn't oscillate infinitely fast)</li>
+            </ul>
+            <p>
+                These conditions cover virtually every function you'll encounter in physics and engineering. A rigorous treatment requires advanced analysis, but the intuition is clear: the function can't do anything "too wild."
+            </p>
+        </div>
+
+        <h3 id="subsec-why-sines">Why Sines and Cosines? Periodicity</h3>
+
+        <p>
+            Here's a key insight: any sum of sines and cosines is itself periodic. If you add waves with frequencies 1, 2, 3, and so on, the result repeats with a period equal to that of the slowest wave (the fundamental frequency). This makes Fourier series a natural tool for analyzing periodic functions—functions that repeat the same pattern over and over.
+        </p>
+
+        <p>
+            Fourier series work for periodic functions of <em>any</em> period $T$. For a function with period $T$, the general formula is:
+        </p>
+
+        <div class="formula" style="background-color: #fce7f3; border: 2px solid #ec4899;">
+            $$f(x) = a_0 + \sum_{n=1}^{\infty} \left(a_n \cos\frac{2\pi nx}{T} + b_n \sin\frac{2\pi nx}{T}\right)$$
+        </div>
+
+        <p>
+            The terms $\cos(2\pi nx/T)$ and $\sin(2\pi nx/T)$ have period $T/n$, so they complete exactly $n$ cycles within one period of $f$.
+        </p>
+
+        <h3 id="subsec-standard-case">The Standard Case: Period $2\pi$</h3>
+
+        <p>
+            Mathematicians often work with period $2\pi$ because it simplifies the formulas. With $T = 2\pi$, the general formula becomes:
+        </p>
+
+        <div class="formula">
+            $$f(x) = a_0 + \sum_{n=1}^{\infty} \left(a_n \cos(nx) + b_n \sin(nx)\right)$$
+        </div>
+
+        <p>
+            In expanded form:
+        </p>
+
+        <div class="formula">
+            $$\begin{aligned}
+            f(x) = a_0 &+ a_1\cos(x) + b_1\sin(x) \\
+            &+ a_2\cos(2x) + b_2\sin(2x) \\
+            &+ a_3\cos(3x) + b_3\sin(3x) + \cdots
+            \end{aligned}$$
+        </div>
+
+        <p>
+            Where:
+        </p>
+        <ul>
+            <li>$a_0$ is a constant term (the average value of the function)</li>
+            <li>$a_n$ and $b_n$ are coefficients that determine how much of each frequency is present</li>
+            <li>The terms $\cos(nx)$ and $\sin(nx)$ are called <strong>harmonics</strong>:
+                <ul>
+                    <li>$n=1$: fundamental frequency (same period as $f$)</li>
+                    <li>$n=2$: second harmonic (twice the frequency, half the period)</li>
+                    <li>$n=3$: third harmonic (three times the frequency)</li>
+                    <li>And so on...</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p>
+            Think of this like a recipe: to make the function $f(x)$, you need $a_0$ units of the constant, $a_1$ units of $\cos(x)$, $b_1$ units of $\sin(x)$, and so on. Different functions have different recipes (different coefficients).
+        </p>
+
+        <div class="warning">
+            <h3 id="subsec-computing-coefficients">About Computing the Coefficients</h3>
+            <p>
+                To find the coefficients $a_n$ and $b_n$ for a given function requires calculus—specifically, integration. For a function with period $2\pi$, the formulas are:
+            </p>
+            <div class="formula">
+                $$a_0 = \frac{1}{2\pi}\int_0^{2\pi} f(x)\,dx$$
+                $$a_n = \frac{1}{\pi}\int_0^{2\pi} f(x)\cos(nx)\,dx$$
+                $$b_n = \frac{1}{\pi}\int_0^{2\pi} f(x)\sin(nx)\,dx$$
+            </div>
+            <p>
+                Don't worry if you haven't learned integration yet—we'll cover it thoroughly in the calculus lesson. For now, the important points are:
+            </p>
+            <ul>
+                <li>There's a systematic procedure to find the coefficients (not guesswork)</li>
+                <li>The procedure involves calculus</li>
+                <li>We can still understand and visualize Fourier series without calculating coefficients from scratch</li>
+                <li>Computers can calculate these coefficients using numerical methods</li>
+            </ul>
+        </div>
+
+        <h3 id="subsec-square-wave">Visual Understanding: Building a Square Wave</h3>
+
+        <p>
+            Let's see Fourier series in action by approximating a square wave. A square wave alternates between +1 and -1. On the interval $[0, 2\pi)$ it's defined as:
+        </p>
+
+        <div class="formula">
+            $$f(x) = \begin{cases} 
+            1 & \text{if } 0 \leq x < \pi \\
+            -1 & \text{if } \pi \leq x < 2\pi
+            \end{cases}$$
+        </div>
+
+        <p>
+            This pattern then <strong>repeats</strong> for all values of $x$: the function has period $2\pi$, meaning $f(x + 2\pi) = f(x)$ for every $x$. The square wave extends infinitely in both directions, alternating between +1 and -1 forever.
+        </p>
+
+        <p>
+            Using calculus (which we're not showing here), we can prove that the Fourier series for this square wave is:
+        </p>
+
+        <div class="formula">
+            $$f(x) = \frac{4}{\pi}\left(\sin(x) + \frac{\sin(3x)}{3} + \frac{\sin(5x)}{5} + \frac{\sin(7x)}{7} + \cdots\right)$$
+        </div>
+
+        <p>
+            Notice:
+        </p>
+        <ul>
+            <li>Only sine terms (no cosine terms) because the square wave is an odd function</li>
+            <li>Only odd harmonics (1, 3, 5, 7, ...) appear</li>
+            <li>Coefficients decrease as $1/n$</li>
+        </ul>
+
+        <p>
+            Let's visualize how adding more and more terms gives better and better approximations:
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.4-1: Square Wave Approximation (1 term)</div>
+            <div class="plotly-wrapper" style="position: relative; max-width: 700px; margin: 0 auto;">
+                <div id="squareWave1" class="plotly-graph" style="width:100%; height:300px;"></div>
+            </div>
+            <div class="graph-caption">
+                Using just the first term: $f(x) \approx \frac{4}{\pi}\sin(x)$. This captures the basic oscillation 
+                but is very smooth compared to the actual square wave.
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.4-2: Square Wave Approximation (3 terms)</div>
+            <div class="plotly-wrapper" style="position: relative; max-width: 700px; margin: 0 auto;">
+                <div id="squareWave3" class="plotly-graph" style="width:100%; height:300px;"></div>
+            </div>
+            <div class="graph-caption">
+                Using three terms: $f(x) \approx \frac{4}{\pi}\left(\sin(x) + \frac{\sin(3x)}{3} + \frac{\sin(5x)}{5}\right)$. 
+                Starting to look more square-like, with sharper transitions.
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.4-3: Square Wave Approximation (5 terms)</div>
+            <div class="plotly-wrapper" style="position: relative; max-width: 700px; margin: 0 auto;">
+                <div id="squareWave5" class="plotly-graph" style="width:100%; height:300px;"></div>
+            </div>
+            <div class="graph-caption">
+                Using five terms: adds $\frac{\sin(7x)}{7} + \frac{\sin(9x)}{9}$. 
+                Getting quite close to the ideal square wave, though you can see some ripples near the transitions.
+            </div>
+        </div>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.4-4: Square Wave Approximation (10 terms)</div>
+            <div class="plotly-wrapper" style="position: relative; max-width: 700px; margin: 0 auto;">
+                <div id="squareWave10" class="plotly-graph" style="width:100%; height:300px;"></div>
+            </div>
+            <div class="graph-caption">
+                Using ten terms (up to $\frac{\sin(19x)}{19}$). Very close to a perfect square wave! 
+                The overshoot near the jumps is called the Gibbs phenomenon—more on this below.
+            </div>
+        </div>
+
+        <h3 id="subsec-gibbs">The Gibbs Phenomenon</h3>
+
+        <p>
+            Notice in the 10-term approximation that there's an "overshoot" near the discontinuities—the approximation rises about 9% higher than it should before settling down. This doesn't go away no matter how many terms you add; it just gets more concentrated near the jump.
+        </p>
+
+        <p>
+            This is called the <strong>Gibbs phenomenon</strong>, discovered by Henry Wilbraham in 1848 and rediscovered by J. Willard Gibbs in 1899. It's a fundamental property of Fourier series when approximating functions with discontinuities (sudden jumps).
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-gibbs-matters">Why the Gibbs Phenomenon Matters</h3>
+            <p>
+                The Gibbs phenomenon isn't just a mathematical curiosity—it has real implications:
+            </p>
+            <ul>
+                <li><strong>Image compression:</strong> Sharp edges in images (like text or graphics) can show "ringing" artifacts in JPEG compression</li>
+                <li><strong>Audio processing:</strong> Hard clipping in audio signals creates high-frequency harmonics that can sound harsh</li>
+                <li><strong>Filter design:</strong> Engineers designing filters must account for overshoot near cutoff frequencies</li>
+                <li><strong>Numerical methods:</strong> Scientists solving differential equations with spectral methods must handle discontinuities carefully</li>
+            </ul>
+            <p>
+                Understanding the Gibbs phenomenon helps engineers design better compression algorithms, audio equipment, and numerical solvers.
+            </p>
+        </div>
+
+        <h3 id="subsec-sawtooth">Another Example: Sawtooth Wave</h3>
+
+        <p>
+            A sawtooth wave ramps linearly, then jumps back and repeats. On the interval $(-\pi, \pi)$ it's simply:
+        </p>
+
+        <div class="formula">
+            $$f(x) = x \quad \text{for } -\pi < x < \pi$$
+        </div>
+
+        <p>
+            Like the square wave, this pattern repeats with period $2\pi$: after ramping up to nearly $\pi$, it jumps back down to $-\pi$ and starts again. The function $f(x + 2\pi) = f(x)$ for all $x$.
+        </p>
+
+        <p>
+            Its Fourier series is:
+        </p>
+
+        <div class="formula">
+            $$f(x) = 2\left(\sin(x) - \frac{\sin(2x)}{2} + \frac{\sin(3x)}{3} - \frac{\sin(4x)}{4} + \cdots\right)$$
+        </div>
+
+        <p>
+            Notice all harmonics appear (not just odd ones), and they alternate in sign.
+        </p>
+
+        <div class="graph-container">
+            <div class="graph-title">Fig. 7.4-5: Sawtooth Wave Fourier Approximation</div>
+            <div class="plotly-wrapper" style="position: relative; max-width: 700px; margin: 0 auto;">
+                <div id="sawtoothWave" class="plotly-graph" style="width:100%; height:350px;"></div>
+            </div>
+            <div class="graph-caption">
+                Sawtooth wave approximated with 1, 3, 5, and 10 terms. The linear ramp shape emerges 
+                as more harmonics are added. Like the square wave, it shows the Gibbs phenomenon at the discontinuity.
+            </div>
+        </div>
+
+        <h3 id="subsec-different-periods">Different Periods: A Practical Example</h3>
+
+        <p>
+            The examples above all used period $2\pi$, but remember: Fourier series work for <em>any</em> period. In practical applications, signals rarely have period $2\pi$—they have periods like 1 millisecond (for a 1000 Hz audio tone) or 1/60 second (for AC electricity in the US).
+        </p>
+
+        <p>
+            Consider a square wave with period $T = 1$ (perhaps representing a 1 Hz digital clock signal). On the interval $[0, 1)$:
+        </p>
+
+        <div class="formula">
+            $$f(t) = \begin{cases} 
+            1 & \text{if } 0 \leq t < 0.5 \\
+            -1 & \text{if } 0.5 \leq t < 1
+            \end{cases}$$
+        </div>
+
+        <p>
+            Using the general formula with $T = 1$, the Fourier series is:
+        </p>
+
+        <div class="formula">
+            $$f(t) = \frac{4}{\pi}\left(\sin(2\pi t) + \frac{\sin(6\pi t)}{3} + \frac{\sin(10\pi t)}{5} + \cdots\right)$$
+        </div>
+
+        <p>
+            Notice how the argument changed from $\sin(x)$ to $\sin(2\pi t)$, from $\sin(3x)$ to $\sin(6\pi t)$, and so on. The factor $2\pi/T = 2\pi$ appears because we're now working with period 1 instead of period $2\pi$. The coefficients ($4/\pi$, $1/3$, $1/5$, etc.) stay the same because the <em>shape</em> of the wave is the same—only the period changed.
+        </p>
+
+        <div class="highlight">
+            <h3 id="subsec-non-periodic">From Periodic to Non-Periodic Functions</h3>
+            <p>
+                Everything we've discussed so far applies to <strong>periodic functions</strong>—functions that repeat forever. But what about signals that don't repeat, like a single drumbeat, a spoken word, or a pulse of light?
+            </p>
+            <p>
+                The key insight is to think of a non-periodic function as the limit of periodic functions as the period $T \to \infty$. As the period gets longer and longer, the discrete frequencies $n/T$ get closer and closer together, eventually forming a continuous spectrum. This leads to the <strong>Fourier transform</strong>, which we'll discuss after covering the computational tools.
+            </p>
+        </div>
+
+        <h3 id="subsec-complex-exponentials">Using Complex Exponentials: A Simpler Form</h3>
+
+        <p>
+            Remember how Euler's formula let us express sine and cosine in terms of complex exponentials? We can use the same idea to write Fourier series more elegantly. Using:
+        </p>
+
+        <div class="formula">
+            $$\cos(nx) = \frac{e^{inx} + e^{-inx}}{2}, \quad \sin(nx) = \frac{e^{inx} - e^{-inx}}{2i}$$
+        </div>
+
+        <p>
+            The Fourier series can be written as:
+        </p>
+
+        <div class="formula" style="background-color: #fce7f3; border: 2px solid #ec4899;">
+            $$f(x) = \sum_{n=-\infty}^{\infty} c_n e^{inx}$$
+        </div>
+
+        <p>
+            Where the $c_n$ are complex coefficients related to the $a_n$ and $b_n$ we saw earlier. This form is more compact and often easier to work with, especially in advanced applications.
+        </p>
+
+        <p>
+            The coefficient $c_n$ represents the "amount" of frequency $n$ present in the signal. This leads to the concept of the <strong>frequency spectrum</strong>: a plot showing which frequencies are present in a signal and how strong they are.
+        </p>
+
+        <h3 id="subsec-fourier-python">Python Code: Computing and Visualizing Fourier Series</h3>
+
+        <p>
+            Here's Python code to compute and visualize Fourier series for various functions. (See "Running the Python Code Examples" at the start of this module for setup instructions.)
+        </p>
+
+        <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+def square_wave(x):
+    """Square wave: +1 for 0 < x < π, -1 for π < x < 2π"""
+    return np.where(np.mod(x, 2*np.pi) < np.pi, 1, -1)
+
+def sawtooth_wave(x):
+    """Sawtooth wave: linear ramp from -π to π"""
+    x_mod = np.mod(x + np.pi, 2*np.pi) - np.pi
+    return x_mod
+
+def triangle_wave(x):
+    """Triangle wave"""
+    x_mod = np.mod(x, 2*np.pi)
+    return np.where(x_mod < np.pi, 
+                    2*x_mod/np.pi - 1,
+                    3 - 2*x_mod/np.pi)
+
+def fourier_square_wave(x, num_terms):
+    """
+    Fourier series for square wave:
+    f(x) = (4/π) * sum of sin((2k-1)x)/(2k-1) for k=1,2,3,...
+    """
+    result = np.zeros_like(x)
+    for k in range(1, num_terms + 1):
+        n = 2*k - 1  # Odd harmonics only
+        result += np.sin(n * x) / n
+    return (4/np.pi) * result
+
+def fourier_sawtooth_wave(x, num_terms):
+    """
+    Fourier series for sawtooth wave:
+    f(x) = 2 * sum of (-1)^(n+1) * sin(nx)/n for n=1,2,3,...
+    """
+    result = np.zeros_like(x)
+    for n in range(1, num_terms + 1):
+        result += ((-1)**(n+1)) * np.sin(n * x) / n
+    return 2 * result
+
+def fourier_triangle_wave(x, num_terms):
+    """
+    Fourier series for triangle wave:
+    f(x) = (8/π²) * sum of sin((2k-1)x)/(2k-1)² * (-1)^(k+1)
+    """
+    result = np.zeros_like(x)
+    for k in range(1, num_terms + 1):
+        n = 2*k - 1
+        result += ((-1)**(k+1)) * np.sin(n * x) / (n**2)
+    return (8/np.pi**2) * result
+
+# Generate x values
+x = np.linspace(0, 4*np.pi, 1000)
+
+# Plot square wave approximations
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+fig.suptitle('Square Wave Fourier Series Approximations', fontsize=16)
+
+terms_list = [1, 3, 5, 10]
+for ax, num_terms in zip(axes.flat, terms_list):
+    # Plot actual square wave
+    ax.plot(x, square_wave(x), 'k--', linewidth=1, alpha=0.5, 
+            label='Target')
+    
+    # Plot Fourier approximation
+    ax.plot(x, fourier_square_wave(x, num_terms), 'b-', linewidth=2, 
+            label=f'{num_terms} terms')
+    
+    ax.set_xlabel('x (radians)')
+    ax.set_ylabel('f(x)')
+    ax.set_title(f'{num_terms} term{"s" if num_terms > 1 else ""}')
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    ax.set_ylim(-1.5, 1.5)
+
+plt.tight_layout()
+plt.show()
+
+# Plot sawtooth wave approximations
+fig, axes = plt.subplots(2, 2, figsize=(14, 10))
+fig.suptitle('Sawtooth Wave Fourier Series Approximations', fontsize=16)
+
+for ax, num_terms in zip(axes.flat, terms_list):
+    # Plot actual sawtooth wave
+    ax.plot(x, sawtooth_wave(x), 'k--', linewidth=1, alpha=0.5, 
+            label='Target')
+    
+    # Plot Fourier approximation
+    ax.plot(x, fourier_sawtooth_wave(x, num_terms), 'r-', linewidth=2, 
+            label=f'{num_terms} terms')
+    
+    ax.set_xlabel('x (radians)')
+    ax.set_ylabel('f(x)')
+    ax.set_title(f'{num_terms} term{"s" if num_terms > 1 else ""}')
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    ax.set_ylim(-4, 4)
+
+plt.tight_layout()
+plt.show()
+
+# Interactive: Let user specify number of terms
+print("Fourier Series Calculator")
+print("=" * 40)
+
+while True:
+    print("\nChoose wave type:")
+    print("1. Square wave")
+    print("2. Sawtooth wave")
+    print("3. Triangle wave")
+    print("4. Exit")
+    
+    choice = input("Enter choice (1-4): ")
+    
+    if choice == '4':
+        break
+    
+    if choice not in ['1', '2', '3']:
+        print("Invalid choice!")
+        continue
+    
+    num_terms = int(input("Number of Fourier terms (1-50): "))
+    num_terms = min(max(num_terms, 1), 50)  # Clamp to valid range
+    
+    fig, ax = plt.subplots(figsize=(12, 6))
+    
+    if choice == '1':
+        ax.plot(x, square_wave(x), 'k--', linewidth=1, alpha=0.5, 
+                label='Target Square Wave')
+        ax.plot(x, fourier_square_wave(x, num_terms), 'b-', linewidth=2, 
+                label=f'Fourier Approximation ({num_terms} terms)')
+        ax.set_title(f'Square Wave - {num_terms} Fourier Terms')
+        ax.set_ylim(-1.5, 1.5)
+    elif choice == '2':
+        ax.plot(x, sawtooth_wave(x), 'k--', linewidth=1, alpha=0.5, 
+                label='Target Sawtooth Wave')
+        ax.plot(x, fourier_sawtooth_wave(x, num_terms), 'r-', linewidth=2, 
+                label=f'Fourier Approximation ({num_terms} terms)')
+        ax.set_title(f'Sawtooth Wave - {num_terms} Fourier Terms')
+        ax.set_ylim(-4, 4)
+    else:  # Triangle
+        ax.plot(x, triangle_wave(x), 'k--', linewidth=1, alpha=0.5, 
+                label='Target Triangle Wave')
+        ax.plot(x, fourier_triangle_wave(x, num_terms), 'g-', linewidth=2, 
+                label=f'Fourier Approximation ({num_terms} terms)')
+        ax.set_title(f'Triangle Wave - {num_terms} Fourier Terms')
+        ax.set_ylim(-1.5, 1.5)
+    
+    ax.set_xlabel('x (radians)', fontsize=12)
+    ax.set_ylabel('f(x)', fontsize=12)
+    ax.grid(True, alpha=0.3)
+    ax.legend()
+    
+    plt.tight_layout()
+    plt.show()
+
+# Demonstrate frequency spectrum
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+
+# Square wave spectrum
+num_terms = 20
+n_values = np.arange(1, 2*num_terms, 2)  # Odd harmonics
+amplitudes = 4/(np.pi * n_values)
+
+ax1.stem(n_values, amplitudes, basefmt=' ')
+ax1.set_xlabel('Harmonic Number (n)', fontsize=12)
+ax1.set_ylabel('Amplitude', fontsize=12)
+ax1.set_title('Square Wave Frequency Spectrum (First 20 Odd Harmonics)', 
+              fontsize=14)
+ax1.grid(True, alpha=0.3)
+
+# Sawtooth wave spectrum
+n_values = np.arange(1, num_terms + 1)
+amplitudes = 2 * ((-1)**(n_values+1)) / n_values
+
+ax2.stem(n_values, amplitudes, basefmt=' ')
+ax2.set_xlabel('Harmonic Number (n)', fontsize=12)
+ax2.set_ylabel('Amplitude', fontsize=12)
+ax2.set_title('Sawtooth Wave Frequency Spectrum (First 20 Harmonics)', 
+              fontsize=14)
+ax2.grid(True, alpha=0.3)
+
+plt.tight_layout()
+plt.show()
+
+print("\nNotice how the Fourier coefficients decrease as 1/n.")
+print("This means higher frequencies contribute less to the signal.")
+print("That's why we can get good approximations with relatively few terms!")</code></pre>
+
+        <p>
+            This code lets you:
+        </p>
+        <ol>
+            <li>See how different numbers of terms approximate various waveforms</li>
+            <li>Interactively specify the number of terms to use</li>
+            <li>Visualize the frequency spectrum showing which harmonics are present and their amplitudes</li>
+        </ol>
+
+        <p>
+            Try experimenting with different numbers of terms. Notice:
+        </p>
+        <ul>
+            <li>How quickly the approximation improves as you add more terms</li>
+            <li>The Gibbs phenomenon persisting even with many terms</li>
+            <li>How the frequency spectrum shows the "recipe" for building each waveform</li>
+        </ul>
+
+        <p>
+            Fourier series are powerful for analyzing periodic signals, but they have a limitation: they only apply to functions that repeat. What about signals that don't repeat—a single spoken word, a crash of thunder, a heartbeat? And how can we efficiently compute Fourier decompositions for real-world signals with thousands or millions of data points? The next section addresses both questions.
+        </p>
+
+        <h2 id="sec-7-5">7.5 The Fourier Transform and FFT</h2>
+
+        <h3 id="subsec-fft">The Fast Fourier Transform (FFT)</h3>
+
+        <p>
+            Computing Fourier coefficients directly using the integral formulas is computationally expensive. For a signal with $N$ samples, a straightforward computation of all Fourier coefficients would require about $N^2$ operations—too slow for real-time applications.
+        </p>
+
+        <p>
+            In 1965, <strong>James Cooley and John Tukey</strong> published an algorithm called the <strong>Fast Fourier Transform (FFT)</strong> that reduces the computational cost from $O(N^2)$ to $O(N \log N)$. This was a game-changer. For $N = 1024$ (a common size):
+        </p>
+        <ul>
+            <li>Direct computation: ~1,000,000 operations</li>
+            <li>FFT: ~10,000 operations (100× faster!)</li>
+        </ul>
+
+        <p>
+            The FFT algorithm made real-time signal processing possible. It's the foundation of:
+        </p>
+        <ul>
+            <li><strong>MP3 audio compression:</strong> Converting time-domain audio to frequency domain, keeping only perceptually important frequencies</li>
+            <li><strong>JPEG image compression:</strong> Similar idea but for 2D images</li>
+            <li><strong>WiFi and cellular networks:</strong> OFDM (Orthogonal Frequency Division Multiplexing) uses FFT for efficient data transmission</li>
+            <li><strong>Radar and sonar:</strong> Detecting targets by analyzing reflected signals</li>
+            <li><strong>Medical imaging:</strong> MRI reconstruction relies heavily on FFT</li>
+            <li><strong>Astronomy:</strong> Analyzing radio telescope data to study distant objects</li>
+        </ul>
+
+        <div class="historical">
+            <h3 id="subsec-fft-impact">The FFT's Impact</h3>
+            <p>
+                In 2000, <em>Computing in Science and Engineering</em> magazine named the Fast Fourier Transform one of the "Top 10 Algorithms of the 20th Century." It's hard to overstate its importance—every time you:
+            </p>
+            <ul>
+                <li>Listen to compressed music (MP3, AAC, Spotify)</li>
+                <li>Make a phone call (digital voice codecs)</li>
+                <li>Use WiFi or cellular data (OFDM modulation)</li>
+                <li>View a JPEG image</li>
+                <li>Watch streaming video</li>
+                <li>Use noise-canceling headphones</li>
+            </ul>
+            <p>
+                ...the FFT is working behind the scenes, analyzing signals in fractions of a second. Your smartphone performs millions of FFT computations every second without you noticing.
+            </p>
+        </div>
+
+        <h3 id="subsec-fft-python">Python Example: Using FFT</h3>
+
+        <p>
+            NumPy provides an efficient FFT implementation. Here's how to use it. (See "Running the Python Code Examples" at the start of this module for setup instructions.)
+        </p>
+
+        <pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+
+# Create a signal: mixture of sine waves
+sample_rate = 1000  # Hz
+duration = 1.0      # seconds
+t = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
+
+# Signal: sum of 50 Hz, 120 Hz, and 200 Hz sine waves
+freq1, freq2, freq3 = 50, 120, 200
+signal = (np.sin(2 * np.pi * freq1 * t) + 
+          0.5 * np.sin(2 * np.pi * freq2 * t) + 
+          0.3 * np.sin(2 * np.pi * freq3 * t))
+
+# Add some noise
+signal += 0.2 * np.random.randn(len(t))
+
+# Compute FFT
+fft_result = np.fft.fft(signal)
+frequencies = np.fft.fftfreq(len(signal), 1/sample_rate)
+
+# Only plot positive frequencies
+positive_freq_idx = frequencies > 0
+frequencies = frequencies[positive_freq_idx]
+fft_magnitude = np.abs(fft_result[positive_freq_idx])
+
+# Plot
+fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 8))
+
+# Time domain
+ax1.plot(t[:500], signal[:500])  # Plot first 0.5 seconds
+ax1.set_xlabel('Time (s)', fontsize=12)
+ax1.set_ylabel('Amplitude', fontsize=12)
+ax1.set_title('Time Domain Signal', fontsize=14)
+ax1.grid(True, alpha=0.3)
+
+# Frequency domain
+ax2.plot(frequencies, fft_magnitude)
+ax2.set_xlabel('Frequency (Hz)', fontsize=12)
+ax2.set_ylabel('Magnitude', fontsize=12)
+ax2.set_title('Frequency Domain (via FFT)', fontsize=14)
+ax2.set_xlim(0, 300)  # Show 0-300 Hz range
+ax2.grid(True, alpha=0.3)
+
+# Mark the three frequencies we used
+ax2.axvline(x=freq1, color='r', linestyle='--', alpha=0.7, 
+            label=f'{freq1} Hz')
+ax2.axvline(x=freq2, color='g', linestyle='--', alpha=0.7, 
+            label=f'{freq2} Hz')
+ax2.axvline(x=freq3, color='b', linestyle='--', alpha=0.7, 
+            label=f'{freq3} Hz')
+ax2.legend()
+
+plt.tight_layout()
+plt.show()
+
+print(f"Original signal contained frequencies: {freq1} Hz, {freq2} Hz, {freq3} Hz")
+print(f"FFT successfully identified these frequencies despite the noise!")
+print(f"\nFFT computation time for {len(signal)} samples:")
+print(f"  Direct method: ~O(N²) = ~{len(signal)**2:,} operations")
+print(f"  FFT method: ~O(N log N) = ~{int(len(signal) * np.log2(len(signal))):,} operations")
+print(f"  Speedup: ~{len(signal)**2 / (len(signal) * np.log2(len(signal))):.0f}×")</code></pre>
+
+        <p>
+            This example demonstrates how FFT can extract the frequency components from a noisy signal. Even though the time-domain signal looks complicated, the FFT clearly identifies the three frequencies present.
+        </p>
+
+        <h3 id="subsec-fourier-transform">From Fourier Series to Fourier Transform</h3>
+
+        <p>
+            Fourier series decompose <em>periodic</em> functions into sums of sines and cosines at discrete frequencies: the fundamental and its harmonics. But many real signals don't repeat—a single drumbeat, a spoken word, a pulse of radar, a seismic tremor. How do we analyze these?
+        </p>
+
+        <p>
+            The key idea (which we previewed earlier) is to imagine the period $T$ becoming larger and larger. As $T \to \infty$, two things happen:
+        </p>
+        <ul>
+            <li>The discrete frequencies $n/T$ get closer together, eventually forming a <strong>continuous spectrum</strong></li>
+            <li>The sum over $n$ becomes an integral over all frequencies</li>
+        </ul>
+
+        <p>
+            This limiting process gives us the <strong>Fourier Transform</strong>. Instead of a discrete sum over integer frequencies $n$, it's an integral over all possible frequencies $\omega$:
+        </p>
+
+        <div class="formula">
+            $$F(\omega) = \int_{-\infty}^{\infty} f(t) e^{-i\omega t}\, dt$$
+        </div>
+
+        <p>
+            Where:
+        </p>
+        <ul>
+            <li>$f(t)$ is your signal in the time domain</li>
+            <li>$F(\omega)$ is the frequency spectrum (how much of each frequency $\omega$ is present)</li>
+            <li>The complex exponential $e^{-i\omega t}$ acts as a "probe" testing for frequency $\omega$</li>
+        </ul>
+
+        <p>
+            The inverse Fourier transform reconstructs the original signal from its frequency spectrum:
+        </p>
+
+        <div class="formula">
+            $$f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{i\omega t}\, d\omega$$
+        </div>
+
+        <p>
+            These transforms are the mathematical foundation of essentially all modern signal processing. They allow us to:
+        </p>
+        <ul>
+            <li><strong>Analyze</strong> signals by seeing which frequencies are present</li>
+            <li><strong>Filter</strong> signals by removing unwanted frequencies</li>
+            <li><strong>Compress</strong> signals by keeping only important frequencies</li>
+            <li><strong>Modify</strong> signals by changing the frequency content</li>
+        </ul>
+
+        <div class="example">
+            <h3 id="subsec-noise-canceling">Real-World Application: Noise-Canceling Headphones</h3>
+            <p>
+                Modern noise-canceling headphones use Fourier analysis in real-time:
+            </p>
+            <ol>
+                <li><strong>Microphones</strong> on the headphones pick up ambient noise</li>
+                <li><strong>FFT</strong> converts the noise signal to the frequency domain</li>
+                <li><strong>Analysis</strong> identifies which frequencies need cancellation (typically low frequencies like engine rumble)</li>
+                <li><strong>Signal generation</strong> creates an inverted waveform (same frequencies, opposite phase)</li>
+                <li><strong>Superposition</strong> adds the inverted signal to the audio, causing destructive interference</li>
+            </ol>
+            <p>
+                All of this happens in milliseconds, thousands of times per second, using the FFT algorithm and Fourier's insight that any signal is a sum of sine waves.
+            </p>
+        </div>
+
+        <div class="example">
+            <h3 id="subsec-mri">Real-World Application: MRI Imaging</h3>
+            <p>
+                MRI (Magnetic Resonance Imaging) machines create detailed images of the inside of your body using Fourier transforms:
+            </p>
+            <ol>
+                <li>Hydrogen atoms in your body resonate at specific frequencies in a magnetic field</li>
+                <li>Radio pulses excite these atoms, causing them to emit signals</li>
+                <li>Different tissues emit different frequency patterns</li>
+                <li>The MRI machine records these signals in the <em>frequency domain</em> (called "k-space")</li>
+                <li><strong>Inverse Fourier Transform</strong> converts k-space data into a spatial image</li>
+            </ol>
+            <p>
+                Without Fourier transforms, MRI would be impossible. The raw data from an MRI scan isn't an image—it's a 2D Fourier transform of the image, which must be mathematically reconstructed.
+            </p>
+        </div>
+
+        <div class="highlight">
+            <h3 id="subsec-fourier-universal">Key Takeaway: Fourier Analysis is Universal</h3>
+            <p>
+                Fourier's insight—that any repeating pattern is a sum of sine and cosine waves—extends to non-repeating patterns through the Fourier transform. This makes Fourier analysis applicable to virtually everything in science and engineering:
+            </p>
+            <ul>
+                <li><strong>Physics:</strong> Wave phenomena, quantum mechanics, thermodynamics</li>
+                <li><strong>Engineering:</strong> Signal processing, control systems, telecommunications</li>
+                <li><strong>Computer Science:</strong> Data compression, pattern recognition, cryptography</li>
+                <li><strong>Medicine:</strong> MRI, EEG, ECG analysis</li>
+                <li><strong>Finance:</strong> Time series analysis, option pricing</li>
+                <li><strong>Biology:</strong> Analyzing biological rhythms, protein structure determination</li>
+            </ul>
+            <p>
+                Learning Fourier analysis (which requires calculus) will be one of the most important steps in your mathematical education for technical work. What we've covered here is just the foundation—a glimpse of one of mathematics' most powerful tools.
+            </p>
+        </div>
+
+        <h2 id="sec-7-6">7.6 Synthesis and Summary</h2>
+
+        <h3 id="subsec-deep-connections">The Deep Connections</h3>
+
+        <p>
+            Let's step back and see how everything in this module connects:
+        </p>
+
+        <div class="graph-container" style="background-color: #f0f9ff;">
+            <h3 style="color: #1e40af; text-align: center;">The Web of Connections</h3>
+            <ul style="text-align: left;">
+                <li><strong>Trigonometry</strong> describes circles and right triangles → extends to unit circle → produces periodic functions</li>
+                <li><strong>Complex numbers</strong> extend the number system → represent points in a plane → use polar coordinates</li>
+                <li><strong>Euler's formula</strong> connects complex exponentials to trigonometry → $e^{i\theta} = \cos\theta + i\sin\theta$</li>
+                <li><strong>Fourier series</strong> decompose periodic functions into sine and cosine waves → can be written using complex exponentials</li>
+                <li><strong>FFT algorithm</strong> efficiently computes Fourier coefficients → enables real-time signal processing</li>
+                <li><strong>Applications</strong> in physics, engineering, computer science, medicine all build on these foundations</li>
+            </ul>
+        </div>
+
+        <p>
+            The journey from "opposite over hypotenuse" to Fourier transforms and quantum mechanics is long, but every step builds logically on what came before. Trigonometry isn't isolated—it's part of the unified structure of mathematics, connected to:
+        </p>
+        <ul>
+            <li>Algebra (complex numbers)</li>
+            <li>Calculus (derivatives, integrals, infinite series)</li>
+            <li>Geometry (circles, polar coordinates)</li>
+            <li>Analysis (convergence, approximation)</li>
+        </ul>
+
+        <div class="highlight">
+        <h3 id="subsec-what-learned">What We've Learned</h3>
+            <ul>
+                <li><strong>Complex numbers</strong> extend the number system by adding $i = \sqrt{-1}$, creating a 2D number system (the complex plane)</li>
+                <li><strong>Polar form</strong> $z = r(\cos\theta + i\sin\theta)$ connects complex numbers to trigonometry and the unit circle</li>
+                <li><strong>Euler's formula</strong> $e^{i\theta} = \cos\theta + i\sin\theta$ unifies exponentials and trigonometry in one beautiful equation</li>
+                <li><strong>Euler's identity</strong> $e^{i\pi} + 1 = 0$ brings together the five most important constants in mathematics</li>
+                <li><strong>Fourier series</strong> express any periodic function as a sum of sine and cosine waves</li>
+                <li><strong>FFT algorithm</strong> makes real-time frequency analysis possible, enabling modern audio, video, and communications technology</li>
+                <li><strong>Fourier transform</strong> extends the idea to non-periodic functions, providing the foundation for signal processing</li>
+                <li><strong>Applications</strong> span all of science and engineering, from quantum mechanics to smartphone technology</li>
+            </ul>
+        </div>
+
+        <p>
+            In Module 8, we'll complete our trigonometry journey with:
+        </p>
+        <ul>
+            <li>Inverse trigonometric functions (going from ratios back to angles)</li>
+            <li>Life beyond the plane—spherical trigonometry and how algebra and geometry unite</li>
+            <li>The unity of mathematics—how trigonometry connects to the broader mathematical landscape</li>
+            <li>Paths for further study—where to go next based on your interests</li>
+        </ul>
+
+        <div class="warning">
+            <h3 id="subsec-before-module-8">Before Moving to Module 8</h3>
+            <p>
+                Take time to let these ideas settle. Complex numbers and Fourier series are profound concepts that even professional mathematicians continue to find new insights about. It's okay if not everything clicked perfectly—the goal here was exposure and building intuition.
+            </p>
+            <p>
+                Consider:
+            </p>
+            <ul>
+                <li>Running the Python code and experimenting with different parameters</li>
+                <li>Reading more about Euler's life and work (he contributed to virtually every area of mathematics)</li>
+                <li>Looking for Fourier transforms in technologies you use daily (audio codecs, image formats, wireless protocols)</li>
+                <li>Watching visualizations of Euler's formula and Fourier series on YouTube or other educational platforms</li>
+            </ul>
+            <p>
+                These concepts will become clearer as you learn calculus and see them applied in different contexts. What's important now is that you've been introduced to these ideas and have a framework for understanding them as you continue your mathematical journey.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+    // Wait for DOM and MathJax to be ready
+    window.addEventListener('DOMContentLoaded', function() {
+        
+        // ========================================
+        // Fullscreen change handler - triggers Plotly resize (per guidelines 2.3.9)
+        // CSS handles sizing via .graph-container:fullscreen rules
+        // ========================================
+        document.addEventListener('fullscreenchange', function() {
+            const plotlyDivs = document.querySelectorAll('.plotly-graph');
+            
+            // Delay resize to let CSS take effect
+            setTimeout(function() {
+                plotlyDivs.forEach(function(graphDiv) {
+                    Plotly.Plots.resize(graphDiv);
+                });
+            }, 200);
+        });
+        
+        // ========================================
+        // Fig. 7.2-1: The Complex Plane (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Complex plane showing various complex numbers as points
+            //
+            // COORDINATE CALCULATIONS:
+            // Example points: 3+2i at (3,2), -2+1i at (-2,1), 1-2i at (1,-2), -1-1i at (-1,-1)
+            // Axes from -4 to 4 in both directions
+            // Labels extend slightly beyond points
+            //
+            // COORDINATE RANGES:
+            // x: -4 to 4 (width = 8)
+            // y: -4 to 4 (height = 8)
+            //
+            // MARGINS (15%):
+            // xMargin = 1.2, yMargin = 1.2
+            // xmin = -4 - 1.2 = -5.2
+            // xmax = 4 + 1.2 = 5.2
+            // ymin = -4 - 1.2 = -5.2
+            // ymax = 4 + 1.2 = 5.2
+            //
+            // FINAL BOUNDINGBOX: [-5.2, 5.2, 5.2, -5.2]
+            
+            const board1 = JXG.JSXGraph.initBoard('complexPlane', {
+                boundingbox: [-5.2, 5.2, 5.2, -5.2],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: {
+                    symbol: '\u26F6',
+                    scale: 0.95
+                },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw axes
+            board1.create('arrow', [[0, 0], [4.5, 0]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            board1.create('arrow', [[0, 0], [-4.5, 0]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            board1.create('arrow', [[0, 0], [0, 4.5]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            board1.create('arrow', [[0, 0], [0, -4.5]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            
+            // Axis labels
+            board1.create('text', [5.0, -0.3, '<i>Real axis</i>'], {
+                fontSize: 14, color: '#6b7280', anchorX: 'right'
+            });
+            board1.create('text', [0.3, 4.8, '<i>Imaginary axis</i>'], {
+                fontSize: 14, color: '#6b7280'
+            });
+            
+            // Grid lines
+            for (let i = -4; i <= 4; i++) {
+                if (i !== 0) {
+                    board1.create('line', [[i, -4.5], [i, 4.5]], {
+                        strokeColor: '#e5e7eb',
+                        strokeWidth: 1,
+                        straightFirst: false,
+                        straightLast: false
+                    });
+                    board1.create('line', [[-4.5, i], [4.5, i]], {
+                        strokeColor: '#e5e7eb',
+                        strokeWidth: 1,
+                        straightFirst: false,
+                        straightLast: false
+                    });
+                }
+            }
+            
+            // Example complex numbers
+            const examples = [
+                {a: 3, b: 2, label: '3 + 2<i>i</i>', color: '#3b82f6'},
+                {a: -2, b: 1, label: '-2 + <i>i</i>', color: '#10b981'},
+                {a: 1, b: -2, label: '1 - 2<i>i</i>', color: '#f59e0b'},
+                {a: -1, b: -1.5, label: '-1 - 1.5<i>i</i>', color: '#ec4899'},
+                {a: 2, b: 0, label: '2', color: '#8b5cf6'},
+                {a: 0, b: 2.5, label: '2.5<i>i</i>', color: '#ef4444'}
+            ];
+            
+            examples.forEach(ex => {
+                const pt = board1.create('point', [ex.a, ex.b], {
+                    name: '',
+                    size: 5,
+                    fillColor: ex.color,
+                    strokeColor: ex.color,
+                    fixed: true
+                });
+                
+                // Dashed lines to axes
+                board1.create('line', [[ex.a, 0], [ex.a, ex.b]], {
+                    strokeColor: ex.color,
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                board1.create('line', [[0, ex.b], [ex.a, ex.b]], {
+                    strokeColor: ex.color,
+                    strokeWidth: 1,
+                    dash: 2,
+                    straightFirst: false,
+                    straightLast: false
+                });
+                
+                // Label
+                const offsetX = ex.a > 0 ? 0.5 : -0.5;
+                const offsetY = ex.b > 0 ? 0.4 : -0.4;
+                board1.create('text', [ex.a + offsetX, ex.b + offsetY, ex.label], {
+                    fontSize: 13,
+                    color: ex.color
+                });
+            });
+        })();
+        
+        // ========================================
+        // Fig. 7.2-1b: Complex Addition (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Vector addition in complex plane
+            // v = 2 + i, w = 1 + 2i, v+w = 3 + 3i
+            //
+            // COORDINATE RANGES: x: -0.5 to 4, y: -0.5 to 4
+            // MARGINS (15%): 0.675
+            // FINAL BOUNDINGBOX: [-1.2, 4.7, 4.7, -1.2]
+            
+            const boardAdd = JXG.JSXGraph.initBoard('complexAddition', {
+                boundingbox: [-1.2, 4.7, 4.7, -1.2],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: { symbol: '\u26F6', scale: 0.95 },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Axes
+            boardAdd.create('arrow', [[0, 0], [4.2, 0]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardAdd.create('arrow', [[0, 0], [0, 4.2]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardAdd.create('text', [4.3, -0.2, 'Re'], { fontSize: 13, color: '#6b7280' });
+            boardAdd.create('text', [0.2, 4.3, 'Im'], { fontSize: 13, color: '#6b7280' });
+            
+            // Grid
+            for (let i = 1; i <= 4; i++) {
+                boardAdd.create('line', [[i, 0], [i, 4]], { strokeColor: '#e5e7eb', strokeWidth: 1, straightFirst: false, straightLast: false });
+                boardAdd.create('line', [[0, i], [4, i]], { strokeColor: '#e5e7eb', strokeWidth: 1, straightFirst: false, straightLast: false });
+            }
+            
+            // Vector v = 2 + i (blue)
+            boardAdd.create('arrow', [[0, 0], [2, 1]], { strokeColor: '#3b82f6', strokeWidth: 3, lastArrow: {type: 2, size: 8} });
+            boardAdd.create('point', [2, 1], { name: '', size: 4, fillColor: '#3b82f6', strokeColor: '#3b82f6', fixed: true });
+            boardAdd.create('text', [2.2, 0.7, '<b>v</b> = 2 + <i>i</i>'], { fontSize: 13, color: '#3b82f6' });
+            
+            // Vector w = 1 + 2i (green)
+            boardAdd.create('arrow', [[0, 0], [1, 2]], { strokeColor: '#10b981', strokeWidth: 3, lastArrow: {type: 2, size: 8} });
+            boardAdd.create('point', [1, 2], { name: '', size: 4, fillColor: '#10b981', strokeColor: '#10b981', fixed: true });
+            boardAdd.create('text', [0.3, 2.3, '<b>w</b> = 1 + 2<i>i</i>'], { fontSize: 13, color: '#10b981' });
+            
+            // Vector w placed at tip of v (tip-to-tail, dashed green)
+            boardAdd.create('arrow', [[2, 1], [3, 3]], { strokeColor: '#10b981', strokeWidth: 2, dash: 2, lastArrow: {type: 2, size: 6} });
+            
+            // Vector v placed at tip of w (parallelogram, dashed blue)
+            boardAdd.create('arrow', [[1, 2], [3, 3]], { strokeColor: '#3b82f6', strokeWidth: 2, dash: 2, lastArrow: {type: 2, size: 6} });
+            
+            // Sum v + w = 3 + 3i (red)
+            boardAdd.create('arrow', [[0, 0], [3, 3]], { strokeColor: '#ef4444', strokeWidth: 3, lastArrow: {type: 2, size: 8} });
+            boardAdd.create('point', [3, 3], { name: '', size: 5, fillColor: '#ef4444', strokeColor: '#ef4444', fixed: true });
+            boardAdd.create('text', [3.2, 3.2, '<b>v + w</b> = 3 + 3<i>i</i>'], { fontSize: 13, color: '#ef4444' });
+        })();
+        
+        // ========================================
+        // Fig. 7.2-1c: Complex Multiplication (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Multiplication showing rotation and scaling
+            // z = 2 + i, multiply by: 2 (real), i, and (1+i)
+            //
+            // COORDINATE RANGES: x: -4 to 5, y: -3 to 5
+            // FINAL BOUNDINGBOX: [-4.5, 5.5, 5.5, -3.5]
+            
+            const boardMult = JXG.JSXGraph.initBoard('complexMultiplication', {
+                boundingbox: [-4.5, 5.5, 5.5, -3.5],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: { symbol: '\u26F6', scale: 0.95 },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Axes
+            boardMult.create('arrow', [[0, 0], [5, 0]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('arrow', [[0, 0], [-4, 0]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('arrow', [[0, 0], [0, 5]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('arrow', [[0, 0], [0, -3]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('text', [5.1, -0.3, 'Re'], { fontSize: 12, color: '#6b7280' });
+            boardMult.create('text', [0.2, 5.2, 'Im'], { fontSize: 12, color: '#6b7280' });
+            
+            // Original z = 2 + i (blue)
+            boardMult.create('arrow', [[0, 0], [2, 1]], { strokeColor: '#3b82f6', strokeWidth: 3, lastArrow: {type: 2, size: 7} });
+            boardMult.create('point', [2, 1], { name: '', size: 4, fillColor: '#3b82f6', fixed: true });
+            boardMult.create('text', [2.2, 0.6, '<b>z</b> = 2 + <i>i</i>'], { fontSize: 12, color: '#3b82f6' });
+            
+            // 2z = 4 + 2i (green) - scaling only
+            boardMult.create('arrow', [[0, 0], [4, 2]], { strokeColor: '#10b981', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('point', [4, 2], { name: '', size: 4, fillColor: '#10b981', fixed: true });
+            boardMult.create('text', [4.2, 1.7, '2<b>z</b> = 4 + 2<i>i</i>'], { fontSize: 11, color: '#10b981' });
+            
+            // iz = i(2+i) = 2i - 1 = -1 + 2i (orange) - 90° rotation
+            boardMult.create('arrow', [[0, 0], [-1, 2]], { strokeColor: '#f59e0b', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('point', [-1, 2], { name: '', size: 4, fillColor: '#f59e0b', fixed: true });
+            boardMult.create('text', [-2.5, 2.2, '<i>i</i><b>z</b> = -1 + 2<i>i</i>'], { fontSize: 11, color: '#f59e0b' });
+            
+            // (1+i)z = (1+i)(2+i) = 2 + i + 2i - 1 = 1 + 3i (red) - 45° rotation + scaling
+            boardMult.create('arrow', [[0, 0], [1, 3]], { strokeColor: '#ef4444', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMult.create('point', [1, 3], { name: '', size: 4, fillColor: '#ef4444', fixed: true });
+            boardMult.create('text', [1.3, 3.3, '(1+<i>i</i>)<b>z</b> = 1 + 3<i>i</i>'], { fontSize: 11, color: '#ef4444' });
+            
+            // Arc showing 90° rotation for i
+            const arc90 = [];
+            for (let t = Math.atan2(1, 2); t <= Math.atan2(1, 2) + Math.PI/2; t += 0.05) {
+                arc90.push([1.0 * Math.cos(t), 1.0 * Math.sin(t)]);
+            }
+            boardMult.create('curve', [arc90.map(p => p[0]), arc90.map(p => p[1])], { strokeColor: '#f59e0b', strokeWidth: 1.5, dash: 2 });
+            boardMult.create('text', [-0.3, 1.3, '90°'], { fontSize: 10, color: '#f59e0b' });
+        })();
+        
+        // ========================================
+        // Fig. 7.2-1d: Complex Magnitude (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Magnitude as distance from origin with right triangle
+            // z = 3 + 4i, |z| = 5
+            //
+            // COORDINATE RANGES: x: -0.5 to 4.5, y: -0.5 to 5.5
+            // FINAL BOUNDINGBOX: [-1, 6, 5, -1]
+            
+            const boardMag = JXG.JSXGraph.initBoard('complexMagnitude', {
+                boundingbox: [-1, 6, 5, -1],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: { symbol: '\u26F6', scale: 0.95 },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Axes
+            boardMag.create('arrow', [[0, 0], [4.5, 0]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMag.create('arrow', [[0, 0], [0, 5.5]], { strokeColor: '#6b7280', strokeWidth: 2, lastArrow: {type: 2, size: 6} });
+            boardMag.create('text', [4.6, -0.3, 'Re'], { fontSize: 13, color: '#6b7280' });
+            boardMag.create('text', [0.2, 5.6, 'Im'], { fontSize: 13, color: '#6b7280' });
+            
+            // Tick marks
+            for (let i = 1; i <= 4; i++) {
+                boardMag.create('line', [[i, -0.1], [i, 0.1]], { strokeColor: '#6b7280', strokeWidth: 1, straightFirst: false, straightLast: false });
+                boardMag.create('text', [i, -0.4, i.toString()], { fontSize: 10, color: '#6b7280', anchorX: 'middle' });
+            }
+            for (let i = 1; i <= 5; i++) {
+                boardMag.create('line', [[-0.1, i], [0.1, i]], { strokeColor: '#6b7280', strokeWidth: 1, straightFirst: false, straightLast: false });
+                boardMag.create('text', [-0.4, i, i.toString()], { fontSize: 10, color: '#6b7280', anchorX: 'right' });
+            }
+            
+            // Point z = 3 + 4i
+            const a = 3, b = 4;
+            boardMag.create('point', [a, b], { name: '', size: 5, fillColor: '#3b82f6', strokeColor: '#2563eb', fixed: true });
+            boardMag.create('text', [3.2, 4.3, '<b>z</b> = 3 + 4<i>i</i>'], { fontSize: 13, color: '#3b82f6' });
+            
+            // Right triangle: horizontal leg (a), vertical leg (b), hypotenuse (|z|)
+            // Horizontal leg
+            boardMag.create('line', [[0, 0], [a, 0]], { strokeColor: '#10b981', strokeWidth: 3, straightFirst: false, straightLast: false });
+            boardMag.create('text', [1.5, -0.5, 'a = 3'], { fontSize: 12, color: '#10b981' });
+            
+            // Vertical leg
+            boardMag.create('line', [[a, 0], [a, b]], { strokeColor: '#f59e0b', strokeWidth: 3, straightFirst: false, straightLast: false });
+            boardMag.create('text', [3.4, 2, 'b = 4'], { fontSize: 12, color: '#f59e0b' });
+            
+            // Hypotenuse (magnitude)
+            boardMag.create('line', [[0, 0], [a, b]], { strokeColor: '#ef4444', strokeWidth: 3, straightFirst: false, straightLast: false });
+            boardMag.create('text', [1.0, 2.5, '|<b>z</b>| = 5'], { fontSize: 13, color: '#ef4444' });
+            
+            // Right angle marker
+            boardMag.create('line', [[a-0.3, 0], [a-0.3, 0.3]], { strokeColor: '#6b7280', strokeWidth: 1, straightFirst: false, straightLast: false });
+            boardMag.create('line', [[a-0.3, 0.3], [a, 0.3]], { strokeColor: '#6b7280', strokeWidth: 1, straightFirst: false, straightLast: false });
+            
+            // Formula
+            boardMag.create('text', [0.5, 5.3, '|<b>z</b>| = \\u221A(a\\u00B2 + b\\u00B2) = \\u221A(9 + 16) = 5'], { fontSize: 11, color: '#374151' });
+        })();
+        
+        // ========================================
+        // Fig. 7.2-2: Polar Form (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Complex number in polar form showing r and theta
+            //
+            // COORDINATE CALCULATIONS:
+            // Point z at (2, 1.5) gives r ≈ 2.5, θ ≈ 37°
+            // Circle of radius r centered at origin
+            // Angle arc
+            // Labels
+            //
+            // COORDINATE RANGES:
+            // x: -0.5 to 3 (width = 3.5)
+            // y: -0.5 to 3 (height = 3.5)
+            //
+            // MARGINS (15%):
+            // xMargin = 0.525, yMargin = 0.525
+            // xmin = -0.5 - 0.525 = -1.025 ≈ -1.2
+            // xmax = 3 + 0.525 = 3.525 ≈ 3.7
+            // ymin = -0.5 - 0.525 = -1.025 ≈ -1.2
+            // ymax = 3 + 0.525 = 3.525 ≈ 3.7
+            //
+            // FINAL BOUNDINGBOX: [-1.2, 3.7, 3.7, -1.2]
+            
+            const board2 = JXG.JSXGraph.initBoard('polarForm', {
+                boundingbox: [-1.2, 3.7, 3.7, -1.2],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: {
+                    symbol: '\u26F6',
+                    scale: 0.95
+                },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Axes
+            board2.create('arrow', [[0, 0], [3.5, 0]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            board2.create('arrow', [[0, 0], [0, 3.5]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            
+            board2.create('text', [3.6, -0.2, 'Re'], {
+                fontSize: 14, color: '#6b7280', anchorX: 'right'
+            });
+            board2.create('text', [0.2, 3.5, 'Im'], {
+                fontSize: 14, color: '#6b7280'
+            });
+            
+            // The complex number z
+            const a = 2.2, b = 1.6;
+            const r = Math.sqrt(a*a + b*b);
+            const theta = Math.atan2(b, a);
+            
+            const origin = board2.create('point', [0, 0], {
+                name: '',
+                size: 4,
+                fillColor: '#6b7280',
+                fixed: true
+            });
+            
+            const z = board2.create('point', [a, b], {
+                name: '',
+                size: 6,
+                fillColor: '#3b82f6',
+                strokeColor: '#2563eb',
+                fixed: true
+            });
+            
+            // Radius line
+            board2.create('line', [origin, z], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Dashed circle showing magnitude
+            const anglePoints = [];
+            for (let t = 0; t <= 2*Math.PI; t += 0.1) {
+                anglePoints.push([r * Math.cos(t), r * Math.sin(t)]);
+            }
+            board2.create('curve', [
+                anglePoints.map(p => p[0]),
+                anglePoints.map(p => p[1])
+            ], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 1,
+                dash: 2
+            });
+            
+            // Angle arc
+            const arcPoints = [];
+            for (let t = 0; t <= theta; t += 0.05) {
+                arcPoints.push([0.8 * Math.cos(t), 0.8 * Math.sin(t)]);
+            }
+            board2.create('curve', [
+                arcPoints.map(p => p[0]),
+                arcPoints.map(p => p[1])
+            ], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 2
+            });
+            
+            // Labels
+            board2.create('text', [a/2 - 0.3, b/2 + 0.3, '<i>r</i>'], {
+                fontSize: 16,
+                color: '#3b82f6'
+            });
+            
+            board2.create('text', [1.2, 0.3, '<i>θ</i>'], {
+                fontSize: 16,
+                color: '#f59e0b'
+            });
+            
+            board2.create('text', [a + 0.2, b + 0.2, '<i>z</i> = <i>a</i> + <i>bi</i>'], {
+                fontSize: 14,
+                color: '#3b82f6'
+            });
+            
+            board2.create('text', [a + 0.2, b - 0.3, '= <i>r</i>(cos<i>θ</i> + <i>i</i>sin<i>θ</i>)'], {
+                fontSize: 13,
+                color: '#3b82f6'
+            });
+            
+            // Projections
+            board2.create('line', [[a, 0], [a, b]], {
+                strokeColor: '#10b981',
+                strokeWidth: 1,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            board2.create('line', [[0, b], [a, b]], {
+                strokeColor: '#ec4899',
+                strokeWidth: 1,
+                dash: 2,
+                straightFirst: false,
+                straightLast: false
+            });
+            
+            // Projection points on axes with formulas
+            board2.create('point', [a, 0], {
+                name: '',
+                size: 4,
+                fillColor: '#10b981',
+                strokeColor: '#10b981',
+                fixed: true
+            });
+            board2.create('text', [a - 0.1, -0.45, 'x = a = r cos θ'], {
+                fontSize: 11,
+                color: '#10b981',
+                anchorX: 'middle'
+            });
+            
+            board2.create('point', [0, b], {
+                name: '',
+                size: 4,
+                fillColor: '#ec4899',
+                strokeColor: '#ec4899',
+                fixed: true
+            });
+            board2.create('text', [-0.15, b + 0.25, 'y = b = r sin θ'], {
+                fontSize: 11,
+                color: '#ec4899',
+                anchorX: 'right'
+            });
+            
+            board2.create('text', [a + 0.1, b/2, '<i>b</i>'], {
+                fontSize: 13,
+                color: '#10b981'
+            });
+            board2.create('text', [a/2, b + 0.15, '<i>a</i>'], {
+                fontSize: 13,
+                color: '#ec4899'
+            });
+        })();
+        
+        // ========================================
+        // Fig. 7.3-1: Complex exponentials trace circles (JSXGraph)
+        // ========================================
+        (function() {
+            // DIAGRAM: Unit circle showing e^(iθ) = cos θ + i sin θ
+            // Uses 1:1 aspect ratio so circle appears circular
+            //
+            // COORDINATE RANGES:
+            // x: -1.5 to 1.5 (width = 3)
+            // y: -1.5 to 1.5 (height = 3)
+            //
+            // MARGINS (10%):
+            // margin = 0.15
+            // FINAL BOUNDINGBOX: [-1.65, 1.65, 1.65, -1.65]
+            
+            const board = JXG.JSXGraph.initBoard('eulerCircle', {
+                boundingbox: [-1.65, 1.65, 1.65, -1.65],
+                axis: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: {
+                    symbol: '\u26F6',
+                    scale: 0.95
+                },
+                showCopyright: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw axes
+            board.create('arrow', [[-1.5, 0], [1.5, 0]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            board.create('arrow', [[0, -1.5], [0, 1.5]], {
+                strokeColor: '#6b7280',
+                strokeWidth: 2,
+                lastArrow: {type: 2, size: 6}
+            });
+            
+            // Axis labels
+            board.create('text', [1.45, -0.15, 'Re (cos θ)'], {
+                fontSize: 12, color: '#6b7280', anchorX: 'right'
+            });
+            board.create('text', [0.08, 1.5, 'Im (sin θ)'], {
+                fontSize: 12, color: '#6b7280', anchorX: 'left'
+            });
+            
+            // Grid lines
+            for (let i = -1; i <= 1; i++) {
+                if (i !== 0) {
+                    board.create('line', [[i, -1.5], [i, 1.5]], {
+                        strokeColor: '#e5e7eb', strokeWidth: 1, straightFirst: false, straightLast: false, dash: 2
+                    });
+                    board.create('line', [[-1.5, i], [1.5, i]], {
+                        strokeColor: '#e5e7eb', strokeWidth: 1, straightFirst: false, straightLast: false, dash: 2
+                    });
+                    // Tick labels
+                    board.create('text', [i, -0.12, i.toString()], {fontSize: 10, color: '#9ca3af', anchorX: 'middle'});
+                    board.create('text', [-0.1, i, i.toString()], {fontSize: 10, color: '#9ca3af', anchorX: 'right'});
+                }
+            }
+            board.create('text', [0.08, -0.12, '0'], {fontSize: 10, color: '#9ca3af'});
+            
+            // Unit circle
+            board.create('circle', [[0, 0], 1], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 3,
+                fillColor: 'rgba(59, 130, 246, 0.05)'
+            });
+            
+            // Example point at θ = π/4 (45°)
+            const theta0 = Math.PI / 4;
+            const px = Math.cos(theta0);
+            const py = Math.sin(theta0);
+            
+            // Angle arc
+            board.create('arc', [[0, 0], [0.3, 0], [px * 0.3, py * 0.3]], {
+                strokeColor: '#f59e0b',
+                strokeWidth: 2
+            });
+            board.create('text', [0.4, 0.15, 'θ'], {
+                fontSize: 14, color: '#f59e0b'
+            });
+            
+            // Radius line to point
+            board.create('segment', [[0, 0], [px, py]], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2,
+                dash: 0
+            });
+            
+            // The point e^(iθ)
+            board.create('point', [px, py], {
+                name: '',
+                size: 5,
+                fillColor: '#3b82f6',
+                strokeColor: '#1d4ed8',
+                fixed: true
+            });
+            board.create('text', [px + 0.08, py + 0.1, 'e<sup>iθ</sup> = cos θ + i sin θ'], {
+                fontSize: 12, color: '#3b82f6'
+            });
+            
+            // Projections
+            board.create('segment', [[px, 0], [px, py]], {
+                strokeColor: '#10b981',
+                strokeWidth: 2,
+                dash: 2
+            });
+            board.create('segment', [[0, py], [px, py]], {
+                strokeColor: '#ec4899',
+                strokeWidth: 2,
+                dash: 2
+            });
+            
+            // Projection labels
+            board.create('text', [px/2, -0.15, 'cos θ'], {
+                fontSize: 11, color: '#10b981', anchorX: 'middle'
+            });
+            board.create('text', [-0.15, py/2, 'sin θ'], {
+                fontSize: 11, color: '#ec4899', anchorX: 'right', anchorY: 'middle'
+            });
+            
+            // Legend
+            board.create('text', [0, -1.45, 'As θ varies from 0 to 2π, e^{iθ} traces the unit circle'], {
+                fontSize: 11, color: '#6b7280', anchorX: 'middle'
+            });
+        })();
+        
+        // ========================================
+        // Custom Fullscreen Button for Plotly (per guidelines 2.3.7)
+        // ========================================
+        const fullscreenButton = {
+            name: 'Fullscreen',
+            icon: {
+                width: 24,
+                height: 24,
+                path: 'M4 4h6v2H6v4H4V4zm16 0v6h-2V6h-4V4h6zM4 20v-6h2v4h4v2H4zm16 0h-6v-2h4v-4h2v6z'
+            },
+            click: function(gd) {
+                const container = gd.closest('.graph-container');
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    container.requestFullscreen();
+                }
+            }
+        };
+        
+        // ========================================
+        // Fig. 7.4-1 through 7.4-4: Square wave approximations (Plotly)
+        // ========================================
+        
+        function createSquareWavePlotly(divId, numTerms) {
+            const xVals = [];
+            const targetY = [];
+            const approxY = [];
+            
+            for (let x = 0; x <= 4 * Math.PI; x += 0.02) {
+                xVals.push(x);
+                
+                // Target square wave
+                const period = Math.floor(x / Math.PI) % 2;
+                targetY.push(period === 0 ? 1 : -1);
+                
+                // Fourier approximation
+                let sum = 0;
+                for (let k = 1; k <= numTerms; k++) {
+                    const n = 2 * k - 1;  // Odd harmonics only
+                    sum += Math.sin(n * x) / n;
+                }
+                approxY.push((4 / Math.PI) * sum);
+            }
+            
+            const targetTrace = {
+                x: xVals,
+                y: targetY,
+                mode: 'lines',
+                name: 'Target square wave',
+                line: {color: '#6b7280', width: 1.5, dash: 'dash'}
+            };
+            
+            const approxTrace = {
+                x: xVals,
+                y: approxY,
+                mode: 'lines',
+                name: `Fourier approximation (${numTerms} term${numTerms > 1 ? 's' : ''})`,
+                line: {color: '#3b82f6', width: 2.5}
+            };
+            
+            const layout = {
+                xaxis: {
+                    title: 'x (radians)',
+                    range: [0, 4 * Math.PI],
+                    tickvals: [0, Math.PI, 2*Math.PI, 3*Math.PI, 4*Math.PI],
+                    ticktext: ['0', 'π', '2π', '3π', '4π'],
+                    gridcolor: '#e5e7eb'
+                },
+                yaxis: {
+                    title: 'f(x)',
+                    range: [-1.5, 1.5],
+                    gridcolor: '#e5e7eb'
+                },
+                legend: {
+                    x: 0.5,
+                    y: 1.15,
+                    xanchor: 'center',
+                    orientation: 'h'
+                },
+                margin: {t: 40, r: 20, b: 50, l: 50},
+                paper_bgcolor: 'white',
+                plot_bgcolor: 'white'
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                modeBarButtonsToAdd: [fullscreenButton],
+                modeBarButtonsToRemove: ['lasso2d', 'select2d'],
+                displaylogo: false
+            };
+            
+            Plotly.newPlot(divId, [targetTrace, approxTrace], layout, config);
+        }
+        
+        createSquareWavePlotly('squareWave1', 1);
+        createSquareWavePlotly('squareWave3', 3);
+        createSquareWavePlotly('squareWave5', 5);
+        createSquareWavePlotly('squareWave10', 10);
+        
+        // ========================================
+        // Fig. 7.4-5: Sawtooth wave approximation (Plotly)
+        // ========================================
+        
+        (function() {
+            const xVals = [];
+            const targetY = [];
+            const approx1Y = [];
+            const approx3Y = [];
+            const approx5Y = [];
+            const approx10Y = [];
+            
+            for (let x = 0; x <= 4 * Math.PI; x += 0.02) {
+                xVals.push(x);
+                
+                // Target sawtooth wave (ranges from -π to π)
+                const xMod = ((x + Math.PI) % (2 * Math.PI)) - Math.PI;
+                targetY.push(xMod);
+                
+                // Fourier approximations with different numbers of terms
+                for (const [arr, n] of [[approx1Y, 1], [approx3Y, 3], [approx5Y, 5], [approx10Y, 10]]) {
+                    let sum = 0;
+                    for (let k = 1; k <= n; k++) {
+                        sum += (Math.pow(-1, k + 1) * Math.sin(k * x)) / k;
+                    }
+                    arr.push(2 * sum);
+                }
+            }
+            
+            const traces = [
+                {
+                    x: xVals, y: targetY,
+                    mode: 'lines',
+                    name: 'Target sawtooth',
+                    line: {color: '#6b7280', width: 1.5, dash: 'dash'}
+                },
+                {
+                    x: xVals, y: approx1Y,
+                    mode: 'lines',
+                    name: '1 term',
+                    line: {color: '#3b82f6', width: 2}
+                },
+                {
+                    x: xVals, y: approx3Y,
+                    mode: 'lines',
+                    name: '3 terms',
+                    line: {color: '#10b981', width: 2}
+                },
+                {
+                    x: xVals, y: approx5Y,
+                    mode: 'lines',
+                    name: '5 terms',
+                    line: {color: '#f59e0b', width: 2}
+                },
+                {
+                    x: xVals, y: approx10Y,
+                    mode: 'lines',
+                    name: '10 terms',
+                    line: {color: '#ec4899', width: 2}
+                }
+            ];
+            
+            const layout = {
+                xaxis: {
+                    title: 'x (radians)',
+                    range: [0, 4 * Math.PI],
+                    tickvals: [0, Math.PI, 2*Math.PI, 3*Math.PI, 4*Math.PI],
+                    ticktext: ['0', 'π', '2π', '3π', '4π'],
+                    gridcolor: '#e5e7eb'
+                },
+                yaxis: {
+                    title: 'f(x)',
+                    range: [-4, 4],
+                    gridcolor: '#e5e7eb'
+                },
+                legend: {
+                    x: 0.5,
+                    y: 1.15,
+                    xanchor: 'center',
+                    orientation: 'h'
+                },
+                margin: {t: 50, r: 20, b: 50, l: 50},
+                paper_bgcolor: 'white',
+                plot_bgcolor: 'white'
+            };
+            
+            const config = {
+                responsive: true,
+                displayModeBar: true,
+                modeBarButtonsToAdd: [fullscreenButton],
+                modeBarButtonsToRemove: ['lasso2d', 'select2d'],
+                displaylogo: false
+            };
+            
+            Plotly.newPlot('sawtoothWave', traces, layout, config);
+        })();
+        
+    }); // End DOMContentLoaded
+    </script>
+
+</body>
+</html>
