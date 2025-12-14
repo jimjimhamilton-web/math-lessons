@@ -1,4 +1,343 @@
-<a href="./exp-log/Exponentials_Logarithms_v3_20251128.html">Exponents and Logarithms</a>
-<a href="./trig/Trigonometry_Lesson_Title20251204.html">Trigonometry</a>
-<a href="./calculus/Foundations_Module_A1_v5_20251213.html">Calculus</a>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lessons on Mathematics, with History and Applications</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('mountain_lake.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #000;
+        }
+        
+        .content {
+            background-color: rgba(255, 255, 255, 0.88);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 50px;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+        }
+        
+        .content.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .toggle-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: background-color 0.2s ease;
+        }
+        
+        .toggle-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .photo-credit {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .photo-credit.visible {
+            opacity: 1;
+        }
+        
+        h1 {
+            font-size: 1.8em;
+            margin-bottom: 5px;
+            color: #000;
+        }
+        
+        .authors {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+        
+        .date {
+            font-size: 1.0em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        h2 {
+            font-size: 1.4em;
+            margin-top: 35px;
+            margin-bottom: 10px;
+            color: #000;
+        }
+        
+        h2 a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        h2 a:hover {
+            text-decoration: underline;
+        }
+        
+        .module-link {
+            margin-left: 25px;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+        
+        .module-link a {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        .module-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .section-link {
+            margin-left: 50px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            font-size: 0.95em;
+        }
+        
+        .section-link a {
+            color: #222;
+            text-decoration: none;
+        }
+        
+        .section-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .top-section-link {
+            margin-left: 25px;
+            margin-top: 3px;
+            margin-bottom: 3px;
+            font-size: 0.95em;
+        }
+        
+        .top-section-link a {
+            color: #222;
+            text-decoration: none;
+        }
+        
+        .top-section-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleContent()">View Photo</button>
+    <div class="photo-credit">Titcomb Basin, Wind River Range, Wyoming</div>
+    <div class="content">
+        <h1>Lessons on Mathematics, with History and Applications</h1>
+        <div class="authors">Claude Sonnet 4.5, Claude Opus 4.5, Jim Hamilton</div>
+        <div class="date">December 13, 2025</div>
+        
+        <!-- ============================================================ -->
+        <!-- EXPONENTIALS AND LOGARITHMS -->
+        <!-- ============================================================ -->
+        
+        <h2><a href="exp-log/Exponentials_Logarithms_v3_20251128.html">Exponentials and Logarithms</a></h2>
+        
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-intro">Introduction</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-1">1.1 The Problem That Started It All</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-2">1.2 Napier's Brilliant Insight</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-3">1.3 The Revolutionary Impact</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-4">1.4 How Logarithms Work: The Definition</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-5">1.5 Essential Properties of Logarithms</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-6">1.6 Logarithm Tables: The Killer App (1614-1970s)</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-7">1.7 Scientific Notation: The Key to Practical Log Tables</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-1-8">1.8 Common Bases and Why They're Used</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-2-1">2.1 The Exponential Function</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-2-2">2.2 The Logarithmic Function</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-2-3">2.3 Inverse Functions: The Mirror Relationship</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-2-4">2.4 Linear vs. Logarithmic Axes</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-2-5">2.5 Real-World Example: Bacterial Growth</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-3-1">3.1 Chemistry: Radioactive Decay</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-3-2">3.2 Physics: Newton's Law of Cooling</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-3-3">3.3 Pharmacology: Drug Elimination</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-3-4">3.4 Astronomy and Magnitudes</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-3-5">3.5 Seismology: The Richter Scale</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-1">4.1 Why Base 2? Binary and Computing</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-2">4.2 Algorithm Analysis: Big-O Notation</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-3">4.3 Binary Search: The Classic O(log n) Algorithm</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-4">4.4 Binary Trees and Logarithmic Height</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-5">4.5 Sorting Algorithms</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-6">4.6 Divide and Conquer: The Power of Halving</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-4-7">4.7 Information Theory: Bits and Entropy</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-5-1">5.1 Database Indexing</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-5-2">5.2 Network Routing and Distributed Systems</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-5-3">5.3 Exponential Growth in Technology</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-6-1">6.1 Neural Networks and Activation Functions</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-6-2">6.2 Loss Functions: Cross-Entropy</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-6-3">6.3 Gradient Descent and Optimization</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-6-4">6.4 Logarithmic Scaling in Deep Learning</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-6-5">6.5 Logarithms in Data Preprocessing</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-7-1">7.1 Signal Processing and Decibels</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-7-2">7.2 Compound Interest and Finance</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-7-3">7.3 Cryptography: Keeping Secrets with Mathematics</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-7-4">7.4 Historical Context: Power Laws</a></div>
+        <div class="top-section-link"><a href="exp-log/Exponentials_Logarithms_v3_20251128.html#sec-7-5">7.5 Summary and Next Steps</a></div>
+        
+        <!-- ============================================================ -->
+        <!-- TRIGONOMETRY -->
+        <!-- ============================================================ -->
+        
+        <h2><a href="trig/Trigonometry_Lesson_Title20251204.html">Trigonometry</a></h2>
+        
+        <!-- Module 1 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html">Module 1: Orientation and History</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-1">1.1 Why Did Humans Invent Trigonometry?</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-2">1.2 The Historical Development: A 4000-Year Journey</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-3">1.3 Why Does Trigonometry Matter Today?</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-4">1.4 The Core Idea: Relationships in Triangles</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-5">1.5 The Remarkable Power of Sine and Cosine</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-6">1.6 The Journey Ahead</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_1_v4_20251202.html#sec-1-7">1.7 Closing Thoughts</a></div>
+        
+        <!-- Module 2 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html">Module 2: Right Triangle Trigonometry</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-1">2.1 Introduction: From Ancient Problems to Modern Functions</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-2">2.2 The Pythagorean Theorem: Our Starting Point</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-3">2.3 Similar Triangles: The Key Insight</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-4">2.4 Defining Sine, Cosine, and Tangent</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-5">2.5 The Other Trigonometric Functions</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-6">2.6 Special Angles from Geometry</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-7">2.7 Solving Right Triangles: Worked Examples</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-8">2.8 Real-World Applications and Practice</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-9">2.9 Practice Problems</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_2_v6_20251202.html#sec-2-10">2.10 Summary and Looking Ahead</a></div>
+        
+        <!-- Module 3 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html">Module 3: The Unit Circle</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-1">3.1 Beyond Right Triangles: The Need for Extension</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-2">3.2 The Unit Circle: A Foundation for All Angles</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-3">3.3 The Four Quadrants</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-4">3.4 Radian Measure: A Natural Way to Measure Angles</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-5">3.5 Reference Angles and Sign Patterns</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-6">3.6 Special Angles and Their Values</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-7">3.7 Arc Length and Sector Area</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-8">3.8 Practice Problems</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_3_v7_20251202.html#sec-3-9">3.9 Summary</a></div>
+        
+        <!-- Module 4 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html">Module 4: Trigonometric Functions and Graphs</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-intro">Introduction: From Ratios to Functions</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-1">4.1 Visualizing Sine: From Circle to Wave</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-2">4.2 Visualizing Cosine</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-3">4.3 Visualizing Tangent</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-4">4.4 Periodic Functions: The Mathematics of Repetition</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-5">4.5 Amplitude and Vertical Shift: Changing the Height</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-6">4.6 Period and Frequency: Changing the Speed</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-7">4.7 Phase Shift: Moving the Wave Horizontally</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-8">4.8 The General Form: Putting It All Together</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-9">4.9 Applications of Periodic Functions</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-10">4.10 Wave Interference and Superposition</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_4_v7_20251203.html#sec-4-conclusion">Conclusion: The Power of Periodic Functions</a></div>
+        
+        <!-- Module 5 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html">Module 5: Trigonometric Identities</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-1">5.1 What Are Identities and Why Do They Matter?</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-2">5.2 The Pythagorean Identities</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-3">5.3 Reciprocal and Quotient Identities</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-4">5.4 Even-Odd Identities</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-5">5.5 Cofunction Identities</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-6">5.6 Sum and Difference Formulas</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-7">5.7 Double Angle Formulas</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-8">5.8 Half Angle Formulas</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-9">5.9 Product-to-Sum and Sum-to-Product Formulas</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-5-10">5.10 Solving Trigonometric Equations</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_5_v5_20251203.html#sec-summary-your-trigonometric-identity-toolkit">Summary: Your Trigonometric Identity Toolkit</a></div>
+        
+        <!-- Module 6 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html">Module 6: Applications of Trigonometry</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-1">6.1 Introduction: The Power of Solving General Triangles</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-2">6.2 The Law of Sines</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-3">6.3 The Law of Cosines</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-4">6.4 Navigation Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-5">6.5 Surveying and Triangulation</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-6">6.6 Physics Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-7">6.7 Engineering Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-8">6.8 Computer Graphics Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-9">6.9 Astronomy Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-6-10">6.10 Conclusion: The Unity of Trigonometric Applications</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-appendix-a1">A.1 Proof of the Law of Sines</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_6_v4_20251203.html#sec-appendix-a2">A.2 Proof of the Law of Cosines</a></div>
+        
+        <!-- Module 7 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html">Module 7: Complex Numbers and Fourier Analysis</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-1">7.1 Introduction: Completing the Mathematical Landscape</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-2">7.2 Complex Numbers: Beyond the Real Number Line</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-3">7.3 Euler's Formula: The Crown Jewel of Mathematics</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-4">7.4 Fourier Series: Any Wave is a Sum of Sine Waves</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-5">7.5 The Fourier Transform and FFT</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_7_v1_20251204.html#sec-7-6">7.6 Synthesis and Summary</a></div>
+        
+        <!-- Module 8 -->
+        <div class="module-link"><a href="trig/Trigonometry_Module_8_v1_20251204.html">Module 8: Looking Forward</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_8_v1_20251204.html#sec-8-1">8.1 Inverse Trigonometric Functions</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_8_v1_20251204.html#sec-8-2">8.2 Life Beyond the Plane</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_8_v1_20251204.html#sec-8-3">8.3 The Unity of Mathematics</a></div>
+        <div class="section-link"><a href="trig/Trigonometry_Module_8_v1_20251204.html#sec-8-4">8.4 Paths for Further Study</a></div>
+        
+        <!-- ============================================================ -->
+        <!-- CALCULUS -->
+        <!-- ============================================================ -->
+        
+        <h2>Calculus</h2>
+        
+        <div class="module-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html">The Mathematical Foundations of Analysis</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-1">1.1 From Objects to Quantity</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-2">1.2 The Challenge of Representation</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-3">1.3 The Number That Wasn't</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-4">1.4 Less Than Nothing</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-5">1.5 Parts, Ratios, and the Space Between</a></div>
+        <div class="section-link"><a href="calculus/Foundations_Module_A1_v5_20251213.html#sec-A1-6">1.6 Numbers Find a Home</a></div>
+        
+    </div>
+    
+    <script>
+        function toggleContent() {
+            const content = document.querySelector('.content');
+            const button = document.querySelector('.toggle-button');
+            const credit = document.querySelector('.photo-credit');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                credit.classList.remove('visible');
+                button.textContent = 'View Photo';
+            } else {
+                content.classList.add('hidden');
+                credit.classList.add('visible');
+                button.textContent = 'Show Content';
+            }
+        }
+    </script>
+</body>
+</html>
