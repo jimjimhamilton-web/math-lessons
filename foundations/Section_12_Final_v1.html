@@ -1,0 +1,3819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 12 (Graphing and Linear Functions)
+      Version: 1.0 FINAL
+      Date: 2026-01-27
+      Guidelines Version: Technical Document Implementation v2.0
+      
+      Status: FINAL - Ready for deployment
+      
+      History:
+        Batch 3: Sections 12.9-12.10 plus Summary. Added Mathematical Modeling box.
+                 Expanded water tank example with idealization discussion. Added
+                 Calculator Problems section with realistic measurements.
+        Batch 2: Sections 12.6-12.8. Integrated Δy/Δx formula throughout 12.6.
+                 Derived point-slope form. Added Going Deeper box deriving
+                 parallel/perpendicular relationships.
+        Batch 1: Sections 12.1-12.5. Added Going Deeper box on coordinate systems.
+                 Added 3D Plotly saddle surface. New section 12.3 on independent/
+                 dependent variables. Revised slope introduction.
+    -->
+    
+    <title>Section 12: Graphing and Linear Functions</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- JSXGraph 1.4.6 for geometric diagrams -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <!-- Plotly.js 2.35.2 for 3D visualization -->
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-nav {
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #0369a1;
+        }
+        .section-nav a {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1a5f2a;
+        }
+        
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .draft-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .draft-notice h3 {
+            color: #b45309;
+            margin: 0 0 10px 0;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .historical-note {
+            background-color: #fffbeb;
+            padding: 20px;
+            border: 1px dashed #d97706;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .historical-note::before {
+            content: "Historical Note";
+            display: block;
+            font-weight: bold;
+            color: #b45309;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .going-deeper {
+            background-color: #f3e8ff;
+            padding: 20px;
+            border: 2px solid #9333ea;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .going-deeper::before {
+            content: "Going Deeper";
+            display: block;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .going-deeper h4 {
+            color: #6b21a8;
+            margin-top: 15px;
+        }
+        .going-deeper h4:first-of-type {
+            margin-top: 5px;
+        }
+        
+        .big-idea {
+            background-color: #fdf2f8;
+            padding: 20px;
+            border: 2px solid #db2777;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .big-idea::before {
+            content: "The Big Picture";
+            display: block;
+            font-weight: bold;
+            color: #be185d;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .figure-container {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .graph-title {
+            font-weight: bold;
+            color: #1a5f2a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .graph-caption {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .jxgbox {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            margin: 0 auto;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        
+        .plotly-graph {
+            margin: 0 auto;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: #1a5f2a;
+            font-weight: bold;
+        }
+        
+        .problems {
+            background-color: #fffde7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #fbc02d;
+        }
+        .problems h4 {
+            margin-top: 0;
+            color: #f57f17;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #fff59d;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #f57f17;
+        }
+        .solution {
+            margin-top: 12px;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        ul, ol { margin-left: 20px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .jxgbox { max-width: 100%; padding: 12px; }
+            .plotly-graph { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section-nav">
+            <a href="Section_11_Final_v1.html">&larr; Section 11: Inequalities</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 12: Graphing and Linear Functions</span> | 
+            <a href="Section_13_Final_v1.html">Section 13: Systems of Linear Equations &rarr;</a>
+        </div>
+        
+        <h1>Section 12: Graphing and Linear Functions</h1>
+        
+        <p>
+            In Section 11, we worked with inequalities on a number line—a single dimension where every point represents one number. Now we expand to two dimensions: the <strong>coordinate plane</strong>. This is where algebra becomes truly visual. Instead of just solving for unknown numbers, we can <em>see</em> equations as shapes—and linear equations, as we'll discover, always produce straight lines.
+        </p>
+        
+        <p>
+            The coordinate plane lets us represent relationships between two quantities pictorially. If one quantity changes, how does the other respond? The graph shows us at a glance.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.1: THE COORDINATE PLANE -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-1">12.1 The Coordinate Plane</h2>
+        
+        <p>
+            The coordinate plane is built from two number lines placed perpendicular to each other:
+        </p>
+        
+        <ul>
+            <li>The <strong>horizontal axis</strong> is called the <strong>$x$-axis</strong></li>
+            <li>The <strong>vertical axis</strong> is called the <strong>$y$-axis</strong></li>
+            <li>The point where they cross is the <strong>origin</strong>, labeled $(0, 0)$</li>
+        </ul>
+        
+        <p>
+            The axes divide the plane into four regions called <strong>quadrants</strong>, numbered counterclockwise starting from the upper right:
+        </p>
+        
+        <ul>
+            <li><strong>Quadrant I</strong> (upper right): $x$ positive, $y$ positive</li>
+            <li><strong>Quadrant II</strong> (upper left): $x$ negative, $y$ positive</li>
+            <li><strong>Quadrant III</strong> (lower left): $x$ negative, $y$ negative</li>
+            <li><strong>Quadrant IV</strong> (lower right): $x$ positive, $y$ negative</li>
+        </ul>
+        
+        <div class="historical-note">
+            <p>
+                The coordinate plane emerged independently in 1637 from two French mathematicians: René Descartes and Pierre de Fermat. Descartes published his approach in <em>La Géométrie</em>, an appendix to his philosophical work <em>Discourse on the Method</em>. Fermat's treatment circulated in manuscript form but wasn't published until after his death.
+            </p>
+            <p>
+                Their insight was revolutionary: geometry (shapes, positions, distances) and algebra (equations, variables, operations) could be unified. A curve could be described by an equation; an equation could be visualized as a curve. This fusion—now called <strong>analytic geometry</strong> or <strong>coordinate geometry</strong>—became one of the essential foundations for calculus, developed later that century by Newton and Leibniz.
+            </p>
+            <p>
+                <em>For a fuller treatment of this pivotal development, see the Calculus Foundations appendix, Module A1.</em>
+            </p>
+        </div>
+        
+        <h3>Ordered Pairs</h3>
+        
+        <p>
+            Every point in the plane is identified by an <strong>ordered pair</strong> $(x, y)$:
+        </p>
+        
+        <ul>
+            <li>The first number, $x$, tells you how far to move <strong>horizontally</strong> from the origin (right if positive, left if negative)</li>
+            <li>The second number, $y$, tells you how far to move <strong>vertically</strong> (up if positive, down if negative)</li>
+        </ul>
+        
+        <div class="key-point">
+            <h4>Order Matters!</h4>
+            <p>The point $(3, 5)$ is <em>not</em> the same as the point $(5, 3)$.</p>
+            <p>$(3, 5)$ means: go right 3, then up 5.</p>
+            <p>$(5, 3)$ means: go right 5, then up 3.</p>
+            <p>These are different locations. The $x$-coordinate always comes first.</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.1: The Coordinate Plane</div>
+            <div id="fig-12-1" class="jxgbox" style="width: 500px; height: 500px;"></div>
+            <div class="graph-caption">The coordinate plane with quadrants labeled and several points plotted. Notice how the signs of the coordinates determine which quadrant a point falls in.</div>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Reading Coordinates</h4>
+            
+            <p>Looking at Fig. 12.1:</p>
+            
+            <ul>
+                <li>Point $A = (3, 4)$ is in Quadrant I: both coordinates positive</li>
+                <li>Point $B = (-4, 2)$ is in Quadrant II: $x$ negative, $y$ positive</li>
+                <li>Point $C = (-3, -3)$ is in Quadrant III: both coordinates negative</li>
+                <li>Point $D = (4, -2)$ is in Quadrant IV: $x$ positive, $y$ negative</li>
+                <li>Point $E = (0, 3)$ is on the $y$-axis (not in any quadrant)</li>
+                <li>Point $F = (-2, 0)$ is on the $x$-axis (not in any quadrant)</li>
+            </ul>
+            
+            <p>Points on the axes don't belong to any quadrant—they're on the boundary between quadrants.</p>
+        </div>
+        
+        <div class="going-deeper">
+            <h4>Coordinates as an "Address System"</h4>
+            
+            <p>
+                The perpendicular $x$-$y$ grid we've introduced is not a property of the plane itself—it's a system we impose on the plane to locate points. Think of it as an address system: the plane is like a vast open field that exists whether or not we draw lines on it. The coordinate axes are like street names we lay down so we can give directions.
+            </p>
+            
+            <p>
+                The standard Cartesian system (named after Descartes) uses perpendicular axes and creates a grid of perfect squares. But this isn't the only possibility. To assign coordinates to points in a plane, we only need two pieces of information that, when combined, pinpoint exactly one location.
+            </p>
+            
+            <h4>Alternative: Oblique Coordinates</h4>
+            
+            <p>
+                Instead of perpendicular axes, we could use two axes that meet at any angle—say, 60°. This creates a grid of parallelograms (diamonds) instead of squares. The math works the same way; only the geometry of the grid changes. This is useful in crystallography, where atomic structures often form hexagonal patterns rather than square ones. With oblique axes tilted to match the crystal structure, atoms land on nice integer coordinates instead of messy fractions.
+            </p>
+            
+            <!-- Oblique Coordinates Diagram -->
+            <svg width="320" height="240" viewBox="0 0 320 240" style="display: block; margin: 15px auto; background-color: white; border-radius: 4px;">
+                <!-- Grid lines - u direction (horizontal-ish) -->
+                <line x1="20" y1="200" x2="300" y2="200" stroke="#ccc" stroke-width="1"/>
+                <line x1="50" y1="148" x2="300" y2="148" stroke="#ccc" stroke-width="1"/>
+                <line x1="80" y1="96" x2="300" y2="96" stroke="#ccc" stroke-width="1"/>
+                <line x1="110" y1="44" x2="300" y2="44" stroke="#ccc" stroke-width="1"/>
+                
+                <!-- Grid lines - v direction (slanted) -->
+                <line x1="80" y1="220" x2="170" y2="20" stroke="#ccc" stroke-width="1"/>
+                <line x1="140" y1="220" x2="230" y2="20" stroke="#ccc" stroke-width="1"/>
+                <line x1="200" y1="220" x2="290" y2="20" stroke="#ccc" stroke-width="1"/>
+                <line x1="260" y1="220" x2="300" y2="132" stroke="#ccc" stroke-width="1"/>
+                
+                <!-- Axes -->
+                <line x1="20" y1="200" x2="300" y2="200" stroke="#2d8a4e" stroke-width="2" marker-end="url(#arrowGreen)"/>
+                <line x1="20" y1="200" x2="110" y2="0" stroke="#9333ea" stroke-width="2" marker-end="url(#arrowPurple)"/>
+                
+                <!-- Arrow markers -->
+                <defs>
+                    <marker id="arrowGreen" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L9,3 z" fill="#2d8a4e"/>
+                    </marker>
+                    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                        <path d="M0,0 L0,6 L9,3 z" fill="#9333ea"/>
+                    </marker>
+                </defs>
+                
+                <!-- Axis labels -->
+                <text x="295" y="220" font-size="14" fill="#2d8a4e" font-weight="bold">u</text>
+                <text x="115" y="15" font-size="14" fill="#9333ea" font-weight="bold">v</text>
+                
+                <!-- Sample points -->
+                <circle cx="140" cy="148" r="5" fill="#e63946"/>
+                <text x="148" y="145" font-size="11" fill="#e63946">(2, 1)</text>
+                
+                <circle cx="200" cy="96" r="5" fill="#e63946"/>
+                <text x="208" y="93" font-size="11" fill="#e63946">(3, 2)</text>
+                
+                <circle cx="80" cy="148" r="5" fill="#e63946"/>
+                <text x="88" y="145" font-size="11" fill="#e63946">(1, 1)</text>
+                
+                <circle cx="200" cy="200" r="5" fill="#e63946"/>
+                <text x="208" y="197" font-size="11" fill="#e63946">(3, 0)</text>
+                
+                <!-- Origin -->
+                <circle cx="20" cy="200" r="4" fill="#333"/>
+                <text x="8" y="220" font-size="11" fill="#333">O</text>
+                
+                <!-- Angle arc -->
+                <path d="M 50 200 A 30 30 0 0 0 35 175" stroke="#666" stroke-width="1" fill="none"/>
+                <text x="52" y="185" font-size="10" fill="#666">60°</text>
+            </svg>
+            <p style="text-align: center; font-size: 0.85em; color: #666; margin-top: -10px;">Oblique coordinates with axes at 60°. The point (2, 1) means "2 units along $u$, then 1 unit along $v$."</p>
+            
+            <h4>Alternative: Polar Coordinates</h4>
+            
+            <p>
+                An even more dramatic departure: instead of "go right, then go up," we can use "face a direction, then walk a distance." In <strong>polar coordinates</strong>, a point is identified by:
+            </p>
+            <ul>
+                <li>$r$ = distance from the origin</li>
+                <li>$\theta$ = angle measured from the positive $x$-axis</li>
+            </ul>
+            <p>
+                The "grid lines" in polar coordinates are concentric circles (constant $r$) and rays emanating from the origin (constant $\theta$). This system is natural for anything involving rotation or circular symmetry—radar screens, for instance, or the orbits of planets.
+            </p>
+            
+            <!-- Polar Coordinates Diagram -->
+            <svg width="320" height="280" viewBox="0 0 320 280" style="display: block; margin: 15px auto; background-color: white; border-radius: 4px;">
+                <!-- Concentric circles (constant r) -->
+                <circle cx="160" cy="140" r="40" stroke="#ccc" stroke-width="1" fill="none"/>
+                <circle cx="160" cy="140" r="80" stroke="#ccc" stroke-width="1" fill="none"/>
+                <circle cx="160" cy="140" r="120" stroke="#ccc" stroke-width="1" fill="none"/>
+                
+                <!-- Radial lines (constant θ) -->
+                <line x1="160" y1="140" x2="290" y2="140" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="30" y2="140" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="160" y2="10" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="160" y2="270" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="252" y2="48" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="68" y2="232" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="252" y2="232" stroke="#ccc" stroke-width="1"/>
+                <line x1="160" y1="140" x2="68" y2="48" stroke="#ccc" stroke-width="1"/>
+                
+                <!-- Main axis (θ = 0) -->
+                <line x1="160" y1="140" x2="295" y2="140" stroke="#2d8a4e" stroke-width="2"/>
+                <text x="298" y="144" font-size="12" fill="#2d8a4e">θ = 0</text>
+                
+                <!-- Origin -->
+                <circle cx="160" cy="140" r="4" fill="#333"/>
+                <text x="165" y="155" font-size="11" fill="#333">O</text>
+                
+                <!-- r labels -->
+                <text x="195" y="155" font-size="10" fill="#666">r = 1</text>
+                <text x="235" y="155" font-size="10" fill="#666">r = 2</text>
+                <text x="275" y="155" font-size="10" fill="#666">r = 3</text>
+                
+                <!-- Sample points -->
+                <!-- Point at r=2, θ=45° -->
+                <circle cx="217" cy="83" r="5" fill="#e63946"/>
+                <line x1="160" y1="140" x2="217" y2="83" stroke="#e63946" stroke-width="1" stroke-dasharray="4,2"/>
+                <text x="225" y="80" font-size="11" fill="#e63946">(2, 45°)</text>
+                
+                <!-- Point at r=3, θ=90° -->
+                <circle cx="160" cy="20" r="5" fill="#3b82f6"/>
+                <text x="168" y="25" font-size="11" fill="#3b82f6">(3, 90°)</text>
+                
+                <!-- Point at r=1, θ=135° -->
+                <circle cx="132" cy="112" r="5" fill="#2a9d8f"/>
+                <text x="95" y="105" font-size="11" fill="#2a9d8f">(1, 135°)</text>
+                
+                <!-- Point at r=2, θ=180° -->
+                <circle cx="80" cy="140" r="5" fill="#9b59b6"/>
+                <text x="45" y="135" font-size="11" fill="#9b59b6">(2, 180°)</text>
+                
+                <!-- Angle arc for the 45° point -->
+                <path d="M 190 140 A 30 30 0 0 0 181 119" stroke="#e63946" stroke-width="1.5" fill="none"/>
+                <text x="188" y="125" font-size="10" fill="#e63946">45°</text>
+            </svg>
+            <p style="text-align: center; font-size: 0.85em; color: #666; margin-top: -10px;">Polar coordinates: each point is located by distance $r$ from origin and angle $\theta$ from the horizontal.</p>
+            
+            <h4>Why Different Systems?</h4>
+            
+            <p>
+                The golden rule of coordinate geometry: <strong>pick the coordinate system that matches your problem</strong>. If you're analyzing a square room, Cartesian coordinates make the boundaries simple ($x = 0$, $x = 10$, etc.). If you're analyzing ripples in a circular pond, polar coordinates make the boundary simple ($r = 5$). By choosing the right "address system," complicated equations can become simple ones.
+            </p>
+            
+            <p>
+                For this course, we'll work entirely with the standard perpendicular $x$-$y$ system. But knowing that alternatives exist helps you understand that coordinates are a tool we choose, not a fact about space itself.
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.1</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> Plot the following points and identify which quadrant (or axis) each lies in: $A = (2, 5)$, $B = (-3, 4)$, $C = (0, -2)$, $D = (-1, -4)$, $E = (3, 0)$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <ul>
+                        <li>$A = (2, 5)$: Quadrant I (both positive)</li>
+                        <li>$B = (-3, 4)$: Quadrant II ($x$ negative, $y$ positive)</li>
+                        <li>$C = (0, -2)$: On the $y$-axis (not in any quadrant)</li>
+                        <li>$D = (-1, -4)$: Quadrant III (both negative)</li>
+                        <li>$E = (3, 0)$: On the $x$-axis (not in any quadrant)</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> A point has coordinates $(-5, 7)$. Without plotting, determine which quadrant it's in. Then determine which quadrant $(7, -5)$ is in. Are these the same point?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$(-5, 7)$: $x$ is negative, $y$ is positive → Quadrant II</p>
+                    <p>$(7, -5)$: $x$ is positive, $y$ is negative → Quadrant IV</p>
+                    <p>These are <em>not</em> the same point. Order matters in ordered pairs.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> Describe all points where $x = 0$. Describe all points where $y = 0$. Where is the only point where both $x = 0$ and $y = 0$?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>All points where $x = 0$ lie on the $y$-axis (the vertical axis).</p>
+                    <p>All points where $y = 0$ lie on the $x$-axis (the horizontal axis).</p>
+                    <p>The only point where both $x = 0$ and $y = 0$ is the origin: $(0, 0)$.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> A point is in Quadrant III. What can you say for certain about the signs of its coordinates?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>In Quadrant III, both coordinates are negative: $x < 0$ and $y < 0$.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.2: SOLUTIONS AS POINTS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-2">12.2 Equations and Their Graphs</h2>
+        
+        <p>
+            In Section 10, we solved equations like $2x + 3 = 11$, finding a single value ($x = 4$) that made the equation true. Now consider an equation with <em>two</em> variables:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $y = 2x + 1$
+        </p>
+        
+        <p>
+            This equation doesn't have just one solution—it has infinitely many. For every value of $x$ you choose, there's a corresponding value of $y$ that makes the equation true:
+        </p>
+        
+        <ul>
+            <li>If $x = 0$: $y = 2(0) + 1 = 1$, so $(0, 1)$ is a solution</li>
+            <li>If $x = 1$: $y = 2(1) + 1 = 3$, so $(1, 3)$ is a solution</li>
+            <li>If $x = 2$: $y = 2(2) + 1 = 5$, so $(2, 5)$ is a solution</li>
+            <li>If $x = -1$: $y = 2(-1) + 1 = -1$, so $(-1, -1)$ is a solution</li>
+        </ul>
+        
+        <p>
+            But not every pair works. For example, $(3, 4)$ is <em>not</em> a solution: if $x = 3$, then $y = 2(3) + 1 = 7$, not $4$. The point $(3, 4)$ doesn't satisfy the equation.
+        </p>
+        
+        <p>
+            Each solution is an ordered pair $(x, y)$—which means each solution is a <em>point</em> in the coordinate plane. This is the key insight: <strong>solutions to an equation become points on a graph</strong>.
+        </p>
+        
+        <div class="definition">
+            <h4>Solution of an Equation in Two Variables</h4>
+            <p>A <strong>solution</strong> of an equation in $x$ and $y$ is an ordered pair $(x, y)$ that makes the equation true when you substitute those values.</p>
+            <p>The <strong>graph</strong> of an equation is the set of all points $(x, y)$ that are solutions.</p>
+        </div>
+        
+        <div class="big-idea">
+            <h4>The Fusion of Algebra and Geometry</h4>
+            
+            <p>
+                This definition—that the graph of an equation is the set of all its solutions—is one of the most powerful ideas in mathematics. It creates a bridge between two worlds:
+            </p>
+            
+            <ul>
+                <li><strong>Algebra</strong> gives us equations: symbols, operations, logical relationships</li>
+                <li><strong>Geometry</strong> gives us shapes: curves, lines, surfaces we can see and draw</li>
+            </ul>
+            
+            <p>
+                With this bridge, each world illuminates the other. A geometric question ("Where does this curve cross the $x$-axis?") becomes an algebraic problem (solve for $x$ when $y = 0$). An algebraic relationship ("$y$ is always twice $x$ plus one") becomes a visible shape (a line with a particular steepness).
+            </p>
+            
+            <p>
+                This idea extends far beyond the flat plane. Equations in three variables ($x$, $y$, $z$) have graphs that are surfaces in three-dimensional space. The figure below shows the graph of $z = x^2 - y^2$—a "saddle surface" that curves upward in one direction and downward in another. Every point on that surface satisfies the equation; every solution to the equation lies on that surface. <em>Use your mouse to click and drag the graph to rotate it—you'll see the saddle shape from different angles.</em>
+            </p>
+            
+            <div class="figure-container" style="background-color: #fdf2f8; border-color: #db2777;">
+                <div class="graph-title" style="color: #be185d;">A Glimpse Ahead: A 3D Graph</div>
+                <div id="fig-3d-saddle" class="plotly-graph" style="width: 100%; max-width: 550px; height: 450px;"></div>
+                <div class="graph-caption">The surface $z = x^2 - y^2$, called a "saddle" or "hyperbolic paraboloid." Every point $(x, y, z)$ on this surface satisfies the equation. This is the same idea as our 2D graphs, extended to three dimensions.</div>
+            </div>
+            
+            <p>
+                Don't worry about understanding this surface now—it's here to show where these ideas lead. For now, we'll focus on equations in two variables, whose graphs are curves (or lines) in the plane. But the principle is the same at every level: <strong>an equation defines a shape, and a shape encodes an equation</strong>.
+            </p>
+        </div>
+        
+        <h3>Building a Table of Values</h3>
+        
+        <p>
+            To graph an equation, we systematically find solutions by choosing $x$-values and calculating the corresponding $y$-values. A <strong>table of values</strong> organizes this process.
+        </p>
+        
+        <div class="example">
+            <h4>Example: Building a Table for $y = 2x - 1$</h4>
+            
+            <p>Choose several $x$-values (including negatives, zero, and positives for variety):</p>
+            
+            <table>
+                <tr>
+                    <th>$x$</th>
+                    <th>$y = 2x - 1$</th>
+                    <th>$(x, y)$</th>
+                </tr>
+                <tr>
+                    <td>$-2$</td>
+                    <td>$2(-2) - 1 = -5$</td>
+                    <td>$(-2, -5)$</td>
+                </tr>
+                <tr>
+                    <td>$-1$</td>
+                    <td>$2(-1) - 1 = -3$</td>
+                    <td>$(-1, -3)$</td>
+                </tr>
+                <tr>
+                    <td>$0$</td>
+                    <td>$2(0) - 1 = -1$</td>
+                    <td>$(0, -1)$</td>
+                </tr>
+                <tr>
+                    <td>$1$</td>
+                    <td>$2(1) - 1 = 1$</td>
+                    <td>$(1, 1)$</td>
+                </tr>
+                <tr>
+                    <td>$2$</td>
+                    <td>$2(2) - 1 = 3$</td>
+                    <td>$(2, 3)$</td>
+                </tr>
+                <tr>
+                    <td>$3$</td>
+                    <td>$2(3) - 1 = 5$</td>
+                    <td>$(3, 5)$</td>
+                </tr>
+            </table>
+            
+            <p>Each row gives us a point to plot. When we plot all these points and connect them, something remarkable happens: they form a perfectly straight line. The graph of this equation is shown in Fig. 12.2 below.</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.2: From Table to Graph</div>
+            <div id="fig-12-2" class="jxgbox" style="width: 500px; height: 450px;"></div>
+            <div class="graph-caption">The equation $y = 2x - 1$ graphed by plotting points from our table. All the points lie on a straight line—this is the visual signature of a linear equation.</div>
+        </div>
+        
+        <h3>Testing Whether a Point Is a Solution</h3>
+        
+        <p>
+            Given an equation and a point, you can test whether the point is a solution by substituting:
+        </p>
+        
+        <div class="example">
+            <h4>Example: Is $(3, 7)$ a solution of $y = 2x + 1$?</h4>
+            
+            <p>Substitute $x = 3$ and $y = 7$:</p>
+            <p>$$7 \stackrel{?}{=} 2(3) + 1$$</p>
+            <p>$$7 \stackrel{?}{=} 6 + 1$$</p>
+            <p>$$7 = 7 \quad \checkmark$$</p>
+            <p><strong>Yes</strong>, $(3, 7)$ is a solution. This point lies on the graph.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Is $(2, 4)$ a solution of $y = 2x + 1$?</h4>
+            
+            <p>Substitute $x = 2$ and $y = 4$:</p>
+            <p>$$4 \stackrel{?}{=} 2(2) + 1$$</p>
+            <p>$$4 \stackrel{?}{=} 4 + 1$$</p>
+            <p>$$4 \neq 5$$</p>
+            <p><strong>No</strong>, $(2, 4)$ is not a solution. This point does not lie on the graph.</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.2</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> For the equation $y = 3x - 2$, determine whether each point is a solution: (a) $(1, 1)$, (b) $(2, 4)$, (c) $(0, -2)$, (d) $(-1, -4)$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) $(1, 1)$: Is $1 = 3(1) - 2 = 1$? Yes. ✓ Solution</p>
+                    <p>(b) $(2, 4)$: Is $4 = 3(2) - 2 = 4$? Yes. ✓ Solution</p>
+                    <p>(c) $(0, -2)$: Is $-2 = 3(0) - 2 = -2$? Yes. ✓ Solution</p>
+                    <p>(d) $(-1, -4)$: Is $-4 = 3(-1) - 2 = -5$? No. ✗ Not a solution</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Build a table of values for $y = -x + 3$ using $x = -2, -1, 0, 1, 2, 3$. List the six ordered pairs.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <table>
+                        <tr><th>$x$</th><th>$y = -x + 3$</th><th>$(x, y)$</th></tr>
+                        <tr><td>$-2$</td><td>$-(-2) + 3 = 5$</td><td>$(-2, 5)$</td></tr>
+                        <tr><td>$-1$</td><td>$-(-1) + 3 = 4$</td><td>$(-1, 4)$</td></tr>
+                        <tr><td>$0$</td><td>$-(0) + 3 = 3$</td><td>$(0, 3)$</td></tr>
+                        <tr><td>$1$</td><td>$-(1) + 3 = 2$</td><td>$(1, 2)$</td></tr>
+                        <tr><td>$2$</td><td>$-(2) + 3 = 1$</td><td>$(2, 1)$</td></tr>
+                        <tr><td>$3$</td><td>$-(3) + 3 = 0$</td><td>$(3, 0)$</td></tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> The point $(4, k)$ lies on the graph of $y = 2x - 5$. Find the value of $k$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Since $(4, k)$ is on the graph, it must satisfy the equation.</p>
+                    <p>Substitute $x = 4$: $k = 2(4) - 5 = 8 - 5 = 3$</p>
+                    <p>Therefore $k = 3$, and the point is $(4, 3)$.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.3: INDEPENDENT AND DEPENDENT VARIABLES -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-3">12.3 Variables: Independent and Dependent</h2>
+        
+        <p>
+            In an equation like $y = 2x + 1$, the two variables play different roles. We <em>choose</em> a value for $x$, and then the equation <em>determines</em> the corresponding value of $y$. This asymmetry has names:
+        </p>
+        
+        <div class="definition">
+            <h4>Independent and Dependent Variables</h4>
+            <p>The <strong>independent variable</strong> is the one we choose freely—we control its value.</p>
+            <p>The <strong>dependent variable</strong> is the one whose value is determined by the equation once we've chosen the independent variable—it <em>depends on</em> our choice.</p>
+        </div>
+        
+        <p>
+            In the equation $y = 2x + 1$:
+        </p>
+        <ul>
+            <li>$x$ is the <strong>independent variable</strong>: we pick any value we like</li>
+            <li>$y$ is the <strong>dependent variable</strong>: its value is forced once we pick $x$</li>
+        </ul>
+        
+        <p>
+            This is a <em>convention</em>, not an absolute rule. Mathematically, we could rewrite the same relationship as $x = \frac{y - 1}{2}$ and treat $y$ as independent. But the standard convention—$x$ independent, $y$ dependent—is so widespread that it's worth learning. When you see an equation written as "$y = \text{(something with } x\text{)}$", the author almost always intends $x$ to be the independent variable.
+        </p>
+        
+        <h3>Variables Beyond $x$ and $y$</h3>
+        
+        <p>
+            The letters $x$ and $y$ are conventional for abstract mathematical relationships, but real-world quantities have their own natural names:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Relationship</th>
+                <th>Independent Variable</th>
+                <th>Dependent Variable</th>
+            </tr>
+            <tr>
+                <td>Distance traveled at constant speed</td>
+                <td>$t$ (time)</td>
+                <td>$d$ (distance)</td>
+            </tr>
+            <tr>
+                <td>Cost of buying items</td>
+                <td>$n$ (number of items)</td>
+                <td>$C$ (total cost)</td>
+            </tr>
+            <tr>
+                <td>Temperature conversion</td>
+                <td>$C$ (Celsius)</td>
+                <td>$F$ (Fahrenheit)</td>
+            </tr>
+            <tr>
+                <td>Area of a square</td>
+                <td>$s$ (side length)</td>
+                <td>$A$ (area)</td>
+            </tr>
+            <tr>
+                <td>Phone bill based on data usage</td>
+                <td>$g$ (gigabytes used)</td>
+                <td>$C$ (monthly cost)</td>
+            </tr>
+        </table>
+        
+        <p>
+            In each case, the independent variable is typically what we control or measure first, and the dependent variable is what results from that choice.
+        </p>
+        
+        <div class="key-point">
+            <h4>Graphing Convention</h4>
+            <p>When graphing a relationship between two variables:</p>
+            <ul>
+                <li>The <strong>independent variable</strong> goes on the <strong>horizontal axis</strong></li>
+                <li>The <strong>dependent variable</strong> goes on the <strong>vertical axis</strong></li>
+            </ul>
+            <p>So if we're graphing distance vs. time, time ($t$) goes on the horizontal axis, and distance ($d$) goes on the vertical axis. The graph shows how distance <em>depends on</em> time.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Identifying Variables</h4>
+            
+            <p>A car travels at a constant 60 miles per hour. The relationship between time $t$ (in hours) and distance $d$ (in miles) is:</p>
+            <p style="text-align: center;">$d = 60t$</p>
+            
+            <p><strong>Independent variable:</strong> $t$ (time)—we choose how long the car travels</p>
+            <p><strong>Dependent variable:</strong> $d$ (distance)—the distance depends on how long we travel</p>
+            
+            <p>If we graph this, $t$ goes on the horizontal axis and $d$ on the vertical axis. When $t = 2$ hours, $d = 120$ miles, giving the point $(2, 120)$.</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.3</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> For the equation $A = \pi r^2$ (area of a circle), identify the independent and dependent variables. Which axis would each go on?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Independent variable: $r$ (radius)—we choose the size of the circle</p>
+                    <p>Dependent variable: $A$ (area)—the area depends on the radius we chose</p>
+                    <p>When graphing: $r$ on the horizontal axis, $A$ on the vertical axis.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> A streaming service costs 15 dollars per month. Write an equation relating the number of months $m$ to the total cost $C$. Which variable is independent?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Equation: $C = 15m$</p>
+                    <p>Independent variable: $m$ (months)—we choose how long to subscribe</p>
+                    <p>Dependent variable: $C$ (cost)—the total cost depends on how many months</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> The equation $F = \frac{9}{5}C + 32$ converts Celsius to Fahrenheit. If you know a temperature in Celsius and want to find Fahrenheit, which variable is independent? What if you're given Fahrenheit and want Celsius?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>If given Celsius, want Fahrenheit: $C$ is independent, $F$ is dependent. The equation $F = \frac{9}{5}C + 32$ is already set up for this.</p>
+                    <p>If given Fahrenheit, want Celsius: $F$ is independent, $C$ is dependent. For this direction, it's easier to rearrange the equation as $C = \frac{5}{9}(F - 32)$.</p>
+                    <p>The same relationship can be viewed either way—which variable is "independent" depends on what information you start with and what you're trying to find.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.4: GRAPHING LINEAR EQUATIONS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-4">12.4 Graphing Linear Equations</h2>
+        
+        <p>
+            Why did all the points in Fig. 12.2 fall on a straight line? Because the equation $y = 2x - 1$ is a <strong>linear equation</strong>.
+        </p>
+        
+        <div class="definition">
+            <h4>Linear Equation in Two Variables</h4>
+            <p>A <strong>linear equation</strong> is an equation where the variables appear only to the first power—no $x^2$, no $y^3$, no $xy$, no $\sqrt{x}$. The defining characteristic is simply: each variable is raised only to the power of 1.</p>
+            <p>Linear equations can be written in many equivalent forms. Two common ones are:</p>
+            <ul>
+                <li><strong>Standard form:</strong> $Ax + By = C$</li>
+                <li><strong>Slope-intercept form:</strong> $y = mx + b$</li>
+            </ul>
+            <p>We'll encounter other forms (like point-slope form) later. What makes an equation "linear" isn't the form it's written in—it's the fact that $x$ and $y$ appear only to the first power.</p>
+        </div>
+        
+        <p>
+            The fundamental fact about linear equations is this: <strong>the graph of every linear equation is a straight line</strong>. This is why they're called "linear."
+        </p>
+        
+        <div class="key-point">
+            <h4>Why a Straight Line?</h4>
+            <p>
+                Think of a linear equation as a simple, unchanging rule. Take $y = 2x + 1$. This says: "Whatever $x$ is, double it and add 1 to get $y$."
+            </p>
+            <p>
+                Imagine walking along this graph, starting at any point. Each time you take one step to the right (increasing $x$ by 1), the rule forces you to go up by exactly 2 (because $y$ increases by $2 \times 1 = 2$). The instruction never changes: step right, go up 2. Step right, go up 2. Step right, go up 2.
+            </p>
+            <p>
+                A constant, unchanging movement rule produces a straight path. If the rule ever varied—"sometimes go up 2, sometimes go up 3"—you'd get a curve. But linear equations have constant rules, so they produce straight lines. This constant "rise per step" is exactly what we'll call <em>slope</em> in the next section.
+            </p>
+        </div>
+        
+        <p>
+            Conversely, every straight line in the coordinate plane can be described by a linear equation. There's a perfect correspondence between lines (geometry) and linear equations (algebra).
+        </p>
+        
+        <h3>How Many Points Do You Need?</h3>
+        
+        <p>
+            Since two points determine a line, you technically need only two solutions to graph a linear equation. However, plotting a third point is good practice—it serves as an error check. If your three points don't line up, you've made a calculation mistake somewhere.
+        </p>
+        
+        <div class="key-point">
+            <h4>Graphing Strategy</h4>
+            <p>To graph a linear equation:</p>
+            <ol>
+                <li>Find at least three solutions by choosing $x$-values and calculating $y$-values</li>
+                <li>Plot these points on the coordinate plane</li>
+                <li>Verify the points are collinear (lie on a line)</li>
+                <li>Draw a straight line through them, extending beyond the plotted points</li>
+            </ol>
+        </div>
+        
+        <h3>Intercepts</h3>
+        
+        <p>
+            Two special points on any graph are particularly useful:
+        </p>
+        
+        <div class="definition">
+            <h4>Intercepts</h4>
+            <p><strong>$x$-intercept:</strong> The point where the graph crosses the $x$-axis. At this point, $y = 0$.</p>
+            <p><strong>$y$-intercept:</strong> The point where the graph crosses the $y$-axis. At this point, $x = 0$.</p>
+        </div>
+        
+        <p>
+            Intercepts are easy to find algebraically:
+        </p>
+        
+        <ul>
+            <li>To find the <strong>$y$-intercept</strong>: set $x = 0$ and solve for $y$</li>
+            <li>To find the <strong>$x$-intercept</strong>: set $y = 0$ and solve for $x$</li>
+        </ul>
+        
+        <div class="example">
+            <h4>Example: Finding Intercepts of $y = 2x - 4$</h4>
+            
+            <p><strong>$y$-intercept</strong> (set $x = 0$):</p>
+            <p>$$y = 2(0) - 4 = -4$$</p>
+            <p>The $y$-intercept is $(0, -4)$.</p>
+            
+            <p><strong>$x$-intercept</strong> (set $y = 0$):</p>
+            <p>$$0 = 2x - 4$$</p>
+            <p>$$4 = 2x$$</p>
+            <p>$$x = 2$$</p>
+            <p>The $x$-intercept is $(2, 0)$.</p>
+            
+            <p>With these two intercepts plus one more point for verification, we can graph the line.</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.3: Graphing $y = 2x - 4$ Using Intercepts</div>
+            <div id="fig-12-3" class="jxgbox" style="width: 500px; height: 450px;"></div>
+            <div class="graph-caption">The line $y = 2x - 4$ passes through the intercepts $(0, -4)$ and $(2, 0)$. The third point $(3, 2)$ confirms our line is correct.</div>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.4</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> Find the $x$-intercept and $y$-intercept of $y = 3x - 6$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$y$-intercept (set $x = 0$): $y = 3(0) - 6 = -6$. The $y$-intercept is $(0, -6)$.</p>
+                    <p>$x$-intercept (set $y = 0$): $0 = 3x - 6$, so $3x = 6$, thus $x = 2$. The $x$-intercept is $(2, 0)$.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> Find the $x$-intercept and $y$-intercept of $2x + 3y = 12$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$y$-intercept (set $x = 0$): $2(0) + 3y = 12$, so $3y = 12$, thus $y = 4$. The $y$-intercept is $(0, 4)$.</p>
+                    <p>$x$-intercept (set $y = 0$): $2x + 3(0) = 12$, so $2x = 12$, thus $x = 6$. The $x$-intercept is $(6, 0)$.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> Which of the following are linear equations? (a) $y = 5x - 3$, (b) $y = x^2 + 1$, (c) $3x - 2y = 7$, (d) $xy = 6$, (e) $y = 4$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) $y = 5x - 3$: Linear ✓ (both variables to first power)</p>
+                    <p>(b) $y = x^2 + 1$: Not linear ✗ ($x$ is squared)</p>
+                    <p>(c) $3x - 2y = 7$: Linear ✓ (standard form, both variables to first power)</p>
+                    <p>(d) $xy = 6$: Not linear ✗ ($x$ and $y$ are multiplied together)</p>
+                    <p>(e) $y = 4$: Linear ✓ (can be written as $0x + y = 4$; it's a horizontal line)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.5: SLOPE -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-5">12.5 Slope: Measuring Steepness</h2>
+        
+        <p>
+            Consider a ramp. Some ramps are gentle—easy to walk up. Others are steep—hard to climb. We need a way to measure this steepness precisely. In mathematics, this measurement is called <strong>slope</strong>.
+        </p>
+        
+        <p>
+            Intuitively, slope answers the question: <em>For each unit you move horizontally, how much does the line rise (or fall) vertically?</em> Fig. 12.4 below shows several lines with different slopes—compare them visually as we develop the formal definition.
+        </p>
+        
+        <div class="definition">
+            <h4>Slope</h4>
+            <p>The <strong>slope</strong> of a line measures its steepness. Given two points $(x_1, y_1)$ and $(x_2, y_2)$ on a line:</p>
+            <p style="text-align: center; font-size: 1.2em;">
+                $\displaystyle m = \frac{\text{rise}}{\text{run}} = \frac{\text{change in } y}{\text{change in } x} = \frac{y_2 - y_1}{x_2 - x_1}$
+            </p>
+            <p>The letter $m$ is traditionally used for slope.</p>
+            <p>The "rise" is how much the line goes up (or down, if negative). The "run" is how much the line goes across. Slope is the ratio of these two changes—it tells you how much you rise or fall for each step forward.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Calculating Slope from Two Points</h4>
+            
+            <p>Find the slope of the line through $(1, 2)$ and $(4, 8)$.</p>
+            
+            <p>Using the slope formula with $(x_1, y_1) = (1, 2)$ and $(x_2, y_2) = (4, 8)$:</p>
+            
+            <p>$$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{8 - 2}{4 - 1} = \frac{6}{3} = 2$$</p>
+            
+            <p>The slope is $2$. This means: for every 1 unit you move to the right, the line rises 2 units.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Slope with a Negative Result</h4>
+            
+            <p>Find the slope of the line through $(0, 5)$ and $(3, 2)$.</p>
+            
+            <p>$$m = \frac{2 - 5}{3 - 0} = \frac{-3}{3} = -1$$</p>
+            
+            <p>The slope is $-1$. The negative sign tells us the line goes <em>down</em> as we move right. For every 1 unit to the right, the line falls 1 unit.</p>
+        </div>
+        
+        <h3>Interpreting Slope Values</h3>
+        
+        <p>
+            The sign and magnitude of slope tell us about the line's direction and steepness:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Slope</th>
+                <th>Direction</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>$m > 0$ (positive)</td>
+                <td>Rises left to right</td>
+                <td>Line goes uphill</td>
+            </tr>
+            <tr>
+                <td>$m < 0$ (negative)</td>
+                <td>Falls left to right</td>
+                <td>Line goes downhill</td>
+            </tr>
+            <tr>
+                <td>$m = 0$</td>
+                <td>Horizontal</td>
+                <td>Flat—no rise at all</td>
+            </tr>
+            <tr>
+                <td>$m$ undefined</td>
+                <td>Vertical</td>
+                <td>No run—division by zero</td>
+            </tr>
+        </table>
+        
+        <p>
+            The larger the absolute value of the slope, the steeper the line. A slope of $3$ is steeper than a slope of $\frac{1}{2}$. A slope of $-4$ is steeper than a slope of $-1$ (both go downhill, but $-4$ is steeper).
+        </p>
+        
+        <div class="key-point">
+            <h4>Horizontal and Vertical Lines</h4>
+            <p><strong>Horizontal lines</strong> have equation $y = c$ (where $c$ is a constant). The slope is $0$ because there's no rise—the line is flat.</p>
+            <p><strong>Vertical lines</strong> have equation $x = c$. The slope is <em>undefined</em> because the run is $0$, and we can't divide by zero.</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.4: Comparing Slopes</div>
+            <div id="fig-12-4" class="jxgbox" style="width: 550px; height: 500px;"></div>
+            <div class="graph-caption">Lines with different slopes: steep positive ($m = 2$), gentle positive ($m = \frac{1}{2}$), negative ($m = -1$), and horizontal ($m = 0$). The vertical line $x = 4$ has undefined slope.</div>
+        </div>
+        
+        <h3>Slope as Rate of Change</h3>
+        
+        <p>
+            Slope isn't just about steepness on a graph—it measures how quickly one quantity changes relative to another. This interpretation becomes crucial in applications. When we have real-world variables, slope tells us the rate: how much the dependent variable changes for each unit change in the independent variable.
+        </p>
+        
+        <div class="example">
+            <h4>Example: Slope as Speed</h4>
+            
+            <p>A car's distance from home is recorded over time. Let $t$ represent time (in hours) and $d$ represent distance (in miles). The data points $(1, 50)$ and $(3, 150)$ lie on the graph—meaning at $t = 1$ hour the car was 50 miles away, and at $t = 3$ hours it was 150 miles away.</p>
+            
+            <p>Here $t$ is the independent variable (horizontal axis) and $d$ is the dependent variable (vertical axis). The slope formula becomes:</p>
+            
+            <p>$$m = \frac{d_2 - d_1}{t_2 - t_1} = \frac{150 - 50}{3 - 1} = \frac{100 \text{ miles}}{2 \text{ hours}} = 50 \text{ miles per hour}$$</p>
+            
+            <p>The slope is 50—the car's speed. Slope = rate of change of distance with respect to time = speed.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Slope as Cost Rate</h4>
+            
+            <p>A phone plan's monthly cost depends on data usage. Let $g$ represent data used (in gigabytes) and $C$ represent the monthly cost (in dollars). The graph passes through $(2, 45)$ and $(5, 75)$—meaning 2 GB costs 45 dollars and 5 GB costs 75 dollars.</p>
+            
+            <p>Here $g$ is the independent variable and $C$ is the dependent variable. Applying the slope formula:</p>
+            
+            <p>$$m = \frac{C_2 - C_1}{g_2 - g_1} = \frac{75 - 45}{5 - 2} = \frac{30 \text{ dollars}}{3 \text{ GB}} = 10 \text{ dollars per GB}$$</p>
+            
+            <p>The slope is 10—the plan charges 10 dollars per gigabyte of data used.</p>
+        </div>
+        
+        <p>
+            In these examples, slope has real-world meaning: speed, cost per unit, rate of growth. Whenever you see a linear relationship, the slope tells you how fast the dependent variable changes as the independent variable changes.
+        </p>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.5</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> Find the slope of the line through $(-2, 3)$ and $(4, -1)$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$m = \frac{-1 - 3}{4 - (-2)} = \frac{-4}{6} = -\frac{2}{3}$</p>
+                    <p>The slope is $-\frac{2}{3}$. The line falls (negative slope), dropping 2 units for every 3 units to the right.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> Find the slope of the line through $(3, 5)$ and $(3, -2)$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$m = \frac{-2 - 5}{3 - 3} = \frac{-7}{0}$</p>
+                    <p>Division by zero is undefined. This is a vertical line ($x = 3$), and vertical lines have <strong>undefined slope</strong>.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> Find the slope of the line through $(-1, 4)$ and $(5, 4)$.</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$m = \frac{4 - 4}{5 - (-1)} = \frac{0}{6} = 0$</p>
+                    <p>The slope is $0$. This is a horizontal line ($y = 4$)—it has no rise.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> A water tank is being filled. At $t = 2$ minutes, the tank contains $V = 50$ gallons. At $t = 8$ minutes, it contains $V = 170$ gallons. Treating $t$ as the independent variable and $V$ as the dependent variable, find the slope. What does this slope represent in the real world?</p>
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$$m = \frac{V_2 - V_1}{t_2 - t_1} = \frac{170 \text{ gallons} - 50 \text{ gallons}}{8 \text{ min} - 2 \text{ min}} = \frac{120 \text{ gallons}}{6 \text{ min}} = 20 \text{ gallons/min}$$</p>
+                    <p>The slope is <strong>20 gallons per minute</strong>. This represents the <strong>rate of filling</strong>—the tank gains 20 gallons for each minute that passes. Note that slope in real-world contexts carries units: here it's gallons/minute, just as speed is miles/hour or cost rate is dollars/GB.</p>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+        <!-- SECTION 12.6: SLOPE-INTERCEPT FORM -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-6">12.6 Slope-Intercept Form</h2>
+        
+        <p>
+            In Section 12.5, we defined slope as $m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$—the ratio of vertical change to horizontal change, often called "rise over run." Now we'll see how slope and the $y$-intercept come together in the most useful form of a linear equation.
+        </p>
+        
+        <div class="definition">
+            <h4>Slope-Intercept Form</h4>
+            <p>A linear equation written as</p>
+            <p style="text-align: center; font-size: 1.3em;">$y = mx + b$</p>
+            <p>is in <strong>slope-intercept form</strong>, where:</p>
+            <ul>
+                <li>$m$ is the <strong>slope</strong> of the line</li>
+                <li>$b$ is the <strong>$y$-intercept</strong> (the $y$-coordinate where the line crosses the $y$-axis)</li>
+            </ul>
+        </div>
+        
+        <p>
+            This isn't just a convenient formula to memorize—there are clear reasons <em>why</em> $m$ represents slope and $b$ represents the $y$-intercept. Understanding these reasons makes the formula meaningful rather than arbitrary.
+        </p>
+        
+        <h3>Why $b$ Is the $y$-Intercept</h3>
+        
+        <p>
+            The $y$-intercept is where the line crosses the $y$-axis. On the $y$-axis, the $x$-coordinate is always $0$. So to find the $y$-intercept, we substitute $x = 0$ into the equation:
+        </p>
+        
+        <p>$$y = m(0) + b = 0 + b = b$$</p>
+        
+        <p>
+            When $x = 0$, $y = b$. The line passes through the point $(0, b)$—which is exactly what "$y$-intercept equals $b$" means.
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.5a: Why $b$ Is the $y$-Intercept</div>
+            <div id="fig-12-5a" class="jxgbox" style="width: 500px; height: 400px;"></div>
+            <div class="graph-caption">Three lines with the same slope ($m = 1$) but different $y$-intercepts. Each line crosses the $y$-axis at its $b$ value: $y = x + 3$ crosses at $(0, 3)$, $y = x$ crosses at $(0, 0)$, and $y = x - 2$ crosses at $(0, -2)$.</div>
+        </div>
+        
+        <h3>Why $m$ Is the Slope</h3>
+        
+        <p>
+            Let's verify that the coefficient $m$ really is the slope by using the slope formula from Section 12.5. Take any two points on the line $y = mx + b$:
+        </p>
+        
+        <ul>
+            <li>At $x = x_1$, we get $y_1 = mx_1 + b$</li>
+            <li>At $x = x_2$, we get $y_2 = mx_2 + b$</li>
+        </ul>
+        
+        <p>
+            Now apply the slope formula:
+        </p>
+        
+        <p>$$\text{slope} = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1} = \frac{(mx_2 + b) - (mx_1 + b)}{x_2 - x_1} = \frac{mx_2 - mx_1}{x_2 - x_1} = \frac{m(x_2 - x_1)}{x_2 - x_1} = m$$</p>
+        
+        <p>
+            No matter which two points you choose, the slope formula gives $m$. The coefficient of $x$ in $y = mx + b$ <em>is</em> the slope.
+        </p>
+        
+        <p>
+            This also tells us how to interpret $m$ geometrically. Since $m = \frac{\Delta y}{\Delta x}$:
+        </p>
+        
+        <ul>
+            <li>If $m = 2 = \frac{2}{1}$, then $\Delta y = 2$ when $\Delta x = 1$: the line rises 2 units for every 1 unit to the right</li>
+            <li>If $m = \frac{2}{3}$, then $\Delta y = 2$ when $\Delta x = 3$: the line rises 2 units for every 3 units to the right</li>
+            <li>If $m = -\frac{1}{2}$, then $\Delta y = -1$ when $\Delta x = 2$: the line falls 1 unit for every 2 units to the right</li>
+        </ul>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.5b: Why $m$ Is the Slope — A Family of Lines</div>
+            <div id="fig-12-5b" class="jxgbox" style="width: 520px; height: 420px;"></div>
+            <div class="graph-caption">Four lines through the same $y$-intercept $(0, 2)$ but with different slopes. Steeper lines have larger $|m|$. Positive $m$ rises left-to-right; negative $m$ falls.</div>
+        </div>
+        
+        <h3>Reading Slope and Intercept from an Equation</h3>
+        
+        <p>
+            When an equation is in slope-intercept form, you can read off $m$ and $b$ directly:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Equation</th>
+                <th>Slope ($m$)</th>
+                <th>$y$-intercept ($b$)</th>
+            </tr>
+            <tr>
+                <td>$y = 3x + 5$</td>
+                <td>$3$</td>
+                <td>$5$</td>
+            </tr>
+            <tr>
+                <td>$y = -2x + 1$</td>
+                <td>$-2$</td>
+                <td>$1$</td>
+            </tr>
+            <tr>
+                <td>$y = \frac{1}{2}x - 4$</td>
+                <td>$\frac{1}{2}$</td>
+                <td>$-4$</td>
+            </tr>
+            <tr>
+                <td>$y = x$</td>
+                <td>$1$</td>
+                <td>$0$</td>
+            </tr>
+            <tr>
+                <td>$y = -x - 3$</td>
+                <td>$-1$</td>
+                <td>$-3$</td>
+            </tr>
+            <tr>
+                <td>$y = 7$</td>
+                <td>$0$</td>
+                <td>$7$</td>
+            </tr>
+        </table>
+        
+        <p>
+            Notice the last row: $y = 7$ can be written as $y = 0x + 7$. The slope is $0$ (horizontal line), and the $y$-intercept is $7$.
+        </p>
+        
+        <h3>Graphing Using Slope-Intercept Form</h3>
+        
+        <p>
+            Slope-intercept form gives us an efficient graphing method:
+        </p>
+        
+        <div class="key-point">
+            <h4>Graphing from $y = mx + b$</h4>
+            <ol>
+                <li><strong>Plot the $y$-intercept:</strong> Start at the point $(0, b)$ on the $y$-axis</li>
+                <li><strong>Use the slope to find another point:</strong> From $(0, b)$, use $m = \frac{\Delta y}{\Delta x}$ to move to a second point. If $m = \frac{2}{3}$, move right 3 units ($\Delta x = 3$) and up 2 units ($\Delta y = 2$). If $m = -\frac{1}{4}$, move right 4 units and down 1 unit.</li>
+                <li><strong>Draw the line:</strong> Connect the points and extend in both directions</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Graph $y = 2x - 3$</h4>
+            
+            <p><strong>Step 1:</strong> Identify slope and $y$-intercept.</p>
+            <p>$m = 2$, $b = -3$</p>
+            
+            <p><strong>Step 2:</strong> Plot the $y$-intercept $(0, -3)$.</p>
+            
+            <p><strong>Step 3:</strong> From $(0, -3)$, use the slope. Since $m = 2 = \frac{2}{1}$, we have $\frac{\Delta y}{\Delta x} = \frac{2}{1}$:</p>
+            <ul>
+                <li>Move right 1 unit ($\Delta x = 1$)</li>
+                <li>Move up 2 units ($\Delta y = 2$)</li>
+                <li>This gives the point $(1, -1)$</li>
+            </ul>
+            
+            <p><strong>Step 4:</strong> Draw the line through $(0, -3)$ and $(1, -1)$. (See Fig. 12.5c below.)</p>
+            
+            <p><strong>Check:</strong> Find a third point. At $x = 2$: $y = 2(2) - 3 = 1$. Does $(2, 1)$ lie on our line? Yes! ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Graph $y = -\frac{1}{2}x + 4$</h4>
+            
+            <p><strong>Step 1:</strong> Identify slope and $y$-intercept.</p>
+            <p>$m = -\frac{1}{2}$, $b = 4$</p>
+            
+            <p><strong>Step 2:</strong> Plot the $y$-intercept $(0, 4)$.</p>
+            
+            <p><strong>Step 3:</strong> From $(0, 4)$, use the slope. Since $m = -\frac{1}{2}$, we have $\frac{\Delta y}{\Delta x} = \frac{-1}{2}$:</p>
+            <ul>
+                <li>Move right 2 units ($\Delta x = 2$)</li>
+                <li>Move down 1 unit ($\Delta y = -1$)</li>
+                <li>This gives the point $(2, 3)$</li>
+            </ul>
+            
+            <p><strong>Step 4:</strong> Draw the line through $(0, 4)$ and $(2, 3)$. (See Fig. 12.5c below.)</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.5c: Graphing from Slope-Intercept Form</div>
+            <div id="fig-12-5c" class="jxgbox" style="width: 520px; height: 450px;"></div>
+            <div class="graph-caption">The lines $y = 2x - 3$ (blue) and $y = -\frac{1}{2}x + 4$ (red) graphed using the slope-intercept method. Starting points are the $y$-intercepts; dashed lines show the $\Delta x$ and $\Delta y$ movements.</div>
+        </div>
+        
+        <h3>Writing Equations in Slope-Intercept Form</h3>
+        
+        <p>
+            If you know the slope and $y$-intercept, writing the equation is straightforward:
+        </p>
+        
+        <div class="example">
+            <h4>Example: Write the Equation</h4>
+            
+            <p>A line has slope $m = 2$ and $y$-intercept $b = -3$. Write its equation.</p>
+            
+            <p><strong>Solution:</strong> Substitute into $y = mx + b$:</p>
+            <p>$$y = 2x + (-3) = 2x - 3$$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.6</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> For each equation, identify the slope and $y$-intercept:</p>
+                <p>(a) $y = 4x - 7$ &nbsp;&nbsp; (b) $y = -3x + 2$ &nbsp;&nbsp; (c) $y = \frac{2}{5}x$ &nbsp;&nbsp; (d) $y = -x + 1$ &nbsp;&nbsp; (e) $y = 6$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">19.</span> Write the equation of a line with slope $-\frac{3}{4}$ and $y$-intercept $5$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">20.</span> Graph $y = -x + 2$ using the slope-intercept method. List the $y$-intercept and one other point you found using the slope.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">21.</span> A line has $y$-intercept $(0, -4)$ and passes through $(3, 2)$. Find the slope, then write the equation in slope-intercept form.</p>
+            </div>
+        </div>
+        
+        <div class="solutions">
+            <h4>Solutions: Section 12.6</h4>
+            
+            <div class="solution">
+                <p><strong>18.</strong></p>
+                <p>(a) $m = 4$, $b = -7$</p>
+                <p>(b) $m = -3$, $b = 2$</p>
+                <p>(c) $m = \frac{2}{5}$, $b = 0$ (the equation is $y = \frac{2}{5}x + 0$)</p>
+                <p>(d) $m = -1$, $b = 1$</p>
+                <p>(e) $m = 0$, $b = 6$ (horizontal line)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>19.</strong> $y = mx + b = -\frac{3}{4}x + 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>20.</strong> $m = -1 = \frac{-1}{1}$, $b = 2$</p>
+                <p>$y$-intercept: $(0, 2)$</p>
+                <p>From $(0, 2)$, use $\frac{\Delta y}{\Delta x} = \frac{-1}{1}$: move right 1 ($\Delta x = 1$) and down 1 ($\Delta y = -1$): $(1, 1)$</p>
+                <p>The line passes through $(0, 2)$ and $(1, 1)$:</p>
+                <div id="sol-20-graph" class="jxgbox solution-graph" style="width: 300px; height: 300px;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>21.</strong> Using the two points $(0, -4)$ and $(3, 2)$:</p>
+                <p>$$m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1} = \frac{2 - (-4)}{3 - 0} = \frac{6}{3} = 2$$</p>
+                <p>With $m = 2$ and $b = -4$:</p>
+                <p>$y = 2x - 4$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.7: OTHER FORMS OF LINEAR EQUATIONS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-7">12.7 Other Forms of Linear Equations</h2>
+        
+        <p>
+            Slope-intercept form is convenient for graphing and for reading off the slope and intercept. But linear equations appear in other forms too, each useful in different situations.
+        </p>
+        
+        <h3>Standard Form</h3>
+        
+        <div class="definition">
+            <h4>Standard Form</h4>
+            <p>A linear equation in <strong>standard form</strong> is written as:</p>
+            <p style="text-align: center; font-size: 1.2em;">$Ax + By = C$</p>
+            <p>where $A$, $B$, and $C$ are constants, and typically $A \geq 0$.</p>
+        </div>
+        
+        <p>
+            Standard form is common in applications (especially systems of equations, which we'll study in Section 13) and makes finding intercepts easy:
+        </p>
+        
+        <ul>
+            <li><strong>$x$-intercept:</strong> Set $y = 0$ and solve for $x$</li>
+            <li><strong>$y$-intercept:</strong> Set $x = 0$ and solve for $y$</li>
+        </ul>
+        
+        <div class="example">
+            <h4>Example: Finding Intercepts from Standard Form</h4>
+            
+            <p>Find the intercepts of $3x + 2y = 12$.</p>
+            
+            <p><strong>$x$-intercept</strong> (set $y = 0$):</p>
+            <p>$3x + 2(0) = 12$</p>
+            <p>$3x = 12$</p>
+            <p>$x = 4$</p>
+            <p>The $x$-intercept is $(4, 0)$.</p>
+            
+            <p><strong>$y$-intercept</strong> (set $x = 0$):</p>
+            <p>$3(0) + 2y = 12$</p>
+            <p>$2y = 12$</p>
+            <p>$y = 6$</p>
+            <p>The $y$-intercept is $(0, 6)$.</p>
+        </div>
+        
+        <h3>Converting Standard Form to Slope-Intercept Form</h3>
+        
+        <p>
+            To convert from standard form to slope-intercept form, solve for $y$:
+        </p>
+        
+        <div class="example">
+            <h4>Example: Convert $2x + 3y = 12$ to Slope-Intercept Form</h4>
+            
+            <p>Start with: $2x + 3y = 12$</p>
+            
+            <p>Subtract $2x$ from both sides:</p>
+            <p>$3y = -2x + 12$</p>
+            
+            <p>Divide both sides by $3$:</p>
+            <p>$y = -\frac{2}{3}x + 4$</p>
+            
+            <p>Now we can read off: slope $m = -\frac{2}{3}$, $y$-intercept $b = 4$.</p>
+        </div>
+        
+        <h3>Point-Slope Form</h3>
+        
+        <p>
+            What if you know a point on a line and its slope, but the point isn't the $y$-intercept? We can derive a useful formula directly from the slope definition.
+        </p>
+        
+        <p>
+            Suppose a line has slope $m$ and passes through the known point $(x_1, y_1)$. Let $(x, y)$ be any other point on the line. Since both points lie on the same line, the slope between them must equal $m$:
+        </p>
+        
+        <p>$$m = \frac{y - y_1}{x - x_1}$$</p>
+        
+        <p>
+            Multiply both sides by $(x - x_1)$:
+        </p>
+        
+        <p>$$m(x - x_1) = y - y_1$$</p>
+        
+        <p>
+            Rewriting with $y - y_1$ on the left:
+        </p>
+        
+        <div class="definition">
+            <h4>Point-Slope Form</h4>
+            <p>If a line has slope $m$ and passes through the point $(x_1, y_1)$, its equation can be written as:</p>
+            <p style="text-align: center; font-size: 1.2em;">$y - y_1 = m(x - x_1)$</p>
+            <p>This formula comes directly from the definition of slope: it says that the slope between any point $(x, y)$ on the line and the known point $(x_1, y_1)$ equals $m$.</p>
+        </div>
+        
+        <p>
+            Point-slope form is useful when you know:
+        </p>
+        <ul>
+            <li>A point on the line, AND</li>
+            <li>The slope of the line</li>
+        </ul>
+        
+        <div class="example">
+            <h4>Example: Write the Equation Using Point-Slope Form</h4>
+            
+            <p>Write the equation of the line through $(2, 5)$ with slope $3$.</p>
+            
+            <p><strong>Solution:</strong> Use point-slope form with $(x_1, y_1) = (2, 5)$ and $m = 3$:</p>
+            
+            <p>$$y - y_1 = m(x - x_1)$$</p>
+            <p>$$y - 5 = 3(x - 2)$$</p>
+            
+            <p>This is the equation in point-slope form. We can also convert to slope-intercept form:</p>
+            <p>$$y - 5 = 3x - 6$$</p>
+            <p>$$y = 3x - 1$$</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Watch the Signs!</h4>
+            <p>The point-slope formula has <em>subtraction</em>: $y - y_1$ and $x - x_1$.</p>
+            <p>If your point has negative coordinates, be careful:</p>
+            <p>For the point $(-3, 4)$: $\quad y - 4 = m(x - (-3)) = m(x + 3)$</p>
+            <p>For the point $(2, -5)$: $\quad y - (-5) = m(x - 2)$, which simplifies to $y + 5 = m(x - 2)$</p>
+            <p>Sign errors here are common—double-check your substitution.</p>
+        </div>
+        
+        <h3>Finding an Equation from Two Points</h3>
+        
+        <p>
+            What if you're given two points but no slope? You can find the equation in two steps:
+        </p>
+        
+        <div class="key-point">
+            <h4>Two-Point Method</h4>
+            <ol>
+                <li><strong>Calculate the slope</strong> from the two points: $m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$</li>
+                <li><strong>Use point-slope form</strong> with the slope you found and either point</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Find the Equation Through Two Points</h4>
+            
+            <p>Write the equation of the line through $(1, 2)$ and $(4, 8)$.</p>
+            
+            <p><strong>Step 1: Find the slope.</strong></p>
+            <p>$$m = \frac{\Delta y}{\Delta x} = \frac{8 - 2}{4 - 1} = \frac{6}{3} = 2$$</p>
+            
+            <p><strong>Step 2: Use point-slope form with either point.</strong></p>
+            <p>Using $(1, 2)$:</p>
+            <p>$$y - 2 = 2(x - 1)$$</p>
+            
+            <p><strong>Step 3: Simplify to slope-intercept form (optional).</strong></p>
+            <p>$$y - 2 = 2x - 2$$</p>
+            <p>$$y = 2x$$</p>
+            
+            <p><strong>Check:</strong> Does $(4, 8)$ satisfy $y = 2x$? Yes: $8 = 2(4)$. ✓</p>
+        </div>
+        
+        <h3>Any Form Gets You There</h3>
+        
+        <p>
+            Students sometimes worry about using the "wrong" form. Here's an important principle: <strong>any form will give you the correct equation</strong>—some paths are just shorter than others.
+        </p>
+        
+        <p>
+            Let's demonstrate by solving the same problem two different ways:
+        </p>
+        
+        <div class="example">
+            <h4>Example: Same Problem, Two Approaches</h4>
+            
+            <p><strong>Problem:</strong> Find the equation of the line through $(2, 7)$ with slope $3$.</p>
+            
+            <p><strong>Approach 1: Point-Slope Form (natural choice)</strong></p>
+            <p>We have a point and a slope—point-slope form is made for this:</p>
+            <p>$$y - 7 = 3(x - 2)$$</p>
+            <p>$$y - 7 = 3x - 6$$</p>
+            <p>$$y = 3x + 1$$</p>
+            <p>Done in 3 steps.</p>
+            
+            <hr style="margin: 20px 0; border: none; border-top: 1px dashed #ccc;">
+            
+            <p><strong>Approach 2: Slope-Intercept Form (longer path)</strong></p>
+            <p>We could insist on using $y = mx + b$ directly. We know $m = 3$, so:</p>
+            <p>$$y = 3x + b$$</p>
+            <p>Now we need to find $b$. Since $(2, 7)$ is on the line, substitute $x = 2$ and $y = 7$:</p>
+            <p>$$7 = 3(2) + b$$</p>
+            <p>$$7 = 6 + b$$</p>
+            <p>$$b = 1$$</p>
+            <p>So $y = 3x + 1$.</p>
+            <p>Done in 5 steps—same answer, more work.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Another Comparison</h4>
+            
+            <p><strong>Problem:</strong> Find the equation of the line through $(-1, 4)$ and $(3, -2)$.</p>
+            
+            <p><strong>Approach 1: Two-Point Method (natural choice)</strong></p>
+            <p>Step 1—Find slope: $m = \frac{-2 - 4}{3 - (-1)} = \frac{-6}{4} = -\frac{3}{2}$</p>
+            <p>Step 2—Point-slope with $(-1, 4)$:</p>
+            <p>$$y - 4 = -\frac{3}{2}(x - (-1))$$</p>
+            <p>$$y - 4 = -\frac{3}{2}(x + 1)$$</p>
+            <p>$$y - 4 = -\frac{3}{2}x - \frac{3}{2}$$</p>
+            <p>$$y = -\frac{3}{2}x + \frac{5}{2}$$</p>
+            
+            <hr style="margin: 20px 0; border: none; border-top: 1px dashed #ccc;">
+            
+            <p><strong>Approach 2: Slope-Intercept Form</strong></p>
+            <p>Step 1—Find slope (same as above): $m = -\frac{3}{2}$</p>
+            <p>Step 2—Write $y = -\frac{3}{2}x + b$ and substitute one point to find $b$.</p>
+            <p>Using $(-1, 4)$:</p>
+            <p>$$4 = -\frac{3}{2}(-1) + b$$</p>
+            <p>$$4 = \frac{3}{2} + b$$</p>
+            <p>$$b = 4 - \frac{3}{2} = \frac{8}{2} - \frac{3}{2} = \frac{5}{2}$$</p>
+            <p>So $y = -\frac{3}{2}x + \frac{5}{2}$.</p>
+            <p>Same answer—both approaches work!</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>The Takeaway</h4>
+            <p>You can solve any linear equation problem using any form. Choosing the "right" form makes the work easier, but choosing the "wrong" form doesn't give you the wrong answer—it just gives you more work. If you get stuck or confused, you can always:</p>
+            <ol>
+                <li>Find the slope (using the slope formula if needed)</li>
+                <li>Find $b$ by substituting a known point into $y = mx + b$</li>
+            </ol>
+            <p>This "brute force" method always works.</p>
+        </div>
+        
+        <h3>Converting Between Forms</h3>
+        
+        <p>
+            Any linear equation can be written in any of these forms. Here's how to convert:
+        </p>
+        
+        <table>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Method</th>
+            </tr>
+            <tr>
+                <td>Standard</td>
+                <td>Slope-Intercept</td>
+                <td>Solve for $y$</td>
+            </tr>
+            <tr>
+                <td>Point-Slope</td>
+                <td>Slope-Intercept</td>
+                <td>Distribute and solve for $y$</td>
+            </tr>
+            <tr>
+                <td>Any form</td>
+                <td>Standard</td>
+                <td>Rearrange to $Ax + By = C$</td>
+            </tr>
+        </table>
+        
+        <div class="example">
+            <h4>Example: Convert Point-Slope to Standard Form</h4>
+            
+            <p>Convert $y - 3 = 2(x - 1)$ to standard form.</p>
+            
+            <p>Distribute: $y - 3 = 2x - 2$</p>
+            <p>Add 3 to both sides: $y = 2x + 1$</p>
+            <p>Subtract $2x$ from both sides: $-2x + y = 1$</p>
+            <p>Multiply by $-1$ (to make $A$ positive): $2x - y = -1$</p>
+            
+            <p>Standard form: $2x - y = -1$</p>
+        </div>
+        
+        <h3>Which Form to Use?</h3>
+        
+        <p>
+            While any form works, some are more convenient in specific situations:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Situation</th>
+                <th>Most Convenient Form</th>
+            </tr>
+            <tr>
+                <td>Graphing a line</td>
+                <td>Slope-intercept: $y = mx + b$</td>
+            </tr>
+            <tr>
+                <td>Given slope and $y$-intercept</td>
+                <td>Slope-intercept: $y = mx + b$</td>
+            </tr>
+            <tr>
+                <td>Given slope and a point</td>
+                <td>Point-slope: $y - y_1 = m(x - x_1)$</td>
+            </tr>
+            <tr>
+                <td>Given two points</td>
+                <td>Find slope first, then point-slope</td>
+            </tr>
+            <tr>
+                <td>Finding intercepts</td>
+                <td>Standard: $Ax + By = C$</td>
+            </tr>
+            <tr>
+                <td>Systems of equations</td>
+                <td>Standard: $Ax + By = C$</td>
+            </tr>
+        </table>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.7</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">22.</span> Convert $5x - 2y = 10$ to slope-intercept form. What is the slope?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">23.</span> Write the equation of the line through $(-1, 4)$ with slope $-2$. Give your answer in slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">24.</span> Write the equation of the line through $(2, -1)$ and $(5, 8)$. Give your answer in slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">25.</span> Convert $y = -\frac{3}{4}x + 6$ to standard form with integer coefficients.</p>
+            </div>
+        </div>
+        
+        <div class="solutions">
+            <h4>Solutions: Section 12.7</h4>
+            
+            <div class="solution">
+                <p><strong>22.</strong></p>
+                <p>$5x - 2y = 10$</p>
+                <p>$-2y = -5x + 10$</p>
+                <p>$y = \frac{5}{2}x - 5$</p>
+                <p>The slope is $m = \frac{5}{2}$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>23.</strong></p>
+                <p>Point-slope form: $y - 4 = -2(x - (-1))$</p>
+                <p>$y - 4 = -2(x + 1)$</p>
+                <p>$y - 4 = -2x - 2$</p>
+                <p>$y = -2x + 2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>24.</strong></p>
+                <p><strong>Method 1 (Two-Point → Point-Slope):</strong></p>
+                <p>Step 1 — Find slope: $m = \frac{\Delta y}{\Delta x} = \frac{8 - (-1)}{5 - 2} = \frac{9}{3} = 3$</p>
+                <p>Step 2 — Point-slope with $(2, -1)$: $y - (-1) = 3(x - 2)$</p>
+                <p>$y + 1 = 3x - 6$</p>
+                <p>$y = 3x - 7$</p>
+                
+                <p style="margin-top: 15px;"><strong>Method 2 (Direct Slope-Intercept):</strong></p>
+                <p>Step 1 — Find slope (same): $m = 3$</p>
+                <p>Step 2 — Write $y = 3x + b$ and substitute $(2, -1)$:</p>
+                <p>$-1 = 3(2) + b$</p>
+                <p>$-1 = 6 + b$</p>
+                <p>$b = -7$</p>
+                <p>So $y = 3x - 7$. (Same answer, either method works!)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>25.</strong></p>
+                <p>$y = -\frac{3}{4}x + 6$</p>
+                <p>Multiply everything by 4: $4y = -3x + 24$</p>
+                <p>Add $3x$ to both sides: $3x + 4y = 24$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.8: PARALLEL AND PERPENDICULAR LINES -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-8">12.8 Parallel and Perpendicular Lines</h2>
+        
+        <p>
+            Two special relationships between lines arise constantly in geometry and applications: lines that never meet (parallel) and lines that meet at right angles (perpendicular). Both relationships have simple characterizations in terms of slope. (For geometric derivations of these relationships, see the "Going Deeper" box at the end of this section.)
+        </p>
+        
+        <h3>Parallel Lines</h3>
+        
+        <div class="definition">
+            <h4>Parallel Lines</h4>
+            <p>Two lines are <strong>parallel</strong> if they never intersect—they maintain the same distance apart everywhere.</p>
+            <p>Algebraically: <strong>Parallel lines have the same slope.</strong></p>
+            <p style="text-align: center; font-size: 1.1em;">If line 1 has slope $m_1$ and line 2 has slope $m_2$, the lines are parallel when $m_1 = m_2$.</p>
+        </div>
+        
+        <p>
+            This makes intuitive sense: if two lines rise at exactly the same rate (same $\frac{\Delta y}{\Delta x}$), they're tilted the same way and will never cross. They're like two railroad tracks—always the same distance apart. (For a more rigorous argument, see the "Going Deeper" box below.)
+        </p>
+        
+        <div class="example">
+            <h4>Example: Identifying Parallel Lines</h4>
+            
+            <p>Are the lines $y = 3x + 5$ and $y = 3x - 2$ parallel?</p>
+            
+            <p><strong>Solution:</strong> Both lines have slope $m = 3$. Same slope → parallel lines. ✓</p>
+            
+            <p>Note: They have different $y$-intercepts ($5$ and $-2$), so they're not the same line—they're distinct parallel lines.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Finding a Parallel Line</h4>
+            
+            <p>Find the equation of the line parallel to $y = 2x + 3$ that passes through $(1, 7)$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>Step 1: The given line has slope $m = 2$. A parallel line must also have slope $2$.</p>
+            <p>Step 2: Use point-slope form with $m = 2$ and the point $(1, 7)$:</p>
+            <p>$$y - 7 = 2(x - 1)$$</p>
+            <p>$$y - 7 = 2x - 2$$</p>
+            <p>$$y = 2x + 5$$</p>
+            
+            <p>This line has the same slope as $y = 2x + 3$ but a different $y$-intercept, so it's parallel.</p>
+        </div>
+        
+        <h3>Perpendicular Lines</h3>
+        
+        <div class="definition">
+            <h4>Perpendicular Lines</h4>
+            <p>Two lines are <strong>perpendicular</strong> if they intersect at a right angle (90°).</p>
+            <p>Algebraically: <strong>Perpendicular lines have slopes that are negative reciprocals.</strong></p>
+            <p style="text-align: center; font-size: 1.1em;">If line 1 has slope $m_1$ and line 2 has slope $m_2$, the lines are perpendicular when $m_1 \cdot m_2 = -1$.</p>
+            <p>Equivalently: $m_2 = -\frac{1}{m_1}$</p>
+        </div>
+        
+        <p>
+            The "negative reciprocal" means: flip the fraction and change the sign. Why does this work? See the "Going Deeper" box below for a geometric explanation.
+        </p>
+        
+        <table>
+            <tr>
+                <th>If one line has slope...</th>
+                <th>A perpendicular line has slope...</th>
+            </tr>
+            <tr>
+                <td>$2$</td>
+                <td>$-\frac{1}{2}$</td>
+            </tr>
+            <tr>
+                <td>$-3$</td>
+                <td>$\frac{1}{3}$</td>
+            </tr>
+            <tr>
+                <td>$\frac{2}{5}$</td>
+                <td>$-\frac{5}{2}$</td>
+            </tr>
+            <tr>
+                <td>$-\frac{4}{3}$</td>
+                <td>$\frac{3}{4}$</td>
+            </tr>
+            <tr>
+                <td>$1$</td>
+                <td>$-1$</td>
+            </tr>
+        </table>
+        
+        <div class="key-point">
+            <h4>Quick Check: Multiply the Slopes</h4>
+            <p>If $m_1 \cdot m_2 = -1$, the lines are perpendicular.</p>
+            <p>Example: Slopes $2$ and $-\frac{1}{2}$: $\quad 2 \times (-\frac{1}{2}) = -1$ ✓ Perpendicular</p>
+            <p>Example: Slopes $3$ and $-\frac{1}{4}$: $\quad 3 \times (-\frac{1}{4}) = -\frac{3}{4} \neq -1$ ✗ Not perpendicular</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Finding a Perpendicular Line</h4>
+            
+            <p>Find the equation of the line perpendicular to $y = 2x + 3$ that passes through $(1, 5)$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>Step 1: The given line has slope $m = 2$. A perpendicular line has slope $-\frac{1}{2}$ (negative reciprocal).</p>
+            <p>Step 2: Use point-slope form with $m = -\frac{1}{2}$ and the point $(1, 5)$:</p>
+            <p>$$y - 5 = -\frac{1}{2}(x - 1)$$</p>
+            <p>$$y - 5 = -\frac{1}{2}x + \frac{1}{2}$$</p>
+            <p>$$y = -\frac{1}{2}x + \frac{11}{2}$$</p>
+            
+            <p><strong>Check:</strong> Slopes are $2$ and $-\frac{1}{2}$. Product: $2 \times (-\frac{1}{2}) = -1$ ✓</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 12.6: Parallel and Perpendicular Lines</div>
+            <div id="fig-12-6" class="jxgbox" style="width: 540px; height: 480px;"></div>
+            <div class="graph-caption">The blue lines are parallel (both have slope $2$). The red line is perpendicular to them (slope $-\frac{1}{2}$). Note the right angle where the red and blue lines intersect.</div>
+        </div>
+        
+        <h3>Special Cases: Horizontal and Vertical Lines</h3>
+        
+        <p>
+            The slope formula helps us understand horizontal and vertical lines:
+        </p>
+        
+        <p>
+            <strong>Horizontal lines</strong> ($y = c$): Any two points on a horizontal line have the same $y$-coordinate, so $\Delta y = y_2 - y_1 = 0$. Therefore:
+        </p>
+        <p>$$m = \frac{\Delta y}{\Delta x} = \frac{0}{\Delta x} = 0$$</p>
+        <p>
+            Horizontal lines have slope $0$. They are all parallel to each other (all have the same slope).
+        </p>
+        
+        <p>
+            <strong>Vertical lines</strong> ($x = c$): Any two points on a vertical line have the same $x$-coordinate, so $\Delta x = x_2 - x_1 = 0$. Therefore:
+        </p>
+        <p>$$m = \frac{\Delta y}{\Delta x} = \frac{\Delta y}{0} = \text{undefined}$$</p>
+        <p>
+            Vertical lines have undefined slope (division by zero). They are all parallel to each other.
+        </p>
+        
+        <p>
+            <strong>Horizontal ⊥ Vertical:</strong> The "negative reciprocal" rule doesn't apply directly here (you can't take the reciprocal of undefined or $0$), but geometrically it's clear: horizontal and vertical lines meet at right angles, so they are perpendicular.
+        </p>
+        
+        <div class="going-deeper">
+            <h4>Why These Slope Rules Work</h4>
+            
+            <p>
+                We've stated that parallel lines have equal slopes and perpendicular lines have slopes whose product is $-1$. But <em>why</em> are these statements true? Let's look deeper and see the reasoning from both geometry and algebra. It's not essential that you master every detail here, but it gives you a flavor for mathematical reasoning—and demonstrates how the same question can be approached from different angles.
+            </p>
+            
+            <h4>Parallel Lines: The Geometric Argument</h4>
+            
+            <p>
+                Think about what slope means geometrically: $m = \frac{\Delta y}{\Delta x}$ measures how much the line rises per unit of horizontal distance. If two lines have the same slope, they rise at the same rate—they're tilted at exactly the same angle to the horizontal.
+            </p>
+            
+            <p>
+                Two lines tilted at the same angle either coincide (are the same line) or never meet. To see why they never meet if they're distinct: suppose they did meet at some point $P$. At that point, both lines extend in exactly the same direction (same slope = same tilt). But then they would have to be the same line! Since they're not the same line (different $y$-intercepts), they can't meet anywhere. That's the definition of parallel.
+            </p>
+            
+            <h4>Parallel Lines: The Algebraic Argument</h4>
+            
+            <p>
+                The geometric argument is intuitively clear, but perhaps a bit "hand-wavy." Part of the power of what we're learning is that you can examine the same question from either a geometric or an algebraic viewpoint. Let's use algebra to prove that lines with different slopes must meet, while lines with the same slope (but different intercepts) cannot.
+            </p>
+            
+            <p>
+                Consider two lines: $y = m_1 x + b_1$ and $y = m_2 x + b_2$. If the lines meet at a point $(p, q)$, then that point lies on both lines, so:
+            </p>
+            <p>$$q = m_1 p + b_1 \quad \text{and} \quad q = m_2 p + b_2$$</p>
+            
+            <p>
+                Since both expressions equal $q$, we can set them equal:
+            </p>
+            <p>$$m_1 p + b_1 = m_2 p + b_2$$</p>
+            
+            <p>
+                Rearranging to solve for $p$:
+            </p>
+            <p>$$(m_1 - m_2)p = b_2 - b_1$$</p>
+            <p>$$p = \frac{b_2 - b_1}{m_1 - m_2}$$</p>
+            
+            <p>
+                <strong>Case 1: Different slopes ($m_1 \neq m_2$).</strong> The denominator is nonzero, so we can compute $p$, and the lines intersect. A concrete example: suppose the lines are $y = 2x - 4$ and $y = 4x + 1$. The $x$-coordinate of intersection is:
+            </p>
+            <p>$$p = \frac{1 - (-4)}{2 - 4} = \frac{5}{-2} = -\frac{5}{2}$$</p>
+            <p>
+                To find $q$, substitute into either equation. Using the first: $q = 2(-\frac{5}{2}) - 4 = -5 - 4 = -9$. Check with the second: $q = 4(-\frac{5}{2}) + 1 = -10 + 1 = -9$. ✓ The lines meet at $(-\frac{5}{2}, -9)$.
+            </p>
+            
+            <p>
+                <strong>Case 2: Same slope ($m_1 = m_2$).</strong> Now $m_1 - m_2 = 0$, and computing $p = \frac{b_2 - b_1}{0}$ requires division by zero—there is no such $p$. Going back to our equations $m_1 p + b_1 = m_2 p + b_2$, if the slopes are equal, this simplifies to $b_1 = b_2$. But we assumed the lines are distinct (different intercepts), so $b_1 \neq b_2$. Contradiction! The lines cannot meet.
+            </p>
+            
+            <p>
+                This is a geometric conclusion—"distinct lines with equal slopes don't intersect"—proved entirely by algebra.
+            </p>
+            
+            <h4>Perpendicular Lines: A Geometric Argument</h4>
+            
+            <p>
+                The algebraic proof for perpendicular lines requires tools beyond this course, but we can give a convincing geometric argument. Consider a line with slope $m = \frac{a}{b}$, where $a$ is the rise and $b$ is the run. Now imagine rotating this line 90° counterclockwise.
+            </p>
+            
+            <p>
+                Under a 90° counterclockwise rotation:
+            </p>
+            <ul>
+                <li>A horizontal movement (run) of $b$ units to the right becomes a vertical movement of $b$ units upward</li>
+                <li>A vertical movement (rise) of $a$ units upward becomes a horizontal movement of $a$ units to the <em>left</em></li>
+            </ul>
+            
+            <p>
+                So the original "rise over run" of $\frac{a}{b}$ becomes a new rise of $b$ and a new run of $-a$ (negative because leftward). The new slope is:
+            </p>
+            <p>$$m_{\text{rotated}} = \frac{b}{-a} = -\frac{b}{a} = -\frac{1}{m}$$</p>
+            
+            <p>
+                The slope of the rotated (perpendicular) line is the negative reciprocal of the original slope. Multiplying them:
+            </p>
+            <p>$$m \cdot m_{\text{rotated}} = \frac{a}{b} \cdot \left(-\frac{b}{a}\right) = -1$$</p>
+            
+            <p>
+                This is why perpendicular lines have slopes whose product is $-1$: rotating a line 90° transforms its slope to its negative reciprocal.
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Section 12.8</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">26.</span> Determine whether each pair of lines is parallel, perpendicular, or neither:</p>
+                <p>(a) $y = 4x + 1$ and $y = 4x - 3$</p>
+                <p>(b) $y = 2x + 5$ and $y = -\frac{1}{2}x + 1$</p>
+                <p>(c) $y = 3x - 2$ and $y = -3x + 4$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">27.</span> Write the equation of the line parallel to $y = -3x + 7$ that passes through $(2, 4)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">28.</span> Write the equation of the line perpendicular to $y = \frac{2}{3}x - 4$ that passes through $(6, 2)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">29.</span> Line $\ell$ passes through $(0, 4)$ and $(2, 0)$. Find the equation of the line through $(3, 1)$ that is (a) parallel to $\ell$, and (b) perpendicular to $\ell$.</p>
+            </div>
+        </div>
+        
+        <div class="solutions">
+            <h4>Solutions: Section 12.8</h4>
+            
+            <div class="solution">
+                <p><strong>26.</strong></p>
+                <p>(a) Slopes: $4$ and $4$. Same slope → <strong>Parallel</strong></p>
+                <p>(b) Slopes: $2$ and $-\frac{1}{2}$. Product: $2 \times (-\frac{1}{2}) = -1$ → <strong>Perpendicular</strong></p>
+                <p>(c) Slopes: $3$ and $-3$. Product: $3 \times (-3) = -9 \neq -1$. Not the same slope, not negative reciprocals → <strong>Neither</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>27.</strong></p>
+                <p>Parallel line has slope $m = -3$.</p>
+                <p>Point-slope: $y - 4 = -3(x - 2)$</p>
+                <p>$y - 4 = -3x + 6$</p>
+                <p>$y = -3x + 10$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>28.</strong></p>
+                <p>Original slope: $\frac{2}{3}$. Perpendicular slope: $-\frac{3}{2}$ (negative reciprocal).</p>
+                <p>Point-slope: $y - 2 = -\frac{3}{2}(x - 6)$</p>
+                <p>$y - 2 = -\frac{3}{2}x + 9$</p>
+                <p>$y = -\frac{3}{2}x + 11$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>29.</strong></p>
+                <p>First, find the slope of $\ell$ using the slope formula:</p>
+                <p>$$m = \frac{\Delta y}{\Delta x} = \frac{0 - 4}{2 - 0} = \frac{-4}{2} = -2$$</p>
+                
+                <p><strong>(a) Parallel:</strong> Same slope $m = -2$, through $(3, 1)$:</p>
+                <p>$y - 1 = -2(x - 3)$</p>
+                <p>$y - 1 = -2x + 6$</p>
+                <p>$y = -2x + 7$</p>
+                
+                <p><strong>(b) Perpendicular:</strong> Slope $= -\frac{1}{m} = -\frac{1}{-2} = \frac{1}{2}$, through $(3, 1)$:</p>
+                <p>$y - 1 = \frac{1}{2}(x - 3)$</p>
+                <p>$y - 1 = \frac{1}{2}x - \frac{3}{2}$</p>
+                <p>$y = \frac{1}{2}x - \frac{1}{2}$</p>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+        <!-- SECTION 12.9: APPLICATIONS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-9">12.9 Applications</h2>
+        
+        <p>
+            Linear equations appear everywhere in the real world. In this section, we'll see how to build and interpret linear models—using slope and intercept to understand practical situations.
+        </p>
+        
+        <div class="key-point">
+            <h4>Mathematical Modeling</h4>
+            <p>
+                To use mathematics for real-world problems, you must make <em>assumptions</em> to create a <strong>mathematical model</strong>—a simplified representation of reality that can be analyzed with mathematical tools.
+            </p>
+            <p>
+                The quality of your answers depends not just on how well you do the math, but on how well your model matches the real situation. We often simplify a problem to get equations we can solve. A good scientist or engineer creates models that are complex enough to capture the essential features, yet simple enough to be tractable.
+            </p>
+            <p>
+                In this section, we focus on situations where <em>linear models</em> provide useful first approximations. In later lessons, we'll see how to create more sophisticated models and use more advanced mathematics when greater accuracy is needed.
+            </p>
+        </div>
+        
+        <h3>Slope as Rate of Change</h3>
+        
+        <p>
+            We've seen that slope measures how much $y$ changes per unit change in $x$. In applications, this becomes a <em>rate</em>: dollars per hour, miles per gallon, degrees per minute, and so on.
+        </p>
+        
+        <div class="key-point">
+            <h4>Interpreting Slope in Context</h4>
+            <p>When a linear equation models a real situation:</p>
+            <ul>
+                <li>The <strong>slope</strong> tells you the <em>rate of change</em>—how fast the output changes per unit of input</li>
+                <li>The <strong>units of slope</strong> are (units of $y$) per (unit of $x$)</li>
+            </ul>
+            <p>For example, if $y$ is distance in miles and $x$ is time in hours, then the slope has units of miles per hour—it's a speed.</p>
+        </div>
+        
+        <h3>The $y$-Intercept in Context</h3>
+        
+        <p>
+            The $y$-intercept is the value of $y$ when $x = 0$. In applications, this often represents a <em>starting value</em> or <em>fixed amount</em>:
+        </p>
+        
+        <ul>
+            <li>A taxi charges a base fare plus a rate per mile. The base fare is the $y$-intercept (cost when miles = 0).</li>
+            <li>A phone costs a certain amount plus a monthly fee. The purchase price is the $y$-intercept.</li>
+            <li>A candle burns down at a steady rate. The initial height is the $y$-intercept (height at time = 0).</li>
+        </ul>
+        
+        <div class="example">
+            <h4>Example: Cost Function</h4>
+            
+            <p>A rideshare service charges a 2.50 dollar base fare plus 1.75 dollars per mile. Let $C$ be the total cost (in dollars) and $m$ be the distance traveled (in miles).</p>
+            
+            <p><strong>(a) Write a linear equation relating $C$ and $m$.</strong></p>
+            
+            <p>The cost has two parts: a fixed base fare (2.50 dollars) plus a variable amount that depends on miles (1.75 dollars per mile). This gives:</p>
+            <p>$$C = 1.75m + 2.50$$</p>
+            
+            <p><strong>(b) Identify the slope and $y$-intercept. What do they mean?</strong></p>
+            
+            <p>Slope: $1.75$ dollars per mile. This is the rate—each additional mile costs 1.75 dollars.</p>
+            <p>$y$-intercept: $2.50$ dollars. This is the base fare—the cost of a ride even before traveling any distance.</p>
+            
+            <p><strong>(c) How much does a 12-mile ride cost?</strong></p>
+            <p>$$C = 1.75(12) + 2.50 = 21.00 + 2.50 = 23.50 \text{ dollars}$$</p>
+            
+            <p><strong>(d) If you have 30 dollars, how far can you travel?</strong></p>
+            <p>Set $C = 30$ and solve for $m$:</p>
+            <p>$$30 = 1.75m + 2.50$$</p>
+            <p>$$27.50 = 1.75m$$</p>
+            <p>$$m = \frac{27.50}{1.75} \approx 15.7 \text{ miles}$$</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Rideshare Cost vs. Distance</div>
+                <div id="fig-rideshare" class="jxgbox" style="width: 450px; height: 320px;"></div>
+                <div class="graph-caption">The cost function $C = 1.75m + 2.50$. The $y$-intercept (2.50) is the base fare; the slope (1.75) is the cost per mile.</div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Temperature Conversion</h4>
+            
+            <p>The relationship between Celsius ($C$) and Fahrenheit ($F$) temperatures is:</p>
+            <p>$$F = \frac{9}{5}C + 32$$</p>
+            
+            <p><strong>(a) Identify the slope and $y$-intercept. What do they mean?</strong></p>
+            
+            <p>Slope: $\frac{9}{5} = 1.8$ degrees Fahrenheit per degree Celsius. For each 1°C increase, the Fahrenheit temperature increases by 1.8°F. (Fahrenheit degrees are "smaller" than Celsius degrees.)</p>
+            
+            <p>$y$-intercept: $32$°F. When $C = 0$ (the freezing point of water in Celsius), $F = 32$ (the freezing point in Fahrenheit).</p>
+            
+            <p><strong>(b) Convert 25°C to Fahrenheit.</strong></p>
+            <p>$$F = \frac{9}{5}(25) + 32 = 45 + 32 = 77°\text{F}$$</p>
+            
+            <p><strong>(c) At what temperature are Celsius and Fahrenheit equal?</strong></p>
+            <p>Set $F = C$ and solve:</p>
+            <p>$$C = \frac{9}{5}C + 32$$</p>
+            <p>$$C - \frac{9}{5}C = 32$$</p>
+            <p>$$-\frac{4}{5}C = 32$$</p>
+            <p>$$C = 32 \times \left(-\frac{5}{4}\right) = -40$$</p>
+            <p>At $-40$ degrees, Celsius and Fahrenheit readings are the same: $-40°\text{C} = -40°\text{F}$.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Celsius to Fahrenheit Conversion</div>
+                <div id="fig-temperature" class="jxgbox" style="width: 450px; height: 350px;"></div>
+                <div class="graph-caption">The conversion formula $F = \frac{9}{5}C + 32$. The $y$-intercept (32) is the freezing point of water in Fahrenheit. The lines $F = C$ and $F = \frac{9}{5}C + 32$ intersect at $(-40, -40)$.</div>
+            </div>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Interpreting a Graph</h4>
+            
+            <p>The graph below shows the amount of water in a tank over time as it drains.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 12.7: Water Draining from a Tank</div>
+                <div id="fig-12-7" class="jxgbox" style="width: 500px; height: 350px;"></div>
+                <div class="graph-caption">Water volume $V$ (gallons) versus time $t$ (minutes). The tank starts full and drains at a constant rate.</div>
+            </div>
+            
+            <p><strong>(a) What is the initial amount of water?</strong></p>
+            <p>The $y$-intercept is at $(0, 120)$, so the tank initially contains 120 gallons.</p>
+            
+            <p><strong>(b) What is the rate of drainage?</strong></p>
+            <p>The line passes through $(0, 120)$ and $(30, 0)$. The slope is:</p>
+            <p>$$m = \frac{0 - 120}{30 - 0} = \frac{-120}{30} = -4 \text{ gallons per minute}$$</p>
+            <p>The negative slope indicates decreasing volume. The tank loses 4 gallons per minute.</p>
+            
+            <p><strong>(c) Write the equation and predict when the tank will be half empty.</strong></p>
+            <p>The equation is $V = -4t + 120$.</p>
+            <p>Half of 120 gallons is 60 gallons. Set $V = 60$:</p>
+            <p>$$60 = -4t + 120$$</p>
+            <p>$$-60 = -4t$$</p>
+            <p>$$t = 15 \text{ minutes}$$</p>
+            
+            <p><strong>(d) When will the tank be empty?</strong></p>
+            <p>Set $V = 0$:</p>
+            <p>$$0 = -4t + 120$$</p>
+            <p>$$t = 30 \text{ minutes}$$</p>
+            <p>This matches the $x$-intercept of the graph.</p>
+            
+            <p><strong>A note on modeling:</strong> This example assumes a <em>constant</em> drainage rate, which is an idealization. If the tank drains through a pump running at fixed speed, a constant rate is realistic. But if water flows out through a spigot at the bottom, the rate depends on water pressure—which decreases as the tank empties. In that case, drainage would be fast at first and slow near the end, and our linear model would underestimate the total time to empty.</p>
+            
+            <p>Our linear model gives a useful first approximation, but a more accurate prediction for gravity-fed drainage would require a nonlinear model (which we'll encounter in later courses). Recognizing when a linear approximation is "good enough" versus when you need more sophisticated mathematics is an important skill in applied work.</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Building Linear Models</h4>
+            <p>To model a situation with a linear equation:</p>
+            <ol>
+                <li><strong>Identify the variables:</strong> What quantities are changing? Which is independent ($x$) and which is dependent ($y$)?</li>
+                <li><strong>Find the slope:</strong> What is the rate of change? (Look for phrases like "per unit," "each," "for every.")</li>
+                <li><strong>Find the $y$-intercept:</strong> What is the starting value when $x = 0$? (Look for fixed costs, initial amounts, base values.)</li>
+                <li><strong>Write the equation:</strong> $y = mx + b$</li>
+                <li><strong>Check units:</strong> Make sure the slope has the right units and the answer makes sense.</li>
+            </ol>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12.10: PRACTICE PROBLEMS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-10">12.10 Practice Problems</h2>
+        
+        <p>
+            These problems cover all the concepts from Section 12. Work through them to solidify your understanding of graphing and linear functions.
+        </p>
+        
+        <div class="problems">
+            <h4>Problems</h4>
+            
+            <p><strong>Plotting Points and Quadrants (1–4)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> Plot the following points and identify which quadrant (or axis) each lies in: $A = (3, 5)$, $B = (-2, 4)$, $C = (-3, -1)$, $D = (4, -3)$, $E = (0, -2)$, $F = (5, 0)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> Give the coordinates of a point in each quadrant and one point on each axis.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> A point has a negative $x$-coordinate and a positive $y$-coordinate. Which quadrant is it in?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> The point $(a, b)$ is in Quadrant III. What can you conclude about the signs of $a$ and $b$?</p>
+            </div>
+            
+            <p><strong>Solutions of Equations (5–8)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> Determine whether each point is a solution of $y = 3x - 7$:</p>
+                <p>(a) $(2, -1)$ &nbsp;&nbsp; (b) $(0, -7)$ &nbsp;&nbsp; (c) $(3, 3)$ &nbsp;&nbsp; (d) $(-1, -10)$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Find three solutions of $y = -1.5x + 4.2$ by choosing $x = -2$, $x = 0$, and $x = 3$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> The point $(4, k)$ lies on the line $y = \frac{1}{2}x + 3$. Find $k$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> The point $(p, 2)$ lies on the line $y = -3x + 11$. Find $p$.</p>
+            </div>
+            
+            <p><strong>Graphing Linear Equations (9–12)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> Graph $y = 2x - 4$ by making a table of values with $x = -1, 0, 1, 2, 3$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> Graph $y = -\frac{2}{3}x + 2$ using the slope-intercept method.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> Find the $x$- and $y$-intercepts of $3x - 2y = 12$, then use them to graph the line.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> Graph the horizontal line $y = -3$ and the vertical line $x = 4$ on the same coordinate plane.</p>
+            </div>
+            
+            <p><strong>Slope (13–16)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> Find the slope of the line through $(1, 3)$ and $(5, 11)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> Find the slope of the line through $(-1.5, 3.2)$ and $(2.5, -0.8)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> A line passes through $(3, 7)$ and $(3, -2)$. What is its slope?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> A ramp rises 3 feet over a horizontal distance of 12 feet. What is the slope of the ramp? Express as a simplified fraction.</p>
+            </div>
+            
+            <p><strong>Slope-Intercept Form (17–20)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> For each equation, identify the slope and $y$-intercept:</p>
+                <p>(a) $y = 5x - 2$ &nbsp;&nbsp; (b) $y = -\frac{3}{4}x + 1$ &nbsp;&nbsp; (c) $y = x$ &nbsp;&nbsp; (d) $y = -8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> Write the equation of a line with slope $0.75$ and $y$-intercept $-2.5$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">19.</span> A line has slope $-2$ and passes through $(0, 7)$. Write its equation.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">20.</span> A line passes through $(0, 2.4)$ and $(5, 9.4)$. Find its slope and write the equation in slope-intercept form.</p>
+            </div>
+            
+            <p><strong>Other Forms and Conversions (21–24)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">21.</span> Convert $4x + 2y = 10$ to slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">22.</span> Write the equation of the line through $(3, -2)$ with slope $4$ in slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">23.</span> Write the equation of the line through $(-1, 5)$ and $(2, -4)$ in slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">24.</span> Convert $y = \frac{2}{5}x - 3$ to standard form with integer coefficients.</p>
+            </div>
+            
+            <p><strong>Parallel and Perpendicular Lines (25–27)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">25.</span> Determine whether each pair of lines is parallel, perpendicular, or neither:</p>
+                <p>(a) $y = 2x + 1$ and $y = 2x - 5$</p>
+                <p>(b) $y = 3x + 2$ and $y = -\frac{1}{3}x + 4$</p>
+                <p>(c) $y = 4x - 1$ and $y = -4x + 3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">26.</span> Write the equation of the line parallel to $y = -\frac{1}{2}x + 6$ that passes through $(4, 1)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">27.</span> Write the equation of the line perpendicular to $y = 3x - 2$ that passes through $(6, 0)$.</p>
+            </div>
+            
+            <p><strong>Applications (28–30)</strong></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">28.</span> A plumber charges a 50 dollar service call fee plus 35 dollars per hour of labor. Let $C$ be the total cost and $h$ be the hours of labor.</p>
+                <p>(a) Write an equation for $C$ in terms of $h$.</p>
+                <p>(b) What is the slope and what does it represent?</p>
+                <p>(c) What is the $y$-intercept and what does it represent?</p>
+                <p>(d) How much would a 3-hour job cost?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">29.</span> A car is traveling at a constant speed. After 2 hours, it has traveled 110 miles. After 5 hours, it has traveled 275 miles.</p>
+                <p>(a) Find the slope of the line through $(2, 110)$ and $(5, 275)$. What does this represent?</p>
+                <p>(b) Find the equation relating time $t$ and distance $d$.</p>
+                <p>(c) How far will the car have traveled after 7 hours?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">30.</span> A candle is 18 centimeters tall when lit. It burns at a rate of 1.5 centimeters per hour.</p>
+                <p>(a) Write an equation for the height $h$ (in cm) after $t$ hours of burning.</p>
+                <p>(b) What is the slope, and why is it negative?</p>
+                <p>(c) How tall is the candle after 4 hours?</p>
+                <p>(d) After how many hours will the candle be completely burned?</p>
+            </div>
+            
+            <p><strong>Calculator Problems (31–34)</strong></p>
+            <p style="font-size: 0.95em; color: #666; margin-bottom: 15px;">These problems involve realistic measurements. Use a calculator and round answers to 2 decimal places where appropriate.</p>
+            
+            <div class="problem">
+                <p><span class="problem-number">31.</span> Find the slope of the line through $(2.75, 8.32)$ and $(6.25, -3.18)$.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">32.</span> A line passes through $(0, 14.7)$ and $(12.5, 52.2)$. Write its equation in slope-intercept form.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">33.</span> A solar panel installation costs 2,850 dollars for equipment plus 125.50 dollars per hour for labor. Let $C$ be the total cost and $h$ be the hours of labor.</p>
+                <p>(a) Write an equation for $C$ in terms of $h$.</p>
+                <p>(b) A job takes 18.5 hours. What is the total cost?</p>
+                <p>(c) If the customer's budget is 6,000 dollars, what is the maximum labor time available?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">34.</span> A weather balloon rises at a constant rate. At 3.5 minutes after launch, it is at 847 meters altitude. At 8.0 minutes, it is at 1,922 meters.</p>
+                <p>(a) Find the rate of ascent (slope) in meters per minute.</p>
+                <p>(b) Write an equation relating altitude $A$ to time $t$.</p>
+                <p>(c) What was the altitude at launch ($t = 0$)?</p>
+                <p>(d) When will the balloon reach 3,000 meters?</p>
+            </div>
+        </div>
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <div class="solution">
+                <p><strong>1.</strong> $A = (3, 5)$: Quadrant I. $B = (-2, 4)$: Quadrant II. $C = (-3, -1)$: Quadrant III. $D = (4, -3)$: Quadrant IV. $E = (0, -2)$: on the $y$-axis. $F = (5, 0)$: on the $x$-axis.</p>
+                <div id="sol-1-graph" class="jxgbox" style="width: 300px; height: 300px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>2.</strong> Answers vary. Examples: Quadrant I: $(2, 3)$. Quadrant II: $(-1, 4)$. Quadrant III: $(-2, -5)$. Quadrant IV: $(3, -1)$. On $x$-axis: $(4, 0)$. On $y$-axis: $(0, -3)$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>3.</strong> Quadrant II (negative $x$, positive $y$).</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>4.</strong> In Quadrant III, both coordinates are negative, so $a < 0$ and $b < 0$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>5.</strong></p>
+                <p>(a) $(2, -1)$: Check $-1 = 3(2) - 7 = 6 - 7 = -1$. ✓ Yes, it's a solution.</p>
+                <p>(b) $(0, -7)$: Check $-7 = 3(0) - 7 = -7$. ✓ Yes.</p>
+                <p>(c) $(3, 3)$: Check $3 = 3(3) - 7 = 9 - 7 = 2$. ✗ No ($3 \neq 2$).</p>
+                <p>(d) $(-1, -10)$: Check $-10 = 3(-1) - 7 = -3 - 7 = -10$. ✓ Yes.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>6.</strong></p>
+                <p>$x = -2$: $y = -1.5(-2) + 4.2 = 3 + 4.2 = 7.2$, so $(-2, 7.2)$.</p>
+                <p>$x = 0$: $y = -1.5(0) + 4.2 = 4.2$, so $(0, 4.2)$.</p>
+                <p>$x = 3$: $y = -1.5(3) + 4.2 = -4.5 + 4.2 = -0.3$, so $(3, -0.3)$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>7.</strong> Substitute $x = 4$: $k = \frac{1}{2}(4) + 3 = 2 + 3 = 5$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>8.</strong> Substitute $y = 2$: $2 = -3p + 11$, so $-3p = -9$, and $p = 3$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>9.</strong></p>
+                <table style="font-size: 0.9em;">
+                    <tr><th>$x$</th><th>$y = 2x - 4$</th><th>$(x, y)$</th></tr>
+                    <tr><td>$-1$</td><td>$-6$</td><td>$(-1, -6)$</td></tr>
+                    <tr><td>$0$</td><td>$-4$</td><td>$(0, -4)$</td></tr>
+                    <tr><td>$1$</td><td>$-2$</td><td>$(1, -2)$</td></tr>
+                    <tr><td>$2$</td><td>$0$</td><td>$(2, 0)$</td></tr>
+                    <tr><td>$3$</td><td>$2$</td><td>$(3, 2)$</td></tr>
+                </table>
+                <div id="sol-9-graph" class="jxgbox" style="width: 280px; height: 280px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>10.</strong> $m = -\frac{2}{3}$, $b = 2$. Start at $(0, 2)$. From there, move right 3 units and down 2 units to reach $(3, 0)$. Draw the line through these points.</p>
+                <div id="sol-10-graph" class="jxgbox" style="width: 280px; height: 280px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>11.</strong></p>
+                <p>$x$-intercept (set $y = 0$): $3x = 12$, so $x = 4$. Point: $(4, 0)$.</p>
+                <p>$y$-intercept (set $x = 0$): $-2y = 12$, so $y = -6$. Point: $(0, -6)$.</p>
+                <div id="sol-11-graph" class="jxgbox" style="width: 280px; height: 280px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>12.</strong> $y = -3$ is a horizontal line passing through all points with $y$-coordinate $-3$. $x = 4$ is a vertical line passing through all points with $x$-coordinate $4$. The lines intersect at $(4, -3)$.</p>
+                <div id="sol-12-graph" class="jxgbox" style="width: 280px; height: 280px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>13.</strong> $m = \frac{11 - 3}{5 - 1} = \frac{8}{4} = 2$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>14.</strong> $m = \frac{-0.8 - 3.2}{2.5 - (-1.5)} = \frac{-4.0}{4.0} = -1$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>15.</strong> $m = \frac{-2 - 7}{3 - 3} = \frac{-9}{0}$ = undefined. This is a vertical line.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>16.</strong> Slope $= \frac{\text{rise}}{\text{run}} = \frac{3}{12} = \frac{1}{4}$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>17.</strong></p>
+                <p>(a) $m = 5$, $b = -2$.</p>
+                <p>(b) $m = -\frac{3}{4}$, $b = 1$.</p>
+                <p>(c) $y = 1 \cdot x + 0$, so $m = 1$, $b = 0$.</p>
+                <p>(d) $y = 0 \cdot x + (-8)$, so $m = 0$, $b = -8$ (horizontal line).</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>18.</strong> $y = 0.75x - 2.5$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>19.</strong> The point $(0, 7)$ is the $y$-intercept, so $b = 7$. With $m = -2$: $y = -2x + 7$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>20.</strong> Slope: $m = \frac{9.4 - 2.4}{5 - 0} = \frac{7.0}{5} = 1.4$. The $y$-intercept is $(0, 2.4)$, so $b = 2.4$. Equation: $y = 1.4x + 2.4$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>21.</strong> $4x + 2y = 10$. Subtract $4x$: $2y = -4x + 10$. Divide by 2: $y = -2x + 5$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>22.</strong> Point-slope: $y - (-2) = 4(x - 3)$, so $y + 2 = 4x - 12$, and $y = 4x - 14$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>23.</strong> Slope: $m = \frac{-4 - 5}{2 - (-1)} = \frac{-9}{3} = -3$.</p>
+                <p>Point-slope with $(-1, 5)$: $y - 5 = -3(x - (-1)) = -3(x + 1) = -3x - 3$.</p>
+                <p>So $y = -3x + 2$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>24.</strong> Multiply by 5: $5y = 2x - 15$. Rearrange: $-2x + 5y = -15$, or $2x - 5y = 15$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>25.</strong></p>
+                <p>(a) Both have slope 2. Same slope → <strong>Parallel</strong>.</p>
+                <p>(b) Slopes: $3$ and $-\frac{1}{3}$. Product: $3 \times (-\frac{1}{3}) = -1$ → <strong>Perpendicular</strong>.</p>
+                <p>(c) Slopes: $4$ and $-4$. Product: $4 \times (-4) = -16 \neq -1$. Not equal slopes either → <strong>Neither</strong>.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>26.</strong> Parallel means same slope: $m = -\frac{1}{2}$.</p>
+                <p>Point-slope: $y - 1 = -\frac{1}{2}(x - 4) = -\frac{1}{2}x + 2$.</p>
+                <p>So $y = -\frac{1}{2}x + 3$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>27.</strong> Original slope: $3$. Perpendicular slope: $-\frac{1}{3}$.</p>
+                <p>Point-slope: $y - 0 = -\frac{1}{3}(x - 6) = -\frac{1}{3}x + 2$.</p>
+                <p>So $y = -\frac{1}{3}x + 2$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>28.</strong></p>
+                <p>(a) $C = 35h + 50$.</p>
+                <p>(b) Slope = 35 dollars per hour. This is the hourly rate for labor.</p>
+                <p>(c) $y$-intercept = 50 dollars. This is the fixed service call fee, charged regardless of time.</p>
+                <p>(d) $C = 35(3) + 50 = 105 + 50 = 155$ dollars.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>29.</strong></p>
+                <p>(a) $m = \frac{275 - 110}{5 - 2} = \frac{165}{3} = 55$ miles per hour. This is the car's constant speed.</p>
+                <p>(b) Using point $(2, 110)$ and $m = 55$:</p>
+                <p>$d - 110 = 55(t - 2) = 55t - 110$, so $d = 55t$.</p>
+                <p>(Note: The $y$-intercept is 0, meaning the car started at the reference point.)</p>
+                <p>(c) $d = 55(7) = 385$ miles.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>30.</strong></p>
+                <p>(a) $h = -1.5t + 18$.</p>
+                <p>(b) Slope = $-1.5$ cm per hour. It's negative because the height <em>decreases</em> as time passes (the candle burns down).</p>
+                <p>(c) $h = -1.5(4) + 18 = -6 + 18 = 12$ cm.</p>
+                <p>(d) Set $h = 0$: $0 = -1.5t + 18$, so $1.5t = 18$, and $t = 12$ hours.</p>
+                <div id="sol-30-graph" class="jxgbox" style="width: 320px; height: 280px; margin: 15px auto;"></div>
+            </div>
+            
+            <div class="solution">
+                <p><strong>31.</strong> $m = \frac{-3.18 - 8.32}{6.25 - 2.75} = \frac{-11.50}{3.50} \approx -3.29$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>32.</strong> Slope: $m = \frac{52.2 - 14.7}{12.5 - 0} = \frac{37.5}{12.5} = 3$. The $y$-intercept is $14.7$.</p>
+                <p>Equation: $y = 3x + 14.7$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>33.</strong></p>
+                <p>(a) $C = 125.50h + 2850$.</p>
+                <p>(b) $C = 125.50(18.5) + 2850 = 2321.75 + 2850 = 5171.75$ dollars.</p>
+                <p>(c) Set $C = 6000$:</p>
+                <p>$6000 = 125.50h + 2850$</p>
+                <p>$3150 = 125.50h$</p>
+                <p>$h = \frac{3150}{125.50} \approx 25.10$ hours.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>34.</strong></p>
+                <p>(a) $m = \frac{1922 - 847}{8.0 - 3.5} = \frac{1075}{4.5} \approx 238.89$ meters per minute.</p>
+                <p>(b) Using point-slope with $(3.5, 847)$:</p>
+                <p>$A - 847 = 238.89(t - 3.5)$</p>
+                <p>$A = 238.89t - 836.11 + 847$</p>
+                <p>$A = 238.89t + 10.89$ (approximately).</p>
+                <p>(c) At $t = 0$: $A = 238.89(0) + 10.89 \approx 10.89$ meters. (The balloon was launched from about 11 meters altitude—perhaps on a hilltop or platform.)</p>
+                <p>(d) Set $A = 3000$:</p>
+                <p>$3000 = 238.89t + 10.89$</p>
+                <p>$2989.11 = 238.89t$</p>
+                <p>$t \approx 12.51$ minutes.</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 12 SUMMARY -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-12-summary">Section 12 Summary</h2>
+        
+        <div class="summary-box">
+            <h3>Key Concepts</h3>
+            
+            <h4>The Coordinate Plane</h4>
+            <ul>
+                <li>The coordinate plane is formed by two perpendicular number lines: the horizontal $x$-axis and vertical $y$-axis, meeting at the origin $(0, 0)$.</li>
+                <li>Every point is identified by an ordered pair $(x, y)$.</li>
+                <li>The plane is divided into four quadrants, numbered I–IV counterclockwise from the upper right.</li>
+            </ul>
+            
+            <h4>Linear Equations and Their Graphs</h4>
+            <ul>
+                <li>A linear equation in two variables (like $y = 2x + 3$ or $3x - y = 7$) graphs as a straight line.</li>
+                <li>Every point on the line is a solution of the equation; every solution is a point on the line.</li>
+                <li>To graph a line, find at least two points that satisfy the equation.</li>
+            </ul>
+            
+            <h4>Slope</h4>
+            <ul>
+                <li>Slope measures steepness: $m = \frac{\Delta y}{\Delta x} = \frac{y_2 - y_1}{x_2 - x_1}$ ("rise over run").</li>
+                <li>Positive slope: line rises left to right. Negative slope: line falls left to right.</li>
+                <li>Zero slope: horizontal line. Undefined slope: vertical line.</li>
+                <li>In applications, slope represents a rate of change (dollars per hour, miles per gallon, etc.).</li>
+            </ul>
+            
+            <h4>Forms of Linear Equations</h4>
+            <ul>
+                <li><strong>Slope-intercept form:</strong> $y = mx + b$, where $m$ is slope and $b$ is the $y$-intercept.</li>
+                <li><strong>Point-slope form:</strong> $y - y_1 = m(x - x_1)$, useful when you know a point and the slope.</li>
+                <li><strong>Standard form:</strong> $Ax + By = C$, useful for finding intercepts and solving systems.</li>
+                <li>Any form can be converted to any other form. The choice affects convenience, not correctness.</li>
+            </ul>
+            
+            <h4>Parallel and Perpendicular Lines</h4>
+            <ul>
+                <li><strong>Parallel lines</strong> have the same slope (and different $y$-intercepts).</li>
+                <li><strong>Perpendicular lines</strong> have slopes that are negative reciprocals: $m_1 \cdot m_2 = -1$.</li>
+                <li>Horizontal and vertical lines are perpendicular to each other.</li>
+            </ul>
+            
+            <h4>Interpreting Linear Models</h4>
+            <ul>
+                <li>The <strong>slope</strong> tells you the rate of change—how much the output changes per unit of input.</li>
+                <li>The <strong>$y$-intercept</strong> tells you the starting value—the output when the input is zero.</li>
+            </ul>
+        </div>
+        
+        <hr style="margin: 40px 0; border: none; border-top: 1px solid #ccc;">
+        
+        <p style="text-align: center; color: #666; font-style: italic;">
+            End of Section 12: Graphing and Linear Functions.
+        </p>
+        
+    </div>
+    
+    <!-- ============================================================ -->
+    <!-- JAVASCRIPT: JSXGraph and Plotly Initialization -->
+    <!-- ============================================================ -->
+    
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ============================================================
+        // Fig. 12.1: The Coordinate Plane
+        // ============================================================
+        var board1 = JXG.JSXGraph.initBoard('fig-12-1', {
+            boundingbox: [-6.5, 6.5, 6.5, -6.5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {
+                        position: 'rt',
+                        offset: [-15, 15]
+                    },
+                    ticks: {
+                        insertTicks: false,
+                        ticksDistance: 1,
+                        minorTicks: 0
+                    }
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {
+                        position: 'rt',
+                        offset: [15, -5]
+                    },
+                    ticks: {
+                        insertTicks: false,
+                        ticksDistance: 1,
+                        minorTicks: 0
+                    }
+                }
+            }
+        });
+        
+        // Quadrant labels
+        board1.create('text', [3.5, 5.5, 'I'], {fontSize: 18, color: '#666', anchorX: 'middle'});
+        board1.create('text', [-3.5, 5.5, 'II'], {fontSize: 18, color: '#666', anchorX: 'middle'});
+        board1.create('text', [-3.5, -5.5, 'III'], {fontSize: 18, color: '#666', anchorX: 'middle'});
+        board1.create('text', [3.5, -5.5, 'IV'], {fontSize: 18, color: '#666', anchorX: 'middle'});
+        
+        // Sample points
+        board1.create('point', [3, 4], {name: 'A(3, 4)', size: 4, color: '#e63946', label: {offset: [8, 8], color: '#e63946'}});
+        board1.create('point', [-4, 2], {name: 'B(-4, 2)', size: 4, color: '#2a9d8f', label: {offset: [-60, 8], color: '#2a9d8f'}});
+        board1.create('point', [-3, -3], {name: 'C(-3, -3)', size: 4, color: '#e9c46a', label: {offset: [-65, -15], color: '#b8860b'}});
+        board1.create('point', [4, -2], {name: 'D(4, -2)', size: 4, color: '#9b59b6', label: {offset: [8, -15], color: '#9b59b6'}});
+        board1.create('point', [0, 3], {name: 'E(0, 3)', size: 4, color: '#3498db', label: {offset: [8, 8], color: '#3498db'}});
+        board1.create('point', [-2, 0], {name: 'F(-2, 0)', size: 4, color: '#1abc9c', label: {offset: [-60, 10], color: '#1abc9c'}});
+        
+        // Origin label
+        board1.create('text', [0.3, -0.5, 'O'], {fontSize: 12, color: '#333'});
+        
+        // ============================================================
+        // Fig. 12.2: From Table to Graph (y = 2x - 1)
+        // ============================================================
+        var board2 = JXG.JSXGraph.initBoard('fig-12-2', {
+            boundingbox: [-4.5, 7, 5, -6.5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // The line y = 2x - 1
+        board2.create('functiongraph', [function(x) { return 2*x - 1; }], {
+            strokeColor: '#3b82f6',
+            strokeWidth: 2
+        });
+        
+        // Plot the points from the table
+        var pts2 = [
+            [-2, -5, '(-2, -5)'],
+            [-1, -3, '(-1, -3)'],
+            [0, -1, '(0, -1)'],
+            [1, 1, '(1, 1)'],
+            [2, 3, '(2, 3)'],
+            [3, 5, '(3, 5)']
+        ];
+        
+        pts2.forEach(function(p) {
+            board2.create('point', [p[0], p[1]], {
+                name: p[2],
+                size: 4,
+                color: '#e63946',
+                label: {offset: [8, 8], fontSize: 11, color: '#333'}
+            });
+        });
+        
+        // Equation label
+        board2.create('text', [3.5, 5.8, 'y = 2x - 1'], {fontSize: 14, color: '#3b82f6', anchorX: 'middle'});
+        
+        // ============================================================
+        // Fig. 12.3: Graphing y = 2x - 4 Using Intercepts
+        // ============================================================
+        var board3 = JXG.JSXGraph.initBoard('fig-12-3', {
+            boundingbox: [-3, 5, 6, -6],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // The line y = 2x - 4
+        board3.create('functiongraph', [function(x) { return 2*x - 4; }], {
+            strokeColor: '#2d8a4e',
+            strokeWidth: 2
+        });
+        
+        // Intercepts and verification point
+        board3.create('point', [0, -4], {
+            name: 'y-intercept (0, -4)',
+            size: 5,
+            color: '#e63946',
+            label: {offset: [10, -15], fontSize: 11, color: '#e63946'}
+        });
+        board3.create('point', [2, 0], {
+            name: 'x-intercept (2, 0)',
+            size: 5,
+            color: '#e63946',
+            label: {offset: [5, 12], fontSize: 11, color: '#e63946'}
+        });
+        board3.create('point', [3, 2], {
+            name: 'Check: (3, 2)',
+            size: 5,
+            color: '#3498db',
+            label: {offset: [8, 8], fontSize: 11, color: '#3498db'}
+        });
+        
+        // Equation label
+        board3.create('text', [4.5, 3.5, 'y = 2x - 4'], {fontSize: 14, color: '#2d8a4e', anchorX: 'middle'});
+        
+        // ============================================================
+        // Fig. 12.4: Comparing Slopes
+        // ============================================================
+        var board4 = JXG.JSXGraph.initBoard('fig-12-4', {
+            boundingbox: [-5, 6, 7, -5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // Line with slope m = 2 (steep positive)
+        board4.create('functiongraph', [function(x) { return 2*x; }], {
+            strokeColor: '#e63946',
+            strokeWidth: 2
+        });
+        board4.create('text', [2.3, 5.2, 'm = 2'], {fontSize: 12, color: '#e63946'});
+        
+        // Line with slope m = 1/2 (gentle positive)
+        board4.create('functiongraph', [function(x) { return 0.5*x; }], {
+            strokeColor: '#2a9d8f',
+            strokeWidth: 2
+        });
+        board4.create('text', [5.5, 3.2, 'm = 1/2'], {fontSize: 12, color: '#2a9d8f'});
+        
+        // Line with slope m = -1 (negative)
+        board4.create('functiongraph', [function(x) { return -x; }], {
+            strokeColor: '#9b59b6',
+            strokeWidth: 2
+        });
+        board4.create('text', [3.5, -4, 'm = -1'], {fontSize: 12, color: '#9b59b6'});
+        
+        // Horizontal line (m = 0)
+        board4.create('functiongraph', [function(x) { return 0; }], {
+            strokeColor: '#f59e0b',
+            strokeWidth: 2,
+            dash: 2
+        });
+        board4.create('text', [5.5, 0.5, 'm = 0'], {fontSize: 12, color: '#f59e0b'});
+        
+        // Vertical line x = 4 (undefined slope)
+        board4.create('line', [[4, 0], [4, 1]], {
+            strokeColor: '#6b7280',
+            strokeWidth: 2,
+            dash: 3,
+            straightFirst: true,
+            straightLast: true
+        });
+        board4.create('text', [4.3, -3.5, 'x = 4'], {fontSize: 11, color: '#6b7280'});
+        board4.create('text', [4.3, -4.3, '(undefined)'], {fontSize: 10, color: '#6b7280'});
+        
+        // ============================================================
+        // 3D Plotly Saddle Surface: z = x^2 - y^2
+        // ============================================================
+        var saddleDiv = document.getElementById('fig-3d-saddle');
+        
+        // Generate data for the saddle surface
+        var xVals = [];
+        var yVals = [];
+        var zVals = [];
+        
+        var steps = 40;
+        var range = 2;
+        
+        for (var i = 0; i <= steps; i++) {
+            var xRow = [];
+            var yRow = [];
+            var zRow = [];
+            var x = -range + (2 * range * i / steps);
+            
+            for (var j = 0; j <= steps; j++) {
+                var y = -range + (2 * range * j / steps);
+                xRow.push(x);
+                yRow.push(y);
+                zRow.push(x * x - y * y);
+            }
+            xVals.push(xRow);
+            yVals.push(yRow);
+            zVals.push(zRow);
+        }
+        
+        var saddleData = [{
+            type: 'surface',
+            x: xVals,
+            y: yVals,
+            z: zVals,
+            colorscale: [
+                [0, '#3b82f6'],
+                [0.5, '#f8fafc'],
+                [1, '#e63946']
+            ],
+            showscale: false,
+            opacity: 0.9
+        }];
+        
+        var saddleLayout = {
+            margin: {l: 0, r: 0, t: 30, b: 0},
+            scene: {
+                xaxis: {title: 'x', range: [-2, 2]},
+                yaxis: {title: 'y', range: [-2, 2]},
+                zaxis: {title: 'z', range: [-4, 4]},
+                camera: {
+                    eye: {x: -1.5, y: -1.5, z: 1.2}
+                }
+            },
+            paper_bgcolor: 'rgba(0,0,0,0)',
+            plot_bgcolor: 'rgba(0,0,0,0)'
+        };
+        
+        var saddleConfig = {
+            responsive: true,
+            displayModeBar: true,
+            modeBarButtonsToRemove: ['toImage', 'sendDataToCloud', 'hoverClosest3d'],
+            displaylogo: false
+        };
+        
+        Plotly.newPlot(saddleDiv, saddleData, saddleLayout, saddleConfig);
+        
+        // ============================================================
+        // Fig. 12.5a: Why b Is the Y-Intercept
+        // Three lines with same slope, different y-intercepts
+        // ============================================================
+        var board5a = JXG.JSXGraph.initBoard('fig-12-5a', {
+            boundingbox: [-5, 8, 7, -5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // y = x + 3 (b = 3)
+        board5a.create('functiongraph', [function(x) { return x + 3; }], {
+            strokeColor: '#e63946', strokeWidth: 2
+        });
+        board5a.create('point', [0, 3], {
+            name: '(0, 3)', size: 4, color: '#e63946',
+            label: {offset: [8, 5], color: '#e63946', fontSize: 11}
+        });
+        board5a.create('text', [5, 7.5, 'y = x + 3'], {fontSize: 12, color: '#e63946'});
+        
+        // y = x (b = 0)
+        board5a.create('functiongraph', [function(x) { return x; }], {
+            strokeColor: '#2a9d8f', strokeWidth: 2
+        });
+        board5a.create('point', [0, 0], {
+            name: '(0, 0)', size: 4, color: '#2a9d8f',
+            label: {offset: [8, -15], color: '#2a9d8f', fontSize: 11}
+        });
+        board5a.create('text', [5.5, 5, 'y = x'], {fontSize: 12, color: '#2a9d8f'});
+        
+        // y = x - 2 (b = -2)
+        board5a.create('functiongraph', [function(x) { return x - 2; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        board5a.create('point', [0, -2], {
+            name: '(0, -2)', size: 4, color: '#3b82f6',
+            label: {offset: [8, -10], color: '#3b82f6', fontSize: 11}
+        });
+        board5a.create('text', [5, 2.5, 'y = x - 2'], {fontSize: 12, color: '#3b82f6'});
+        
+        // ============================================================
+        // Fig. 12.5b: Why m Is the Slope — Family of Lines
+        // Same y-intercept, different slopes
+        // ============================================================
+        var board5b = JXG.JSXGraph.initBoard('fig-12-5b', {
+            boundingbox: [-5, 9, 7, -5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // All lines pass through (0, 2)
+        board5b.create('point', [0, 2], {
+            name: 'y-intercept (0, 2)', size: 5, color: '#333',
+            label: {offset: [-100, 5], color: '#333', fontSize: 11}
+        });
+        
+        // y = 3x + 2 (steep positive)
+        board5b.create('functiongraph', [function(x) { return 3*x + 2; }], {
+            strokeColor: '#e63946', strokeWidth: 2
+        });
+        board5b.create('text', [1.8, 8.2, 'm = 3'], {fontSize: 11, color: '#e63946'});
+        
+        // y = x + 2 (moderate positive)
+        board5b.create('functiongraph', [function(x) { return x + 2; }], {
+            strokeColor: '#f59e0b', strokeWidth: 2
+        });
+        board5b.create('text', [5.5, 7.2, 'm = 1'], {fontSize: 11, color: '#f59e0b'});
+        
+        // y = 0.5x + 2 (gentle positive)
+        board5b.create('functiongraph', [function(x) { return 0.5*x + 2; }], {
+            strokeColor: '#2a9d8f', strokeWidth: 2
+        });
+        board5b.create('text', [5.5, 4.5, 'm = 1/2'], {fontSize: 11, color: '#2a9d8f'});
+        
+        // y = -x + 2 (negative)
+        board5b.create('functiongraph', [function(x) { return -x + 2; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        board5b.create('text', [5, -3.5, 'm = -1'], {fontSize: 11, color: '#3b82f6'});
+        
+        // ============================================================
+        // Fig. 12.5c: Graphing from Slope-Intercept Form
+        // Two examples with rise/run shown
+        // ============================================================
+        var board5c = JXG.JSXGraph.initBoard('fig-12-5c', {
+            boundingbox: [-3, 7, 7, -5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // Line 1: y = 2x - 3 (blue)
+        board5c.create('functiongraph', [function(x) { return 2*x - 3; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        
+        // y-intercept
+        board5c.create('point', [0, -3], {
+            name: '(0, -3)', size: 5, color: '#3b82f6',
+            label: {offset: [-50, -10], color: '#3b82f6', fontSize: 11}
+        });
+        
+        // Second point using slope
+        board5c.create('point', [1, -1], {
+            name: '(1, -1)', size: 5, color: '#3b82f6',
+            label: {offset: [8, -10], color: '#3b82f6', fontSize: 11}
+        });
+        
+        // Rise/run arrows for blue line
+        board5c.create('segment', [[0, -3], [1, -3]], {
+            strokeColor: '#3b82f6', strokeWidth: 1, dash: 2
+        });
+        board5c.create('segment', [[1, -3], [1, -1]], {
+            strokeColor: '#3b82f6', strokeWidth: 1, dash: 2
+        });
+        board5c.create('text', [0.3, -3.5, 'Δx = 1'], {fontSize: 9, color: '#3b82f6'});
+        board5c.create('text', [1.2, -2, 'Δy = 2'], {fontSize: 9, color: '#3b82f6'});
+        
+        board5c.create('text', [4, 4.5, 'y = 2x - 3'], {fontSize: 12, color: '#3b82f6'});
+        
+        // Line 2: y = -0.5x + 4 (red)
+        board5c.create('functiongraph', [function(x) { return -0.5*x + 4; }], {
+            strokeColor: '#e63946', strokeWidth: 2
+        });
+        
+        // y-intercept
+        board5c.create('point', [0, 4], {
+            name: '(0, 4)', size: 5, color: '#e63946',
+            label: {offset: [8, 8], color: '#e63946', fontSize: 11}
+        });
+        
+        // Second point using slope
+        board5c.create('point', [2, 3], {
+            name: '(2, 3)', size: 5, color: '#e63946',
+            label: {offset: [8, 8], color: '#e63946', fontSize: 11}
+        });
+        
+        // Rise/run arrows for red line
+        board5c.create('segment', [[0, 4], [2, 4]], {
+            strokeColor: '#e63946', strokeWidth: 1, dash: 2
+        });
+        board5c.create('segment', [[2, 4], [2, 3]], {
+            strokeColor: '#e63946', strokeWidth: 1, dash: 2
+        });
+        board5c.create('text', [0.7, 4.3, 'Δx = 2'], {fontSize: 9, color: '#e63946'});
+        board5c.create('text', [2.2, 3.5, 'Δy = -1'], {fontSize: 9, color: '#e63946'});
+        
+        board5c.create('text', [4.5, 2, 'y = -½x + 4'], {fontSize: 12, color: '#e63946'});
+        
+        // ============================================================
+        // Solution 20 Graph: y = -x + 2
+        // ============================================================
+        var solBoard20 = JXG.JSXGraph.initBoard('sol-20-graph', {
+            boundingbox: [-2, 5, 5, -2],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        solBoard20.create('functiongraph', [function(x) { return -x + 2; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        solBoard20.create('point', [0, 2], {name: '', size: 4, color: '#3b82f6'});
+        solBoard20.create('point', [1, 1], {name: '', size: 4, color: '#3b82f6'});
+        solBoard20.create('text', [2.5, 0, 'y = -x + 2'], {fontSize: 10, color: '#3b82f6'});
+        
+        // ============================================================
+        // Fig. 12.6: Parallel and Perpendicular Lines
+        // ============================================================
+        var board6 = JXG.JSXGraph.initBoard('fig-12-6', {
+            boundingbox: [-4, 10, 8, -4],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: {
+                    name: 'x',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [-15, 15]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                },
+                y: {
+                    name: 'y',
+                    withLabel: true,
+                    label: {position: 'rt', offset: [15, -5]},
+                    ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0}
+                }
+            }
+        });
+        
+        // Parallel line 1: y = 2x + 1 (blue)
+        board6.create('functiongraph', [function(x) { return 2*x + 1; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        board6.create('text', [3.5, 8.5, 'y = 2x + 1'], {fontSize: 11, color: '#3b82f6'});
+        
+        // Parallel line 2: y = 2x - 2 (blue, dashed)
+        board6.create('functiongraph', [function(x) { return 2*x - 2; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2, dash: 2
+        });
+        board6.create('text', [4.5, 6, 'y = 2x - 2'], {fontSize: 11, color: '#3b82f6'});
+        
+        // Perpendicular line: y = -0.5x + 6 (red)
+        board6.create('functiongraph', [function(x) { return -0.5*x + 6; }], {
+            strokeColor: '#e63946', strokeWidth: 2
+        });
+        board6.create('text', [5.5, 2.5, 'y = -½x + 6'], {fontSize: 11, color: '#e63946'});
+        
+        // Mark the intersection point of y = 2x + 1 and y = -0.5x + 6
+        // 2x + 1 = -0.5x + 6 → 2.5x = 5 → x = 2, y = 5
+        board6.create('point', [2, 5], {
+            name: '', size: 4, color: '#333'
+        });
+        
+        // Right angle marker at intersection
+        var sqSize = 0.4;
+        board6.create('polygon', [
+            [2, 5],
+            [2 + sqSize*0.447, 5 + sqSize*0.894],
+            [2 + sqSize*0.447 + sqSize*0.894, 5 + sqSize*0.894 - sqSize*0.447],
+            [2 + sqSize*0.894, 5 - sqSize*0.447]
+        ], {
+            fillColor: 'none',
+            strokeColor: '#333',
+            strokeWidth: 1,
+            vertices: {visible: false}
+        });
+        
+        // Labels for parallel and perpendicular
+        board6.create('text', [0.5, 8.5, 'Parallel lines'], {fontSize: 12, color: '#3b82f6', fontWeight: 'bold'});
+        board6.create('text', [0.5, 8, '(same slope: m = 2)'], {fontSize: 10, color: '#3b82f6'});
+        
+        board6.create('text', [5, -2.5, 'Perpendicular'], {fontSize: 12, color: '#e63946', fontWeight: 'bold'});
+        board6.create('text', [5, -3.2, '(slopes: 2 and -½)'], {fontSize: 10, color: '#e63946'});
+        
+        // ============================================================
+        // Rideshare Cost Function Graph
+        // C = 1.75m + 2.50
+        // ============================================================
+        var boardRide = JXG.JSXGraph.initBoard('fig-rideshare', {
+            boundingbox: [-1, 35, 18, -3],
+            axis: false,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: { symbol: '\u26F6', scale: 0.95 },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false}
+        });
+        
+        // Custom axes
+        boardRide.create('axis', [[0, 0], [1, 0]], {
+            name: 'm (miles)',
+            withLabel: true,
+            label: {position: 'rt', offset: [-50, 15]},
+            ticks: {insertTicks: false, ticksDistance: 5, minorTicks: 0, label: {offset: [-4, -12]}}
+        });
+        boardRide.create('axis', [[0, 0], [0, 1]], {
+            name: 'C ($)',
+            withLabel: true,
+            label: {position: 'rt', offset: [15, -5]},
+            ticks: {insertTicks: false, ticksDistance: 5, minorTicks: 0, label: {offset: [-20, 0]}}
+        });
+        
+        // Line C = 1.75m + 2.50
+        boardRide.create('functiongraph', [function(m) { return 1.75*m + 2.50; }, 0, 17], {
+            strokeColor: '#3b82f6', strokeWidth: 2.5
+        });
+        
+        // Key points
+        boardRide.create('point', [0, 2.50], {
+            name: '(0, 2.50)', size: 4, color: '#e63946',
+            label: {offset: [8, 5], color: '#e63946', fontSize: 10}
+        });
+        boardRide.create('point', [12, 23.50], {
+            name: '(12, 23.50)', size: 4, color: '#3b82f6',
+            label: {offset: [5, 8], color: '#3b82f6', fontSize: 10}
+        });
+        
+        // Equation label
+        boardRide.create('text', [8, 10, 'C = 1.75m + 2.50'], {fontSize: 12, color: '#3b82f6'});
+        
+        // ============================================================
+        // Temperature Conversion Graph
+        // F = (9/5)C + 32
+        // ============================================================
+        var boardTemp = JXG.JSXGraph.initBoard('fig-temperature', {
+            boundingbox: [-55, 120, 45, -55],
+            axis: false,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: { symbol: '\u26F6', scale: 0.95 },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false}
+        });
+        
+        // Custom axes
+        boardTemp.create('axis', [[0, 0], [1, 0]], {
+            name: 'C (°Celsius)',
+            withLabel: true,
+            label: {position: 'rt', offset: [-70, 15]},
+            ticks: {insertTicks: false, ticksDistance: 20, minorTicks: 0, label: {offset: [-4, -12]}}
+        });
+        boardTemp.create('axis', [[0, 0], [0, 1]], {
+            name: 'F (°Fahrenheit)',
+            withLabel: true,
+            label: {position: 'rt', offset: [10, -15]},
+            ticks: {insertTicks: false, ticksDistance: 20, minorTicks: 0, label: {offset: [-25, 0]}}
+        });
+        
+        // Line F = (9/5)C + 32
+        boardTemp.create('functiongraph', [function(c) { return (9/5)*c + 32; }, -50, 42], {
+            strokeColor: '#3b82f6', strokeWidth: 2.5
+        });
+        
+        // Line F = C (for comparison)
+        boardTemp.create('functiongraph', [function(c) { return c; }, -50, 42], {
+            strokeColor: '#9ca3af', strokeWidth: 1.5, dash: 2
+        });
+        boardTemp.create('text', [30, 25, 'F = C'], {fontSize: 10, color: '#9ca3af'});
+        
+        // Key points
+        boardTemp.create('point', [0, 32], {
+            name: '(0, 32)', size: 4, color: '#e63946',
+            label: {offset: [8, 5], color: '#e63946', fontSize: 10}
+        });
+        boardTemp.create('point', [-40, -40], {
+            name: '(−40, −40)', size: 5, color: '#16a34a',
+            label: {offset: [-70, -5], color: '#16a34a', fontSize: 10}
+        });
+        boardTemp.create('point', [100/1.8 - 32/1.8, 100], {
+            name: '', size: 0, color: '#3b82f6'
+        });
+        
+        // Equation label
+        boardTemp.create('text', [5, 95, 'F = (9/5)C + 32'], {fontSize: 12, color: '#3b82f6'});
+        
+        // ============================================================
+        // Fig. 12.7: Water Draining from a Tank
+        // ============================================================
+        var board7 = JXG.JSXGraph.initBoard('fig-12-7', {
+            boundingbox: [-3, 140, 35, -15],
+            axis: false,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: true,
+            fullscreen: {
+                symbol: '\u26F6',
+                scale: 0.95
+            },
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false}
+        });
+        
+        // Custom axes
+        board7.create('axis', [[0, 0], [1, 0]], {
+            name: 't (minutes)',
+            withLabel: true,
+            label: {position: 'rt', offset: [-70, 15]},
+            ticks: {insertTicks: false, ticksDistance: 5, minorTicks: 0, label: {offset: [-4, -12]}}
+        });
+        board7.create('axis', [[0, 0], [0, 1]], {
+            name: 'V (gallons)',
+            withLabel: true,
+            label: {position: 'rt', offset: [10, -10]},
+            ticks: {insertTicks: false, ticksDistance: 20, minorTicks: 0, label: {offset: [-25, 0]}}
+        });
+        
+        // Line V = -4t + 120
+        board7.create('functiongraph', [function(t) { return -4*t + 120; }, 0, 30], {
+            strokeColor: '#3b82f6', strokeWidth: 2.5
+        });
+        
+        // Key points
+        board7.create('point', [0, 120], {
+            name: '(0, 120)', size: 4, color: '#3b82f6',
+            label: {offset: [8, 5], color: '#3b82f6', fontSize: 11}
+        });
+        board7.create('point', [30, 0], {
+            name: '(30, 0)', size: 4, color: '#3b82f6',
+            label: {offset: [5, -15], color: '#3b82f6', fontSize: 11}
+        });
+        board7.create('point', [15, 60], {
+            name: '(15, 60)', size: 4, color: '#e63946',
+            label: {offset: [8, 5], color: '#e63946', fontSize: 11}
+        });
+        
+        // Equation label
+        board7.create('text', [18, 95, 'V = -4t + 120'], {fontSize: 13, color: '#3b82f6'});
+        
+        // ============================================================
+        // Solution 1: Plot points in quadrants
+        // ============================================================
+        var sol1 = JXG.JSXGraph.initBoard('sol-1-graph', {
+            boundingbox: [-6, 7, 7, -5],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: { ticks: {insertTicks: false, ticksDistance: 2, minorTicks: 0} },
+                y: { ticks: {insertTicks: false, ticksDistance: 2, minorTicks: 0} }
+            }
+        });
+        
+        sol1.create('point', [3, 5], {name: 'A', size: 3, color: '#3b82f6', label: {offset: [5, 5], fontSize: 10}});
+        sol1.create('point', [-2, 4], {name: 'B', size: 3, color: '#e63946', label: {offset: [-15, 5], fontSize: 10}});
+        sol1.create('point', [-3, -1], {name: 'C', size: 3, color: '#16a34a', label: {offset: [-15, -10], fontSize: 10}});
+        sol1.create('point', [4, -3], {name: 'D', size: 3, color: '#f59e0b', label: {offset: [5, -10], fontSize: 10}});
+        sol1.create('point', [0, -2], {name: 'E', size: 3, color: '#8b5cf6', label: {offset: [8, 0], fontSize: 10}});
+        sol1.create('point', [5, 0], {name: 'F', size: 3, color: '#ec4899', label: {offset: [0, 10], fontSize: 10}});
+        
+        // ============================================================
+        // Solution 9: y = 2x - 4
+        // ============================================================
+        var sol9 = JXG.JSXGraph.initBoard('sol-9-graph', {
+            boundingbox: [-3, 5, 5, -8],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} },
+                y: { ticks: {insertTicks: false, ticksDistance: 2, minorTicks: 0} }
+            }
+        });
+        
+        sol9.create('functiongraph', [function(x) { return 2*x - 4; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        // Plot the five points from the table
+        sol9.create('point', [-1, -6], {name: '', size: 3, color: '#e63946'});
+        sol9.create('point', [0, -4], {name: '', size: 3, color: '#e63946'});
+        sol9.create('point', [1, -2], {name: '', size: 3, color: '#e63946'});
+        sol9.create('point', [2, 0], {name: '', size: 3, color: '#e63946'});
+        sol9.create('point', [3, 2], {name: '', size: 3, color: '#e63946'});
+        sol9.create('text', [2.5, -5, 'y = 2x − 4'], {fontSize: 10, color: '#3b82f6'});
+        
+        // ============================================================
+        // Solution 10: y = -(2/3)x + 2
+        // ============================================================
+        var sol10 = JXG.JSXGraph.initBoard('sol-10-graph', {
+            boundingbox: [-2, 4, 5, -2],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} },
+                y: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} }
+            }
+        });
+        
+        sol10.create('functiongraph', [function(x) { return -(2/3)*x + 2; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        sol10.create('point', [0, 2], {name: '(0, 2)', size: 3, color: '#e63946', label: {offset: [5, 5], fontSize: 9}});
+        sol10.create('point', [3, 0], {name: '(3, 0)', size: 3, color: '#e63946', label: {offset: [5, -10], fontSize: 9}});
+        // Show rise/run
+        sol10.create('segment', [[0, 2], [3, 2]], {strokeColor: '#9ca3af', strokeWidth: 1, dash: 2});
+        sol10.create('segment', [[3, 2], [3, 0]], {strokeColor: '#9ca3af', strokeWidth: 1, dash: 2});
+        sol10.create('text', [1.2, 2.3, 'run = 3'], {fontSize: 8, color: '#666'});
+        sol10.create('text', [3.2, 1, 'rise = −2'], {fontSize: 8, color: '#666'});
+        
+        // ============================================================
+        // Solution 11: 3x - 2y = 12 (intercepts method)
+        // ============================================================
+        var sol11 = JXG.JSXGraph.initBoard('sol-11-graph', {
+            boundingbox: [-2, 3, 7, -8],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} },
+                y: { ticks: {insertTicks: false, ticksDistance: 2, minorTicks: 0} }
+            }
+        });
+        
+        // 3x - 2y = 12 => y = (3/2)x - 6
+        sol11.create('functiongraph', [function(x) { return (3/2)*x - 6; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        sol11.create('point', [4, 0], {name: '(4, 0)', size: 3, color: '#e63946', label: {offset: [5, 8], fontSize: 9}});
+        sol11.create('point', [0, -6], {name: '(0, −6)', size: 3, color: '#e63946', label: {offset: [5, -5], fontSize: 9}});
+        sol11.create('text', [4.5, -3, '3x − 2y = 12'], {fontSize: 10, color: '#3b82f6'});
+        
+        // ============================================================
+        // Solution 12: y = -3 and x = 4
+        // ============================================================
+        var sol12 = JXG.JSXGraph.initBoard('sol-12-graph', {
+            boundingbox: [-2, 4, 7, -6],
+            axis: true,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false},
+            defaultAxes: {
+                x: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} },
+                y: { ticks: {insertTicks: false, ticksDistance: 1, minorTicks: 0} }
+            }
+        });
+        
+        // Horizontal line y = -3
+        sol12.create('functiongraph', [function(x) { return -3; }], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        // Vertical line x = 4
+        sol12.create('line', [[4, 0], [4, 1]], {
+            strokeColor: '#e63946', strokeWidth: 2, straightFirst: true, straightLast: true
+        });
+        sol12.create('point', [4, -3], {name: '(4, −3)', size: 3, color: '#16a34a', label: {offset: [5, -12], fontSize: 9}});
+        sol12.create('text', [0.5, -2.3, 'y = −3'], {fontSize: 9, color: '#3b82f6'});
+        sol12.create('text', [4.3, 2.5, 'x = 4'], {fontSize: 9, color: '#e63946'});
+        
+        // ============================================================
+        // Solution 30: Candle h = -1.5t + 18
+        // ============================================================
+        var sol30 = JXG.JSXGraph.initBoard('sol-30-graph', {
+            boundingbox: [-1, 22, 14, -3],
+            axis: false,
+            showCopyright: false,
+            showNavigation: false,
+            drag: {enabled: false},
+            pan: {enabled: false},
+            zoom: {enabled: false},
+            keyboard: {enabled: false}
+        });
+        
+        // Custom axes
+        sol30.create('axis', [[0, 0], [1, 0]], {
+            name: 't (hours)',
+            withLabel: true,
+            label: {position: 'rt', offset: [-55, 15]},
+            ticks: {insertTicks: false, ticksDistance: 2, minorTicks: 0, label: {offset: [-4, -12]}}
+        });
+        sol30.create('axis', [[0, 0], [0, 1]], {
+            name: 'h (cm)',
+            withLabel: true,
+            label: {position: 'rt', offset: [10, -5]},
+            ticks: {insertTicks: false, ticksDistance: 4, minorTicks: 0, label: {offset: [-20, 0]}}
+        });
+        
+        // Line h = -1.5t + 18
+        sol30.create('functiongraph', [function(t) { return -1.5*t + 18; }, 0, 12], {
+            strokeColor: '#3b82f6', strokeWidth: 2
+        });
+        
+        // Key points
+        sol30.create('point', [0, 18], {
+            name: '(0, 18)', size: 3, color: '#e63946',
+            label: {offset: [5, 5], color: '#e63946', fontSize: 9}
+        });
+        sol30.create('point', [4, 12], {
+            name: '(4, 12)', size: 3, color: '#16a34a',
+            label: {offset: [5, 5], color: '#16a34a', fontSize: 9}
+        });
+        sol30.create('point', [12, 0], {
+            name: '(12, 0)', size: 3, color: '#e63946',
+            label: {offset: [5, 8], color: '#e63946', fontSize: 9}
+        });
+        
+        sol30.create('text', [5, 15, 'h = −1.5t + 18'], {fontSize: 10, color: '#3b82f6'});
+        
+        
+    });
+    </script>
+    
+</body>
+</html>

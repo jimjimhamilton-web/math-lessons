@@ -1,0 +1,2436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 13 (Systems of Linear Equations) - FINAL
+      Version: 1.0
+      Date: 2026-01-27
+      Guidelines Version: Technical Document Implementation v2.1
+      
+      Status: FINAL - Complete integrated section ready for deployment
+      
+      Follows: Section_12_Final_v1.html (Complete Section 12)
+      
+      History:
+        Version 1.0: FINAL - Integrated from three validated batches:
+                     - Batch 1: Sections 13.1-13.4 (Systems basics, graphing, substitution, elimination)
+                     - Batch 2: Sections 13.5-13.7 (Special cases, method selection, applications)
+                     - Batch 3: Section 13.8 (Practice problems) + Section Summary
+    -->
+    
+    <title>Section 13: Systems of Linear Equations</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- JSXGraph 1.4.6 for geometric diagrams -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-nav {
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #0369a1;
+        }
+        .section-nav a {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1a5f2a;
+        }
+        
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .draft-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .draft-notice h3 {
+            color: #b45309;
+            margin: 0 0 10px 0;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .historical-note {
+            background-color: #fffbeb;
+            padding: 20px;
+            border: 1px dashed #d97706;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .historical-note::before {
+            content: "Historical Note";
+            display: block;
+            font-weight: bold;
+            color: #b45309;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .going-deeper {
+            background-color: #f3e8ff;
+            padding: 20px;
+            border: 2px solid #9333ea;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .going-deeper::before {
+            content: "Going Deeper";
+            display: block;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .going-deeper h4 {
+            color: #6b21a8;
+            margin-top: 15px;
+        }
+        .going-deeper h4:first-of-type {
+            margin-top: 5px;
+        }
+        
+        .big-idea {
+            background-color: #fdf2f8;
+            padding: 20px;
+            border: 2px solid #db2777;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .big-idea::before {
+            content: "The Big Picture";
+            display: block;
+            font-weight: bold;
+            color: #be185d;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .figure-container {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .graph-title {
+            font-weight: bold;
+            color: #1a5f2a;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .graph-caption {
+            font-size: 0.9em;
+            color: #6b7280;
+            margin-top: 10px;
+            font-style: italic;
+            text-align: center;
+        }
+        
+        .jxgbox {
+            border: 1px solid #e5e7eb;
+            background-color: white;
+            border-radius: 4px;
+            margin: 0 auto;
+            padding: 12px;
+            box-sizing: border-box;
+        }
+        
+        /* Three-panel figure layout */
+        .three-panel {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .three-panel .panel {
+            flex: 1 1 250px;
+            max-width: 280px;
+            text-align: center;
+        }
+        .three-panel .panel-label {
+            font-weight: bold;
+            color: #374151;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: #1a5f2a;
+            font-weight: bold;
+        }
+        
+        .problems {
+            background-color: #fffde7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #fbc02d;
+        }
+        .problems h4 {
+            margin-top: 0;
+            color: #f57f17;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #fff59d;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #f57f17;
+        }
+        .solution {
+            margin-top: 12px;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        ul, ol { margin-left: 20px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .jxgbox { max-width: 100%; padding: 12px; }
+            .three-panel { flex-direction: column; align-items: center; }
+            .three-panel .panel { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section-nav">
+            <a href="Section_12_Final_v1.html">&larr; Section 12: Graphing and Linear Functions</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 13: Systems of Linear Equations</span> | 
+            <a href="Section_14_Final_v1.html">Section 14: Polynomials &rarr;</a>
+        </div>
+        
+        <h1>Section 13: Systems of Linear Equations</h1>
+        
+        <p>
+            So far, we've worked with single equations containing one or two variables. But many real-world problems involve multiple conditions that must all be satisfied at once. A business needs to meet both a budget constraint <em>and</em> a production target. A diet plan requires hitting protein goals <em>while</em> staying under a calorie limit. Two cars traveling toward each other will meet when they've covered the total distance between them—but when and where?
+        </p>
+        
+        <p>
+            These situations lead us to <strong>systems of equations</strong>: two or more equations that must be solved together. The solution must work for <em>all</em> the equations simultaneously, not just one at a time.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.1: WHAT SYSTEMS MEAN -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-1">13.1 What Systems Mean</h2>
+        
+        <div class="definition">
+            <h4>System of Equations</h4>
+            <p>
+                A <strong>system of equations</strong> is a set of two or more equations with the same variables. A <strong>solution</strong> to the system is a set of values that makes <em>all</em> the equations true simultaneously.
+            </p>
+            <p>
+                Systems can involve many types of equations—quadratic, exponential, trigonometric, and others. In Section 12, we began our study of equations by focusing on <strong>linear equations</strong>, where variables appear only to the first power: there are no exponents like $x^2$ or $y^3$, no square roots, and no more complicated functions of the variables. In this section, we continue that focus by studying <strong>systems of two linear equations</strong>. We'll see what solutions that satisfy both equations look like, and learn systematic methods for finding them.
+            </p>
+        </div>
+        
+        <p>
+            Consider this system of two linear equations:
+        </p>
+        
+        <p>
+            $$x + y = 5$$
+            $$x - y = 1$$
+        </p>
+        
+        <p>
+            A solution must satisfy <em>both</em> equations. Let's test a few candidates:
+        </p>
+        
+        <ul>
+            <li><strong>Try $x = 2$, $y = 3$:</strong> First equation: $2 + 3 = 5$ ✓. Second equation: $2 - 3 = -1 \neq 1$ ✗. This is <em>not</em> a solution.</li>
+            <li><strong>Try $x = 3$, $y = 2$:</strong> First equation: $3 + 2 = 5$ ✓. Second equation: $3 - 2 = 1$ ✓. This <em>is</em> a solution.</li>
+        </ul>
+        
+        <p>
+            The ordered pair $(3, 2)$ is the solution to this system. It's the only pair of values that works in both equations.
+        </p>
+        
+        <h3>The Geometric Picture</h3>
+        
+        <p>
+            In Section 12, we learned that a linear equation in two variables produces a straight line when graphed. Each point on the line represents a solution to that equation. So what happens when we graph <em>two</em> linear equations?
+        </p>
+        
+        <p>
+            Each equation gives us a line. A solution to the <em>system</em> must lie on <em>both</em> lines—that is, it must be a point where the lines intersect. This geometric insight gives us three possibilities:
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 13.1 — The Three Cases for Systems of Linear Equations</div>
+            <div class="three-panel">
+                <div class="panel">
+                    <div id="fig-13-1a" class="jxgbox" style="width: 250px; height: 250px;"></div>
+                    <div class="panel-label">(a) One Solution</div>
+                </div>
+                <div class="panel">
+                    <div id="fig-13-1b" class="jxgbox" style="width: 250px; height: 250px;"></div>
+                    <div class="panel-label">(b) No Solution</div>
+                </div>
+                <div class="panel">
+                    <div id="fig-13-1c" class="jxgbox" style="width: 250px; height: 250px;"></div>
+                    <div class="panel-label">(c) Infinitely Many Solutions</div>
+                </div>
+            </div>
+            <div class="graph-caption">
+                (a) Lines with different slopes intersect at exactly one point. 
+                (b) Parallel lines (same slope, different intercepts) never intersect. 
+                (c) The same line (equations are equivalent) has infinitely many common points.
+            </div>
+        </div>
+        
+        <div class="key-point">
+            <h4>Three Cases for Linear Systems</h4>
+            <p>A system of two linear equations in two variables has exactly one of these outcomes:</p>
+            <ol>
+                <li><strong>One solution:</strong> The lines intersect at exactly one point. The system is <em>consistent</em> and <em>independent</em>.</li>
+                <li><strong>No solution:</strong> The lines are parallel (same slope, different $y$-intercepts). The system is <em>inconsistent</em>.</li>
+                <li><strong>Infinitely many solutions:</strong> The lines are identical (the equations are equivalent). The system is <em>consistent</em> and <em>dependent</em>.</li>
+            </ol>
+        </div>
+        
+        <p>
+            Recall from Section 12.8 that two lines with different slopes must intersect somewhere. This means: if two linear equations have different slopes, the system is guaranteed to have exactly one solution. Parallel lines have the same slope but different $y$-intercepts—they run alongside each other forever without meeting.
+        </p>
+        
+        <div class="example">
+            <h4>Example: Identifying the Number of Solutions</h4>
+            
+            <p>Without solving, determine how many solutions each system has.</p>
+            
+            <p><strong>(a)</strong> $y = 2x + 1$ and $y = -x + 4$</p>
+            
+            <p>
+                The slopes are $2$ and $-1$—different. The lines must intersect.
+                <br><strong>Answer: One solution.</strong>
+            </p>
+            
+            <p><strong>(b)</strong> $y = 3x - 2$ and $y = 3x + 5$</p>
+            
+            <p>
+                Both lines have slope $3$, but different $y$-intercepts ($-2$ and $5$). They're parallel.
+                <br><strong>Answer: No solution.</strong>
+            </p>
+            
+            <p><strong>(c)</strong> $2x + 4y = 8$ and $x + 2y = 4$</p>
+            
+            <p>
+                Let's rewrite both in slope-intercept form. First equation: $4y = -2x + 8$, so $y = -\frac{1}{2}x + 2$. Second equation: $2y = -x + 4$, so $y = -\frac{1}{2}x + 2$. These are the <em>same</em> equation!
+                <br><strong>Answer: Infinitely many solutions.</strong>
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.2: SOLVING BY GRAPHING -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-2">13.2 Solving by Graphing</h2>
+        
+        <p>
+            The most intuitive way to solve a system is to graph both equations and find where the lines cross. This method gives us a visual understanding of what we're looking for.
+        </p>
+        
+        <h3>Procedure: Solving by Graphing</h3>
+        
+        <ol>
+            <li>Graph each equation on the same coordinate plane.</li>
+            <li>Identify the point of intersection (if any).</li>
+            <li>Read the coordinates of the intersection point.</li>
+            <li>Check by substituting into <em>both</em> original equations.</li>
+        </ol>
+        
+        <div class="example">
+            <h4>Example: Solving a System by Graphing</h4>
+            
+            <p>Solve the system by graphing:</p>
+            <p>$$y = 2x - 1$$</p>
+            <p>$$y = -x + 5$$</p>
+            
+            <p><strong>Step 1: Graph each line.</strong></p>
+            
+            <p>
+                First equation: $y = 2x - 1$ has slope $2$ and $y$-intercept $-1$. Start at $(0, -1)$ and use "rise 2, run 1" to plot additional points.
+            </p>
+            <p>
+                Second equation: $y = -x + 5$ has slope $-1$ and $y$-intercept $5$. Start at $(0, 5)$ and use "rise $-1$, run 1" (or equivalently, "down 1, right 1").
+            </p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 13.2 — Solving by Graphing</div>
+                <div id="fig-13-2" class="jxgbox" style="width: 450px; height: 400px;"></div>
+                <div class="graph-caption">The lines $y = 2x - 1$ and $y = -x + 5$ intersect at $(2, 3)$.</div>
+            </div>
+            
+            <p><strong>Step 2: Find the intersection.</strong></p>
+            <p>The lines appear to cross at $(2, 3)$.</p>
+            
+            <p><strong>Step 3: Check in both equations.</strong></p>
+            <p>First equation: $y = 2x - 1 \Rightarrow 3 = 2(2) - 1 = 4 - 1 = 3$ ✓</p>
+            <p>Second equation: $y = -x + 5 \Rightarrow 3 = -(2) + 5 = -2 + 5 = 3$ ✓</p>
+            
+            <p><strong>Answer:</strong> $(2, 3)$</p>
+        </div>
+        
+        <h3>Strengths and Limitations of Graphing</h3>
+        
+        <p>
+            Graphing is valuable because it shows us <em>what's happening</em>. We can see whether lines intersect, run parallel, or coincide. We can estimate where the solution lies even before doing any algebra.
+        </p>
+        
+        <p>
+            But graphing has a significant limitation: <strong>precision depends on how carefully we draw</strong>. If the solution is $(2, 3)$, we can read it exactly. But what if the solution is $\left(\frac{7}{3}, \frac{11}{5}\right)$? We'd see the intersection is "somewhere around $(2.3, 2.2)$" but couldn't determine the exact values from a graph.
+        </p>
+        
+        <p>
+            If you need an answer to several digits of precision—say, two or more significant figures—graphing alone won't get you there. A carefully drawn graph might tell you the solution is "approximately $(2.3, 2.2)$," but is it $(2.33, 2.20)$ or $(2.35, 2.18)$? You can't tell by looking. When precision matters, graphing helps you understand the problem, but algebraic methods are needed to find the solution to the desired accuracy.
+        </p>
+        
+        <div class="key-point">
+            <h4>When Graphing Helps</h4>
+            <ul>
+                <li><strong>Visualization:</strong> Graphing shows whether a solution exists and roughly where it is.</li>
+                <li><strong>Intuition:</strong> Seeing the lines helps you understand the problem and catch errors. If your algebraic answer is $(10, -15)$ but the graph clearly shows intersection in the first quadrant, something went wrong.</li>
+                <li><strong>Estimation:</strong> A quick sketch tells you "the answer is around $(3, 4)$"—useful for checking reasonableness or choosing good starting values for iterative methods.</li>
+                <li><strong>Guiding your approach:</strong> More broadly, graphical and geometric thinking are powerful tools throughout mathematics. Visualizing a problem often reveals structure that suggests the right algebraic approach. Even when you need an exact numerical answer, a picture can show you <em>how</em> to find it.</li>
+            </ul>
+            <p>For exact answers, especially with non-integer solutions, we need algebraic methods—which we develop in the next two sections.</p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.3: SOLVING BY SUBSTITUTION -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-3">13.3 Solving by Substitution</h2>
+        
+        <p>
+            We've seen that two non-parallel lines in the plane must intersect at exactly one point—the solution to the system of equations those lines represent. Graphing can give us an estimate of that solution, but we usually need more accuracy.
+        </p>
+        
+        <p>
+            In this section and the next, we'll learn two systematic algebraic methods for finding exact solutions to systems of linear equations: the <strong>substitution method</strong> (this section) and the <strong>elimination method</strong> (Section 13.4).
+        </p>
+        
+        <p>
+            The substitution method uses one equation to express one variable in terms of the other, then substitutes that expression into the second equation. This reduces a system of two equations in two variables to a single equation in one variable—which we already know how to solve.
+        </p>
+        
+        <h3>Procedure: Solving by Substitution</h3>
+        
+        <ol>
+            <li>Solve one equation for one variable (choose whichever is easiest).</li>
+            <li>Substitute that expression into the other equation.</li>
+            <li>Solve the resulting equation for the remaining variable.</li>
+            <li>Substitute back to find the other variable.</li>
+            <li>Check in <em>both</em> original equations.</li>
+        </ol>
+        
+        <div class="warning">
+            <h4>Don't Stop Halfway!</h4>
+            <p>
+                A common mistake is to find the value of one variable and think you're done. Remember: a solution to a system requires values for <em>both</em> variables. After Step 3 gives you one variable, you must continue to Step 4 to find the other.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 1: Variable Already Isolated</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$y = 3x - 4$$</p>
+            <p>$$2x + y = 6$$</p>
+            
+            <p><strong>Step 1:</strong> The first equation already has $y$ isolated: $y = 3x - 4$.</p>
+            
+            <p><strong>Step 2:</strong> Substitute $3x - 4$ for $y$ in the second equation:</p>
+            <p>$$2x + (3x - 4) = 6$$</p>
+            
+            <p><strong>Step 3:</strong> Solve for $x$:</p>
+            <p>$$2x + 3x - 4 = 6$$</p>
+            <p>$$5x - 4 = 6$$</p>
+            <p>$$5x = 10$$</p>
+            <p>$$x = 2$$</p>
+            
+            <p><strong>Step 4:</strong> Substitute $x = 2$ back into $y = 3x - 4$:</p>
+            <p>$$y = 3(2) - 4 = 6 - 4 = 2$$</p>
+            
+            <p><strong>Step 5:</strong> Check in both original equations:</p>
+            <ul>
+                <li>First equation: $y = 3x - 4 \Rightarrow 2 = 3(2) - 4 = 2$ ✓</li>
+                <li>Second equation: $2x + y = 6 \Rightarrow 2(2) + 2 = 4 + 2 = 6$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(2, 2)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Isolating a Variable First</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$x + 3y = 7$$</p>
+            <p>$$2x - y = 0$$</p>
+            
+            <p><strong>Step 1:</strong> Choose a variable to isolate. Looking at the second equation, solving for $y$ is easy (coefficient is just $-1$):</p>
+            <p>$$2x - y = 0$$</p>
+            <p>$$-y = -2x$$</p>
+            <p>$$y = 2x$$</p>
+            
+            <p><strong>Step 2:</strong> Substitute $y = 2x$ into the first equation:</p>
+            <p>$$x + 3(2x) = 7$$</p>
+            
+            <p><strong>Step 3:</strong> Solve for $x$:</p>
+            <p>$$x + 6x = 7$$</p>
+            <p>$$7x = 7$$</p>
+            <p>$$x = 1$$</p>
+            
+            <p><strong>Step 4:</strong> Find $y$:</p>
+            <p>$$y = 2x = 2(1) = 2$$</p>
+            
+            <p><strong>Step 5:</strong> Check:</p>
+            <ul>
+                <li>First equation: $x + 3y = 1 + 3(2) = 1 + 6 = 7$ ✓</li>
+                <li>Second equation: $2x - y = 2(1) - 2 = 0$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(1, 2)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Fractional Coefficients</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$3x - 2y = 12$$</p>
+            <p>$$x + 4y = -2$$</p>
+            
+            <p><strong>Step 1:</strong> The second equation has $x$ with coefficient $1$—easy to isolate:</p>
+            <p>$$x = -2 - 4y$$</p>
+            
+            <p><strong>Step 2:</strong> Substitute into the first equation:</p>
+            <p>$$3(-2 - 4y) - 2y = 12$$</p>
+            
+            <p><strong>Step 3:</strong> Solve for $y$:</p>
+            <p>$$-6 - 12y - 2y = 12$$</p>
+            <p>$$-6 - 14y = 12$$</p>
+            <p>$$-14y = 18$$</p>
+            <p>$$y = \frac{18}{-14} = -\frac{9}{7}$$</p>
+            
+            <p><strong>Step 4:</strong> Find $x$:</p>
+            <p>$$x = -2 - 4\left(-\frac{9}{7}\right) = -2 + \frac{36}{7} = \frac{-14 + 36}{7} = \frac{22}{7}$$</p>
+            
+            <p><strong>Step 5:</strong> Check (using fractions carefully):</p>
+            <ul>
+                <li>First equation: $3\left(\frac{22}{7}\right) - 2\left(-\frac{9}{7}\right) = \frac{66}{7} + \frac{18}{7} = \frac{84}{7} = 12$ ✓</li>
+                <li>Second equation: $\frac{22}{7} + 4\left(-\frac{9}{7}\right) = \frac{22}{7} - \frac{36}{7} = \frac{-14}{7} = -2$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $\left(\frac{22}{7}, -\frac{9}{7}\right)$ or approximately $(3.14, -1.29)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: Decimal Coefficients (Calculator Recommended)</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$1.5x + 2y = 9.3$$</p>
+            <p>$$y = 0.8x + 1.1$$</p>
+            
+            <p><strong>Step 1:</strong> The second equation already has $y$ isolated.</p>
+            
+            <p><strong>Step 2:</strong> Substitute into the first equation:</p>
+            <p>$$1.5x + 2(0.8x + 1.1) = 9.3$$</p>
+            
+            <p><strong>Step 3:</strong> Solve for $x$:</p>
+            <p>$$1.5x + 1.6x + 2.2 = 9.3$$</p>
+            <p>$$3.1x + 2.2 = 9.3$$</p>
+            <p>$$3.1x = 7.1$$</p>
+            <p>$$x = \frac{7.1}{3.1} \approx 2.29$$</p>
+            
+            <p><strong>Step 4:</strong> Find $y$:</p>
+            <p>$$y = 0.8(2.29) + 1.1 \approx 1.83 + 1.1 = 2.93$$</p>
+            
+            <p><strong>Step 5:</strong> Check (using the more precise value $x = 7.1/3.1$):</p>
+            <p>For checking, we can use $x \approx 2.2903$ and $y \approx 2.9323$:</p>
+            <ul>
+                <li>First equation: $1.5(2.2903) + 2(2.9323) \approx 3.44 + 5.86 = 9.30$ ✓</li>
+                <li>Second equation: $0.8(2.2903) + 1.1 \approx 1.83 + 1.1 = 2.93$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(2.29, 2.93)$ (to two decimal places)</p>
+            
+            <p><em>Note:</em> With decimal coefficients, small rounding differences may accumulate. For higher precision, keep more decimal places during calculations or use exact fractions: $x = \frac{71}{31}$ and $y = \frac{91}{31}$.</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Choosing Which Variable to Isolate</h4>
+            <p>
+                Look for a variable with coefficient $1$ or $-1$—it isolates without introducing fractions. In Example 3, we chose to isolate $x$ in the second equation because its coefficient was $1$. If we had isolated $y$ from the first equation, we'd get $y = \frac{3x - 12}{2}$—messier, though it would still work.
+            </p>
+            <p>
+                There's no "wrong" choice—just easier and harder paths to the same answer.
+            </p>
+        </div>
+        
+        <h3>Practice Problems: Substitution</h3>
+        
+        <div class="problems">
+            <h4>Try These (Solutions Below)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">1.</span> Solve by substitution: $y = 2x + 1$ and $3x + y = 11$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">2.</span> Solve by substitution: $x - 2y = 4$ and $3x + y = 5$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">3.</span> Solve by substitution: $2x + 5y = 1$ and $x + 3y = -1$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">4. (Calculator)</span> Solve by substitution: $y = 1.2x - 0.5$ and $2.5x + 3y = 14.9$
+            </div>
+        </div>
+        
+        <h4>Solutions</h4>
+        
+        <div class="solution">
+            <p><strong>Problem 1:</strong> Substitute $y = 2x + 1$ into $3x + y = 11$:</p>
+            <p>$3x + (2x + 1) = 11 \Rightarrow 5x + 1 = 11 \Rightarrow 5x = 10 \Rightarrow x = 2$</p>
+            <p>Then $y = 2(2) + 1 = 5$.</p>
+            <p><strong>Answer: $(2, 5)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 2:</strong> From the first equation, $x = 2y + 4$. Substitute into $3x + y = 5$:</p>
+            <p>$3(2y + 4) + y = 5 \Rightarrow 6y + 12 + y = 5 \Rightarrow 7y = -7 \Rightarrow y = -1$</p>
+            <p>Then $x = 2(-1) + 4 = 2$.</p>
+            <p><strong>Answer: $(2, -1)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 3:</strong> From the second equation, $x = -1 - 3y$. Substitute into $2x + 5y = 1$:</p>
+            <p>$2(-1 - 3y) + 5y = 1 \Rightarrow -2 - 6y + 5y = 1 \Rightarrow -2 - y = 1 \Rightarrow y = -3$</p>
+            <p>Then $x = -1 - 3(-3) = -1 + 9 = 8$.</p>
+            <p><strong>Answer: $(8, -3)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 4:</strong> Substitute $y = 1.2x - 0.5$ into $2.5x + 3y = 14.9$:</p>
+            <p>$2.5x + 3(1.2x - 0.5) = 14.9$</p>
+            <p>$2.5x + 3.6x - 1.5 = 14.9$</p>
+            <p>$6.1x = 16.4$</p>
+            <p>$x = 16.4 \div 6.1 \approx 2.69$</p>
+            <p>Then $y = 1.2(2.69) - 0.5 \approx 3.23 - 0.5 = 2.73$.</p>
+            <p>Check: $2.5(2.69) + 3(2.73) = 6.725 + 8.19 = 14.915 \approx 14.9$ ✓</p>
+            <p><strong>Answer: $(2.69, 2.73)$</strong> (to two decimal places)</p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.4: SOLVING BY ELIMINATION -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-4">13.4 Solving by Elimination</h2>
+        
+        <p>
+            The <strong>elimination method</strong> (also called the <strong>addition method</strong>) takes a different approach: instead of substituting one equation into another, we add or subtract the equations to eliminate one variable entirely.
+        </p>
+        
+        <p>
+            The key insight is that we can add equations together. If $A = B$ and $C = D$, then $A + C = B + D$. When the coefficients of one variable are opposites (like $3y$ and $-3y$), adding the equations makes that variable disappear.
+        </p>
+        
+        <h3>Procedure: Solving by Elimination</h3>
+        
+        <ol>
+            <li>Arrange both equations in standard form ($Ax + By = C$), with like terms aligned.</li>
+            <li>If necessary, multiply one or both equations so that the coefficients of one variable are opposites.</li>
+            <li>Add the equations to eliminate one variable.</li>
+            <li>Solve the resulting equation.</li>
+            <li>Substitute back to find the other variable.</li>
+            <li>Check in <em>both</em> original equations.</li>
+        </ol>
+        
+        <div class="example">
+            <h4>Example 1: Direct Elimination (Coefficients Already Opposite)</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$2x + 3y = 13$$</p>
+            <p>$$2x - 3y = -1$$</p>
+            
+            <p><strong>Step 1:</strong> The equations are already in standard form with terms aligned.</p>
+            
+            <p><strong>Step 2:</strong> Notice that the $y$-coefficients are already opposites: $+3y$ and $-3y$. No multiplication needed.</p>
+            
+            <p><strong>Step 3:</strong> Add the equations:</p>
+            <p>
+                $$\begin{array}{rcrcr}
+                2x & + & 3y & = & 13 \\
+                2x & - & 3y & = & -1 \\
+                \hline
+                4x & + & 0 & = & 12
+                \end{array}$$
+            </p>
+            
+            <p><strong>Step 4:</strong> Solve for $x$:</p>
+            <p>$$4x = 12$$</p>
+            <p>$$x = 3$$</p>
+            
+            <p><strong>Step 5:</strong> Substitute $x = 3$ into either original equation. Using the first:</p>
+            <p>$$2(3) + 3y = 13$$</p>
+            <p>$$6 + 3y = 13$$</p>
+            <p>$$3y = 7$$</p>
+            <p>$$y = \frac{7}{3}$$</p>
+            
+            <p><strong>Step 6:</strong> Check in both original equations:</p>
+            <ul>
+                <li>First: $2(3) + 3\left(\frac{7}{3}\right) = 6 + 7 = 13$ ✓</li>
+                <li>Second: $2(3) - 3\left(\frac{7}{3}\right) = 6 - 7 = -1$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $\left(3, \frac{7}{3}\right)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Multiplying One Equation</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$3x + 2y = 11$$</p>
+            <p>$$x - y = 2$$</p>
+            
+            <p><strong>Step 1:</strong> Equations are in standard form.</p>
+            
+            <p><strong>Step 2:</strong> We need opposite coefficients for one variable. Looking at $y$: the first equation has $+2y$ and the second has $-y$. If we multiply the second equation by $2$, we'll have $-2y$, which is the opposite of $+2y$.</p>
+            
+            <p>Multiply the second equation by $2$:</p>
+            <p>$$2(x - y) = 2(2)$$</p>
+            <p>$$2x - 2y = 4$$</p>
+            
+            <p><strong>Step 3:</strong> Add the equations:</p>
+            <p>
+                $$\begin{array}{rcrcr}
+                3x & + & 2y & = & 11 \\
+                2x & - & 2y & = & 4 \\
+                \hline
+                5x & + & 0 & = & 15
+                \end{array}$$
+            </p>
+            
+            <p><strong>Step 4:</strong> Solve for $x$:</p>
+            <p>$$5x = 15$$</p>
+            <p>$$x = 3$$</p>
+            
+            <p><strong>Step 5:</strong> Substitute into the (original) second equation:</p>
+            <p>$$3 - y = 2$$</p>
+            <p>$$y = 1$$</p>
+            
+            <p><strong>Step 6:</strong> Check:</p>
+            <ul>
+                <li>First: $3(3) + 2(1) = 9 + 2 = 11$ ✓</li>
+                <li>Second: $3 - 1 = 2$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(3, 1)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Multiplying Both Equations</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$2x + 3y = 7$$</p>
+            <p>$$3x + 4y = 10$$</p>
+            
+            <p><strong>Step 1:</strong> Equations are in standard form.</p>
+            
+            <p><strong>Step 2:</strong> Neither variable has coefficients that are opposites or easy multiples. Let's eliminate $x$. The coefficients are $2$ and $3$. To get opposites, we can:</p>
+            <ul>
+                <li>Multiply the first equation by $3$: gives $6x$</li>
+                <li>Multiply the second equation by $-2$: gives $-6x$</li>
+            </ul>
+            
+            <p>First equation $\times 3$: $\quad 6x + 9y = 21$</p>
+            <p>Second equation $\times (-2)$: $\quad -6x - 8y = -20$</p>
+            
+            <p><strong>Step 3:</strong> Add:</p>
+            <p>
+                $$\begin{array}{rcrcr}
+                6x & + & 9y & = & 21 \\
+                -6x & - & 8y & = & -20 \\
+                \hline
+                0 & + & y & = & 1
+                \end{array}$$
+            </p>
+            
+            <p><strong>Step 4:</strong> We get $y = 1$ directly.</p>
+            
+            <p><strong>Step 5:</strong> Substitute into the first original equation:</p>
+            <p>$$2x + 3(1) = 7$$</p>
+            <p>$$2x = 4$$</p>
+            <p>$$x = 2$$</p>
+            
+            <p><strong>Step 6:</strong> Check:</p>
+            <ul>
+                <li>First: $2(2) + 3(1) = 4 + 3 = 7$ ✓</li>
+                <li>Second: $3(2) + 4(1) = 6 + 4 = 10$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(2, 1)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: Decimal Coefficients (Calculator Recommended)</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$0.4x + 0.3y = 2.3$$</p>
+            <p>$$0.5x - 0.2y = 1.4$$</p>
+            
+            <p><strong>Step 1:</strong> Equations are in standard form. (We could multiply to clear decimals, but let's work with them directly.)</p>
+            
+            <p><strong>Step 2:</strong> To eliminate $y$, we need opposite coefficients. The $y$-coefficients are $0.3$ and $-0.2$. Multiply the first equation by $2$ and the second by $3$:</p>
+            <p>First equation $\times 2$: $\quad 0.8x + 0.6y = 4.6$</p>
+            <p>Second equation $\times 3$: $\quad 1.5x - 0.6y = 4.2$</p>
+            
+            <p><strong>Step 3:</strong> Add the equations:</p>
+            <p>
+                $$\begin{array}{rcrcr}
+                0.8x & + & 0.6y & = & 4.6 \\
+                1.5x & - & 0.6y & = & 4.2 \\
+                \hline
+                2.3x & + & 0 & = & 8.8
+                \end{array}$$
+            </p>
+            
+            <p><strong>Step 4:</strong> Solve for $x$:</p>
+            <p>$$x = \frac{8.8}{2.3} \approx 3.83$$</p>
+            
+            <p><strong>Step 5:</strong> Substitute into the first original equation:</p>
+            <p>$$0.4(3.83) + 0.3y = 2.3$$</p>
+            <p>$$1.532 + 0.3y = 2.3$$</p>
+            <p>$$0.3y = 0.768$$</p>
+            <p>$$y \approx 2.56$$</p>
+            
+            <p><strong>Step 6:</strong> Check:</p>
+            <ul>
+                <li>First: $0.4(3.83) + 0.3(2.56) = 1.53 + 0.77 = 2.30$ ✓</li>
+                <li>Second: $0.5(3.83) - 0.2(2.56) = 1.92 - 0.51 = 1.41 \approx 1.4$ ✓</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $(3.83, 2.56)$ (to two decimal places)</p>
+            
+            <p><em>Alternative approach:</em> Multiply both equations by 10 first to clear decimals: $4x + 3y = 23$ and $5x - 2y = 14$. This often makes the arithmetic cleaner.</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Choosing Multipliers</h4>
+            <p>
+                To eliminate a variable, you need its coefficients to be opposites. If the coefficients are $a$ and $b$, you can:
+            </p>
+            <ul>
+                <li>Multiply the first equation by $b$ and the second by $-a$, or</li>
+                <li>Multiply the first by $-b$ and the second by $a$</li>
+            </ul>
+            <p>
+                Either way, the coefficients become $ab$ and $-ab$, which cancel when you add.
+            </p>
+            <p>
+                <strong>Tip:</strong> Look for the least common multiple (LCM) of the coefficients to keep numbers small. In Example 3, the LCM of $2$ and $3$ is $6$.
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>Common Errors in Elimination</h4>
+            <ul>
+                <li><strong>Forgetting to multiply the entire equation:</strong> When you multiply an equation by a number, <em>every term</em> (including the constant) must be multiplied.</li>
+                <li><strong>Sign errors when adding:</strong> Pay careful attention to signs, especially when one equation has been multiplied by a negative number.</li>
+                <li><strong>Using the modified equation to find the second variable:</strong> After elimination, substitute into an <em>original</em> equation, not a modified one. This reduces the chance of propagating an earlier error.</li>
+                <li><strong>Stopping after finding one variable:</strong> After elimination gives you one variable's value, you must substitute back to find the other. The solution isn't complete until you have values for <em>both</em> variables.</li>
+            </ul>
+        </div>
+        
+        <h3>Practice Problems: Elimination</h3>
+        
+        <div class="problems">
+            <h4>Try These (Solutions Below)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">1.</span> Solve by elimination: $x + y = 7$ and $x - y = 3$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">2.</span> Solve by elimination: $2x + 3y = 12$ and $4x - 3y = 6$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">3.</span> Solve by elimination: $3x + 2y = 8$ and $2x + 5y = 9$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">4. (Calculator)</span> Solve by elimination: $1.5x + 2.5y = 11$ and $0.5x - 1.5y = -5$
+            </div>
+        </div>
+        
+        <h4>Solutions</h4>
+        
+        <div class="solution">
+            <p><strong>Problem 1:</strong> The $y$-coefficients are already opposites ($+1$ and $-1$). Add:</p>
+            <p>$2x = 10 \Rightarrow x = 5$</p>
+            <p>Substitute: $5 + y = 7 \Rightarrow y = 2$</p>
+            <p><strong>Answer: $(5, 2)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 2:</strong> The $y$-coefficients are already opposites ($+3y$ and $-3y$). Add:</p>
+            <p>$6x = 18 \Rightarrow x = 3$</p>
+            <p>Substitute: $2(3) + 3y = 12 \Rightarrow 6 + 3y = 12 \Rightarrow y = 2$</p>
+            <p><strong>Answer: $(3, 2)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 3:</strong> Eliminate $x$: multiply first equation by $2$ and second by $-3$:</p>
+            <p>$6x + 4y = 16$</p>
+            <p>$-6x - 15y = -27$</p>
+            <p>Add: $-11y = -11 \Rightarrow y = 1$</p>
+            <p>Substitute: $3x + 2(1) = 8 \Rightarrow 3x = 6 \Rightarrow x = 2$</p>
+            <p><strong>Answer: $(2, 1)$</strong></p>
+        </div>
+        
+        <div class="solution">
+            <p><strong>Problem 4:</strong> Multiply second equation by $-3$ to eliminate $x$:</p>
+            <p>$1.5x + 2.5y = 11$</p>
+            <p>$-1.5x + 4.5y = 15$</p>
+            <p>Add: $7y = 26 \Rightarrow y = 26/7 \approx 3.71$</p>
+            <p>Substitute: $0.5x - 1.5(3.71) = -5$</p>
+            <p>$0.5x - 5.57 = -5$</p>
+            <p>$0.5x = 0.57$</p>
+            <p>$x \approx 1.14$</p>
+            <p>Check: $1.5(1.14) + 2.5(3.71) = 1.71 + 9.28 = 10.99 \approx 11$ ✓</p>
+            <p><strong>Answer: $(1.14, 3.71)$</strong> (to two decimal places)</p>
+            <p><em>Exact answer: $\left(\frac{8}{7}, \frac{26}{7}\right)$</em></p>
+        </div>
+        
+        <h3>Substitution vs. Elimination: A Preview</h3>
+        
+        <p>
+            Both methods always work, and both give the same answer. The choice often comes down to which makes the arithmetic simpler:
+        </p>
+        
+        <ul>
+            <li><strong>Substitution</strong> tends to be easiest when one equation is already solved for a variable, or when a variable has coefficient $1$ or $-1$.</li>
+            <li><strong>Elimination</strong> tends to be easiest when the equations are in standard form and the coefficients line up nicely.</li>
+        </ul>
+        
+        <p>
+            We'll compare the methods more systematically in Section 13.6, after we've seen some special cases.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-5">13.5 Special Cases</h2>
+        
+        <p>
+            In Section 13.1, we saw that a system of two linear equations can have exactly one solution (intersecting lines), no solution (parallel lines), or infinitely many solutions (the same line). When we solved systems in Sections 13.3 and 13.4, our examples all had exactly one solution. Now let's see what happens algebraically when we encounter the special cases.
+        </p>
+        
+        <h3>No Solution: The Inconsistent System</h3>
+        
+        <p>
+            When two lines are parallel, they never intersect, so there's no point that satisfies both equations. What does this look like when we try to solve algebraically?
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: A System with No Solution</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$2x + y = 5$$</p>
+            <p>$$4x + 2y = 3$$</p>
+            
+            <p><strong>Using elimination:</strong> Multiply the first equation by $-2$ to eliminate $x$:</p>
+            <p>$$-4x - 2y = -10$$</p>
+            <p>$$4x + 2y = 3$$</p>
+            
+            <p>Add the equations:</p>
+            <p>$$0 = -7$$</p>
+            
+            <p>This is a <em>false statement</em>—zero does not equal negative seven, no matter what values $x$ and $y$ have. This tells us the system has <strong>no solution</strong>.</p>
+            
+            <p><strong>Why did this happen?</strong> Let's look at the original equations more carefully. Rewrite both in slope-intercept form:</p>
+            <ul>
+                <li>First equation: $y = -2x + 5$</li>
+                <li>Second equation: $2y = -4x + 3$, so $y = -2x + \frac{3}{2}$</li>
+            </ul>
+            
+            <p>Both lines have slope $-2$, but different $y$-intercepts ($5$ vs. $\frac{3}{2}$). They're parallel—they never meet.</p>
+            
+            <p><strong>Answer:</strong> No solution. The system is <em>inconsistent</em>.</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Recognizing "No Solution"</h4>
+            <p>When solving a system algebraically, if the variables cancel out and you're left with a <strong>false statement</strong> (like $0 = -7$ or $5 = 12$), the system has <strong>no solution</strong>.</p>
+            <p>Geometrically, this means the lines are parallel—same slope, different intercepts.</p>
+        </div>
+        
+        <h3>Infinitely Many Solutions: The Dependent System</h3>
+        
+        <p>
+            When two equations represent the same line, every point on that line satisfies both equations. What does this look like algebraically?
+        </p>
+        
+        <div class="example">
+            <h4>Example 2: A System with Infinitely Many Solutions</h4>
+            
+            <p>Solve the system:</p>
+            <p>$$x - 2y = 4$$</p>
+            <p>$$3x - 6y = 12$$</p>
+            
+            <p><strong>Using elimination:</strong> Multiply the first equation by $-3$ to eliminate $x$:</p>
+            <p>$$-3x + 6y = -12$$</p>
+            <p>$$3x - 6y = 12$$</p>
+            
+            <p>Add the equations:</p>
+            <p>$$0 = 0$$</p>
+            
+            <p>This is a <em>true statement</em>—but it doesn't tell us what $x$ and $y$ are! This happens because the two equations are actually the <em>same equation</em> in disguise.</p>
+            
+            <p><strong>Check:</strong> The second equation $3x - 6y = 12$ is exactly $3$ times the first equation $x - 2y = 4$. They represent the same line.</p>
+            
+            <p><strong>Answer:</strong> Infinitely many solutions. Every point on the line $x - 2y = 4$ (or equivalently, $y = \frac{1}{2}x - 2$) is a solution. The system is <em>dependent</em>.</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Recognizing "Infinitely Many Solutions"</h4>
+            <p>When solving a system algebraically, if the variables cancel out and you're left with a <strong>true statement</strong> (like $0 = 0$ or $12 = 12$), the system has <strong>infinitely many solutions</strong>.</p>
+            <p>Geometrically, this means the two equations represent the same line—one equation is a multiple of the other.</p>
+        </div>
+        
+        <h3>Summary: What the Algebra Tells You</h3>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>When solving leads to...</th>
+                <th>The system has...</th>
+                <th>Geometrically...</th>
+            </tr>
+            <tr>
+                <td>A unique value for each variable</td>
+                <td>Exactly one solution</td>
+                <td>Lines intersect at one point</td>
+            </tr>
+            <tr>
+                <td>A false statement (e.g., $0 = 5$)</td>
+                <td>No solution (inconsistent)</td>
+                <td>Lines are parallel</td>
+            </tr>
+            <tr>
+                <td>A true statement (e.g., $0 = 0$)</td>
+                <td>Infinitely many solutions (dependent)</td>
+                <td>Lines are identical</td>
+            </tr>
+        </table>
+        
+        <h3>Interpreting Special Cases in Context</h3>
+        
+        <p>
+            What do these special cases mean when the system comes from a real-world problem?
+        </p>
+        
+        <ul>
+            <li><strong>No solution</strong> often means the problem's constraints are contradictory—you're being asked to do something impossible. For example, "Find a mixture that weighs 10 pounds and costs 50 dollars" might have no solution if the available ingredients can't produce that combination.</li>
+            <li><strong>Infinitely many solutions</strong> often means the problem is underdetermined—you have more freedom than you realized. For example, if two "different" budget constraints turn out to be the same constraint expressed differently, any point satisfying that constraint works.</li>
+        </ul>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.6: CHOOSING A METHOD -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-6">13.6 Choosing a Method</h2>
+        
+        <p>
+            We now have three methods for solving systems of linear equations: graphing, substitution, and elimination. All three represent the same answer (when a unique solution exists). If you don't need an answer accurate to many decimal places, a graphical solution may be all you need—though for simple problems, algebraic methods may actually be less work than drawing an accurate graph. A graphical solution can also give you better understanding of the problem than just obtaining a single point from algebra. If you need an accurate decimal or fractional answer, choose substitution or elimination. The choice ultimately comes down to what sort of understanding you need and what makes the work easiest for a particular problem.
+        </p>
+        
+        <h3>Method Comparison</h3>
+        
+        <table class="comparison-table">
+            <tr>
+                <th>Method</th>
+                <th>Advantages</th>
+                <th>Disadvantages</th>
+                <th>Best When...</th>
+            </tr>
+            <tr>
+                <td>Graphing</td>
+                <td>Visual; shows relationship between equations; reveals special cases</td>
+                <td>Imprecise for non-integer solutions; time-consuming to draw accurately</td>
+                <td>You want to understand the problem visually; you need an estimate; checking reasonableness of algebraic answer</td>
+            </tr>
+            <tr>
+                <td>Substitution</td>
+                <td>Straightforward when one variable is already isolated; works systematically</td>
+                <td>Can get messy with fractions; requires solving for a variable first</td>
+                <td>One equation is already solved for a variable (like $y = 3x + 2$); one variable has coefficient 1 or $-1$</td>
+            </tr>
+            <tr>
+                <td>Elimination</td>
+                <td>Systematic; handles any coefficients; no need to isolate first</td>
+                <td>Requires careful alignment; more steps when coefficients don't match easily</td>
+                <td>Equations are in standard form; coefficients are already opposites or easy multiples; neither variable is isolated</td>
+            </tr>
+        </table>
+        
+        <div class="key-point">
+            <h4>The Bottom Line</h4>
+            <p>
+                There's no "wrong" method—just more or less efficient choices. With practice, you'll develop intuition for which approach suits a particular problem. When in doubt:
+            </p>
+            <ul>
+                <li>If one equation has a variable isolated → <strong>Substitution</strong></li>
+                <li>If equations are in standard form with aligned terms → <strong>Elimination</strong></li>
+                <li>If you want to see what's going on → <strong>Graphing</strong> (at least as a first step)</li>
+            </ul>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Choosing the Right Tool</h4>
+            
+            <p>Which method would you choose for each system?</p>
+            
+            <p><strong>(a)</strong> $y = 4x - 3$ and $2x + 3y = 15$</p>
+            <p><em>Substitution</em> — the first equation already has $y$ isolated.</p>
+            
+            <p><strong>(b)</strong> $5x + 2y = 11$ and $5x - 2y = 1$</p>
+            <p><em>Elimination</em> — the $y$-coefficients are already opposites; just add.</p>
+            
+            <p><strong>(c)</strong> $3x + 7y = 22$ and $2x - 5y = -9$</p>
+            <p><em>Elimination</em> — standard form, but will need to multiply both equations. (Substitution would work too, but would introduce fractions early.)</p>
+            
+            <p><strong>(d)</strong> $x = 2y + 1$ and $y = 3x - 7$</p>
+            <p><em>Substitution</em> — both variables are isolated; substitute one into the other.</p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13.7: APPLICATIONS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-7">13.7 Applications</h2>
+        
+        <p>
+            Systems of equations arise naturally when a problem involves two unknown quantities and gives us two independent pieces of information about them. The key skill is translating the words into equations.
+        </p>
+        
+        <div class="key-point">
+            <h4>Setting Up Systems from Word Problems</h4>
+            <ol>
+                <li><strong>Identify the unknowns.</strong> What two quantities are you trying to find? Assign variables to them.</li>
+                <li><strong>Find two relationships.</strong> What two facts does the problem give you about these quantities?</li>
+                <li><strong>Write equations.</strong> Translate each relationship into an equation.</li>
+                <li><strong>Solve the system.</strong> Use graphing, substitution, or elimination.</li>
+                <li><strong>Check and interpret.</strong> Does your answer make sense in context? Answer in words, not just numbers.</li>
+            </ol>
+        </div>
+        
+        <h3>Mixture Problems</h3>
+        
+        <p>
+            Mixture problems involve combining two items with different properties (prices, concentrations, etc.) to create a mixture with a specified property.
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Nut Mixture</h4>
+            
+            <p>A store sells cashews for 8 dollars per pound and peanuts for 3 dollars per pound. How many pounds of each should be mixed to create 20 pounds of a mixture worth 5 dollars per pound?</p>
+            
+            <p><strong>Step 1: Identify unknowns.</strong></p>
+            <ul>
+                <li>Let $c$ = pounds of cashews</li>
+                <li>Let $p$ = pounds of peanuts</li>
+            </ul>
+            
+            <p><strong>Step 2: Find relationships.</strong></p>
+            <ul>
+                <li>Total weight: The mixture weighs 20 pounds.</li>
+                <li>Total value: The mixture is worth $5 \times 20 = 100$ dollars.</li>
+            </ul>
+            
+            <p><strong>Step 3: Write equations.</strong></p>
+            <p>Weight equation: $c + p = 20$</p>
+            <p>Value equation: $8c + 3p = 100$ (cashews contribute $8c$ dollars, peanuts contribute $3p$ dollars)</p>
+            
+            <p><strong>Step 4: Solve.</strong> Using substitution: from the first equation, $p = 20 - c$. Substitute:</p>
+            <p>$$8c + 3(20 - c) = 100$$</p>
+            <p>$$8c + 60 - 3c = 100$$</p>
+            <p>$$5c = 40$$</p>
+            <p>$$c = 8$$</p>
+            <p>Then $p = 20 - 8 = 12$.</p>
+            
+            <p><strong>Step 5: Check and interpret.</strong></p>
+            <p>Weight: $8 + 12 = 20$ pounds ✓</p>
+            <p>Value: $8(8) + 3(12) = 64 + 36 = 100$ dollars ✓</p>
+            <p>Price per pound: $100 \div 20 = 5$ dollars ✓</p>
+            
+            <p><strong>Answer:</strong> Mix 8 pounds of cashews with 12 pounds of peanuts.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 13.3 — Nut Mixture Problem</div>
+                <div id="fig-13-3" class="jxgbox" style="width: 450px; height: 400px;"></div>
+                <div class="graph-caption">The weight constraint ($c + p = 20$) and value constraint ($8c + 3p = 100$) intersect at $(8, 12)$.</div>
+            </div>
+        </div>
+        
+        <h3>Rate Problems</h3>
+        
+        <p>
+            Rate problems often involve motion—distance, speed, and time. The fundamental relationship is: distance = rate × time.
+        </p>
+        
+        <div class="example">
+            <h4>Example 2: Boat on a River</h4>
+            
+            <p>A boat travels 24 miles downstream (with the current) in 2 hours, and 24 miles upstream (against the current) in 3 hours. Find the boat's speed in still water and the speed of the current.</p>
+            
+            <p><strong>Step 1: Identify unknowns.</strong></p>
+            <ul>
+                <li>Let $b$ = boat's speed in still water (mph)</li>
+                <li>Let $c$ = current's speed (mph)</li>
+            </ul>
+            
+            <p><strong>Step 2: Find relationships.</strong></p>
+            <ul>
+                <li>Downstream: The current helps, so effective speed is $b + c$. Traveling 24 miles in 2 hours means speed is $24 \div 2 = 12$ mph.</li>
+                <li>Upstream: The current hinders, so effective speed is $b - c$. Traveling 24 miles in 3 hours means speed is $24 \div 3 = 8$ mph.</li>
+            </ul>
+            
+            <p><strong>Step 3: Write equations.</strong></p>
+            <p>$$b + c = 12$$</p>
+            <p>$$b - c = 8$$</p>
+            
+            <p><strong>Step 4: Solve.</strong> These equations are perfect for elimination—add them:</p>
+            <p>$$2b = 20$$</p>
+            <p>$$b = 10$$</p>
+            <p>Then from $b + c = 12$: $c = 12 - 10 = 2$.</p>
+            
+            <p><strong>Step 5: Check and interpret.</strong></p>
+            <p>Downstream speed: $10 + 2 = 12$ mph. Distance in 2 hours: $12 \times 2 = 24$ miles ✓</p>
+            <p>Upstream speed: $10 - 2 = 8$ mph. Distance in 3 hours: $8 \times 3 = 24$ miles ✓</p>
+            
+            <p><strong>Answer:</strong> The boat's speed in still water is 10 mph. The current's speed is 2 mph.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 13.4 — Boat and Current Problem</div>
+                <div id="fig-13-4" class="jxgbox" style="width: 450px; height: 400px;"></div>
+                <div class="graph-caption">The downstream constraint ($b + c = 12$) and upstream constraint ($b - c = 8$) intersect at $(10, 2)$.</div>
+            </div>
+        </div>
+        
+        <h3>Cost Comparison Problems</h3>
+        
+        <p>
+            When comparing two options with different cost structures, systems help us find the "break-even point" where the costs are equal.
+        </p>
+        
+        <div class="example">
+            <h4>Example 3: Phone Plans</h4>
+            
+            <p>Phone Plan A charges 25 dollars per month plus 0.10 dollars per text message. Plan B charges 40 dollars per month with unlimited texts. When is each plan the better deal?</p>
+            
+            <p><strong>Step 1: Identify unknowns.</strong></p>
+            <ul>
+                <li>Let $t$ = number of text messages per month</li>
+                <li>Let $C$ = monthly cost (in dollars)</li>
+            </ul>
+            
+            <p><strong>Step 2: Write equations for each plan.</strong></p>
+            <p>Plan A: $C = 25 + 0.10t$</p>
+            <p>Plan B: $C = 40$</p>
+            
+            <p><strong>Step 3: Find break-even point.</strong> Set the costs equal:</p>
+            <p>$$25 + 0.10t = 40$$</p>
+            <p>$$0.10t = 15$$</p>
+            <p>$$t = 150$$</p>
+            
+            <p><strong>Step 4: Interpret.</strong></p>
+            <ul>
+                <li>At exactly 150 texts/month, both plans cost the same (40 dollars).</li>
+                <li>Below 150 texts/month, Plan A is cheaper (lower base, per-text cost doesn't add up to 15 dollars).</li>
+                <li>Above 150 texts/month, Plan B is cheaper (unlimited texts for a flat fee).</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> Plan A is better for fewer than 150 texts per month. Plan B is better for more than 150 texts per month. At exactly 150 texts, they cost the same.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 13.5 — Phone Plan Comparison</div>
+                <div id="fig-13-5" class="jxgbox" style="width: 450px; height: 400px;"></div>
+                <div class="graph-caption">Plan A's cost increases with texts; Plan B is flat. They intersect at $(150, 40)$—the break-even point.</div>
+            </div>
+        </div>
+        
+        <h3>Quantity and Value Problems</h3>
+        
+        <p>
+            These problems involve a collection of items where you know the total count and total value, but not how many of each type.
+        </p>
+        
+        <div class="example">
+            <h4>Example 4: Coin Collection</h4>
+            
+            <p>A collection contains 42 coins, all dimes and quarters. The total value is 7.35 dollars. How many of each type of coin are there?</p>
+            
+            <p><strong>Step 1: Identify unknowns.</strong></p>
+            <ul>
+                <li>Let $d$ = number of dimes</li>
+                <li>Let $q$ = number of quarters</li>
+            </ul>
+            
+            <p><strong>Step 2: Find relationships.</strong></p>
+            <ul>
+                <li>Total coins: $d + q = 42$</li>
+                <li>Total value: Each dime is worth 0.10 dollars, each quarter is worth 0.25 dollars. So $0.10d + 0.25q = 7.35$.</li>
+            </ul>
+            
+            <p><strong>Step 3: Write equations.</strong></p>
+            <p>$$d + q = 42$$</p>
+            <p>$$0.10d + 0.25q = 7.35$$</p>
+            
+            <p><strong>Step 4: Solve.</strong> Multiply the second equation by 100 to clear decimals:</p>
+            <p>$$10d + 25q = 735$$</p>
+            
+            <p>From the first equation, $d = 42 - q$. Substitute:</p>
+            <p>$$10(42 - q) + 25q = 735$$</p>
+            <p>$$420 - 10q + 25q = 735$$</p>
+            <p>$$15q = 315$$</p>
+            <p>$$q = 21$$</p>
+            <p>Then $d = 42 - 21 = 21$.</p>
+            
+            <p><strong>Step 5: Check and interpret.</strong></p>
+            <p>Count: $21 + 21 = 42$ coins ✓</p>
+            <p>Value: $0.10(21) + 0.25(21) = 2.10 + 5.25 = 7.35$ dollars ✓</p>
+            
+            <p><strong>Answer:</strong> There are 21 dimes and 21 quarters.</p>
+            
+            <div class="figure-container">
+                <div class="graph-title">Fig. 13.6 — Coin Problem</div>
+                <div id="fig-13-6" class="jxgbox" style="width: 450px; height: 400px;"></div>
+                <div class="graph-caption">The count constraint ($d + q = 42$) and value constraint ($0.10d + 0.25q = 7.35$) intersect at $(21, 21)$.</div>
+            </div>
+        </div>
+        
+        <div class="key-point">
+            <h4>Common Application Types</h4>
+            <p>Most system-of-equations word problems fall into a few categories:</p>
+            <ul>
+                <li><strong>Mixture:</strong> Combining items with different properties (price, concentration, etc.)</li>
+                <li><strong>Rate/Motion:</strong> Objects moving with or against currents, winds, etc.</li>
+                <li><strong>Cost comparison:</strong> Finding when two pricing structures give equal cost</li>
+                <li><strong>Quantity/Value:</strong> Known total count and total value of mixed items</li>
+            </ul>
+            <p>Recognizing the type helps you set up the equations—you'll often have one equation for "count" or "total quantity" and another for "value" or "total cost."</p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 2 -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-8">13.8 Practice Problems</h2>
+        
+        <p>
+            These problems cover all the techniques from this section. Full solutions follow the problem set.
+        </p>
+        
+        <div class="problems-section">
+            <h3>Problems</h3>
+            
+            <h4>Verifying Solutions (Problems 1–3)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">1.</span> Is $(4, 1)$ a solution to the system $x + 2y = 6$ and $3x - y = 11$?
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">2.</span> Is $(-2, 5)$ a solution to the system $2x + y = 1$ and $x - 3y = -13$?
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">3.</span> Is $\left(\frac{1}{2}, 3\right)$ a solution to the system $4x + y = 5$ and $2x - y = -2$?
+            </div>
+            
+            <h4>Solving by Graphing (Problems 4–6)</h4>
+            <p><em>Graph each system and find the solution from the intersection point.</em></p>
+            
+            <div class="problem">
+                <span class="problem-number">4.</span> $y = x + 1$ and $y = -x + 5$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">5.</span> $y = 2x - 3$ and $y = -x + 6$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">6.</span> $x + y = 4$ and $x - y = 2$
+            </div>
+            
+            <h4>Solving by Substitution (Problems 7–11)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">7.</span> $y = 2x + 1$ and $3x + 2y = 16$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">8.</span> $x = 4y - 3$ and $2x + 3y = 5$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">9.</span> $x + y = 7$ and $2x - 3y = -6$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">10.</span> $3x - y = 7$ and $x + 2y = 6$ <em>(Solution involves fractions)</em>
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">11.</span> $2x + 5y = 1$ and $x - y = 4$ <em>(Solution involves fractions)</em>
+            </div>
+            
+            <h4>Solving by Elimination (Problems 12–16)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">12.</span> $x + y = 10$ and $x - y = 4$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">13.</span> $3x + 2y = 19$ and $3x - 2y = 5$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">14.</span> $2x + 3y = 7$ and $5x - 2y = 8$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">15.</span> $4x + 5y = 23$ and $3x + 2y = 12$ <em>(Solution involves fractions)</em>
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">16.</span> $\frac{1}{2}x + \frac{1}{3}y = 5$ and $\frac{1}{4}x - \frac{1}{2}y = -1$
+            </div>
+            
+            <h4>Special Cases (Problems 17–19)</h4>
+            <p><em>Determine whether each system has one solution, no solution, or infinitely many solutions.</em></p>
+            
+            <div class="problem">
+                <span class="problem-number">17.</span> $2x + 4y = 10$ and $x + 2y = 5$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">18.</span> $3x - 6y = 12$ and $x - 2y = 8$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">19.</span> $5x + 2y = 7$ and $10x + 4y = 14$
+            </div>
+            
+            <h4>Word Problems (Problems 20–22)</h4>
+            <p><em>Set up a system of equations and solve.</em></p>
+            
+            <div class="problem">
+                <span class="problem-number">20.</span> The sum of two numbers is 25 and their difference is 7. Find the two numbers.
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">21.</span> A theater sold 400 tickets. Adult tickets cost 12 dollars each and child tickets cost 8 dollars each. Total ticket revenue was 4,200 dollars. How many of each type of ticket were sold?
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">22.</span> A chemist needs to mix a 30% acid solution with a 50% acid solution to obtain 200 mL of a 35% acid solution. How many mL of each solution should be used?
+            </div>
+            
+            <div class="calculator-section">
+                <h4>Calculator Section (Problems 23–25)</h4>
+                <p><em>These problems involve realistic measurements. Use a calculator and round answers to two decimal places.</em></p>
+                
+                <div class="problem">
+                    <span class="problem-number">23.</span> $1.25x + 0.75y = 8.50$ and $0.50x + 1.50y = 7.00$
+                </div>
+                
+                <div class="problem">
+                    <span class="problem-number">24.</span> A delivery truck travels 147 miles using a combination of highway and city driving. Highway driving averages 52 mph and city driving averages 28 mph. If the total trip takes 3.5 hours, how many miles were driven on the highway and how many in the city?
+                </div>
+                
+                <div class="problem">
+                    <span class="problem-number">25.</span> An investor puts 15,000 dollars into two accounts. One account earns 4.5% annual interest and the other earns 6.2% annual interest. After one year, the total interest earned is 787.50 dollars. How much was invested in each account?
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions-section">
+            <h3>Solutions</h3>
+            
+            <h4>Verifying Solutions (Problems 1–3)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 1:</strong> Is $(4, 1)$ a solution to $x + 2y = 6$ and $3x - y = 11$?</p>
+                <p>Check first equation: $4 + 2(1) = 4 + 2 = 6$ ✓</p>
+                <p>Check second equation: $3(4) - 1 = 12 - 1 = 11$ ✓</p>
+                <p><strong>Answer: Yes</strong>, $(4, 1)$ is a solution.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 2:</strong> Is $(-2, 5)$ a solution to $2x + y = 1$ and $x - 3y = -13$?</p>
+                <p>Check first equation: $2(-2) + 5 = -4 + 5 = 1$ ✓</p>
+                <p>Check second equation: $-2 - 3(5) = -2 - 15 = -17 \neq -13$ ✗</p>
+                <p><strong>Answer: No</strong>, $(-2, 5)$ is not a solution.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 3:</strong> Is $\left(\frac{1}{2}, 3\right)$ a solution to $4x + y = 5$ and $2x - y = -2$?</p>
+                <p>Check first equation: $4\left(\frac{1}{2}\right) + 3 = 2 + 3 = 5$ ✓</p>
+                <p>Check second equation: $2\left(\frac{1}{2}\right) - 3 = 1 - 3 = -2$ ✓</p>
+                <p><strong>Answer: Yes</strong>, $\left(\frac{1}{2}, 3\right)$ is a solution.</p>
+            </div>
+            
+            <h4>Solving by Graphing (Problems 4–6)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 4:</strong> $y = x + 1$ and $y = -x + 5$</p>
+                <p>Line 1: slope 1, y-intercept 1. Line 2: slope $-1$, y-intercept 5.</p>
+                <p>Set equal: $x + 1 = -x + 5 \Rightarrow 2x = 4 \Rightarrow x = 2$</p>
+                <p>Then $y = 2 + 1 = 3$.</p>
+                <p><strong>Answer: $(2, 3)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 5:</strong> $y = 2x - 3$ and $y = -x + 6$</p>
+                <p>Set equal: $2x - 3 = -x + 6 \Rightarrow 3x = 9 \Rightarrow x = 3$</p>
+                <p>Then $y = 2(3) - 3 = 3$.</p>
+                <p><strong>Answer: $(3, 3)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 6:</strong> $x + y = 4$ and $x - y = 2$</p>
+                <p>Rewrite: $y = 4 - x$ and $y = x - 2$.</p>
+                <p>Set equal: $4 - x = x - 2 \Rightarrow 6 = 2x \Rightarrow x = 3$</p>
+                <p>Then $y = 4 - 3 = 1$.</p>
+                <p><strong>Answer: $(3, 1)$</strong></p>
+            </div>
+            
+            <h4>Solving by Substitution (Problems 7–11)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 7:</strong> $y = 2x + 1$ and $3x + 2y = 16$</p>
+                <p>Substitute: $3x + 2(2x + 1) = 16$</p>
+                <p>$3x + 4x + 2 = 16 \Rightarrow 7x = 14 \Rightarrow x = 2$</p>
+                <p>Then $y = 2(2) + 1 = 5$.</p>
+                <p>Check: $3(2) + 2(5) = 6 + 10 = 16$ ✓</p>
+                <p><strong>Answer: $(2, 5)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 8:</strong> $x = 4y - 3$ and $2x + 3y = 5$</p>
+                <p>Substitute: $2(4y - 3) + 3y = 5$</p>
+                <p>$8y - 6 + 3y = 5 \Rightarrow 11y = 11 \Rightarrow y = 1$</p>
+                <p>Then $x = 4(1) - 3 = 1$.</p>
+                <p>Check: $2(1) + 3(1) = 5$ ✓</p>
+                <p><strong>Answer: $(1, 1)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 9:</strong> $x + y = 7$ and $2x - 3y = -6$</p>
+                <p>From first equation: $x = 7 - y$. Substitute:</p>
+                <p>$2(7 - y) - 3y = -6$</p>
+                <p>$14 - 2y - 3y = -6 \Rightarrow -5y = -20 \Rightarrow y = 4$</p>
+                <p>Then $x = 7 - 4 = 3$.</p>
+                <p>Check: $2(3) - 3(4) = 6 - 12 = -6$ ✓</p>
+                <p><strong>Answer: $(3, 4)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 10:</strong> $3x - y = 7$ and $x + 2y = 6$</p>
+                <p>From first equation: $y = 3x - 7$. Substitute into second:</p>
+                <p>$x + 2(3x - 7) = 6$</p>
+                <p>$x + 6x - 14 = 6 \Rightarrow 7x = 20 \Rightarrow x = \frac{20}{7}$</p>
+                <p>Then $y = 3\left(\frac{20}{7}\right) - 7 = \frac{60}{7} - \frac{49}{7} = \frac{11}{7}$.</p>
+                <p>Check: $\frac{20}{7} + 2\left(\frac{11}{7}\right) = \frac{20}{7} + \frac{22}{7} = \frac{42}{7} = 6$ ✓</p>
+                <p><strong>Answer: $\left(\frac{20}{7}, \frac{11}{7}\right)$</strong> or approximately $(2.86, 1.57)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 11:</strong> $2x + 5y = 1$ and $x - y = 4$</p>
+                <p>From second equation: $x = y + 4$. Substitute:</p>
+                <p>$2(y + 4) + 5y = 1$</p>
+                <p>$2y + 8 + 5y = 1 \Rightarrow 7y = -7 \Rightarrow y = -1$</p>
+                <p>Then $x = -1 + 4 = 3$.</p>
+                <p>Check: $2(3) + 5(-1) = 6 - 5 = 1$ ✓</p>
+                <p><strong>Answer: $(3, -1)$</strong></p>
+            </div>
+            
+            <h4>Solving by Elimination (Problems 12–16)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 12:</strong> $x + y = 10$ and $x - y = 4$</p>
+                <p>Add equations: $2x = 14 \Rightarrow x = 7$</p>
+                <p>Substitute: $7 + y = 10 \Rightarrow y = 3$</p>
+                <p><strong>Answer: $(7, 3)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 13:</strong> $3x + 2y = 19$ and $3x - 2y = 5$</p>
+                <p>Add equations (y-terms cancel): $6x = 24 \Rightarrow x = 4$</p>
+                <p>Substitute: $3(4) + 2y = 19 \Rightarrow 12 + 2y = 19 \Rightarrow y = \frac{7}{2}$</p>
+                <p><strong>Answer: $\left(4, \frac{7}{2}\right)$</strong> or $(4, 3.5)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 14:</strong> $2x + 3y = 7$ and $5x - 2y = 8$</p>
+                <p>Multiply first by 2 and second by 3 to eliminate $y$:</p>
+                <p>$4x + 6y = 14$</p>
+                <p>$15x - 6y = 24$</p>
+                <p>Add: $19x = 38 \Rightarrow x = 2$</p>
+                <p>Substitute: $2(2) + 3y = 7 \Rightarrow 4 + 3y = 7 \Rightarrow y = 1$</p>
+                <p><strong>Answer: $(2, 1)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 15:</strong> $4x + 5y = 23$ and $3x + 2y = 12$</p>
+                <p>Multiply first by 2 and second by $-5$ to eliminate $y$:</p>
+                <p>$8x + 10y = 46$</p>
+                <p>$-15x - 10y = -60$</p>
+                <p>Add: $-7x = -14 \Rightarrow x = 2$</p>
+                <p>Substitute: $3(2) + 2y = 12 \Rightarrow 6 + 2y = 12 \Rightarrow y = 3$</p>
+                <p><strong>Answer: $(2, 3)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 16:</strong> $\frac{1}{2}x + \frac{1}{3}y = 5$ and $\frac{1}{4}x - \frac{1}{2}y = -1$</p>
+                <p>Clear fractions by multiplying first equation by 6 and second by 4:</p>
+                <p>$3x + 2y = 30$</p>
+                <p>$x - 2y = -4$</p>
+                <p>Add: $4x = 26 \Rightarrow x = \frac{26}{4} = \frac{13}{2}$</p>
+                <p>Substitute into $x - 2y = -4$:</p>
+                <p>$\frac{13}{2} - 2y = -4 \Rightarrow -2y = -4 - \frac{13}{2} = -\frac{21}{2} \Rightarrow y = \frac{21}{4}$</p>
+                <p>Check: $\frac{1}{2}\left(\frac{13}{2}\right) + \frac{1}{3}\left(\frac{21}{4}\right) = \frac{13}{4} + \frac{21}{12} = \frac{39}{12} + \frac{21}{12} = \frac{60}{12} = 5$ ✓</p>
+                <p><strong>Answer: $\left(\frac{13}{2}, \frac{21}{4}\right)$</strong> or $(6.5, 5.25)$</p>
+            </div>
+            
+            <h4>Special Cases (Problems 17–19)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 17:</strong> $2x + 4y = 10$ and $x + 2y = 5$</p>
+                <p>Notice: the first equation is exactly 2 times the second equation.</p>
+                <p>$2(x + 2y) = 2(5) \Rightarrow 2x + 4y = 10$ ✓</p>
+                <p>These are the same line.</p>
+                <p><strong>Answer: Infinitely many solutions</strong> (dependent system)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 18:</strong> $3x - 6y = 12$ and $x - 2y = 8$</p>
+                <p>Simplify first equation by dividing by 3: $x - 2y = 4$</p>
+                <p>But the second equation says $x - 2y = 8$.</p>
+                <p>We have $x - 2y = 4$ and $x - 2y = 8$—these contradict each other.</p>
+                <p>Same slope but different intercepts means parallel lines.</p>
+                <p><strong>Answer: No solution</strong> (inconsistent system)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 19:</strong> $5x + 2y = 7$ and $10x + 4y = 14$</p>
+                <p>The second equation is exactly 2 times the first.</p>
+                <p>$2(5x + 2y) = 2(7) \Rightarrow 10x + 4y = 14$ ✓</p>
+                <p>These are the same line.</p>
+                <p><strong>Answer: Infinitely many solutions</strong> (dependent system)</p>
+            </div>
+            
+            <h4>Word Problems (Problems 20–22)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 20:</strong> The sum of two numbers is 25 and their difference is 7.</p>
+                <p>Let $x$ = larger number, $y$ = smaller number.</p>
+                <p>$x + y = 25$</p>
+                <p>$x - y = 7$</p>
+                <p>Add: $2x = 32 \Rightarrow x = 16$</p>
+                <p>Then $y = 25 - 16 = 9$.</p>
+                <p>Check: $16 + 9 = 25$ ✓ and $16 - 9 = 7$ ✓</p>
+                <p><strong>Answer: The two numbers are 16 and 9.</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 21:</strong> Theater tickets: 400 total, adults 12 dollars, children 8 dollars, revenue 4,200 dollars.</p>
+                <p>Let $a$ = adult tickets, $c$ = child tickets.</p>
+                <p>$a + c = 400$ (total tickets)</p>
+                <p>$12a + 8c = 4200$ (total revenue)</p>
+                <p>From first equation: $a = 400 - c$. Substitute:</p>
+                <p>$12(400 - c) + 8c = 4200$</p>
+                <p>$4800 - 12c + 8c = 4200$</p>
+                <p>$-4c = -600 \Rightarrow c = 150$</p>
+                <p>Then $a = 400 - 150 = 250$.</p>
+                <p>Check: $12(250) + 8(150) = 3000 + 1200 = 4200$ ✓</p>
+                <p><strong>Answer: 250 adult tickets and 150 child tickets.</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 22:</strong> Mixing 30% and 50% acid solutions to get 200 mL of 35% solution.</p>
+                <p>Let $x$ = mL of 30% solution, $y$ = mL of 50% solution.</p>
+                <p>$x + y = 200$ (total volume)</p>
+                <p>$0.30x + 0.50y = 0.35(200) = 70$ (total acid)</p>
+                <p>From first equation: $x = 200 - y$. Substitute:</p>
+                <p>$0.30(200 - y) + 0.50y = 70$</p>
+                <p>$60 - 0.30y + 0.50y = 70$</p>
+                <p>$0.20y = 10 \Rightarrow y = 50$</p>
+                <p>Then $x = 200 - 50 = 150$.</p>
+                <p>Check: $0.30(150) + 0.50(50) = 45 + 25 = 70$ ✓</p>
+                <p><strong>Answer: 150 mL of 30% solution and 50 mL of 50% solution.</strong></p>
+            </div>
+            
+            <h4>Calculator Section (Problems 23–25)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 23:</strong> $1.25x + 0.75y = 8.50$ and $0.50x + 1.50y = 7.00$</p>
+                <p>Multiply first equation by 2 to eliminate $x$:</p>
+                <p>$2.50x + 1.50y = 17.00$</p>
+                <p>Multiply second equation by $-5$:</p>
+                <p>$-2.50x - 7.50y = -35.00$</p>
+                <p>Add: $-6.00y = -18.00 \Rightarrow y = 3.00$</p>
+                <p>Substitute: $0.50x + 1.50(3.00) = 7.00$</p>
+                <p>$0.50x + 4.50 = 7.00 \Rightarrow 0.50x = 2.50 \Rightarrow x = 5.00$</p>
+                <p>Check: $1.25(5) + 0.75(3) = 6.25 + 2.25 = 8.50$ ✓</p>
+                <p><strong>Answer: $(5.00, 3.00)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 24:</strong> Delivery truck: 147 miles total, highway 52 mph, city 28 mph, total time 3.5 hours.</p>
+                <p>Let $h$ = highway miles, $c$ = city miles.</p>
+                <p>$h + c = 147$ (total distance)</p>
+                <p>$\frac{h}{52} + \frac{c}{28} = 3.5$ (total time, using time = distance/rate)</p>
+                <p>Multiply second equation by 364 (LCM of 52 and 28) to clear fractions:</p>
+                <p>$7h + 13c = 1274$</p>
+                <p>From first equation: $h = 147 - c$. Substitute:</p>
+                <p>$7(147 - c) + 13c = 1274$</p>
+                <p>$1029 - 7c + 13c = 1274$</p>
+                <p>$6c = 245 \Rightarrow c \approx 40.83$</p>
+                <p>Then $h = 147 - 40.83 = 106.17$.</p>
+                <p>Check: $\frac{106.17}{52} + \frac{40.83}{28} = 2.04 + 1.46 = 3.50$ hours ✓</p>
+                <p><strong>Answer: Approximately 106.17 miles on the highway and 40.83 miles in the city.</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 25:</strong> Investment: 15,000 dollars total, 4.5% and 6.2% accounts, total interest 787.50 dollars.</p>
+                <p>Let $x$ = amount at 4.5%, $y$ = amount at 6.2%.</p>
+                <p>$x + y = 15000$ (total invested)</p>
+                <p>$0.045x + 0.062y = 787.50$ (total interest)</p>
+                <p>From first equation: $x = 15000 - y$. Substitute:</p>
+                <p>$0.045(15000 - y) + 0.062y = 787.50$</p>
+                <p>$675 - 0.045y + 0.062y = 787.50$</p>
+                <p>$0.017y = 112.50$</p>
+                <p>$y = 112.50 \div 0.017 \approx 6617.65$</p>
+                <p>Then $x = 15000 - 6617.65 = 8382.35$.</p>
+                <p>Check: $0.045(8382.35) + 0.062(6617.65) = 377.21 + 410.29 = 787.50$ ✓</p>
+                <p><strong>Answer: Approximately 8,382.35 dollars at 4.5% and 6,617.65 dollars at 6.2%.</strong></p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 13 SUMMARY -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-13-summary">Section 13 Summary</h2>
+        
+        <div class="summary-box">
+            <h3>Key Concepts</h3>
+            
+            <h4>What Is a System?</h4>
+            <p>A <strong>system of equations</strong> is a set of two or more equations with the same variables. A solution must satisfy <em>all</em> equations simultaneously. For two linear equations in two variables, the solution (if it exists) is an ordered pair $(x, y)$.</p>
+            
+            <h4>Three Possible Outcomes</h4>
+            <table style="width: 100%;">
+                <tr>
+                    <th>Outcome</th>
+                    <th>Geometry</th>
+                    <th>Algebra Shows</th>
+                </tr>
+                <tr>
+                    <td><strong>One solution</strong></td>
+                    <td>Lines intersect at one point</td>
+                    <td>Unique values for $x$ and $y$</td>
+                </tr>
+                <tr>
+                    <td><strong>No solution</strong> (inconsistent)</td>
+                    <td>Lines are parallel</td>
+                    <td>False statement (e.g., $0 = 5$)</td>
+                </tr>
+                <tr>
+                    <td><strong>Infinitely many</strong> (dependent)</td>
+                    <td>Lines are identical</td>
+                    <td>True statement (e.g., $0 = 0$)</td>
+                </tr>
+            </table>
+            
+            <h4>Three Solving Methods</h4>
+            <ul>
+                <li><strong>Graphing:</strong> Plot both lines; read the intersection. Best for visualization and estimation.</li>
+                <li><strong>Substitution:</strong> Solve one equation for a variable, substitute into the other. Best when a variable is already isolated or has coefficient 1 or $-1$.</li>
+                <li><strong>Elimination:</strong> Add or subtract equations to eliminate a variable. Best when equations are in standard form.</li>
+            </ul>
+            <p>All methods give the same answer—choose based on what makes the arithmetic easiest.</p>
+            
+            <h4>Setting Up Word Problems</h4>
+            <ol>
+                <li>Identify two unknowns</li>
+                <li>Find two relationships (facts) about them</li>
+                <li>Write an equation for each relationship</li>
+                <li>Solve and check that the answer makes sense in context</li>
+            </ol>
+            
+            <h4>Common Application Types</h4>
+            <ul>
+                <li><strong>Mixture:</strong> Combining items with different properties</li>
+                <li><strong>Rate/Motion:</strong> Distance, speed, time relationships</li>
+                <li><strong>Cost comparison:</strong> Finding break-even points</li>
+                <li><strong>Quantity/Value:</strong> Total count and total value known</li>
+            </ul>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 3 / END OF SECTION 13 -->
+        <!-- ============================================================ -->
+        
+        <hr style="margin: 40px 0; border: none; border-top: 2px dashed #ccc;">
+        
+        <p style="text-align: center; color: #666; font-style: italic;">
+            End of Section 13: Systems of Linear Equations
+        </p>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // ============================================================
+        // Fig. 13.1a: One Solution (lines with different slopes)
+        // ============================================================
+        var board1a = JXG.JSXGraph.initBoard('fig-13-1a', {
+            boundingbox: [-5, 6, 7, -4],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } },
+                y: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } }
+            }
+        });
+        
+        // Line 1: y = x + 1 (slope 1, intercept 1)
+        board1a.create('functiongraph', [function(x) { return x + 1; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2,
+            name: 'y = x + 1',
+            withLabel: true,
+            label: { position: 'rt', offset: [-60, -5], fontSize: 11 }
+        });
+        
+        // Line 2: y = -0.5x + 4 (slope -0.5, intercept 4)
+        board1a.create('functiongraph', [function(x) { return -0.5*x + 4; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2,
+            name: 'y = -0.5x + 4',
+            withLabel: true,
+            label: { position: 'rt', offset: [-80, 10], fontSize: 11 }
+        });
+        
+        // Intersection point at (2, 3)
+        board1a.create('point', [2, 3], {
+            size: 4,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(2, 3)',
+            label: { offset: [5, 5], fontSize: 11 }
+        });
+        
+        // ============================================================
+        // Fig. 13.1b: No Solution (parallel lines)
+        // ============================================================
+        var board1b = JXG.JSXGraph.initBoard('fig-13-1b', {
+            boundingbox: [-5, 6, 7, -4],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } },
+                y: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } }
+            }
+        });
+        
+        // Line 1: y = 0.5x + 1
+        board1b.create('functiongraph', [function(x) { return 0.5*x + 1; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2,
+            name: 'y = 0.5x + 1',
+            withLabel: true,
+            label: { position: 'rt', offset: [-70, -5], fontSize: 11 }
+        });
+        
+        // Line 2: y = 0.5x + 4 (same slope, different intercept)
+        board1b.create('functiongraph', [function(x) { return 0.5*x + 4; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2,
+            name: 'y = 0.5x + 4',
+            withLabel: true,
+            label: { position: 'rt', offset: [-70, -5], fontSize: 11 }
+        });
+        
+        // ============================================================
+        // Fig. 13.1c: Infinitely Many Solutions (same line)
+        // ============================================================
+        var board1c = JXG.JSXGraph.initBoard('fig-13-1c', {
+            boundingbox: [-5, 6, 7, -4],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } },
+                y: { ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 } }
+            }
+        });
+        
+        // Single line (drawn thicker to suggest "both" lines): y = x + 1
+        // Draw it twice with slight offset to show they're "the same"
+        board1c.create('functiongraph', [function(x) { return x + 1; }], {
+            strokeColor: '#9333ea',
+            strokeWidth: 4,
+            name: 'y = x + 1 (both equations)',
+            withLabel: true,
+            label: { position: 'rt', offset: [-120, 10], fontSize: 11 }
+        });
+        
+        // Mark several points to show infinitely many solutions
+        board1c.create('point', [-2, -1], {
+            size: 3, fillColor: '#16a34a', strokeColor: '#16a34a', name: '', fixed: true
+        });
+        board1c.create('point', [0, 1], {
+            size: 3, fillColor: '#16a34a', strokeColor: '#16a34a', name: '', fixed: true
+        });
+        board1c.create('point', [2, 3], {
+            size: 3, fillColor: '#16a34a', strokeColor: '#16a34a', name: '', fixed: true
+        });
+        board1c.create('point', [4, 5], {
+            size: 3, fillColor: '#16a34a', strokeColor: '#16a34a', name: '', fixed: true
+        });
+        
+        // ============================================================
+        // Fig. 13.2: Solving by Graphing Example
+        // ============================================================
+        var board2 = JXG.JSXGraph.initBoard('fig-13-2', {
+            boundingbox: [-2, 8, 6, -2],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0 } },
+                y: { ticks: { insertTicks: false, ticksDistance: 1, minorTicks: 0 } }
+            }
+        });
+        
+        // Line 1: y = 2x - 1
+        board2.create('functiongraph', [function(x) { return 2*x - 1; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2,
+            name: 'y = 2x - 1',
+            withLabel: true,
+            label: { position: 'rt', offset: [-65, 5], fontSize: 12 }
+        });
+        
+        // Line 2: y = -x + 5
+        board2.create('functiongraph', [function(x) { return -x + 5; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2,
+            name: 'y = -x + 5',
+            withLabel: true,
+            label: { position: 'lft', offset: [5, 5], fontSize: 12 }
+        });
+        
+        // Intersection point at (2, 3)
+        board2.create('point', [2, 3], {
+            size: 5,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(2, 3)',
+            label: { offset: [8, 5], fontSize: 13, fontWeight: 'bold' }
+        });
+        
+        // Dashed lines to axes for emphasis
+        board2.create('line', [[2, 3], [2, 0]], {
+            straightFirst: false,
+            straightLast: false,
+            strokeColor: '#16a34a',
+            strokeWidth: 1,
+            dash: 2
+        });
+        board2.create('line', [[2, 3], [0, 3]], {
+            straightFirst: false,
+            straightLast: false,
+            strokeColor: '#16a34a',
+            strokeWidth: 1,
+            dash: 2
+        });
+        
+        
+        // ============================================================
+        // Fig. 13.3: Nut Mixture Problem
+        // c + p = 20 and 8c + 3p = 100
+        // Solution: (8, 12)
+        // ============================================================
+        var board3 = JXG.JSXGraph.initBoard('fig-13-3', {
+            boundingbox: [-7, 42, 30, -8],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { 
+                    ticks: { insertTicks: false, ticksDistance: 5, minorTicks: 0 }
+                },
+                y: { 
+                    ticks: { insertTicks: false, ticksDistance: 5, minorTicks: 0 }
+                }
+            }
+        });
+        
+        // Axis labels - positioned well clear of axes
+        board3.create('text', [25, -5.5, 'c (cashews, lb)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151', anchorX: 'right'
+        });
+        board3.create('text', [-5.5, 38, 'p (peanuts, lb)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151'
+        });
+        
+        // Line 1: c + p = 20, so p = 20 - c (blue)
+        board3.create('functiongraph', [function(c) { return 20 - c; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2
+        });
+        
+        // Line 2: 8c + 3p = 100, so p = (100 - 8c)/3 (red)
+        board3.create('functiongraph', [function(c) { return (100 - 8*c) / 3; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2
+        });
+        
+        // Line labels with arrows - blue label closer to line
+        board3.create('text', [3, 24, 'c + p = 20'], {
+            fontSize: 12, color: '#2563eb', fontWeight: 'bold'
+        });
+        board3.create('arrow', [[6, 22], [8, 12]], {
+            strokeColor: '#2563eb', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Red line label - moved to lower left, away from blue line
+        board3.create('text', [1, 6, '8c + 3p = 100'], {
+            fontSize: 12, color: '#dc2626', fontWeight: 'bold'
+        });
+        board3.create('arrow', [[7, 8], [9, 9.3]], {
+            strokeColor: '#dc2626', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Intersection point at (8, 12)
+        board3.create('point', [8, 12], {
+            size: 5,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(8, 12)',
+            label: { offset: [8, 8], fontSize: 12, fontWeight: 'bold' }
+        });
+        
+        // ============================================================
+        // Fig. 13.4: Boat and Current Problem
+        // b + c = 12 and b - c = 8
+        // Solution: (10, 2)
+        // ============================================================
+        var board4 = JXG.JSXGraph.initBoard('fig-13-4', {
+            boundingbox: [-2, 18, 18, -5],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { 
+                    ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 }
+                },
+                y: { 
+                    ticks: { insertTicks: false, ticksDistance: 2, minorTicks: 0 }
+                }
+            }
+        });
+        
+        // Axis labels - positioned well clear of axes
+        board4.create('text', [14, -3.5, 'b (boat speed, mph)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151', anchorX: 'right'
+        });
+        board4.create('text', [-1.5, 16, 'c (current, mph)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151'
+        });
+        
+        // Line 1: b + c = 12, so c = 12 - b (blue)
+        board4.create('functiongraph', [function(b) { return 12 - b; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2
+        });
+        
+        // Line 2: b - c = 8, so c = b - 8 (red)
+        board4.create('functiongraph', [function(b) { return b - 8; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2
+        });
+        
+        // Line labels with arrows - blue label closer to line
+        board4.create('text', [2, 12, 'b + c = 12'], {
+            fontSize: 12, color: '#2563eb', fontWeight: 'bold'
+        });
+        board4.create('arrow', [[4, 11], [5, 7]], {
+            strokeColor: '#2563eb', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Red line label
+        board4.create('text', [14, 6, 'b − c = 8'], {
+            fontSize: 12, color: '#dc2626', fontWeight: 'bold'
+        });
+        board4.create('arrow', [[13.5, 5.5], [13, 5]], {
+            strokeColor: '#dc2626', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Intersection point at (10, 2)
+        board4.create('point', [10, 2], {
+            size: 5,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(10, 2)',
+            label: { offset: [-45, 10], fontSize: 12, fontWeight: 'bold' }
+        });
+        
+        // ============================================================
+        // Fig. 13.5: Phone Plan Comparison
+        // Plan A: C = 25 + 0.10t
+        // Plan B: C = 40
+        // Break-even at t = 150, C = 40
+        // ============================================================
+        var board5 = JXG.JSXGraph.initBoard('fig-13-5', {
+            boundingbox: [-30, 70, 270, -12],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { 
+                    ticks: { insertTicks: false, ticksDistance: 50, minorTicks: 0 }
+                },
+                y: { 
+                    ticks: { insertTicks: false, ticksDistance: 10, minorTicks: 0 }
+                }
+            }
+        });
+        
+        // Axis labels - positioned well clear of axes
+        board5.create('text', [220, -8, 't (texts/month)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151', anchorX: 'right'
+        });
+        board5.create('text', [-25, 64, 'C (cost, dollars)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151'
+        });
+        
+        // Plan A: C = 25 + 0.10t (blue, rising line)
+        board5.create('functiongraph', [function(t) { return 25 + 0.10*t; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2
+        });
+        
+        // Plan B: C = 40 (red, horizontal line)
+        board5.create('functiongraph', [function(t) { return 40; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2
+        });
+        
+        // Line labels with arrows
+        // Plan A label (upper right)
+        board5.create('text', [180, 60, 'Plan A: C = 25 + 0.10t'], {
+            fontSize: 11, color: '#2563eb', fontWeight: 'bold'
+        });
+        board5.create('arrow', [[175, 58], [160, 41]], {
+            strokeColor: '#2563eb', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Plan B label (left side, above the line)
+        board5.create('text', [10, 52, 'Plan B: C = 40'], {
+            fontSize: 11, color: '#dc2626', fontWeight: 'bold'
+        });
+        board5.create('arrow', [[35, 50], [35, 42]], {
+            strokeColor: '#dc2626', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Break-even point at (150, 40) - label moved to upper left of point
+        board5.create('point', [150, 40], {
+            size: 5,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(150, 40)',
+            label: { offset: [-55, 12], fontSize: 12, fontWeight: 'bold' }
+        });
+        
+        // Region annotations - "Plan A better" moved below the lines
+        board5.create('text', [60, 20, 'Plan A better'], {
+            fontSize: 11, color: '#2563eb', fontStyle: 'italic'
+        });
+        board5.create('text', [200, 28, 'Plan B better'], {
+            fontSize: 11, color: '#dc2626', fontStyle: 'italic'
+        });
+        
+        // ============================================================
+        // Fig. 13.6: Coin Problem
+        // d + q = 42 and 0.10d + 0.25q = 7.35
+        // Solution: (21, 21)
+        // ============================================================
+        var board6 = JXG.JSXGraph.initBoard('fig-13-6', {
+            boundingbox: [-8, 58, 55, -10],
+            axis: true,
+            grid: true,
+            showCopyright: false,
+            showNavigation: false,
+            showFullscreen: false,
+            pan: { enabled: false },
+            zoom: { enabled: false },
+            defaultAxes: {
+                x: { 
+                    ticks: { insertTicks: false, ticksDistance: 10, minorTicks: 0 }
+                },
+                y: { 
+                    ticks: { insertTicks: false, ticksDistance: 10, minorTicks: 0 }
+                }
+            }
+        });
+        
+        // Axis labels - positioned well clear of axes
+        board6.create('text', [45, -7, 'd (dimes)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151', anchorX: 'right'
+        });
+        board6.create('text', [-6, 53, 'q (quarters)'], {
+            fontSize: 13, fontWeight: 'bold', color: '#374151'
+        });
+        
+        // Line 1: d + q = 42, so q = 42 - d (blue)
+        board6.create('functiongraph', [function(d) { return 42 - d; }], {
+            strokeColor: '#2563eb',
+            strokeWidth: 2
+        });
+        
+        // Line 2: 0.10d + 0.25q = 7.35, so q = 29.4 - 0.4d (red)
+        board6.create('functiongraph', [function(d) { return 29.4 - 0.4*d; }], {
+            strokeColor: '#dc2626',
+            strokeWidth: 2
+        });
+        
+        // Line labels with arrows
+        // Blue line label (upper right)
+        board6.create('text', [35, 48, 'd + q = 42'], {
+            fontSize: 12, color: '#2563eb', fontWeight: 'bold'
+        });
+        board6.create('arrow', [[34, 46], [28, 14]], {
+            strokeColor: '#2563eb', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Red line label (lower right)  
+        board6.create('text', [38, 8, '0.10d + 0.25q = 7.35'], {
+            fontSize: 12, color: '#dc2626', fontWeight: 'bold'
+        });
+        board6.create('arrow', [[37, 10], [30, 17.4]], {
+            strokeColor: '#dc2626', strokeWidth: 1, lastArrow: {type: 2, size: 6}
+        });
+        
+        // Intersection point at (21, 21)
+        board6.create('point', [21, 21], {
+            size: 5,
+            fillColor: '#16a34a',
+            strokeColor: '#16a34a',
+            name: '(21, 21)',
+            label: { offset: [-50, 5], fontSize: 12, fontWeight: 'bold' }
+        });
+        
+    });
+    </script>
+</body>
+</html>

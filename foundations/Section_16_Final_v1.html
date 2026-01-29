@@ -1,0 +1,4014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 16 (Quadratic Equations) - FINAL
+      Version: 1.0
+      Date: 2026-01-17
+      Guidelines Version: Technical Document Implementation v2.1
+      
+      Status: FINAL - Sections 16.1-16.3 ready for integration
+      Note: This is a standalone wrapper for proofing. Content will be
+            integrated into Math_Basics_Part_II when complete.
+      
+      Follows: Section_15_Final_v1.html (Complete Section 15: Factoring)
+      
+      Figure Inventory:
+        - None in this batch
+      
+      History:
+        Version 1.0: FINAL - Approved for integration. Example 8 revised to
+                     use trial-and-error factoring instead of ac-method
+                     grouping for clarity.
+        Draft 0.1: Initial draft of sections 16.1-16.3. What is a quadratic
+                   equation (standard form, historical note), Zero Product
+                   Property, solving by factoring with 10 worked examples.
+                   Practice problems with full solutions.
+    -->
+    
+    <title>Section 16: Quadratic Equations</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .draft-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .draft-notice h3 {
+            color: #b45309;
+            margin: 0 0 10px 0;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .historical-note {
+            background-color: #fdf6e3;
+            padding: 20px;
+            border: 1px solid #d4a767;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .historical-note::before {
+            content: "Historical Note";
+            display: block;
+            font-weight: bold;
+            color: #8b6914;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .problems {
+            background-color: #f8f9fa;
+            padding: 25px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .problems h4 {
+            margin-top: 0;
+            color: #495057;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 10px 0;
+            border-bottom: 1px dashed #dee2e6;
+        }
+        .problem:last-child {
+            border-bottom: none;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #1a5f2a;
+        }
+        
+        .solutions {
+            background-color: #f0f7f0;
+            padding: 25px;
+            border: 1px solid #c8e6c9;
+            border-radius: 8px;
+            margin: 30px 0;
+        }
+        .solutions h4 {
+            margin-top: 0;
+            color: #2e7d32;
+            border-bottom: 1px solid #c8e6c9;
+            padding-bottom: 10px;
+        }
+        .solution {
+            margin: 15px 0;
+            padding: 15px 0;
+            border-bottom: 1px dashed #c8e6c9;
+        }
+        .solution:last-child {
+            border-bottom: none;
+        }
+    .section-nav {
+        background: #f0f9ff;
+        border: 1px solid #0284c7;
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 0.95em;
+        color: #0369a1;
+    }
+    .section-nav a {
+        color: #0284c7;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .section-nav a:hover {
+        text-decoration: underline;
+    }
+    .section-nav .current {
+        font-weight: 600;
+        color: #1a5f2a;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+    <div class="section-nav">
+        <a href="Section_15_Final_v1.html">&larr; Section 15: Factoring</a> | 
+        Part II: Introduction to Algebra | 
+        <span class="current">Section 16: Quadratic Equations</span> | 
+        <a href="Section_17_Final_v1.html">Section 17: Functions &rarr;</a>
+    </div>
+
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 16: QUADRATIC EQUATIONS                              -->
+        <!-- ============================================================ -->
+        
+        <h1 id="section-16">Section 16: Quadratic Equations</h1>
+        
+        <p>
+            In Section 15, we learned to factor polynomials. At the end, we glimpsed why this matters: if $x^2 - 5x + 6$ factors as $(x - 2)(x - 3)$, then the equation $x^2 - 5x + 6 = 0$ has solutions $x = 2$ and $x = 3$. The factored form reveals the solutions directly.
+        </p>
+        
+        <p>
+            Now we develop this connection systematically. Quadratic equations&mdash;equations where the highest power of the variable is 2&mdash;appear throughout science, engineering, and everyday problem-solving. They describe the path of a thrown ball, the shape of satellite dishes, and the behavior of electrical circuits. Learning to solve them opens doors to understanding how the physical world works.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- 16.1 WHAT IS A QUADRATIC EQUATION?                           -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-1">16.1 What is a Quadratic Equation?</h2>
+        
+        <p>
+            In Section 10, we solved <em>linear</em> equations&mdash;equations where the variable appears only to the first power, like $3x + 5 = 14$. A <em>quadratic</em> equation takes one step higher: the variable can appear squared.
+        </p>
+        
+        <div class="definition">
+            <h4>Quadratic Equation</h4>
+            <p>
+                A <strong>quadratic equation</strong> in one variable is an equation that can be written in the form
+            </p>
+            <p style="text-align: center; font-size: 1.1em; margin: 15px 0;">
+                $ax^2 + bx + c = 0$
+            </p>
+            <p>
+                where $a$, $b$, and $c$ are constants and $a \neq 0$. This is called <strong>standard form</strong>.
+            </p>
+            <p style="margin-top: 10px;">
+                The requirement $a \neq 0$ is essential: if $a = 0$, the $x^2$ term vanishes and you're left with a linear equation.
+            </p>
+        </div>
+        
+        <p>
+            The coefficients have names: $a$ is the <strong>leading coefficient</strong> (it leads the highest-power term), $b$ is the <strong>linear coefficient</strong>, and $c$ is the <strong>constant term</strong>.
+        </p>
+        
+        <h3>Recognizing Quadratic Equations</h3>
+        
+        <p>
+            A quadratic equation has an $x^2$ term as its highest power. Here are some examples:
+        </p>
+        
+        <p>
+            <strong>Quadratic equations:</strong>
+        </p>
+        <ul>
+            <li>$x^2 + 5x + 6 = 0$ &mdash; already in standard form with $a = 1$, $b = 5$, $c = 6$</li>
+            <li>$3x^2 - 7 = 0$ &mdash; standard form with $a = 3$, $b = 0$, $c = -7$ (the linear term is missing)</li>
+            <li>$2x^2 = 8x - 3$ &mdash; quadratic, but needs rearrangement to reach standard form</li>
+            <li>$x^2 = 16$ &mdash; quadratic with $b = 0$ and $c = -16$ when written as $x^2 - 16 = 0$</li>
+        </ul>
+        
+        <p>
+            <strong>Not quadratic equations:</strong>
+        </p>
+        <ul>
+            <li>$x^3 + 2x = 5$ &mdash; this is <em>cubic</em> (highest power is 3)</li>
+            <li>$2x + 3 = 0$ &mdash; this is <em>linear</em> (highest power is 1)</li>
+            <li>$\frac{1}{x} + x = 2$ &mdash; the term $\frac{1}{x}$ makes this a rational equation, not a polynomial</li>
+        </ul>
+        
+        <div class="example">
+            <h4>Example 1: Identifying Standard Form Coefficients</h4>
+            <p>For each quadratic equation, write it in standard form and identify $a$, $b$, and $c$.</p>
+            
+            <p><strong>(a)</strong> $x^2 - 4x + 3 = 0$</p>
+            <p style="margin-left: 20px;">
+                Already in standard form. Reading off the coefficients: $a = 1$, $b = -4$, $c = 3$.
+            </p>
+            
+            <p><strong>(b)</strong> $5x^2 + 2x = 0$</p>
+            <p style="margin-left: 20px;">
+                Already in standard form (the constant term is zero). We have $a = 5$, $b = 2$, $c = 0$.
+            </p>
+            
+            <p><strong>(c)</strong> $3x^2 = 12$</p>
+            <p style="margin-left: 20px;">
+                Subtract 12 from both sides: $3x^2 - 12 = 0$. Now it's in standard form with $a = 3$, $b = 0$, $c = -12$.
+            </p>
+            
+            <p><strong>(d)</strong> $x = 2x^2 - 5$</p>
+            <p style="margin-left: 20px;">
+                Move all terms to one side: $0 = 2x^2 - x - 5$, or equivalently $2x^2 - x - 5 = 0$. This gives $a = 2$, $b = -1$, $c = -5$.
+            </p>
+            
+            <p><strong>(e)</strong> $7 - x^2 = 4x$</p>
+            <p style="margin-left: 20px;">
+                Rearrange: $-x^2 - 4x + 7 = 0$. This is valid standard form with $a = -1$, $b = -4$, $c = 7$.
+            </p>
+            <p style="margin-left: 20px;">
+                Alternatively, multiply through by $-1$ to get $x^2 + 4x - 7 = 0$, giving $a = 1$, $b = 4$, $c = -7$. Both forms are correct; the second is often preferred because $a > 0$.
+            </p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Why Standard Form Matters</h4>
+            <p>
+                Converting to standard form isn't just bureaucratic tidiness. It serves two purposes:
+            </p>
+            <ul>
+                <li><strong>It reveals structure.</strong> Once in standard form, you can immediately see the coefficients that determine the equation's behavior.</li>
+                <li><strong>It enables systematic methods.</strong> The quadratic formula (Section 16.5) uses $a$, $b$, and $c$ directly. You can't apply it until you've identified these values.</li>
+            </ul>
+        </div>
+        
+        <div class="historical-note">
+            <p>
+                Quadratic equations have been studied for nearly 4,000 years. Babylonian scribes around 1800 BCE solved problems equivalent to our quadratics using geometric cut-and-paste methods on clay tablets. They could find the side of a square given its area, or solve problems like "a field's length exceeds its width by 7, and its area is 60"&mdash;which we'd write as $x(x + 7) = 60$, or $x^2 + 7x - 60 = 0$.
+            </p>
+            <p>
+                The algebraic approach we use today was systematized by the Persian mathematician Muhammad ibn Musa al-Khwarizmi in his 9th-century treatise <em>Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala</em> ("The Compendious Book on Calculation by Completion and Balancing"). The word <em>al-jabr</em> in the title gave us "algebra." Al-Khwarizmi classified quadratic equations into types and gave systematic recipes for solving each. We'll see more of this history when we derive the quadratic formula in Section 16.5.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.2 THE ZERO PRODUCT PROPERTY                               -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-2">16.2 The Zero Product Property</h2>
+        
+        <p>
+            In Section 15, we learned to factor expressions like $x^2 + 5x + 6$ into $(x + 2)(x + 3)$. To turn this skill into a solving method, we need one key principle.
+        </p>
+        
+        <div class="definition">
+            <h4>Zero Product Property</h4>
+            <p>
+                If $ab = 0$, then $a = 0$ or $b = 0$ (or both).
+            </p>
+            <p style="margin-top: 10px;">
+                In words: if a product of factors equals zero, at least one of the factors must be zero.
+            </p>
+        </div>
+        
+        <p>
+            This property might seem obvious, but it's worth pausing to see why it's true and why it's special to zero.
+        </p>
+        
+        <p>
+            <strong>Why it works:</strong> Suppose $ab = 0$ but $a \neq 0$. Since $a$ isn't zero, we can divide both sides by $a$: we get $b = 0/a = 0$. So if $a$ isn't zero, then $b$ must be. Similarly, if $b$ isn't zero, then $a$ must be. At least one of them has to be zero for their product to be zero.
+        </p>
+        
+        <p>
+            <strong>Why zero is special:</strong> This property doesn't work for any other number. If $ab = 6$, you can't conclude that $a = 6$ or $b = 6$. (Consider $a = 2$, $b = 3$.) But zero has a unique "absorbing" property in multiplication: anything times zero is zero. This makes it the only number where the product being zero forces one of the factors to be zero.
+        </p>
+        
+        <div class="key-point">
+            <h4>The Bridge from Factoring to Solving</h4>
+            <p>
+                The Zero Product Property is what makes factoring useful for solving equations. If we can write an equation as
+            </p>
+            <p style="text-align: center; margin: 10px 0;">
+                (something)(something else) $= 0$
+            </p>
+            <p>
+                then we know at least one of those "somethings" must equal zero. This transforms one complicated equation into two simpler ones.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Direct Application</h4>
+            <p>Solve $(x - 5)(x + 1) = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                The equation is already factored. By the Zero Product Property, either the first factor is zero or the second factor is zero:
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 5 = 0$ &nbsp; or &nbsp; $x + 1 = 0$
+            </p>
+            <p>
+                Solving each linear equation:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = 5$ &nbsp; or &nbsp; $x = -1$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 5$ or $x = -1$
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Check:</strong> Substitute $x = 5$: $(5 - 5)(5 + 1) = (0)(6) = 0$ &#10003;<br>
+                Substitute $x = -1$: $(-1 - 5)(-1 + 1) = (-6)(0) = 0$ &#10003;
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Solutions Including Fractions</h4>
+            <p>Solve $(2x + 3)(x - 4) = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                By the Zero Product Property:
+            </p>
+            <p style="margin-left: 20px;">
+                $2x + 3 = 0$ &nbsp; or &nbsp; $x - 4 = 0$
+            </p>
+            <p>
+                From the first equation: $2x = -3$, so $x = -\frac{3}{2}$.
+            </p>
+            <p>
+                From the second equation: $x = 4$.
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -\frac{3}{2}$ or $x = 4$
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>The Property Only Works When One Side Is Zero</h4>
+            <p>
+                Consider the equation $(x + 2)(x + 3) = 12$. You might be tempted to conclude that $x + 2 = 12$ or $x + 3 = 12$, giving $x = 10$ or $x = 9$.
+            </p>
+            <p>
+                <strong>This is wrong.</strong> Check: $(10 + 2)(10 + 3) = 12 \times 13 = 156 \neq 12$.
+            </p>
+            <p>
+                The Zero Product Property applies <em>only</em> when the product equals zero. For other values, you must expand, rearrange to standard form, and then factor.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Correct approach:</strong> Expand $(x + 2)(x + 3) = x^2 + 5x + 6$. Then $x^2 + 5x + 6 = 12$ becomes $x^2 + 5x - 6 = 0$. Factor: $(x + 6)(x - 1) = 0$. Solutions: $x = -6$ or $x = 1$.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.3 SOLVING BY FACTORING                                    -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-3">16.3 Solving Quadratic Equations by Factoring</h2>
+        
+        <p>
+            Now we combine our factoring skills from Section 15 with the Zero Product Property to develop a systematic solving method.
+        </p>
+        
+        <div class="key-point">
+            <h4>Method: Solving by Factoring</h4>
+            <ol>
+                <li><strong>Write the equation in standard form:</strong> $ax^2 + bx + c = 0$</li>
+                <li><strong>Factor the left side completely.</strong></li>
+                <li><strong>Apply the Zero Product Property:</strong> Set each factor equal to zero.</li>
+                <li><strong>Solve each resulting linear equation.</strong></li>
+                <li><strong>Check your solutions</strong> in the original equation (optional but recommended).</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: A Simple Trinomial</h4>
+            <p>Solve $x^2 + 5x + 6 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                <em>Step 1:</em> The equation is already in standard form.
+            </p>
+            <p>
+                <em>Step 2:</em> Factor the left side. We need two numbers that multiply to 6 and add to 5. Those are 2 and 3.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 5x + 6 = (x + 2)(x + 3)$
+            </p>
+            <p>
+                <em>Step 3:</em> Apply the Zero Product Property.
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 2)(x + 3) = 0$ means $x + 2 = 0$ or $x + 3 = 0$
+            </p>
+            <p>
+                <em>Step 4:</em> Solve each equation.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -2$ or $x = -3$
+            </p>
+            <p>
+                <em>Step 5:</em> Check.
+            </p>
+            <p style="margin-left: 20px;">
+                For $x = -2$: $(-2)^2 + 5(-2) + 6 = 4 - 10 + 6 = 0$ &#10003;
+            </p>
+            <p style="margin-left: 20px;">
+                For $x = -3$: $(-3)^2 + 5(-3) + 6 = 9 - 15 + 6 = 0$ &#10003;
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -2$ or $x = -3$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 5: Difference of Squares</h4>
+            <p>Solve $x^2 - 9 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                This is a difference of squares: $x^2 - 9 = x^2 - 3^2 = (x + 3)(x - 3)$.
+            </p>
+            <p>
+                Setting each factor to zero:
+            </p>
+            <p style="margin-left: 20px;">
+                $x + 3 = 0$ gives $x = -3$
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 3 = 0$ gives $x = 3$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -3$ or $x = 3$ (often written as $x = \pm 3$)
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Alternative approach:</strong> You could also add 9 to both sides to get $x^2 = 9$, then take the square root: $x = \pm\sqrt{9} = \pm 3$. Both methods work.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Rearrangement Required</h4>
+            <p>Solve $x^2 = 5x$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                First, write in standard form by subtracting $5x$ from both sides:
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 - 5x = 0$
+            </p>
+            <p>
+                Factor out the GCF, which is $x$:
+            </p>
+            <p style="margin-left: 20px;">
+                $x(x - 5) = 0$
+            </p>
+            <p>
+                Apply the Zero Product Property:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = 0$ or $x - 5 = 0$
+            </p>
+            <p style="margin-left: 20px;">
+                $x = 0$ or $x = 5$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 0$ or $x = 5$
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>Never Divide Both Sides by the Variable</h4>
+            <p>
+                In Example 6, you might be tempted to "simplify" by dividing both sides of $x^2 = 5x$ by $x$:
+            </p>
+            <p style="text-align: center;">
+                $\frac{x^2}{x} = \frac{5x}{x}$ &nbsp; &rarr; &nbsp; $x = 5$
+            </p>
+            <p>
+                <strong>This loses the solution $x = 0$.</strong>
+            </p>
+            <p>
+                When you divide by $x$, you're implicitly assuming $x \neq 0$. But $x = 0$ <em>is</em> a valid solution&mdash;check: $0^2 = 5(0)$ gives $0 = 0$ &#10003;.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>The safe approach:</strong> Always move all terms to one side and factor. Never divide by an expression containing the variable unless you're certain that expression cannot be zero.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 7: GCF with a Coefficient</h4>
+            <p>Solve $3x^2 - 12x = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Factor out the GCF. Both terms share a factor of $3x$:
+            </p>
+            <p style="margin-left: 20px;">
+                $3x^2 - 12x = 3x(x - 4) = 0$
+            </p>
+            <p>
+                Apply the Zero Product Property. Note that $3x = 0$ means $x = 0$:
+            </p>
+            <p style="margin-left: 20px;">
+                $3x = 0$ gives $x = 0$
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 4 = 0$ gives $x = 4$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 0$ or $x = 4$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: A Harder Trinomial</h4>
+            <p>Solve $2x^2 + 7x + 3 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                This trinomial has $a = 2 \neq 1$, so simple sum-product factoring doesn't apply directly. We use trial and error: the factored form must look like $(2x + \text{?})(x + \text{?})$ where the two unknown numbers multiply to give 3.
+            </p>
+            <p>
+                The factor pairs of 3 are: $(1)(3)$ or $(3)(1)$.
+            </p>
+            <p>
+                Try $(2x + 1)(x + 3)$: multiplying out gives $2x^2 + 6x + x + 3 = 2x^2 + 7x + 3$ &#10003;
+            </p>
+            <p>
+                That's our factorization. Now apply the Zero Product Property:
+            </p>
+            <p style="margin-left: 20px;">
+                $2x + 1 = 0$ gives $x = -\frac{1}{2}$
+            </p>
+            <p style="margin-left: 20px;">
+                $x + 3 = 0$ gives $x = -3$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -\frac{1}{2}$ or $x = -3$
+            </p>
+            <p style="margin-top: 10px;">
+                Notice that when $a \neq 1$, fractional solutions are common.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 9: A Perfect Square Trinomial</h4>
+            <p>Solve $x^2 - 4x + 4 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Recognize this as a perfect square: $x^2 - 4x + 4 = (x - 2)^2$.
+            </p>
+            <p>
+                So the equation becomes $(x - 2)^2 = 0$.
+            </p>
+            <p>
+                The only way a square can equal zero is if the thing being squared is zero:
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 2 = 0$, so $x = 2$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 2$
+            </p>
+            <p style="margin-top: 10px;">
+                This equation has only one solution, but we call it a <strong>repeated root</strong> or <strong>double root</strong> because the factor $(x - 2)$ appears twice. Geometrically, this means the parabola $y = x^2 - 4x + 4$ touches the x-axis at exactly one point rather than crossing it. We'll explore this more in Section 16.7.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 10: Already Factored but Not Zero</h4>
+            <p>Solve $(x + 1)(x - 3) = 5$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                The right side is not zero, so we cannot apply the Zero Product Property directly. We must expand, rearrange to standard form, and factor again.
+            </p>
+            <p>
+                Expand the left side:
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 1)(x - 3) = x^2 - 3x + x - 3 = x^2 - 2x - 3$
+            </p>
+            <p>
+                The equation becomes $x^2 - 2x - 3 = 5$.
+            </p>
+            <p>
+                Subtract 5 to get standard form: $x^2 - 2x - 8 = 0$.
+            </p>
+            <p>
+                Factor: we need numbers with product $-8$ and sum $-2$. Those are $-4$ and $2$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 - 2x - 8 = (x - 4)(x + 2) = 0$
+            </p>
+            <p>
+                Apply the Zero Product Property:
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 4 = 0$ gives $x = 4$
+            </p>
+            <p style="margin-left: 20px;">
+                $x + 2 = 0$ gives $x = -2$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 4$ or $x = -2$
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Check:</strong> For $x = 4$: $(4 + 1)(4 - 3) = (5)(1) = 5$ &#10003;<br>
+                For $x = -2$: $(-2 + 1)(-2 - 3) = (-1)(-5) = 5$ &#10003;
+            </p>
+        </div>
+        
+        <h3>When Factoring Doesn't Work Easily</h3>
+        
+        <p>
+            Solving by factoring is efficient&mdash;when it works. But not every quadratic factors nicely over the integers.
+        </p>
+        
+        <p>
+            Consider $x^2 + x - 1 = 0$. We need integers with product $-1$ and sum $1$. The only factor pairs of $-1$ are $(1)(-1)$ and $(-1)(1)$, which sum to $0$ or $0$. Neither works. This quadratic is prime over the integers.
+        </p>
+        
+        <p>
+            Does this mean the equation has no solutions? Not at all. It just means we need different tools. In Sections 16.4 and 16.5, we'll develop two more methods: <strong>completing the square</strong> and the <strong>quadratic formula</strong>. These methods work for <em>any</em> quadratic equation, whether it factors nicely or not.
+        </p>
+        
+        <p>
+            For now, when a problem says "solve by factoring," it means the equation has been chosen to factor nicely. In real-world applications, you'll typically reach for the quadratic formula unless you spot an obvious factorization.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- PRACTICE PROBLEMS 16.3                                       -->
+        <!-- ============================================================ -->
+        
+        <div class="problems">
+            <h4>Practice Problems: Solving Quadratic Equations by Factoring</h4>
+            
+            <p><em>Solve each equation by factoring. Show your work.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> $x^2 + 7x + 10 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> $x^2 - 3x - 18 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> $x^2 + 2x - 15 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> $x^2 - 49 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> $x^2 - 6x + 9 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> $x^2 + 4x = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> $2x^2 - 10x = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> $x^2 = 8x - 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> $3x^2 + 10x + 8 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> $4x^2 - 25 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> $6x^2 - x - 2 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> $(x - 2)(x + 4) = 7$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> $x^2 + 10x + 25 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> $5x^2 = 45$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> $x(x + 6) = 16$</p>
+            </div>
+            
+            <p style="margin-top: 25px;"><em><strong>Word Problems</strong></em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> The product of two consecutive positive integers is 72. Find the integers.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> A rectangle's length is 4 meters more than its width. Its area is 60 square meters. Find the dimensions of the rectangle.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> In a video game, a character's damage output is modeled by $d = x^2 - 10x$ points, where $x$ is the character's level. At what level(s) is the damage output equal to zero?</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS                                                    -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <div class="solution">
+                <p><span class="problem-number">1.</span> $x^2 + 7x + 10 = 0$</p>
+                <p>Need: product = 10, sum = 7. That's 2 and 5.</p>
+                <p>$(x + 2)(x + 5) = 0$</p>
+                <p>$x = -2$ or $x = -5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">2.</span> $x^2 - 3x - 18 = 0$</p>
+                <p>Need: product = $-18$, sum = $-3$. That's $-6$ and $3$.</p>
+                <p>$(x - 6)(x + 3) = 0$</p>
+                <p>$x = 6$ or $x = -3$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">3.</span> $x^2 + 2x - 15 = 0$</p>
+                <p>Need: product = $-15$, sum = $2$. That's $5$ and $-3$.</p>
+                <p>$(x + 5)(x - 3) = 0$</p>
+                <p>$x = -5$ or $x = 3$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">4.</span> $x^2 - 49 = 0$</p>
+                <p>Difference of squares: $x^2 - 7^2 = (x + 7)(x - 7) = 0$</p>
+                <p>$x = -7$ or $x = 7$ &nbsp; (i.e., $x = \pm 7$)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">5.</span> $x^2 - 6x + 9 = 0$</p>
+                <p>Perfect square trinomial: $(x - 3)^2 = 0$</p>
+                <p>$x = 3$ (double root)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">6.</span> $x^2 + 4x = 0$</p>
+                <p>Factor out GCF: $x(x + 4) = 0$</p>
+                <p>$x = 0$ or $x = -4$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">7.</span> $2x^2 - 10x = 0$</p>
+                <p>Factor out GCF: $2x(x - 5) = 0$</p>
+                <p>$2x = 0$ gives $x = 0$; $x - 5 = 0$ gives $x = 5$</p>
+                <p>$x = 0$ or $x = 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">8.</span> $x^2 = 8x - 15$</p>
+                <p>Rearrange: $x^2 - 8x + 15 = 0$</p>
+                <p>Need: product = 15, sum = $-8$. That's $-3$ and $-5$.</p>
+                <p>$(x - 3)(x - 5) = 0$</p>
+                <p>$x = 3$ or $x = 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">9.</span> $3x^2 + 10x + 8 = 0$</p>
+                <p>Here $a = 3$, so we need factors of $ac = 24$ that sum to $10$. Those are $4$ and $6$.</p>
+                <p>Rewrite: $3x^2 + 4x + 6x + 8 = 0$</p>
+                <p>Group: $x(3x + 4) + 2(3x + 4) = 0$</p>
+                <p>$(3x + 4)(x + 2) = 0$</p>
+                <p>$3x + 4 = 0$ gives $x = -\frac{4}{3}$; $x + 2 = 0$ gives $x = -2$</p>
+                <p>$x = -\frac{4}{3}$ or $x = -2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">10.</span> $4x^2 - 25 = 0$</p>
+                <p>Difference of squares: $(2x)^2 - 5^2 = (2x + 5)(2x - 5) = 0$</p>
+                <p>$2x + 5 = 0$ gives $x = -\frac{5}{2}$; $2x - 5 = 0$ gives $x = \frac{5}{2}$</p>
+                <p>$x = -\frac{5}{2}$ or $x = \frac{5}{2}$ &nbsp; (i.e., $x = \pm\frac{5}{2}$)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">11.</span> $6x^2 - x - 2 = 0$</p>
+                <p>Need factors of $ac = -12$ that sum to $-1$. Those are $3$ and $-4$.</p>
+                <p>Rewrite: $6x^2 + 3x - 4x - 2 = 0$</p>
+                <p>Group: $3x(2x + 1) - 2(2x + 1) = 0$</p>
+                <p>$(2x + 1)(3x - 2) = 0$</p>
+                <p>$2x + 1 = 0$ gives $x = -\frac{1}{2}$; $3x - 2 = 0$ gives $x = \frac{2}{3}$</p>
+                <p>$x = -\frac{1}{2}$ or $x = \frac{2}{3}$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">12.</span> $(x - 2)(x + 4) = 7$</p>
+                <p>Cannot use Zero Product Property directly (right side is not zero).</p>
+                <p>Expand: $x^2 + 4x - 2x - 8 = 7$, so $x^2 + 2x - 8 = 7$</p>
+                <p>Standard form: $x^2 + 2x - 15 = 0$</p>
+                <p>Factor: $(x + 5)(x - 3) = 0$</p>
+                <p>$x = -5$ or $x = 3$</p>
+                <p><strong>Check:</strong> $(-5 - 2)(-5 + 4) = (-7)(-1) = 7$ &#10003; &nbsp; $(3 - 2)(3 + 4) = (1)(7) = 7$ &#10003;</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">13.</span> $x^2 + 10x + 25 = 0$</p>
+                <p>Perfect square trinomial: $(x + 5)^2 = 0$</p>
+                <p>$x = -5$ (double root)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">14.</span> $5x^2 = 45$</p>
+                <p>Divide by 5: $x^2 = 9$</p>
+                <p>$x^2 - 9 = 0$, so $(x + 3)(x - 3) = 0$</p>
+                <p>$x = -3$ or $x = 3$ &nbsp; (i.e., $x = \pm 3$)</p>
+                <p>(Alternatively: $x = \pm\sqrt{9} = \pm 3$)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">15.</span> $x(x + 6) = 16$</p>
+                <p>Expand: $x^2 + 6x = 16$</p>
+                <p>Standard form: $x^2 + 6x - 16 = 0$</p>
+                <p>Need: product = $-16$, sum = $6$. That's $8$ and $-2$.</p>
+                <p>$(x + 8)(x - 2) = 0$</p>
+                <p>$x = -8$ or $x = 2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">16.</span> <em>The product of two consecutive positive integers is 72. Find the integers.</em></p>
+                <p>Let $x$ = the smaller integer. Then $x + 1$ = the larger integer.</p>
+                <p>Equation: $x(x + 1) = 72$</p>
+                <p>Expand: $x^2 + x = 72$</p>
+                <p>Standard form: $x^2 + x - 72 = 0$</p>
+                <p>Need: product = $-72$, sum = $1$. That's $9$ and $-8$.</p>
+                <p>$(x + 9)(x - 8) = 0$</p>
+                <p>$x = -9$ or $x = 8$</p>
+                <p>Since we need <em>positive</em> integers, $x = 8$.</p>
+                <p><strong>Answer:</strong> The integers are 8 and 9.</p>
+                <p><strong>Check:</strong> $8 \times 9 = 72$ &#10003;</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">17.</span> <em>A rectangle's length is 4 meters more than its width. Its area is 60 square meters. Find the dimensions.</em></p>
+                <p>Let $w$ = width (in meters). Then $w + 4$ = length.</p>
+                <p>Area equation: $w(w + 4) = 60$</p>
+                <p>Expand: $w^2 + 4w = 60$</p>
+                <p>Standard form: $w^2 + 4w - 60 = 0$</p>
+                <p>Need: product = $-60$, sum = $4$. That's $10$ and $-6$.</p>
+                <p>$(w + 10)(w - 6) = 0$</p>
+                <p>$w = -10$ or $w = 6$</p>
+                <p>Width must be positive, so $w = 6$ meters. Length = $6 + 4 = 10$ meters.</p>
+                <p><strong>Answer:</strong> Width = 6 m, Length = 10 m.</p>
+                <p><strong>Check:</strong> $6 \times 10 = 60$ &#10003;, and $10 - 6 = 4$ &#10003;</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">18.</span> <em>Damage output $d = x^2 - 10x$ where $x$ is level. At what level(s) is damage zero?</em></p>
+                <p>Set $d = 0$: $x^2 - 10x = 0$</p>
+                <p>Factor: $x(x - 10) = 0$</p>
+                <p>$x = 0$ or $x = 10$</p>
+                <p><strong>Answer:</strong> Damage is zero at level 0 and level 10.</p>
+                <p><strong>Interpretation:</strong> Level 0 makes sense (no character yet). Level 10 is interesting&mdash;perhaps the damage formula transitions to a different mechanic after level 10. (In game design, such formulas often describe one phase of progression before switching to another.)</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 1                                               -->
+        <!-- ============================================================ -->
+        <!-- 16.4 COMPLETING THE SQUARE                                   -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-4">16.4 Completing the Square</h2>
+        
+        <p>
+            In Section 16.3, we solved quadratic equations by factoring. But not every quadratic factors nicely over the integers. What do we do when faced with an equation like $x^2 + 6x + 7 = 0$, where no integer pair has product 7 and sum 6?
+        </p>
+        
+        <p>
+            We need a method that works for <em>any</em> quadratic, whether it factors nicely or not. The technique is called <strong>completing the square</strong>, and it has a beautiful geometric interpretation.
+        </p>
+        
+        <h3>The Geometric Idea</h3>
+        
+        <p>
+            Consider the expression $x^2 + 6x$. We can visualize this as an area: a square with side $x$ (area $x^2$) plus a rectangle with dimensions $x$ by $6$ (area $6x$).
+        </p>
+        
+        <p>
+            Here's the key insight: if we split that rectangle into two pieces of $3x$ each, we can rearrange them to <em>almost</em> form a larger square. The only thing missing is a small corner piece.
+        </p>
+        
+        <!-- Figure 16.1: Completing the Square Area Model -->
+        <div class="figure-container">
+            <div class="figure-row">
+                <div class="figure-panel">
+                    <div class="figure-panel-label">(a) Original: $x^2 + 6x$</div>
+                    <div id="fig-16-1a" class="jxgbox" style="width: 280px; height: 280px;"></div>
+                </div>
+                <div class="figure-panel">
+                    <div class="figure-panel-label">(b) Completed: $(x + 3)^2$</div>
+                    <div id="fig-16-1b" class="jxgbox" style="width: 280px; height: 280px;"></div>
+                </div>
+            </div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.1:</span> Completing the square geometrically. (a) The expression $x^2 + 6x$ as a square plus rectangle. (b) Rearranging and adding 9 to complete a square of side $x + 3$.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            // Panel (a): x^2 + 6x as square plus rectangle
+            var board_a = JXG.JSXGraph.initBoard('fig-16-1a', {
+                boundingbox: [-1, 8.5, 8.5, -1.5],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false }
+            });
+            
+            var x = 4;  // represent x as length 4
+            var b = 3;  // half of 6
+            
+            // Main square x^2 (blue)
+            board_a.create('polygon', [[0, 0], [x, 0], [x, x], [0, x]], {
+                fillColor: '#3b82f6',
+                fillOpacity: 0.6,
+                strokeColor: '#1e40af',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Rectangle 6x (split into two 3x pieces - green)
+            // Bottom piece: 3 wide, x tall
+            board_a.create('polygon', [[x, 0], [x + b, 0], [x + b, x], [x, x]], {
+                fillColor: '#22c55e',
+                fillOpacity: 0.6,
+                strokeColor: '#166534',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Labels
+            board_a.create('text', [x/2, x/2, 'x²'], {
+                fontSize: 18, fontWeight: 'bold', color: '#1e40af', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            board_a.create('text', [x + b/2, x/2, '6x'], {
+                fontSize: 18, fontWeight: 'bold', color: '#166534', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Dimension labels
+            board_a.create('text', [x/2, -0.5, 'x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board_a.create('text', [x + b/2, -0.5, '6'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board_a.create('text', [-0.5, x/2, 'x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true,
+                anchorX: 'middle', anchorY: 'middle', rotate: 90
+            });
+            
+            // Panel (b): Completed square (x+3)^2
+            var board_b = JXG.JSXGraph.initBoard('fig-16-1b', {
+                boundingbox: [-1.5, 8.5, 8.5, -1.5],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false }
+            });
+            
+            // Main square x^2 (blue)
+            board_b.create('polygon', [[0, 0], [x, 0], [x, x], [0, x]], {
+                fillColor: '#3b82f6',
+                fillOpacity: 0.6,
+                strokeColor: '#1e40af',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Right piece: 3 wide, x tall (green)
+            board_b.create('polygon', [[x, 0], [x + b, 0], [x + b, x], [x, x]], {
+                fillColor: '#22c55e',
+                fillOpacity: 0.6,
+                strokeColor: '#166534',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Top piece: x wide, 3 tall (green)
+            board_b.create('polygon', [[0, x], [x, x], [x, x + b], [0, x + b]], {
+                fillColor: '#22c55e',
+                fillOpacity: 0.6,
+                strokeColor: '#166534',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Corner piece: 3 x 3 (orange - the "completing" piece)
+            board_b.create('polygon', [[x, x], [x + b, x], [x + b, x + b], [x, x + b]], {
+                fillColor: '#f97316',
+                fillOpacity: 0.6,
+                strokeColor: '#c2410c',
+                strokeWidth: 2,
+                vertices: { visible: false },
+                fixed: true
+            });
+            
+            // Labels inside regions
+            board_b.create('text', [x/2, x/2, 'x²'], {
+                fontSize: 18, fontWeight: 'bold', color: '#1e40af', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            board_b.create('text', [x + b/2, x/2, '3x'], {
+                fontSize: 16, fontWeight: 'bold', color: '#166534', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            board_b.create('text', [x/2, x + b/2, '3x'], {
+                fontSize: 16, fontWeight: 'bold', color: '#166534', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            board_b.create('text', [x + b/2, x + b/2, '9'], {
+                fontSize: 16, fontWeight: 'bold', color: '#c2410c', fixed: true,
+                anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Dimension labels
+            board_b.create('text', [(x + b)/2, -0.5, 'x + 3'], {
+                fontSize: 14, fontWeight: 'bold', color: '#1a5f2a', fixed: true, anchorX: 'middle'
+            });
+            // Left dimension label - rotated 90 degrees counterclockwise
+            board_b.create('text', [-0.8, (x + b)/2, 'x + 3'], {
+                fontSize: 14, fontWeight: 'bold', color: '#1a5f2a', fixed: true,
+                anchorX: 'middle', anchorY: 'middle', rotate: 90
+            });
+        })();
+        </script>
+        
+        <p>
+            The figure shows the key insight: $x^2 + 6x$ is <em>almost</em> a perfect square. If we add 9 (a $3 \times 3$ corner), we get $(x + 3)^2$. In other words:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $x^2 + 6x + 9 = (x + 3)^2$
+        </p>
+        
+        <p>
+            The number we add&mdash;9 in this case&mdash;is always the square of half the coefficient of $x$. Here, the coefficient of $x$ is 6, half of that is 3, and $3^2 = 9$.
+        </p>
+        
+        <h3>The Algebraic Procedure</h3>
+        
+        <p>
+            To complete the square on $x^2 + bx$:
+        </p>
+        
+        <div class="key-point">
+            <h4>Completing the Square</h4>
+            <p>
+                For the expression $x^2 + bx$:
+            </p>
+            <ol>
+                <li>Take half the coefficient of $x$: that's $\frac{b}{2}$</li>
+                <li>Square it: $\left(\frac{b}{2}\right)^2$</li>
+                <li>Add this value to create a perfect square trinomial:</li>
+            </ol>
+            <p style="text-align: center; font-size: 1.1em; margin: 15px 0;">
+                $x^2 + bx + \left(\frac{b}{2}\right)^2 = \left(x + \frac{b}{2}\right)^2$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 11: Completing the Square (Expression)</h4>
+            <p>Complete the square: $x^2 + 10x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                The coefficient of $x$ is 10. Half of 10 is 5. Square it: $5^2 = 25$.
+            </p>
+            <p>
+                $x^2 + 10x + 25 = (x + 5)^2$
+            </p>
+            <p>
+                <strong>Check:</strong> $(x + 5)^2 = x^2 + 10x + 25$ &#10003;
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 12: Completing the Square (Negative Coefficient)</h4>
+            <p>Complete the square: $x^2 - 8x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                The coefficient of $x$ is $-8$. Half of $-8$ is $-4$. Square it: $(-4)^2 = 16$.
+            </p>
+            <p>
+                $x^2 - 8x + 16 = (x - 4)^2$
+            </p>
+            <p>
+                <strong>Check:</strong> $(x - 4)^2 = x^2 - 8x + 16$ &#10003;
+            </p>
+        </div>
+        
+        <h3>Solving Equations by Completing the Square</h3>
+        
+        <p>
+            Now we can use this technique to solve quadratic equations that don't factor nicely.
+        </p>
+        
+        <div class="example">
+            <h4>Example 13: Solving by Completing the Square</h4>
+            <p>Solve $x^2 + 6x + 7 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                This trinomial doesn't factor over integers (no pair has product 7 and sum 6). We'll complete the square instead.
+            </p>
+            <p>
+                <em>Step 1:</em> Move the constant to the other side.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 6x = -7$
+            </p>
+            <p>
+                <em>Step 2:</em> Complete the square on the left. Half of 6 is 3, and $3^2 = 9$. Add 9 to <em>both sides</em> to keep the equation balanced.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 6x + 9 = -7 + 9$
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 3)^2 = 2$
+            </p>
+            <p>
+                <em>Step 3:</em> Take the square root of both sides. Remember: if $u^2 = k$, then $u = \pm\sqrt{k}$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x + 3 = \pm\sqrt{2}$
+            </p>
+            <p>
+                <em>Step 4:</em> Solve for $x$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -3 \pm \sqrt{2}$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -3 + \sqrt{2}$ or $x = -3 - \sqrt{2}$
+            </p>
+            <p style="margin-top: 10px;">
+                As decimals: $x \approx -3 + 1.414 = -1.586$ or $x \approx -3 - 1.414 = -4.414$
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>Don't Forget: Add to Both Sides</h4>
+            <p>
+                When you add a number to complete the square, you must add the same number to the other side of the equation. An equation is like a balance scale&mdash;whatever you do to one side, you must do to the other.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 14: Another Equation</h4>
+            <p>Solve $x^2 - 4x - 1 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Move the constant: $x^2 - 4x = 1$
+            </p>
+            <p>
+                Complete the square: half of $-4$ is $-2$, and $(-2)^2 = 4$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 - 4x + 4 = 1 + 4$
+            </p>
+            <p style="margin-left: 20px;">
+                $(x - 2)^2 = 5$
+            </p>
+            <p>
+                Take square roots:
+            </p>
+            <p style="margin-left: 20px;">
+                $x - 2 = \pm\sqrt{5}$
+            </p>
+            <p style="margin-left: 20px;">
+                $x = 2 \pm \sqrt{5}$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 2 + \sqrt{5} \approx 4.236$ or $x = 2 - \sqrt{5} \approx -0.236$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 15: When the Leading Coefficient Isn't 1</h4>
+            <p>Solve $2x^2 + 12x + 14 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                When $a \neq 1$, first divide every term by $a$ to make the leading coefficient 1.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 6x + 7 = 0$
+            </p>
+            <p>
+                Now proceed as in Example 13. Move the constant:
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 6x = -7$
+            </p>
+            <p>
+                Complete the square (add 9 to both sides):
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 3)^2 = 2$
+            </p>
+            <p>
+                Take square roots and solve:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -3 \pm \sqrt{2}$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = -3 + \sqrt{2}$ or $x = -3 - \sqrt{2}$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 16: A Case with No Real Solutions</h4>
+            <p>Solve $x^2 + 2x + 5 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Move the constant: $x^2 + 2x = -5$
+            </p>
+            <p>
+                Complete the square: half of 2 is 1, and $1^2 = 1$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 2x + 1 = -5 + 1$
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 1)^2 = -4$
+            </p>
+            <p>
+                Now we need $x + 1 = \pm\sqrt{-4}$. But there is no real number whose square is negative. Squaring any real number gives a non-negative result.
+            </p>
+            <p>
+                <strong>Answer:</strong> No real solutions.
+            </p>
+            <p style="margin-top: 10px;">
+                This equation has solutions in the <em>complex numbers</em> (involving $i = \sqrt{-1}$), which you'll encounter in more advanced courses. For now, "no real solutions" is the complete answer.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.5 THE QUADRATIC FORMULA                                   -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-5">16.5 The Quadratic Formula</h2>
+        
+        <p>
+            Completing the square works for any quadratic equation, but the algebra can be tedious. What if we did the completing-the-square process once, in general terms, and derived a formula that works for all quadratics?
+        </p>
+        
+        <p>
+            That's exactly what the <strong>quadratic formula</strong> is: the result of completing the square on the general equation $ax^2 + bx + c = 0$.
+        </p>
+        
+        <h3>Deriving the Formula</h3>
+        
+        <p>
+            Start with the general quadratic equation:
+        </p>
+        <p style="text-align: center;">
+            $ax^2 + bx + c = 0$ &nbsp;&nbsp;&nbsp; (where $a \neq 0$)
+        </p>
+        
+        <p>
+            <em>Step 1:</em> Divide everything by $a$ to make the leading coefficient 1.
+        </p>
+        <p style="text-align: center;">
+            $x^2 + \frac{b}{a}x + \frac{c}{a} = 0$
+        </p>
+        
+        <p>
+            <em>Step 2:</em> Move the constant term to the right side.
+        </p>
+        <p style="text-align: center;">
+            $x^2 + \frac{b}{a}x = -\frac{c}{a}$
+        </p>
+        
+        <p>
+            <em>Step 3:</em> Complete the square. The coefficient of $x$ is $\frac{b}{a}$. Half of this is $\frac{b}{2a}$. Squaring: $\left(\frac{b}{2a}\right)^2 = \frac{b^2}{4a^2}$.
+        </p>
+        <p>
+            Add this to both sides:
+        </p>
+        <p style="text-align: center;">
+            $x^2 + \frac{b}{a}x + \frac{b^2}{4a^2} = -\frac{c}{a} + \frac{b^2}{4a^2}$
+        </p>
+        
+        <p>
+            <em>Step 4:</em> The left side is now a perfect square. Write it in factored form:
+        </p>
+        <p style="text-align: center;">
+            $\left(x + \frac{b}{2a}\right)^2 = -\frac{c}{a} + \frac{b^2}{4a^2}$
+        </p>
+        
+        <p>
+            <em>Step 5:</em> Simplify the right side by finding a common denominator ($4a^2$):
+        </p>
+        <p style="text-align: center;">
+            $\left(x + \frac{b}{2a}\right)^2 = -\frac{4ac}{4a^2} + \frac{b^2}{4a^2} = \frac{b^2 - 4ac}{4a^2}$
+        </p>
+        
+        <p>
+            <em>Step 6:</em> Take the square root of both sides:
+        </p>
+        <p style="text-align: center;">
+            $x + \frac{b}{2a} = \pm\frac{\sqrt{b^2 - 4ac}}{2a}$
+        </p>
+        
+        <p>
+            <em>Step 7:</em> Solve for $x$:
+        </p>
+        <p style="text-align: center;">
+            $x = -\frac{b}{2a} \pm \frac{\sqrt{b^2 - 4ac}}{2a} = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+        </p>
+        
+        <div class="formula-box">
+            <h4>The Quadratic Formula</h4>
+            <p style="font-size: 1.3em; margin: 15px 0;">
+                $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+            </p>
+            <p>
+                For the equation $ax^2 + bx + c = 0$ with $a \neq 0$.
+            </p>
+        </div>
+        
+        <p>
+            This single formula solves <em>any</em> quadratic equation. Just identify $a$, $b$, and $c$, substitute them into the formula, and simplify.
+        </p>
+        
+        <p>
+            A note of caution: as we've seen, not all quadratic equations have real number solutions. If the expression under the square root (the discriminant $b^2 - 4ac$) is negative, there are no real solutions. The formula still "works"&mdash;it correctly tells us that no real number satisfies the equation. Later, when you learn about complex numbers, you'll find that <em>every</em> quadratic equation has solutions if complex numbers are permitted&mdash;and in fact, the quadratic formula we just derived provides the roots of all quadratic equations, whether those roots are real numbers or complex numbers.
+        </p>
+        
+        <div class="example">
+            <h4>Example 17: Using the Quadratic Formula</h4>
+            <p>Solve $x^2 + 5x + 3 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Identify the coefficients: $a = 1$, $b = 5$, $c = 3$.
+            </p>
+            <p>
+                Apply the quadratic formula:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-5 \pm \sqrt{5^2 - 4(1)(3)}}{2(1)} = \frac{-5 \pm \sqrt{25 - 12}}{2} = \frac{-5 \pm \sqrt{13}}{2}$
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = \frac{-5 + \sqrt{13}}{2} \approx -0.697$ &nbsp; or &nbsp; $x = \frac{-5 - \sqrt{13}}{2} \approx -4.303$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 18: Integer Solutions</h4>
+            <p>Solve $x^2 - 5x + 6 = 0$ using the quadratic formula.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 1$, $b = -5$, $c = 6$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-(-5) \pm \sqrt{(-5)^2 - 4(1)(6)}}{2(1)} = \frac{5 \pm \sqrt{25 - 24}}{2} = \frac{5 \pm \sqrt{1}}{2} = \frac{5 \pm 1}{2}$
+            </p>
+            <p>
+                So $x = \frac{5 + 1}{2} = 3$ or $x = \frac{5 - 1}{2} = 2$.
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 3$ or $x = 2$
+            </p>
+            <p style="margin-top: 10px;">
+                Notice this equation <em>does</em> factor: $x^2 - 5x + 6 = (x - 2)(x - 3)$. The quadratic formula works even when factoring would be easier&mdash;it just takes more computation.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 19: Fractional Solutions</h4>
+            <p>Solve $2x^2 - 7x + 3 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 2$, $b = -7$, $c = 3$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-(-7) \pm \sqrt{(-7)^2 - 4(2)(3)}}{2(2)} = \frac{7 \pm \sqrt{49 - 24}}{4} = \frac{7 \pm \sqrt{25}}{4} = \frac{7 \pm 5}{4}$
+            </p>
+            <p>
+                So $x = \frac{7 + 5}{4} = \frac{12}{4} = 3$ or $x = \frac{7 - 5}{4} = \frac{2}{4} = \frac{1}{2}$.
+            </p>
+            <p>
+                <strong>Answer:</strong> $x = 3$ or $x = \frac{1}{2}$
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 20: Irrational Solutions with Calculator</h4>
+            <p>Solve $3x^2 + 4x - 2 = 0$. Give exact answers and decimal approximations.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 3$, $b = 4$, $c = -2$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-4 \pm \sqrt{16 - 4(3)(-2)}}{2(3)} = \frac{-4 \pm \sqrt{16 + 24}}{6} = \frac{-4 \pm \sqrt{40}}{6}$
+            </p>
+            <p>
+                Simplify $\sqrt{40} = \sqrt{4 \cdot 10} = 2\sqrt{10}$:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-4 \pm 2\sqrt{10}}{6} = \frac{-2 \pm \sqrt{10}}{3}$
+            </p>
+            <p>
+                <strong>Exact answer:</strong> $x = \frac{-2 + \sqrt{10}}{3}$ or $x = \frac{-2 - \sqrt{10}}{3}$
+            </p>
+            <p>
+                <strong>Decimal approximations:</strong> Since $\sqrt{10} \approx 3.162$:
+            </p>
+            <p style="margin-left: 20px;">
+                $x \approx \frac{-2 + 3.162}{3} \approx 0.387$ &nbsp; or &nbsp; $x \approx \frac{-2 - 3.162}{3} \approx -1.721$
+            </p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Calculator Guidance</h4>
+            <p>
+                For equations with messy coefficients, use a calculator to evaluate the formula. The important skills are:
+            </p>
+            <ul>
+                <li>Correctly identifying $a$, $b$, and $c$</li>
+                <li>Setting up the formula accurately (watch the signs!)</li>
+                <li>Interpreting the results in context</li>
+            </ul>
+            <p>
+                Don't waste time on tedious arithmetic when a calculator can handle it reliably.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 21: No Real Solutions</h4>
+            <p>Solve $x^2 + 4x + 5 = 0$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 1$, $b = 4$, $c = 5$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = \frac{-4 \pm \sqrt{16 - 20}}{2} = \frac{-4 \pm \sqrt{-4}}{2}$
+            </p>
+            <p>
+                The expression under the square root is negative. There's no real number whose square is $-4$.
+            </p>
+            <p>
+                <strong>Answer:</strong> No real solutions.
+            </p>
+        </div>
+        
+        <div class="going-deeper">
+            <h4>The Long Road to the Quadratic Formula</h4>
+            <p>
+                The quadratic formula we use today is the endpoint of nearly 4,000 years of mathematical development.
+            </p>
+            <p>
+                <strong>Babylonian mathematicians</strong> (c. 1800 BCE) could solve quadratic problems, but their approach was geometric and case-by-case. Given a problem like "a square and its side equal 870," they would use cut-and-paste geometry&mdash;essentially completing the square with actual squares and rectangles. They had no symbolic algebra and couldn't write a general formula, but they understood the underlying geometric idea.
+            </p>
+            <p>
+                <strong>Greek mathematicians</strong> continued the geometric tradition. Euclid's <em>Elements</em> (c. 300 BCE) contains propositions equivalent to solving quadratics, but expressed as relationships between geometric figures rather than equations. The Greeks were uncomfortable with the idea of negative numbers and irrational lengths, which limited how far they could generalize.
+            </p>
+            <p>
+                <strong>Indian mathematicians</strong> made crucial advances. Brahmagupta (628 CE) gave explicit rules for solving quadratic equations, including cases with negative coefficients. He accepted negative numbers as legitimate solutions&mdash;a conceptual leap the Greeks hadn't made. Sridhara (c. 870 CE) essentially stated the quadratic formula, though in verbal rather than symbolic form.
+            </p>
+            <p>
+                <strong>Islamic mathematicians</strong> synthesized and extended these traditions. Al-Khwarizmi (c. 820 CE) wrote the foundational algebra text that gave us the word "algebra." He solved quadratics by completing the square&mdash;the same method we used to derive the formula&mdash;and gave systematic procedures for each case. His work was translated into Latin and became the basis for European algebra.
+            </p>
+            <p>
+                The symbolic formula we use today, $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$, required the development of algebraic notation in 16th- and 17th-century Europe. It condenses thousands of years of insight into a single line.
+            </p>
+            <p>
+                <strong>What about higher-degree equations?</strong> After the quadratic formula was established, mathematicians sought similar formulas for cubic equations ($ax^3 + \ldots = 0$) and quartic equations ($ax^4 + \ldots = 0$). Both were found in the 16th century by Italian mathematicians. But in 1824, the Norwegian mathematician Niels Henrik Abel proved something remarkable: there is no general formula using only arithmetic operations and roots for polynomial equations of degree five or higher. Some problems are fundamentally harder than others.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.6 THE DISCRIMINANT                                        -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-6">16.6 The Discriminant</h2>
+        
+        <p>
+            In the quadratic formula, the expression under the square root sign determines whether the solutions are real or not, and whether there are two distinct solutions or just one. This expression is important enough to have its own name.
+        </p>
+        
+        <div class="definition">
+            <h4>The Discriminant</h4>
+            <p>
+                For the quadratic equation $ax^2 + bx + c = 0$, the <strong>discriminant</strong> is
+            </p>
+            <p style="text-align: center; font-size: 1.1em; margin: 15px 0;">
+                $D = b^2 - 4ac$
+            </p>
+            <p>
+                The discriminant tells us about the nature of the solutions without requiring us to compute them fully.
+            </p>
+        </div>
+        
+        <p>
+            Since the quadratic formula is $x = \frac{-b \pm \sqrt{D}}{2a}$, the value of $D$ determines what happens:
+        </p>
+        
+        <div class="key-point">
+            <h4>What the Discriminant Tells Us</h4>
+            <ul>
+                <li><strong>If $D > 0$:</strong> Two distinct real solutions. The square root is a positive number, so $\pm\sqrt{D}$ gives two different values.</li>
+                <li><strong>If $D = 0$:</strong> Exactly one real solution (a repeated or double root). The $\pm$ doesn't matter because $\sqrt{0} = 0$, so both cases give $x = \frac{-b}{2a}$.</li>
+                <li><strong>If $D < 0$:</strong> No real solutions. The square root of a negative number doesn't exist in the real numbers.</li>
+            </ul>
+        </div>
+        
+        <h3>The Geometric Meaning</h3>
+        
+        <p>
+            The discriminant has a beautiful geometric interpretation. In Section 12, we saw that linear equations like $y = mx + b$ produce straight-line graphs. What about quadratic equations?
+        </p>
+        
+        <p>
+            The graph of $y = ax^2 + bx + c$ is a curve called a <strong>parabola</strong>&mdash;a symmetric U-shaped curve (or upside-down U if $a < 0$). You can plot a parabola by choosing various $x$-values, computing the corresponding $y$-values from the equation, and connecting the resulting points. We'll explore parabolas in detail in Section 16.7, but for now, the key fact is this: the solutions of the equation $ax^2 + bx + c = 0$ are precisely the $x$-values where the parabola crosses the $x$-axis (where $y = 0$).
+        </p>
+        
+        <p>
+            The discriminant tells us <em>how</em> the parabola meets the $x$-axis.</p>
+        
+        <!-- Figure 16.2: Discriminant and Parabola Crossings -->
+        <div class="figure-container">
+            <div class="figure-row">
+                <div class="figure-panel">
+                    <div class="figure-panel-label">$D > 0$: Two crossings</div>
+                    <div id="fig-16-2a" class="jxgbox" style="width: 220px; height: 200px;"></div>
+                </div>
+                <div class="figure-panel">
+                    <div class="figure-panel-label">$D = 0$: One touching</div>
+                    <div id="fig-16-2b" class="jxgbox" style="width: 220px; height: 200px;"></div>
+                </div>
+                <div class="figure-panel">
+                    <div class="figure-panel-label">$D < 0$: No crossing</div>
+                    <div id="fig-16-2c" class="jxgbox" style="width: 220px; height: 200px;"></div>
+                </div>
+            </div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.2:</span> The discriminant determines how a parabola meets the $x$-axis. Left: two distinct intersections. Center: the parabola just touches the axis (tangent). Right: no intersection.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            // Panel (a): D > 0 - two distinct roots
+            var board_a = JXG.JSXGraph.initBoard('fig-16-2a', {
+                boundingbox: [-4, 5, 4, -2],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: false } },
+                    y: { ticks: { visible: false } }
+                }
+            });
+            
+            // y = x^2 - 3 (roots at x = ±√3 ≈ ±1.73)
+            board_a.create('functiongraph', [function(x) { return x*x - 3; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Mark the roots
+            var r1a = Math.sqrt(3);
+            board_a.create('point', [-r1a, 0], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: ''
+            });
+            board_a.create('point', [r1a, 0], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: ''
+            });
+            
+            // Panel (b): D = 0 - one repeated root
+            var board_b = JXG.JSXGraph.initBoard('fig-16-2b', {
+                boundingbox: [-4, 5, 4, -2],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: false } },
+                    y: { ticks: { visible: false } }
+                }
+            });
+            
+            // y = x^2 (root at x = 0, double root)
+            board_b.create('functiongraph', [function(x) { return x*x; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Mark the root
+            board_b.create('point', [0, 0], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: ''
+            });
+            
+            // Panel (c): D < 0 - no real roots
+            var board_c = JXG.JSXGraph.initBoard('fig-16-2c', {
+                boundingbox: [-4, 5, 4, -2],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: false } },
+                    y: { ticks: { visible: false } }
+                }
+            });
+            
+            // y = x^2 + 1 (no real roots - parabola doesn't touch x-axis)
+            board_c.create('functiongraph', [function(x) { return x*x + 1; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+        })();
+        </script>
+        
+        <div class="example">
+            <h4>Example 22: Using the Discriminant</h4>
+            <p>Without solving, determine the number and type of solutions for each equation.</p>
+            
+            <p><strong>(a)</strong> $x^2 - 6x + 9 = 0$</p>
+            <p style="margin-left: 20px;">
+                $D = (-6)^2 - 4(1)(9) = 36 - 36 = 0$
+            </p>
+            <p style="margin-left: 20px;">
+                Since $D = 0$: <strong>one real solution</strong> (a double root).
+            </p>
+            
+            <p><strong>(b)</strong> $2x^2 + 3x - 5 = 0$</p>
+            <p style="margin-left: 20px;">
+                $D = 3^2 - 4(2)(-5) = 9 + 40 = 49$
+            </p>
+            <p style="margin-left: 20px;">
+                Since $D = 49 > 0$: <strong>two distinct real solutions</strong>.
+            </p>
+            <p style="margin-left: 20px;">
+                (Note: $49 = 7^2$ is a perfect square, so these solutions will be rational.)
+            </p>
+            
+            <p><strong>(c)</strong> $3x^2 - 2x + 1 = 0$</p>
+            <p style="margin-left: 20px;">
+                $D = (-2)^2 - 4(3)(1) = 4 - 12 = -8$
+            </p>
+            <p style="margin-left: 20px;">
+                Since $D = -8 < 0$: <strong>no real solutions</strong>.
+            </p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Discriminant Quick Check</h4>
+            <p>
+                Before diving into the full quadratic formula, it's often worth computing the discriminant first:
+            </p>
+            <ul>
+                <li>If $D < 0$, there are no real solutions. (If you need only real solutions, you can stop here. However, complex solutions exist and are important in engineering and physics&mdash;you'll encounter them in later courses.)</li>
+                <li>If $D$ is a perfect square ($0, 1, 4, 9, 16, \ldots$), the solutions will be rational, and factoring might be easier.</li>
+                <li>If $D > 0$ but not a perfect square, expect irrational solutions.</li>
+            </ul>
+        </div>
+        
+        <h3>When to Use Which Method?</h3>
+        
+        <p>
+            We now have three methods for solving quadratic equations: factoring, completing the square, and the quadratic formula. Here's a practical decision guide:
+        </p>
+        
+        <div class="key-point">
+            <h4>Choosing a Solution Method</h4>
+            <p><strong>Try factoring first if:</strong></p>
+            <ul>
+                <li>The coefficients are small integers</li>
+                <li>You quickly spot a factorization</li>
+                <li>The problem specifically asks for factoring</li>
+            </ul>
+            <p><strong>Use the quadratic formula if:</strong></p>
+            <ul>
+                <li>Factoring doesn't work quickly</li>
+                <li>The coefficients are large or messy</li>
+                <li>You want to guarantee a solution method that always works</li>
+            </ul>
+            <p><strong>Use completing the square if:</strong></p>
+            <ul>
+                <li>You need to convert to vertex form (Section 16.8)</li>
+                <li>The equation is nearly a perfect square already</li>
+                <li>The problem specifically asks for this method</li>
+            </ul>
+            <p>
+                In practice, most people try a quick mental factoring check, then move to the quadratic formula if that doesn't work.
+            </p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Computing with the Quadratic Formula</h4>
+            <p>
+                The quadratic formula is straightforward to program. If you're comfortable with Python or another programming language, here's a simple implementation:
+            </p>
+            <pre><code>import math
+
+def solve_quadratic(a, b, c):
+    """
+    Solve ax^2 + bx + c = 0
+    Returns a tuple of solutions, or a message if no real solutions exist.
+    """
+    if a == 0:
+        return "Not a quadratic equation (a = 0)"
+    
+    discriminant = b**2 - 4*a*c
+    
+    if discriminant < 0:
+        return "No real solutions (discriminant < 0)"
+    elif discriminant == 0:
+        x = -b / (2*a)
+        return (x,)  # One repeated root
+    else:
+        sqrt_d = math.sqrt(discriminant)
+        x1 = (-b + sqrt_d) / (2*a)
+        x2 = (-b - sqrt_d) / (2*a)
+        return (x1, x2)
+
+# Example usage:
+print(solve_quadratic(1, -5, 6))   # x^2 - 5x + 6 = 0  ->  (3.0, 2.0)
+print(solve_quadratic(1, 2, 1))    # x^2 + 2x + 1 = 0  ->  (-1.0,)
+print(solve_quadratic(1, 1, 1))    # x^2 + x + 1 = 0   ->  No real solutions</code></pre>
+            <p style="margin-top: 15px;">
+                <strong>To run this code:</strong> Save it as a <code>.py</code> file (e.g., <code>quadratic.py</code>) and run with <code>python3 quadratic.py</code>. Python is free and available at <a href="https://www.python.org">python.org</a>.
+            </p>
+            <p>
+                The program uses the discriminant to determine which case applies, then computes and returns the appropriate solutions. This is exactly the decision process you'd use by hand, but the computer handles the arithmetic.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- PRACTICE PROBLEMS 16.4-16.6                                  -->
+        <!-- ============================================================ -->
+        
+        <div class="problems">
+            <h4>Practice Problems: Completing the Square, Quadratic Formula, and Discriminant</h4>
+            
+            <p><em>Problems 19-22: Complete the square to write as a perfect square trinomial.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">19.</span> $x^2 + 12x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">20.</span> $x^2 - 14x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">21.</span> $x^2 + 5x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">22.</span> $x^2 - 3x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+            </div>
+            
+            <p><em>Problems 23-26: Solve by completing the square.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">23.</span> $x^2 + 8x + 12 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">24.</span> $x^2 - 6x + 4 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">25.</span> $x^2 + 4x - 3 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">26.</span> $2x^2 - 8x + 5 = 0$</p>
+            </div>
+            
+            <p><em>Problems 27-32: Solve using the quadratic formula.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">27.</span> $x^2 + 3x - 10 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">28.</span> $x^2 - 4x + 1 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">29.</span> $2x^2 + 5x - 3 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">30.</span> $3x^2 - x - 1 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">31.</span> $x^2 + 6x + 10 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">32.</span> $4x^2 - 12x + 9 = 0$</p>
+            </div>
+            
+            <p><em>Problems 33-36: Use the discriminant to determine the number of real solutions (do not solve).</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">33.</span> $x^2 + 7x + 10 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">34.</span> $x^2 - 4x + 4 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">35.</span> $2x^2 + x + 1 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">36.</span> $5x^2 - 3x - 1 = 0$</p>
+            </div>
+            
+            <p><em>Problems 37-38: Solve using any method.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">37.</span> $x^2 - 9x + 20 = 0$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">38.</span> $3x^2 + 2x - 7 = 0$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS                                                    -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <div class="solution">
+                <p><span class="problem-number">19.</span> $x^2 + 12x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+                <p>Half of 12 is 6. Square it: $6^2 = 36$.</p>
+                <p>$x^2 + 12x + 36 = (x + 6)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">20.</span> $x^2 - 14x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+                <p>Half of $-14$ is $-7$. Square it: $(-7)^2 = 49$.</p>
+                <p>$x^2 - 14x + 49 = (x - 7)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">21.</span> $x^2 + 5x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+                <p>Half of 5 is $\frac{5}{2}$. Square it: $\left(\frac{5}{2}\right)^2 = \frac{25}{4}$.</p>
+                <p>$x^2 + 5x + \frac{25}{4} = \left(x + \frac{5}{2}\right)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">22.</span> $x^2 - 3x + \underline{\phantom{00}} = (\underline{\phantom{00}})^2$</p>
+                <p>Half of $-3$ is $-\frac{3}{2}$. Square it: $\left(-\frac{3}{2}\right)^2 = \frac{9}{4}$.</p>
+                <p>$x^2 - 3x + \frac{9}{4} = \left(x - \frac{3}{2}\right)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">23.</span> $x^2 + 8x + 12 = 0$</p>
+                <p>Move constant: $x^2 + 8x = -12$</p>
+                <p>Half of 8 is 4, and $4^2 = 16$. Add to both sides:</p>
+                <p>$x^2 + 8x + 16 = -12 + 16$</p>
+                <p>$(x + 4)^2 = 4$</p>
+                <p>$x + 4 = \pm 2$</p>
+                <p>$x = -4 + 2 = -2$ or $x = -4 - 2 = -6$</p>
+                <p><strong>Answer:</strong> $x = -2$ or $x = -6$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">24.</span> $x^2 - 6x + 4 = 0$</p>
+                <p>Move constant: $x^2 - 6x = -4$</p>
+                <p>Half of $-6$ is $-3$, and $(-3)^2 = 9$. Add to both sides:</p>
+                <p>$x^2 - 6x + 9 = -4 + 9$</p>
+                <p>$(x - 3)^2 = 5$</p>
+                <p>$x - 3 = \pm\sqrt{5}$</p>
+                <p><strong>Answer:</strong> $x = 3 + \sqrt{5} \approx 5.236$ or $x = 3 - \sqrt{5} \approx 0.764$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">25.</span> $x^2 + 4x - 3 = 0$</p>
+                <p>Move constant: $x^2 + 4x = 3$</p>
+                <p>Half of 4 is 2, and $2^2 = 4$. Add to both sides:</p>
+                <p>$x^2 + 4x + 4 = 3 + 4$</p>
+                <p>$(x + 2)^2 = 7$</p>
+                <p>$x + 2 = \pm\sqrt{7}$</p>
+                <p><strong>Answer:</strong> $x = -2 + \sqrt{7} \approx 0.646$ or $x = -2 - \sqrt{7} \approx -4.646$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">26.</span> $2x^2 - 8x + 5 = 0$</p>
+                <p>Divide by 2: $x^2 - 4x + \frac{5}{2} = 0$</p>
+                <p>Move constant: $x^2 - 4x = -\frac{5}{2}$</p>
+                <p>Half of $-4$ is $-2$, and $(-2)^2 = 4$. Add to both sides:</p>
+                <p>$x^2 - 4x + 4 = -\frac{5}{2} + 4 = -\frac{5}{2} + \frac{8}{2} = \frac{3}{2}$</p>
+                <p>$(x - 2)^2 = \frac{3}{2}$</p>
+                <p>$x - 2 = \pm\sqrt{\frac{3}{2}} = \pm\frac{\sqrt{6}}{2}$</p>
+                <p><strong>Answer:</strong> $x = 2 + \frac{\sqrt{6}}{2} \approx 3.225$ or $x = 2 - \frac{\sqrt{6}}{2} \approx 0.775$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">27.</span> $x^2 + 3x - 10 = 0$</p>
+                <p>$a = 1$, $b = 3$, $c = -10$</p>
+                <p>$x = \frac{-3 \pm \sqrt{9 + 40}}{2} = \frac{-3 \pm \sqrt{49}}{2} = \frac{-3 \pm 7}{2}$</p>
+                <p><strong>Answer:</strong> $x = \frac{-3 + 7}{2} = 2$ or $x = \frac{-3 - 7}{2} = -5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">28.</span> $x^2 - 4x + 1 = 0$</p>
+                <p>$a = 1$, $b = -4$, $c = 1$</p>
+                <p>$x = \frac{4 \pm \sqrt{16 - 4}}{2} = \frac{4 \pm \sqrt{12}}{2} = \frac{4 \pm 2\sqrt{3}}{2} = 2 \pm \sqrt{3}$</p>
+                <p><strong>Answer:</strong> $x = 2 + \sqrt{3} \approx 3.732$ or $x = 2 - \sqrt{3} \approx 0.268$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">29.</span> $2x^2 + 5x - 3 = 0$</p>
+                <p>$a = 2$, $b = 5$, $c = -3$</p>
+                <p>$x = \frac{-5 \pm \sqrt{25 + 24}}{4} = \frac{-5 \pm \sqrt{49}}{4} = \frac{-5 \pm 7}{4}$</p>
+                <p><strong>Answer:</strong> $x = \frac{-5 + 7}{4} = \frac{1}{2}$ or $x = \frac{-5 - 7}{4} = -3$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">30.</span> $3x^2 - x - 1 = 0$</p>
+                <p>$a = 3$, $b = -1$, $c = -1$</p>
+                <p>$x = \frac{1 \pm \sqrt{1 + 12}}{6} = \frac{1 \pm \sqrt{13}}{6}$</p>
+                <p><strong>Answer:</strong> $x = \frac{1 + \sqrt{13}}{6} \approx 0.768$ or $x = \frac{1 - \sqrt{13}}{6} \approx -0.434$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">31.</span> $x^2 + 6x + 10 = 0$</p>
+                <p>$a = 1$, $b = 6$, $c = 10$</p>
+                <p>$D = 36 - 40 = -4 < 0$</p>
+                <p><strong>Answer:</strong> No real solutions</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">32.</span> $4x^2 - 12x + 9 = 0$</p>
+                <p>$a = 4$, $b = -12$, $c = 9$</p>
+                <p>$x = \frac{12 \pm \sqrt{144 - 144}}{8} = \frac{12 \pm 0}{8} = \frac{12}{8} = \frac{3}{2}$</p>
+                <p><strong>Answer:</strong> $x = \frac{3}{2}$ (double root)</p>
+                <p>(Note: This is a perfect square: $4x^2 - 12x + 9 = (2x - 3)^2$)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">33.</span> $x^2 + 7x + 10 = 0$</p>
+                <p>$D = 49 - 40 = 9 > 0$</p>
+                <p><strong>Answer:</strong> Two distinct real solutions</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">34.</span> $x^2 - 4x + 4 = 0$</p>
+                <p>$D = 16 - 16 = 0$</p>
+                <p><strong>Answer:</strong> One real solution (double root)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">35.</span> $2x^2 + x + 1 = 0$</p>
+                <p>$D = 1 - 8 = -7 < 0$</p>
+                <p><strong>Answer:</strong> No real solutions</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">36.</span> $5x^2 - 3x - 1 = 0$</p>
+                <p>$D = 9 + 20 = 29 > 0$</p>
+                <p><strong>Answer:</strong> Two distinct real solutions</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">37.</span> $x^2 - 9x + 20 = 0$</p>
+                <p>This factors: need product 20, sum $-9$. That's $-4$ and $-5$.</p>
+                <p>$(x - 4)(x - 5) = 0$</p>
+                <p><strong>Answer:</strong> $x = 4$ or $x = 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">38.</span> $3x^2 + 2x - 7 = 0$</p>
+                <p>Doesn't factor easily. Use quadratic formula with $a = 3$, $b = 2$, $c = -7$:</p>
+                <p>$x = \frac{-2 \pm \sqrt{4 + 84}}{6} = \frac{-2 \pm \sqrt{88}}{6} = \frac{-2 \pm 2\sqrt{22}}{6} = \frac{-1 \pm \sqrt{22}}{3}$</p>
+                <p><strong>Answer:</strong> $x = \frac{-1 + \sqrt{22}}{3} \approx 1.230$ or $x = \frac{-1 - \sqrt{22}}{3} \approx -1.897$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 2                                               -->
+        <!-- ============================================================ -->
+        <!-- 16.7 THE GRAPH OF A QUADRATIC FUNCTION                       -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-7">16.7 The Graph of a Quadratic Function</h2>
+        
+        <p>
+            In Section 16.6, we previewed the connection between quadratic equations and their graphs. Now let's explore this systematically. Understanding how quadratics look when graphed helps you visualize solutions, check your work, and solve real-world optimization problems.
+        </p>
+        
+        <h3>The Parent Function: $y = x^2$</h3>
+        
+        <p>
+            The simplest quadratic function is $y = x^2$. To graph it, we can build a table of values:
+        </p>
+        
+        <table style="margin: 0 auto;">
+            <tr>
+                <th>$x$</th>
+                <td>$-3$</td>
+                <td>$-2$</td>
+                <td>$-1$</td>
+                <td>$0$</td>
+                <td>$1$</td>
+                <td>$2$</td>
+                <td>$3$</td>
+            </tr>
+            <tr>
+                <th>$y = x^2$</th>
+                <td>$9$</td>
+                <td>$4$</td>
+                <td>$1$</td>
+                <td>$0$</td>
+                <td>$1$</td>
+                <td>$4$</td>
+                <td>$9$</td>
+            </tr>
+        </table>
+        
+        <p>
+            Plotting these points and connecting them with a smooth curve gives us a <strong>parabola</strong>&mdash;a symmetric U-shaped curve. Notice that the left and right sides are mirror images of each other.
+        </p>
+        
+        <div class="definition">
+            <h4>Key Features of a Parabola</h4>
+            <ul>
+                <li><strong>Vertex:</strong> The lowest (or highest) point on the parabola. For $y = x^2$, the vertex is at $(0, 0)$.</li>
+                <li><strong>Axis of symmetry:</strong> The vertical line through the vertex. The parabola is symmetric about this line. For $y = x^2$, the axis of symmetry is $x = 0$ (the y-axis).</li>
+                <li><strong>Opens upward or downward:</strong> For $y = x^2$, the parabola opens upward (like a cup that could hold water).</li>
+            </ul>
+        </div>
+        
+        <h3>How the Coefficient $a$ Affects the Graph</h3>
+        
+        <p>
+            The general form of a quadratic function is $y = ax^2 + bx + c$. The leading coefficient $a$ controls two important features: the <em>direction</em> the parabola opens and how <em>wide</em> or <em>narrow</em> it is.
+        </p>
+        
+        <div class="key-point">
+            <h4>Effect of the Coefficient $a$</h4>
+            <ul>
+                <li><strong>If $a > 0$:</strong> The parabola opens <strong>upward</strong> (U-shape). The vertex is the <em>minimum</em> point.</li>
+                <li><strong>If $a < 0$:</strong> The parabola opens <strong>downward</strong> (∩-shape). The vertex is the <em>maximum</em> point.</li>
+                <li><strong>Larger $|a|$:</strong> The parabola is <strong>narrower</strong> (steeper sides).</li>
+                <li><strong>Smaller $|a|$:</strong> The parabola is <strong>wider</strong> (gentler sides).</li>
+            </ul>
+        </div>
+        
+        <!-- Figure 16.3: Effect of coefficient a -->
+        <div class="figure-container">
+            <div class="figure-row">
+                <div class="figure-panel">
+                    <div class="figure-panel-label">(a) $a > 0$: Opens up</div>
+                    <div id="fig-16-3a" class="jxgbox" style="width: 220px; height: 220px;"></div>
+                </div>
+                <div class="figure-panel">
+                    <div class="figure-panel-label">(b) $a < 0$: Opens down</div>
+                    <div id="fig-16-3b" class="jxgbox" style="width: 220px; height: 220px;"></div>
+                </div>
+                <div class="figure-panel">
+                    <div class="figure-panel-label">(c) Width comparison</div>
+                    <div id="fig-16-3c" class="jxgbox" style="width: 220px; height: 220px;"></div>
+                </div>
+            </div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.3:</span> How the coefficient $a$ affects parabola shape. (a) Positive $a$: opens upward. (b) Negative $a$: opens downward. (c) Larger $|a|$ means narrower; smaller $|a|$ means wider.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            // Panel (a): a > 0, opens upward
+            var board_a = JXG.JSXGraph.initBoard('fig-16-3a', {
+                boundingbox: [-4, 10, 4, -2],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: true, minorTicks: 0 } },
+                    y: { ticks: { visible: true, minorTicks: 0 } }
+                }
+            });
+            
+            board_a.create('functiongraph', [function(x) { return x*x; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Mark vertex
+            board_a.create('point', [0, 0], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: '',
+                label: { visible: false }
+            });
+            
+            board_a.create('text', [2, 7, 'y = x²'], {
+                fontSize: 12, color: '#3b82f6', fixed: true
+            });
+            
+            // Panel (b): a < 0, opens downward
+            var board_b = JXG.JSXGraph.initBoard('fig-16-3b', {
+                boundingbox: [-4, 2, 4, -10],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: true, minorTicks: 0 } },
+                    y: { ticks: { visible: true, minorTicks: 0 } }
+                }
+            });
+            
+            board_b.create('functiongraph', [function(x) { return -x*x; }], {
+                strokeColor: '#dc2626',
+                strokeWidth: 2.5
+            });
+            
+            // Mark vertex
+            board_b.create('point', [0, 0], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: '',
+                label: { visible: false }
+            });
+            
+            board_b.create('text', [2, -7, 'y = −x²'], {
+                fontSize: 12, color: '#dc2626', fixed: true
+            });
+            
+            // Panel (c): Width comparison
+            var board_c = JXG.JSXGraph.initBoard('fig-16-3c', {
+                boundingbox: [-4, 10, 4, -2],
+                axis: true,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: true, minorTicks: 0 } },
+                    y: { ticks: { visible: true, minorTicks: 0 } }
+                }
+            });
+            
+            // Wide: y = 0.5x²
+            board_c.create('functiongraph', [function(x) { return 0.5*x*x; }], {
+                strokeColor: '#22c55e',
+                strokeWidth: 2.5
+            });
+            
+            // Normal: y = x²
+            board_c.create('functiongraph', [function(x) { return x*x; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Narrow: y = 2x²
+            board_c.create('functiongraph', [function(x) { return 2*x*x; }], {
+                strokeColor: '#9333ea',
+                strokeWidth: 2.5
+            });
+            
+            board_c.create('text', [2.5, 3, 'y = ½x²'], {
+                fontSize: 11, color: '#22c55e', fixed: true
+            });
+            board_c.create('text', [1.8, 6, 'y = x²'], {
+                fontSize: 11, color: '#3b82f6', fixed: true
+            });
+            board_c.create('text', [1.2, 8.5, 'y = 2x²'], {
+                fontSize: 11, color: '#9333ea', fixed: true
+            });
+        })();
+        </script>
+        
+        <div class="example">
+            <h4>Example 23: Describing a Parabola from Its Equation</h4>
+            <p>Without graphing, describe the parabola $y = -3x^2 + 6x - 1$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                From the equation, $a = -3$, $b = 6$, $c = -1$.
+            </p>
+            <ul>
+                <li><strong>Direction:</strong> Since $a = -3 < 0$, the parabola opens <strong>downward</strong>.</li>
+                <li><strong>Width:</strong> Since $|a| = 3 > 1$, the parabola is <strong>narrower</strong> than $y = x^2$.</li>
+                <li><strong>Vertex type:</strong> Since it opens downward, the vertex is a <strong>maximum</strong> point.</li>
+                <li><strong>y-intercept:</strong> When $x = 0$, $y = -1$. The parabola crosses the y-axis at $(0, -1)$.</li>
+            </ul>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.8 FINDING THE VERTEX                                      -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-8">16.8 Finding the Vertex</h2>
+        
+        <p>
+            The vertex is the most important point on a parabola. It's where the curve turns around&mdash;the minimum point if the parabola opens upward, or the maximum point if it opens downward. Many real-world problems come down to finding this critical point.
+        </p>
+        
+        <h3>The Vertex Formula</h3>
+        
+        <p>
+            For the parabola $y = ax^2 + bx + c$, the x-coordinate of the vertex has a simple formula:
+        </p>
+        
+        <div class="key-point">
+            <h4>Vertex Formula</h4>
+            <p>
+                For $y = ax^2 + bx + c$, the vertex is at:
+            </p>
+            <p style="text-align: center; font-size: 1.1em; margin: 15px 0;">
+                $x = -\frac{b}{2a}$
+            </p>
+            <p>
+                To find the y-coordinate, substitute this x-value back into the original equation.
+            </p>
+        </div>
+        
+        <p>
+            Where does this formula come from? The axis of symmetry passes through the vertex, and by symmetry, it must be exactly halfway between the two x-intercepts (if they exist). Using the quadratic formula, the x-intercepts are $\frac{-b + \sqrt{D}}{2a}$ and $\frac{-b - \sqrt{D}}{2a}$. Their average is:
+        </p>
+        
+        <p style="text-align: center;">
+            $\frac{1}{2}\left(\frac{-b + \sqrt{D}}{2a} + \frac{-b - \sqrt{D}}{2a}\right) = \frac{1}{2} \cdot \frac{-2b}{2a} = -\frac{b}{2a}$
+        </p>
+        
+        <p>
+            The $\pm\sqrt{D}$ terms cancel, leaving $-\frac{b}{2a}$ regardless of whether real roots exist.
+        </p>
+        
+        <div class="example">
+            <h4>Example 24: Finding the Vertex</h4>
+            <p>Find the vertex of $y = x^2 - 6x + 5$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 1$, $b = -6$, $c = 5$.
+            </p>
+            <p>
+                The x-coordinate of the vertex is:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -\frac{b}{2a} = -\frac{-6}{2(1)} = \frac{6}{2} = 3$
+            </p>
+            <p>
+                To find the y-coordinate, substitute $x = 3$ into the equation:
+            </p>
+            <p style="margin-left: 20px;">
+                $y = (3)^2 - 6(3) + 5 = 9 - 18 + 5 = -4$
+            </p>
+            <p>
+                <strong>Answer:</strong> The vertex is at $(3, -4)$.
+            </p>
+            <p style="margin-top: 10px;">
+                Since $a = 1 > 0$, the parabola opens upward, so this vertex is a <strong>minimum</strong> point.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 25: Finding the Vertex (Negative $a$)</h4>
+            <p>Find the vertex of $y = -2x^2 + 8x + 3$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = -2$, $b = 8$, $c = 3$.
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -\frac{8}{2(-2)} = -\frac{8}{-4} = 2$
+            </p>
+            <p>
+                Substitute $x = 2$:
+            </p>
+            <p style="margin-left: 20px;">
+                $y = -2(2)^2 + 8(2) + 3 = -8 + 16 + 3 = 11$
+            </p>
+            <p>
+                <strong>Answer:</strong> The vertex is at $(2, 11)$.
+            </p>
+            <p style="margin-top: 10px;">
+                Since $a = -2 < 0$, the parabola opens downward, so this vertex is a <strong>maximum</strong> point.
+            </p>
+        </div>
+        
+        
+        <!-- ============================================================ -->
+        <!-- 16.9 GRAPHING STRATEGY                                       -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-9">16.9 Graphing Strategy</h2>
+        
+        <p>
+            Now we can put everything together into a systematic approach for graphing quadratic functions.
+        </p>
+        
+        <div class="key-point">
+            <h4>Graphing a Parabola: Step by Step</h4>
+            <ol>
+                <li><strong>Determine the direction:</strong> If $a > 0$, opens up. If $a < 0$, opens down.</li>
+                <li><strong>Find the vertex:</strong> Use $x = -\frac{b}{2a}$, then substitute to find $y$.</li>
+                <li><strong>Find the axis of symmetry:</strong> The vertical line $x = -\frac{b}{2a}$ (same as the vertex's x-coordinate).</li>
+                <li><strong>Find the y-intercept:</strong> Set $x = 0$ and evaluate. This gives the point $(0, c)$.</li>
+                <li><strong>Find the x-intercepts (if any):</strong> Set $y = 0$ and solve $ax^2 + bx + c = 0$. Use the discriminant to check if real solutions exist.</li>
+                <li><strong>Plot and connect:</strong> Plot the vertex, intercepts, and a few additional points. Use symmetry to find points on both sides of the vertex. Draw a smooth curve.</li>
+            </ol>
+        </div>
+        
+        <!-- Figure 16.4: Anatomy of a parabola -->
+        <div class="figure-container">
+            <div id="fig-16-4" class="jxgbox" style="width: 400px; height: 350px; margin: 0 auto;"></div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.4:</span> Anatomy of a parabola: $y = x^2 - 4x - 5$. The vertex is at $(2, -9)$, the axis of symmetry is $x = 2$, the y-intercept is $(0, -5)$, and the x-intercepts are $(-1, 0)$ and $(5, 0)$.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            var board = JXG.JSXGraph.initBoard('fig-16-4', {
+                boundingbox: [-3, 8, 7, -11],
+                axis: true,
+                grid: true,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: true, minorTicks: 0 } },
+                    y: { ticks: { visible: true, minorTicks: 0 } }
+                }
+            });
+            
+            // y = x^2 - 4x - 5 = (x-2)^2 - 9
+            // Vertex: (2, -9)
+            // x-intercepts: x^2 - 4x - 5 = 0 => (x-5)(x+1) = 0 => x = 5, -1
+            // y-intercept: (0, -5)
+            
+            board.create('functiongraph', [function(x) { return x*x - 4*x - 5; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Axis of symmetry
+            board.create('line', [[2, -15], [2, 15]], {
+                strokeColor: '#9333ea',
+                strokeWidth: 1.5,
+                dash: 2,
+                fixed: true
+            });
+            
+            // Vertex
+            board.create('point', [2, -9], {
+                size: 5, fillColor: '#dc2626', strokeColor: '#dc2626', fixed: true, name: 'Vertex (2, −9)',
+                label: { position: 'rt', offset: [5, -5], fontSize: 12 }
+            });
+            
+            // x-intercepts
+            board.create('point', [-1, 0], {
+                size: 4, fillColor: '#22c55e', strokeColor: '#22c55e', fixed: true, name: '(−1, 0)',
+                label: { position: 'top', offset: [0, 10], fontSize: 11 }
+            });
+            board.create('point', [5, 0], {
+                size: 4, fillColor: '#22c55e', strokeColor: '#22c55e', fixed: true, name: '(5, 0)',
+                label: { position: 'top', offset: [0, 10], fontSize: 11 }
+            });
+            
+            // y-intercept
+            board.create('point', [0, -5], {
+                size: 4, fillColor: '#f97316', strokeColor: '#f97316', fixed: true, name: '(0, −5)',
+                label: { position: 'lft', offset: [-5, 0], fontSize: 11 }
+            });
+            
+            // Label for axis of symmetry
+            board.create('text', [2.3, 5, 'x = 2'], {
+                fontSize: 11, color: '#9333ea', fixed: true
+            });
+            
+            // Equation label
+            board.create('text', [4, 6, 'y = x² − 4x − 5'], {
+                fontSize: 12, color: '#3b82f6', fixed: true
+            });
+        })();
+        </script>
+        
+        <div class="example">
+            <h4>Example 26: Complete Graphing Process</h4>
+            <p>Graph $y = x^2 - 4x - 5$ by finding all key features.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 1$, $b = -4$, $c = -5$.
+            </p>
+            
+            <p><strong>Step 1: Direction.</strong> Since $a = 1 > 0$, the parabola opens <strong>upward</strong>.</p>
+            
+            <p><strong>Step 2: Vertex.</strong></p>
+            <p style="margin-left: 20px;">
+                $x = -\frac{-4}{2(1)} = 2$
+            </p>
+            <p style="margin-left: 20px;">
+                $y = (2)^2 - 4(2) - 5 = 4 - 8 - 5 = -9$
+            </p>
+            <p style="margin-left: 20px;">
+                Vertex: $(2, -9)$
+            </p>
+            
+            <p><strong>Step 3: Axis of symmetry.</strong> $x = 2$</p>
+            
+            <p><strong>Step 4: y-intercept.</strong> When $x = 0$: $y = -5$. Point: $(0, -5)$</p>
+            
+            <p><strong>Step 5: x-intercepts.</strong> Solve $x^2 - 4x - 5 = 0$.</p>
+            <p style="margin-left: 20px;">
+                Factor: $(x - 5)(x + 1) = 0$
+            </p>
+            <p style="margin-left: 20px;">
+                Solutions: $x = 5$ or $x = -1$
+            </p>
+            <p style="margin-left: 20px;">
+                x-intercepts: $(-1, 0)$ and $(5, 0)$
+            </p>
+            
+            <p><strong>Step 6: Plot.</strong> See Fig. 16.4 above.</p>
+        </div>
+        
+        <h3>When There Are No x-intercepts</h3>
+        
+        <p>
+            If the discriminant $D = b^2 - 4ac < 0$, the parabola doesn't cross the x-axis. This happens when:
+        </p>
+        <ul>
+            <li>The parabola opens upward and the vertex is above the x-axis, or</li>
+            <li>The parabola opens downward and the vertex is below the x-axis.</li>
+        </ul>
+        
+        <p>
+            In these cases, skip step 5 (no x-intercepts to find) and plot additional points using the y-intercept and its reflection across the axis of symmetry.
+        </p>
+        
+        <div class="example">
+            <h4>Example 27: Graphing with No x-intercepts</h4>
+            <p>Graph $y = x^2 + 2x + 3$.</p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Here $a = 1$, $b = 2$, $c = 3$.
+            </p>
+            
+            <p><strong>Direction:</strong> Opens upward ($a > 0$).</p>
+            
+            <p><strong>Vertex:</strong> $x = -\frac{2}{2(1)} = -1$. Then $y = (-1)^2 + 2(-1) + 3 = 1 - 2 + 3 = 2$. Vertex: $(-1, 2)$.</p>
+            
+            <p><strong>Check for x-intercepts:</strong> $D = 4 - 12 = -8 < 0$. No x-intercepts.</p>
+            
+            <p><strong>y-intercept:</strong> $(0, 3)$</p>
+            
+            <p><strong>Symmetry:</strong> The y-intercept $(0, 3)$ is 1 unit to the right of the axis of symmetry ($x = -1$). By symmetry, there's a corresponding point 1 unit to the left: $(-2, 3)$.</p>
+            
+            <p>
+                <strong>Sketch:</strong> Plot the vertex $(-1, 2)$, the y-intercept $(0, 3)$, and its reflection $(-2, 3)$. The parabola opens upward and sits entirely above the x-axis.
+            </p>
+        </div>
+        
+        <!-- Figure 16.5: No x-intercepts example -->
+        <div class="figure-container">
+            <div id="fig-16-5" class="jxgbox" style="width: 400px; height: 300px; margin: 0 auto;"></div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.5:</span> The parabola $y = x^2 + 2x + 3$ with vertex $(-1, 2)$. Since the discriminant is negative, the parabola has no $x$-intercepts and lies entirely above the $x$-axis.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            var board = JXG.JSXGraph.initBoard('fig-16-5', {
+                boundingbox: [-5, 8, 3, -1],
+                axis: true,
+                grid: true,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false },
+                defaultAxes: {
+                    x: { ticks: { visible: true, minorTicks: 0 } },
+                    y: { ticks: { visible: true, minorTicks: 0 } }
+                }
+            });
+            
+            // y = x^2 + 2x + 3
+            // Vertex: (-1, 2)
+            // y-intercept: (0, 3)
+            // Symmetric point: (-2, 3)
+            // No x-intercepts (D = 4 - 12 = -8 < 0)
+            
+            board.create('functiongraph', [function(x) { return x*x + 2*x + 3; }], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Axis of symmetry
+            board.create('line', [[-1, -5], [-1, 10]], {
+                strokeColor: '#9ca3af',
+                strokeWidth: 1.5,
+                dash: 2,
+                fixed: true
+            });
+            board.create('text', [-0.7, 6, 'x = −1'], {
+                fontSize: 11, color: '#6b7280', fixed: true
+            });
+            
+            // Vertex
+            board.create('point', [-1, 2], {
+                size: 4, fillColor: '#dc2626', strokeColor: '#dc2626', 
+                fixed: true, name: 'vertex (−1, 2)', 
+                label: { offset: [10, -5], fontSize: 11 }
+            });
+            
+            // y-intercept
+            board.create('point', [0, 3], {
+                size: 4, fillColor: '#f97316', strokeColor: '#f97316', 
+                fixed: true, name: '(0, 3)', 
+                label: { offset: [8, 0], fontSize: 11 }
+            });
+            
+            // Symmetric point
+            board.create('point', [-2, 3], {
+                size: 4, fillColor: '#f97316', strokeColor: '#f97316', 
+                fixed: true, name: '(−2, 3)', 
+                label: { offset: [-40, 0], fontSize: 11 }
+            });
+            
+            // Equation label
+            board.create('text', [0.5, 6.5, 'y = x² + 2x + 3'], {
+                fontSize: 12, color: '#3b82f6', fixed: true
+            });
+        })();
+        </script>
+        
+        <h3>Connection to the Discriminant</h3>
+        
+        <p>
+            The discriminant tells us exactly how the parabola relates to the x-axis:
+        </p>
+        
+        <table style="margin: 0 auto;">
+            <tr>
+                <th>Discriminant</th>
+                <th>Number of x-intercepts</th>
+                <th>What it looks like</th>
+            </tr>
+            <tr>
+                <td>$D > 0$</td>
+                <td>Two</td>
+                <td>Parabola crosses x-axis at two points</td>
+            </tr>
+            <tr>
+                <td>$D = 0$</td>
+                <td>One</td>
+                <td>Parabola just touches (is tangent to) x-axis</td>
+            </tr>
+            <tr>
+                <td>$D < 0$</td>
+                <td>None</td>
+                <td>Parabola doesn't reach x-axis</td>
+            </tr>
+        </table>
+        
+        <p style="margin-top: 15px;">
+            This connects our algebraic work (solving equations) with our geometric understanding (graphing curves). The number of solutions to $ax^2 + bx + c = 0$ equals the number of times $y = ax^2 + bx + c$ crosses the x-axis.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- PRACTICE PROBLEMS 16.7-16.9                                  -->
+        <!-- ============================================================ -->
+        
+        <div class="problems">
+            <h4>Practice Problems: Graphing Quadratic Functions</h4>
+            
+            <p><em>Problems 39-41: Describe the parabola without graphing (direction, width relative to $y = x^2$, vertex type).</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">39.</span> $y = 2x^2 - 4x + 1$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">40.</span> $y = -\frac{1}{2}x^2 + 3x - 2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">41.</span> $y = -5x^2 + 10$</p>
+            </div>
+            
+            <p><em>Problems 42-45: Find the vertex.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">42.</span> $y = x^2 + 8x + 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">43.</span> $y = x^2 - 2x - 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">44.</span> $y = -x^2 + 6x - 5$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">45.</span> $y = 3x^2 - 12x + 7$</p>
+            </div>
+            
+            <p><em>Problems 46-48: Find all key features (vertex, axis of symmetry, y-intercept, x-intercepts if they exist) and sketch the graph.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">46.</span> $y = x^2 - 2x - 3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">47.</span> $y = -x^2 + 4x$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">48.</span> $y = x^2 - 4x + 5$</p>
+            </div>
+            
+            <p><em>Problem 49: Use the discriminant to determine how many x-intercepts each parabola has (do not find them).</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">49.</span> (a) $y = x^2 - 6x + 9$ &nbsp;&nbsp; (b) $y = 2x^2 + 3x + 5$ &nbsp;&nbsp; (c) $y = x^2 - 5x + 2$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS                                                    -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <div class="solution">
+                <p><span class="problem-number">39.</span> $y = 2x^2 - 4x + 1$</p>
+                <p>$a = 2 > 0$: opens <strong>upward</strong></p>
+                <p>$|a| = 2 > 1$: <strong>narrower</strong> than $y = x^2$</p>
+                <p>Vertex is a <strong>minimum</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">40.</span> $y = -\frac{1}{2}x^2 + 3x - 2$</p>
+                <p>$a = -\frac{1}{2} < 0$: opens <strong>downward</strong></p>
+                <p>$|a| = \frac{1}{2} < 1$: <strong>wider</strong> than $y = x^2$</p>
+                <p>Vertex is a <strong>maximum</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">41.</span> $y = -5x^2 + 10$</p>
+                <p>$a = -5 < 0$: opens <strong>downward</strong></p>
+                <p>$|a| = 5 > 1$: <strong>narrower</strong> than $y = x^2$</p>
+                <p>Vertex is a <strong>maximum</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">42.</span> $y = x^2 + 8x + 12$</p>
+                <p>$x = -\frac{8}{2(1)} = -4$</p>
+                <p>$y = (-4)^2 + 8(-4) + 12 = 16 - 32 + 12 = -4$</p>
+                <p><strong>Vertex: $(-4, -4)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">43.</span> $y = x^2 - 2x - 8$</p>
+                <p>$x = -\frac{-2}{2(1)} = 1$</p>
+                <p>$y = (1)^2 - 2(1) - 8 = 1 - 2 - 8 = -9$</p>
+                <p><strong>Vertex: $(1, -9)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">44.</span> $y = -x^2 + 6x - 5$</p>
+                <p>$x = -\frac{6}{2(-1)} = 3$</p>
+                <p>$y = -(3)^2 + 6(3) - 5 = -9 + 18 - 5 = 4$</p>
+                <p><strong>Vertex: $(3, 4)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">45.</span> $y = 3x^2 - 12x + 7$</p>
+                <p>$x = -\frac{-12}{2(3)} = \frac{12}{6} = 2$</p>
+                <p>$y = 3(2)^2 - 12(2) + 7 = 12 - 24 + 7 = -5$</p>
+                <p><strong>Vertex: $(2, -5)$</strong></p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">46.</span> $y = x^2 - 2x - 3$</p>
+                <p><strong>Direction:</strong> Opens upward ($a = 1 > 0$)</p>
+                <p><strong>Vertex:</strong> $x = -\frac{-2}{2} = 1$; $y = 1 - 2 - 3 = -4$. Vertex: $(1, -4)$</p>
+                <p><strong>Axis of symmetry:</strong> $x = 1$</p>
+                <p><strong>y-intercept:</strong> $(0, -3)$</p>
+                <p><strong>x-intercepts:</strong> $x^2 - 2x - 3 = 0 \Rightarrow (x - 3)(x + 1) = 0 \Rightarrow x = 3, -1$. Points: $(3, 0)$ and $(-1, 0)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">47.</span> $y = -x^2 + 4x$</p>
+                <p><strong>Direction:</strong> Opens downward ($a = -1 < 0$)</p>
+                <p><strong>Vertex:</strong> $x = -\frac{4}{-2} = 2$; $y = -(4) + 8 = 4$. Vertex: $(2, 4)$</p>
+                <p><strong>Axis of symmetry:</strong> $x = 2$</p>
+                <p><strong>y-intercept:</strong> $(0, 0)$</p>
+                <p><strong>x-intercepts:</strong> $-x^2 + 4x = 0 \Rightarrow -x(x - 4) = 0 \Rightarrow x = 0, 4$. Points: $(0, 0)$ and $(4, 0)$</p>
+                <p>(Note: The y-intercept and one x-intercept are the same point.)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">48.</span> $y = x^2 - 4x + 5$</p>
+                <p><strong>Direction:</strong> Opens upward ($a = 1 > 0$)</p>
+                <p><strong>Vertex:</strong> $x = -\frac{-4}{2} = 2$; $y = 4 - 8 + 5 = 1$. Vertex: $(2, 1)$</p>
+                <p><strong>Axis of symmetry:</strong> $x = 2$</p>
+                <p><strong>y-intercept:</strong> $(0, 5)$</p>
+                <p><strong>x-intercepts:</strong> $D = 16 - 20 = -4 < 0$. <strong>None</strong> (parabola is entirely above x-axis)</p>
+                <p>By symmetry, the point $(0, 5)$ has a mirror image at $(4, 5)$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">49.</span> Discriminant test for x-intercepts:</p>
+                <p><strong>(a)</strong> $y = x^2 - 6x + 9$: $D = 36 - 36 = 0$ → <strong>One x-intercept</strong> (touches axis)</p>
+                <p><strong>(b)</strong> $y = 2x^2 + 3x + 5$: $D = 9 - 40 = -31 < 0$ → <strong>No x-intercepts</strong></p>
+                <p><strong>(c)</strong> $y = x^2 - 5x + 2$: $D = 25 - 8 = 17 > 0$ → <strong>Two x-intercepts</strong></p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 3                                               -->
+        <!-- ============================================================ -->
+        
+        <!-- ============================================================ -->
+        <!-- 16.10 APPLICATIONS OF QUADRATIC EQUATIONS                    -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-10">16.10 Applications of Quadratic Equations</h2>
+        
+        <p>
+            Quadratic equations arise naturally in many real-world situations. They appear whenever two linear quantities are multiplied together, or when physics involves constant acceleration. This section explores several types of applications.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- 16.10.1 PROJECTILE MOTION                                    -->
+        <!-- ============================================================ -->
+        
+        <h3>Projectile Motion</h3>
+        
+        <p>
+            When an object is thrown or launched near Earth's surface, gravity pulls it downward with constant acceleration. This constant acceleration produces a quadratic relationship between height and time.
+        </p>
+        
+        <p>
+            For vertical motion under gravity (ignoring air resistance), the height at time $t$ is:
+        </p>
+        
+        <div class="formula-box">
+            <h4>Projectile Height Formula</h4>
+            <p style="font-size: 1.2em; margin: 15px 0;">
+                $h(t) = -\frac{1}{2}g t^2 + v_0 t + h_0$
+            </p>
+            <p style="margin-top: 10px;">
+                In feet and seconds: $h(t) = -16t^2 + v_0 t + h_0$ &nbsp; (since $g \approx 32$ ft/s&sup2;)
+            </p>
+            <p>
+                In meters and seconds: $h(t) = -4.9t^2 + v_0 t + h_0$ &nbsp; (since $g \approx 9.8$ m/s&sup2;)
+            </p>
+            <p style="margin-top: 10px;">
+                where $v_0$ is the initial upward velocity and $h_0$ is the initial height.
+            </p>
+        </div>
+        
+        <p>
+            Understanding <em>why</em> this formula has a $t^2$ term is important. Problems involving motion are one of the main reasons calculus was invented&mdash;calculus is the natural language for describing how things change. But we can understand the key ideas with careful reasoning, even without calculus.
+        </p>
+        
+        <div class="going-deeper">
+            <h4 style="color: #7c3aed; margin-top: 0;">Understanding Motion with Constant Acceleration</h4>
+            
+            <p>
+                <strong>Challenge:</strong> Can we derive the projectile formula using only basic mathematical reasoning? Yes&mdash;by breaking the problem into two parts.
+            </p>
+            
+            <p><strong>Part 1: A World Without Gravity (Inertia)</strong></p>
+            <p>
+                Imagine a universe with no gravity. You stand on a platform at height $h_0$ and throw a ball upward with speed $v_0$. What happens? The ball never slows down&mdash;it just keeps going at the same speed forever. This is Newton's first law: objects in motion stay in motion unless a force acts on them.
+            </p>
+            <p>
+                In this gravity-free world, distance = rate &times; time, so the height at time $t$ would be:
+            </p>
+            <p style="text-align: center;">
+                $h = h_0 + v_0 \cdot t$
+            </p>
+            
+            <p><strong>Part 2: Gravity Alone (The Drop)</strong></p>
+            <p>
+                Now imagine a different scenario: you hold a ball at some height and simply let go (initial velocity is zero). How far does it fall in $t$ seconds?
+            </p>
+            <p>
+                Gravity doesn't just move the ball&mdash;it <em>accelerates</em> it, adding about $g = 32$ ft/s (or $9.8$ m/s) to its downward speed every second. So after $t$ seconds, the ball is moving at speed $g \cdot t$.
+            </p>
+            <p>
+                Here's the key question: if the speed keeps changing, how do we calculate distance? We can't use starting speed (zero) or ending speed ($g \cdot t$)&mdash;neither represents the whole trip.
+            </p>
+            <p>
+                The answer: use the <em>average</em> speed. Because gravity increases speed smoothly (linearly), the average speed over the interval is exactly halfway between start and finish:
+            </p>
+            <p style="text-align: center;">
+                Average speed $= \frac{0 + gt}{2} = \frac{gt}{2}$
+            </p>
+            <p>
+                Distance fallen $=$ average speed $\times$ time $= \frac{gt}{2} \cdot t = \frac{1}{2}gt^2$
+            </p>
+            
+            <p><strong>Part 3: Combining Both Effects</strong></p>
+            <p>
+                In the real world, both effects happen simultaneously: the ball tries to fly upward (inertia) while gravity pulls it down. We simply add the two contributions:
+            </p>
+            <p style="text-align: center;">
+                $h(t) = h_0 + v_0 t - \frac{1}{2}gt^2$
+            </p>
+            <p>
+                The negative sign appears because gravity pulls <em>down</em> (decreasing height). With $g = 32$ ft/s&sup2;, we get $\frac{1}{2}g = 16$, giving us the formula $h(t) = -16t^2 + v_0 t + h_0$.
+            </p>
+        </div>
+        
+        <p>
+            Since the coefficient of $t^2$ is negative, the parabola opens downward. This matches physical intuition: the projectile rises, reaches a maximum height at the vertex, then falls.
+        </p>
+        
+        <div class="key-point">
+            <h4>Connecting to What We've Learned</h4>
+            <p><strong>Maximum height:</strong> The vertex of the parabola (use $t = -b/(2a)$ from Section 16.8)</p>
+            <p><strong>When it hits the ground:</strong> Solve $h(t) = 0$ for $t > 0$ (the positive x-intercept, after launch)</p>
+            <p><strong>How high at a specific time:</strong> Substitute that $t$ value into the formula</p>
+        </div>
+        
+        <p>
+            For projectiles launched at an angle, the motion has both vertical and horizontal components. The vertical motion follows the quadratic formula above; the horizontal motion (ignoring air resistance) is simply distance = rate &times; time, with no acceleration.
+        </p>
+        
+        <p>
+            <em>Note: In practice, you'd often know the launch angle and total speed rather than separate velocity components. Converting between these requires trigonometry, which you'll learn later. For now, we'll work directly with horizontal and vertical velocity components.</em>
+        </p>
+        
+        <div class="example">
+            <h4>Example 28: Projectile with Horizontal Motion</h4>
+            <p>
+                A ball is launched from a platform 12 feet high with an initial upward velocity of 48 ft/s and an initial horizontal velocity of 30 ft/s. 
+            </p>
+            <p>(a) When does the ball hit the ground?</p>
+            <p>(b) What is the maximum height?</p>
+            <p>(c) How far does the ball travel horizontally?</p>
+            
+            <p><strong>Solution:</strong></p>
+            
+            <p>
+                The height function is $h(t) = -16t^2 + 48t + 12$, where:
+            </p>
+            <ul>
+                <li>The $-16t^2$ term comes from gravity: $-\frac{1}{2}g = -\frac{1}{2}(32) = -16$</li>
+                <li>The $48t$ term reflects the initial upward velocity</li>
+                <li>The $12$ is the initial height (the platform)</li>
+            </ul>
+            
+            <p><strong>(a) When does it hit the ground?</strong></p>
+            <p>
+                We need to find when $h(t) = 0$ for $t > 0$ (after launch at $t = 0$):
+            </p>
+            <p style="margin-left: 20px;">
+                $-16t^2 + 48t + 12 = 0$
+            </p>
+            <p>
+                Divide by $-4$ to simplify: $4t^2 - 12t - 3 = 0$
+            </p>
+            <p>
+                Using the quadratic formula with $a = 4$, $b = -12$, $c = -3$:
+            </p>
+            <p style="margin-left: 20px;">
+                $t = \frac{12 \pm \sqrt{144 + 48}}{8} = \frac{12 \pm \sqrt{192}}{8} = \frac{12 \pm 8\sqrt{3}}{8} = \frac{3 \pm 2\sqrt{3}}{2}$
+            </p>
+            <p>
+                This gives $t \approx 3.23$ seconds or $t \approx -0.23$ seconds. The negative value corresponds to a time before launch (when the ball would have been at ground level if the motion extended backward in time). We want the positive value: <strong>$t \approx 3.23$ seconds</strong>.
+            </p>
+            
+            <p><strong>(b) Maximum height:</strong></p>
+            <p>
+                The vertex occurs at $t = -\frac{48}{2(-16)} = \frac{48}{32} = 1.5$ seconds.
+            </p>
+            <p>
+                Height at $t = 1.5$:
+            </p>
+            <p style="margin-left: 20px;">
+                $h(1.5) = -16(1.5)^2 + 48(1.5) + 12 = -36 + 72 + 12 = 48$ feet
+            </p>
+            
+            <p><strong>(c) Horizontal distance:</strong></p>
+            <p>
+                Horizontal motion has no acceleration, so: distance = rate &times; time
+            </p>
+            <p style="margin-left: 20px;">
+                $d = 30 \times 3.23 \approx 96.9$ feet
+            </p>
+            
+            <p><strong>Answer:</strong> (a) About 3.23 seconds; (b) 48 feet; (c) About 96.9 feet</p>
+        </div>
+        
+        <p>
+            Let's compare this trajectory with a different launch. Suppose a second ball is launched from a 6-foot platform with an upward velocity of 40 ft/s and horizontal velocity of 25 ft/s.
+        </p>
+        
+        <p>
+            <strong>Second trajectory:</strong> $h(t) = -16t^2 + 40t + 6$
+        </p>
+        <ul>
+            <li>Landing time: Solve $-16t^2 + 40t + 6 = 0$, giving $t \approx 2.64$ seconds</li>
+            <li>Maximum height: At $t = 40/32 = 1.25$ s, height $= -16(1.5625) + 50 + 6 = 31$ feet</li>
+            <li>Horizontal distance: $25 \times 2.64 \approx 66$ feet</li>
+        </ul>
+        
+        <!-- Figure 16.6: Projectile trajectories -->
+        <div class="figure-container">
+            <div id="fig-16-6" class="jxgbox" style="width: 520px; height: 380px;"></div>
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.6:</span> Two projectile trajectories. The blue curve (Ball 1) launches higher and faster, reaching 48 feet and traveling about 97 feet. The orange curve (Ball 2) has lower launch parameters, reaching 31 feet and traveling about 66 feet. Both paths are parabolas.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            var board = JXG.JSXGraph.initBoard('fig-16-6', {
+                boundingbox: [-12, 55, 110, -8],
+                axis: false,
+                grid: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                pan: { enabled: false },
+                zoom: { enabled: false }
+            });
+            
+            // Draw axes
+            board.create('axis', [[0, 0], [1, 0]], {
+                ticks: { 
+                    visible: true, 
+                    ticksDistance: 20,
+                    minorTicks: 0,
+                    label: { offset: [-5, -15] }
+                },
+                name: 'horizontal distance (ft)',
+                withLabel: true,
+                label: { position: 'rt', offset: [-80, -25], fontSize: 12 }
+            });
+            board.create('axis', [[0, 0], [0, 1]], {
+                ticks: { 
+                    visible: true, 
+                    ticksDistance: 10,
+                    minorTicks: 0,
+                    label: { offset: [-25, 0] }
+                },
+                name: 'height (ft)',
+                withLabel: true,
+                label: { position: 'rt', offset: [10, -10], fontSize: 12 }
+            });
+            
+            // Ball 1 parameters (Example 28)
+            var h0_1 = 12, v0y_1 = 48, v0x_1 = 30;
+            var t_land_1 = (3 + 2*Math.sqrt(3))/2;  // ~3.23 seconds
+            var t_vertex_1 = 1.5;
+            var h_max_1 = 48;
+            var x_land_1 = v0x_1 * t_land_1;
+            var x_vertex_1 = v0x_1 * t_vertex_1;
+            
+            // Ball 2 parameters
+            var h0_2 = 6, v0y_2 = 40, v0x_2 = 25;
+            var t_land_2 = (40 + Math.sqrt(1600 + 384))/32;  // ~2.64 seconds
+            var t_vertex_2 = 40/32;  // 1.25 seconds
+            var h_max_2 = -16*t_vertex_2*t_vertex_2 + v0y_2*t_vertex_2 + h0_2;  // 31 feet
+            var x_land_2 = v0x_2 * t_land_2;
+            var x_vertex_2 = v0x_2 * t_vertex_2;
+            
+            // Trajectory 1 (blue)
+            board.create('functiongraph', [function(x) {
+                var t = x / v0x_1;
+                if (t < 0 || t > t_land_1 + 0.1) return NaN;
+                return -16*t*t + v0y_1*t + h0_1;
+            }, 0, x_land_1 + 3], {
+                strokeColor: '#3b82f6',
+                strokeWidth: 2.5
+            });
+            
+            // Trajectory 2 (orange)
+            board.create('functiongraph', [function(x) {
+                var t = x / v0x_2;
+                if (t < 0 || t > t_land_2 + 0.1) return NaN;
+                return -16*t*t + v0y_2*t + h0_2;
+            }, 0, x_land_2 + 3], {
+                strokeColor: '#f97316',
+                strokeWidth: 2.5
+            });
+            
+            // Platform 1
+            board.create('polygon', [[-10, 0], [0, 0], [0, h0_1], [-10, h0_1]], {
+                fillColor: '#a0522d',
+                fillOpacity: 0.6,
+                borders: { strokeColor: '#654321', strokeWidth: 1 },
+                vertices: { visible: false }
+            });
+            
+            // Platform 2 (smaller, offset)
+            board.create('polygon', [[-10, 0], [-5, 0], [-5, h0_2], [-10, h0_2]], {
+                fillColor: '#8B7355',
+                fillOpacity: 0.6,
+                borders: { strokeColor: '#654321', strokeWidth: 1 },
+                vertices: { visible: false }
+            });
+            
+            // Mark key points for Ball 1
+            board.create('point', [0, h0_1], {
+                size: 3, fillColor: '#3b82f6', strokeColor: '#3b82f6', 
+                fixed: true, name: ''
+            });
+            board.create('point', [x_vertex_1, h_max_1], {
+                size: 4, fillColor: '#3b82f6', strokeColor: '#1e40af', 
+                fixed: true, name: 'Max: 48 ft',
+                label: { offset: [5, 10], fontSize: 11, color: '#3b82f6' }
+            });
+            board.create('point', [x_land_1, 0], {
+                size: 4, fillColor: '#3b82f6', strokeColor: '#1e40af', 
+                fixed: true, name: '~97 ft',
+                label: { offset: [-5, -18], fontSize: 11, color: '#3b82f6' }
+            });
+            
+            // Mark key points for Ball 2
+            board.create('point', [0, h0_2], {
+                size: 3, fillColor: '#f97316', strokeColor: '#f97316', 
+                fixed: true, name: ''
+            });
+            board.create('point', [x_vertex_2, h_max_2], {
+                size: 4, fillColor: '#f97316', strokeColor: '#c2410c', 
+                fixed: true, name: 'Max: 31 ft',
+                label: { offset: [5, 8], fontSize: 11, color: '#f97316' }
+            });
+            board.create('point', [x_land_2, 0], {
+                size: 4, fillColor: '#f97316', strokeColor: '#c2410c', 
+                fixed: true, name: '~66 ft',
+                label: { offset: [-5, -18], fontSize: 11, color: '#f97316' }
+            });
+            
+            // Legend
+            board.create('text', [75, 50, 'Ball 1 (blue)'], { fontSize: 11, color: '#3b82f6' });
+            board.create('text', [75, 45, 'Ball 2 (orange)'], { fontSize: 11, color: '#f97316' });
+        })();
+        </script>
+        
+        <div class="key-point">
+            <h4>Computing with Python</h4>
+            <p>
+                Here's a Python program that computes projectile motion. You provide the horizontal and vertical velocity components and the launch height; it calculates time of flight, maximum height, and horizontal range.
+            </p>
+            <pre><code>import math
+
+def projectile_motion(v_horizontal, v_vertical, launch_height):
+    """
+    Calculate projectile trajectory (using feet and seconds).
+    
+    v_horizontal: initial horizontal velocity (ft/s)
+    v_vertical: initial upward velocity (ft/s)  
+    launch_height: height of launch point (ft)
+    
+    Returns: (time_of_flight, max_height, horizontal_range)
+    """
+    # Height equation: h(t) = -16t^2 + v_vertical*t + launch_height
+    # The -16 comes from (1/2)*g where g = 32 ft/s^2
+    
+    # Solve -16t^2 + v_vertical*t + launch_height = 0 for landing time
+    a = -16
+    b = v_vertical
+    c = launch_height
+    
+    discriminant = b**2 - 4*a*c
+    if discriminant < 0:
+        return "Error: projectile never reaches ground"
+    
+    # Take the positive root (landing time, after launch)
+    t_flight = (-b - math.sqrt(discriminant)) / (2*a)
+    
+    # Maximum height at vertex: t = -b/(2a) = v_vertical/32
+    t_max = v_vertical / 32
+    max_height = -16*t_max**2 + v_vertical*t_max + launch_height
+    
+    # Horizontal range (no acceleration horizontally)
+    horizontal_range = v_horizontal * t_flight
+    
+    return (t_flight, max_height, horizontal_range)
+
+# Example from the lesson (Ball 1):
+result = projectile_motion(30, 48, 12)
+print(f"Time of flight: {result[0]:.2f} seconds")
+print(f"Maximum height: {result[1]:.2f} feet")
+print(f"Horizontal range: {result[2]:.2f} feet")
+
+# Try Ball 2:
+result2 = projectile_motion(25, 40, 6)
+print(f"\nBall 2: {result2[0]:.2f} s, {result2[1]:.2f} ft max, {result2[2]:.2f} ft range")</code></pre>
+            <p style="margin-top: 10px;">
+                <strong>To run this:</strong> Save as <code>projectile.py</code> and run with <code>python projectile.py</code>. 
+                Try changing the input values to see how different launch conditions affect the trajectory.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.10.2 AREA OPTIMIZATION                                    -->
+        <!-- ============================================================ -->
+        
+        <h3>Area Optimization</h3>
+        
+        <p>
+            A classic application of quadratics is finding maximum or minimum values. Because the vertex of a parabola is either the highest or lowest point on the curve, quadratics are perfectly suited for optimization problems.
+        </p>
+        
+        <div class="example">
+            <h4>Example 29: Maximizing Enclosed Area</h4>
+            <p>
+                A farmer has 120 feet of fencing to build a rectangular pen against an existing barn wall. Only three sides need fencing (the barn forms the fourth side). What dimensions maximize the enclosed area?
+            </p>
+            
+            <!-- Figure 16.7: Fencing diagram -->
+            <div class="simple-diagram">
+                <svg width="350" height="180" class="diagram-svg">
+                    <!-- Barn wall -->
+                    <rect x="30" y="20" width="290" height="25" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                    <text x="175" y="37" text-anchor="middle" fill="white" font-size="14" font-weight="bold">BARN WALL</text>
+                    
+                    <!-- Fenced area -->
+                    <rect x="80" y="45" width="190" height="100" fill="#90EE90" fill-opacity="0.3" stroke="#2d8a4e" stroke-width="3"/>
+                    
+                    <!-- Labels -->
+                    <text x="175" y="160" text-anchor="middle" font-size="14">120 - 2w</text>
+                    <text x="55" y="100" text-anchor="middle" font-size="14">w</text>
+                    <text x="295" y="100" text-anchor="middle" font-size="14">w</text>
+                    
+                    <!-- Dimension arrows -->
+                    <line x1="80" y1="150" x2="270" y2="150" stroke="#333" stroke-width="1"/>
+                    <polygon points="80,150 88,146 88,154" fill="#333"/>
+                    <polygon points="270,150 262,146 262,154" fill="#333"/>
+                </svg>
+            </div>
+            <p class="figure-caption" style="margin-top: 5px;">
+                <span class="figure-number">Fig. 16.7:</span> Rectangular pen against a barn wall. Only three sides require fencing.
+            </p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Let $w$ be the width (the two sides perpendicular to the barn). The fencing for these two sides uses $2w$ feet, leaving $120 - 2w$ feet for the side parallel to the barn.
+            </p>
+            <p>
+                The area is:
+            </p>
+            <p style="margin-left: 20px;">
+                $A(w) = w(120 - 2w) = 120w - 2w^2 = -2w^2 + 120w$
+            </p>
+            <p>
+                This is a quadratic with $a = -2 < 0$, so the parabola opens downward and has a maximum at its vertex.
+            </p>
+            <p>
+                The vertex occurs at:
+            </p>
+            <p style="margin-left: 20px;">
+                $w = -\frac{120}{2(-2)} = \frac{120}{4} = 30$ feet
+            </p>
+            <p>
+                When $w = 30$: length $= 120 - 2(30) = 60$ feet.
+            </p>
+            <p>
+                Maximum area $= 30 \times 60 = 1800$ square feet.
+            </p>
+            <p>
+                <strong>Answer:</strong> Width 30 feet, length 60 feet, for a maximum area of 1800 square feet.
+            </p>
+        </div>
+        
+        <p>
+            Notice the pattern: the problem gives a constraint (fixed amount of fencing), which creates a relationship between variables. Substituting this relationship into the area formula produces a quadratic, and the vertex gives the optimal value.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- 16.10.3 REVENUE PROBLEMS                                     -->
+        <!-- ============================================================ -->
+        
+        <h3>Revenue Problems</h3>
+        
+        <p>
+            Revenue equals price times quantity sold: $R = p \cdot q$. In many situations, raising the price decreases the quantity sold (and vice versa). If both price and quantity are linear functions of some variable, their product is quadratic.
+        </p>
+        
+        <div class="example">
+            <h4>Example 30: Maximizing Revenue</h4>
+            <p>
+                A theater currently charges 8 dollars per ticket and sells 400 tickets per show. Market research indicates that for each 0.50 dollar increase in price, 20 fewer tickets will be sold. What ticket price maximizes revenue?
+            </p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Let $x$ = number of 0.50 dollar price increases.
+            </p>
+            <p>
+                Then: Price $= 8 + 0.5x$ dollars per ticket
+            </p>
+            <p>
+                Tickets sold $= 400 - 20x$
+            </p>
+            <p>
+                Revenue:
+            </p>
+            <p style="margin-left: 20px;">
+                $R(x) = (8 + 0.5x)(400 - 20x)$
+            </p>
+            <p>
+                Expand:
+            </p>
+            <p style="margin-left: 20px;">
+                $R(x) = 3200 - 160x + 200x - 10x^2 = -10x^2 + 40x + 3200$
+            </p>
+            <p>
+                The vertex occurs at:
+            </p>
+            <p style="margin-left: 20px;">
+                $x = -\frac{40}{2(-10)} = \frac{40}{20} = 2$
+            </p>
+            <p>
+                So 2 price increases of 0.50 dollars each means: Price $= 8 + 0.5(2) = 9$ dollars.
+            </p>
+            <p>
+                Maximum revenue $= -10(4) + 40(2) + 3200 = -40 + 80 + 3200 = 3240$ dollars.
+            </p>
+            <p>
+                <strong>Check:</strong> At 9 dollars, tickets sold $= 400 - 20(2) = 360$. Revenue $= 9 \times 360 = 3240$ dollars. &#10003;
+            </p>
+            <p>
+                <strong>Answer:</strong> Ticket price of 9 dollars maximizes revenue at 3240 dollars per show.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.10.4 GEOMETRIC PROBLEMS                                   -->
+        <!-- ============================================================ -->
+        
+        <h3>Geometric Problems</h3>
+        
+        <p>
+            Many geometry problems lead to quadratic equations. Problems involving area (which multiplies two dimensions) or the Pythagorean theorem (which squares lengths) often produce quadratics.
+        </p>
+        
+        <div class="example">
+            <h4>Example 31: Finding Dimensions from Area</h4>
+            <p>
+                The length of a rectangle is 5 cm more than its width. If the area is 126 cm&sup2;, find the dimensions.
+            </p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Let $w$ = width. Then length $= w + 5$.
+            </p>
+            <p>
+                Area: $w(w + 5) = 126$
+            </p>
+            <p style="margin-left: 20px;">
+                $w^2 + 5w = 126$
+            </p>
+            <p style="margin-left: 20px;">
+                $w^2 + 5w - 126 = 0$
+            </p>
+            <p>
+                Try to factor: we need two numbers that multiply to $-126$ and add to $5$. 
+            </p>
+            <p>
+                Since $126 = 2 \times 63 = 2 \times 9 \times 7 = 14 \times 9$, try $14$ and $-9$: &nbsp; $14 \times (-9) = -126$ and $14 + (-9) = 5$. &#10003;
+            </p>
+            <p style="margin-left: 20px;">
+                $(w + 14)(w - 9) = 0$
+            </p>
+            <p>
+                So $w = -14$ or $w = 9$. Since width must be positive, $w = 9$ cm.
+            </p>
+            <p>
+                Length $= 9 + 5 = 14$ cm.
+            </p>
+            <p>
+                <strong>Check:</strong> $9 \times 14 = 126$ cm&sup2;. &#10003;
+            </p>
+            <p>
+                <strong>Answer:</strong> Width 9 cm, length 14 cm.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 32: Pythagorean Theorem Application</h4>
+            <p>
+                The legs of a right triangle differ by 3 cm. If the hypotenuse is 15 cm, find the lengths of the legs.
+            </p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                Let the shorter leg be $x$. Then the longer leg is $x + 3$.
+            </p>
+            <p>
+                By the Pythagorean theorem: $x^2 + (x + 3)^2 = 15^2$
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + x^2 + 6x + 9 = 225$
+            </p>
+            <p style="margin-left: 20px;">
+                $2x^2 + 6x + 9 = 225$
+            </p>
+            <p style="margin-left: 20px;">
+                $2x^2 + 6x - 216 = 0$
+            </p>
+            <p>
+                Divide by 2: $x^2 + 3x - 108 = 0$
+            </p>
+            <p>
+                Try to factor: need two numbers that multiply to $-108$ and add to $3$.
+            </p>
+            <p>
+                Since $108 = 12 \times 9$, try $12$ and $-9$: &nbsp; $12 \times (-9) = -108$ and $12 + (-9) = 3$. &#10003;
+            </p>
+            <p style="margin-left: 20px;">
+                $(x + 12)(x - 9) = 0$
+            </p>
+            <p>
+                So $x = -12$ or $x = 9$. Since length must be positive, $x = 9$ cm.
+            </p>
+            <p>
+                The legs are 9 cm and 12 cm.
+            </p>
+            <p>
+                <strong>Check:</strong> $9^2 + 12^2 = 81 + 144 = 225 = 15^2$. &#10003;
+            </p>
+            <p>
+                <strong>Answer:</strong> The legs are 9 cm and 12 cm.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.10.5 CIRCUIT RESISTANCE                                   -->
+        <!-- ============================================================ -->
+        
+        <h3>Circuit Problems</h3>
+        
+        <p>
+            Quadratic equations also appear in electronics. When resistors are connected in parallel, the combined resistance follows a formula that can lead to quadratic equations.
+        </p>
+        
+        <div class="key-point">
+            <h4>Resistors in Parallel</h4>
+            <p>
+                When two resistors with resistances $R_1$ and $R_2$ are wired in parallel, the total resistance $R$ satisfies:
+            </p>
+            <p style="text-align: center; font-size: 1.1em; margin: 10px 0;">
+                $\frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2}$
+            </p>
+            <p>
+                The total resistance is always <em>less</em> than either individual resistor. (Think of it as giving electricity more paths to flow through.)
+            </p>
+            
+            <!-- Figure 16.8: Parallel resistors diagram -->
+            <div class="simple-diagram" style="margin: 15px 0;">
+                <svg width="300" height="120" class="diagram-svg">
+                    <!-- Wires -->
+                    <line x1="20" y1="60" x2="70" y2="60" stroke="#333" stroke-width="2"/>
+                    <line x1="70" y1="60" x2="70" y2="30" stroke="#333" stroke-width="2"/>
+                    <line x1="70" y1="60" x2="70" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="70" y1="30" x2="100" y2="30" stroke="#333" stroke-width="2"/>
+                    <line x1="70" y1="90" x2="100" y2="90" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- Resistor 1 (top) -->
+                    <rect x="100" y="20" width="80" height="20" fill="#f5f5dc" stroke="#333" stroke-width="2"/>
+                    <text x="140" y="35" text-anchor="middle" font-size="12">R&#8321;</text>
+                    
+                    <!-- Resistor 2 (bottom) -->
+                    <rect x="100" y="80" width="80" height="20" fill="#f5f5dc" stroke="#333" stroke-width="2"/>
+                    <text x="140" y="95" text-anchor="middle" font-size="12">R&#8322;</text>
+                    
+                    <!-- More wires -->
+                    <line x1="180" y1="30" x2="210" y2="30" stroke="#333" stroke-width="2"/>
+                    <line x1="180" y1="90" x2="210" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="210" y1="30" x2="210" y2="90" stroke="#333" stroke-width="2"/>
+                    <line x1="210" y1="60" x2="280" y2="60" stroke="#333" stroke-width="2"/>
+                    
+                    <!-- Labels -->
+                    <text x="20" y="50" font-size="11">in</text>
+                    <text x="265" y="50" font-size="11">out</text>
+                </svg>
+            </div>
+            <p class="figure-caption" style="margin-top: 0;">
+                <span class="figure-number">Fig. 16.8:</span> Two resistors wired in parallel. Current can flow through either path.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 33: Finding Resistor Values</h4>
+            <p>
+                You're building a circuit that requires a total resistance of 2 ohms. You have a collection of resistors in multiples of 3 ohms: 3, 6, 9, 12, 15, ... ohms. Can you achieve 2 ohms by wiring two of these resistors in parallel?
+            </p>
+            
+            <p><strong>Solution:</strong></p>
+            <p>
+                We want to find resistor values from our collection that combine to give 2 ohms total. Let's check if two <em>consecutive</em> sizes (differing by 3 ohms) can work.
+            </p>
+            <p>
+                Let $R_1 = x$ and $R_2 = x + 3$. We need:
+            </p>
+            <p style="margin-left: 20px;">
+                $\frac{1}{2} = \frac{1}{x} + \frac{1}{x + 3}$
+            </p>
+            <p>
+                Multiply both sides by $2x(x + 3)$:
+            </p>
+            <p style="margin-left: 20px;">
+                $x(x + 3) = 2(x + 3) + 2x$
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 3x = 2x + 6 + 2x$
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 + 3x = 4x + 6$
+            </p>
+            <p style="margin-left: 20px;">
+                $x^2 - x - 6 = 0$
+            </p>
+            <p>
+                Factor: $(x - 3)(x + 2) = 0$
+            </p>
+            <p>
+                So $x = 3$ or $x = -2$. Since resistance must be positive, $x = 3$ ohms.
+            </p>
+            <p>
+                The two resistors are $R_1 = 3$ ohms and $R_2 = 6$ ohms.
+            </p>
+            <p>
+                <strong>Check:</strong> $\frac{1}{3} + \frac{1}{6} = \frac{2}{6} + \frac{1}{6} = \frac{3}{6} = \frac{1}{2}$, so $R = 2$ ohms. &#10003;
+            </p>
+            <p>
+                <strong>Answer:</strong> Yes! Wire a 3-ohm resistor in parallel with a 6-ohm resistor.
+            </p>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- PRACTICE PROBLEMS 16.10                                      -->
+        <!-- ============================================================ -->
+        
+        <div class="problems">
+            <h4>Practice Problems: Applications</h4>
+            
+            <p><em>Projectile Motion (Problems 50-52)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">50.</span> A ball is thrown straight up from ground level with an initial velocity of 64 ft/s.</p>
+                <p>(a) When does it reach its maximum height?</p>
+                <p>(b) What is the maximum height?</p>
+                <p>(c) When does it return to the ground?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">51.</span> A stone is dropped from a bridge 80 feet above a river. (Dropped means initial velocity is 0.)</p>
+                <p>(a) Write the height function.</p>
+                <p>(b) How long until the stone hits the water?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">52.</span> A projectile is launched from a 5-meter platform with initial upward velocity 25 m/s and horizontal velocity 15 m/s. Use $h(t) = -4.9t^2 + v_0 t + h_0$.</p>
+                <p>(a) What is the maximum height? (Calculator needed)</p>
+                <p>(b) When does it hit the ground? (Calculator needed)</p>
+                <p>(c) How far does it travel horizontally?</p>
+            </div>
+            
+            <p><em>Optimization (Problems 53-55)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">53.</span> A farmer has 200 feet of fencing to enclose a rectangular garden (all four sides). What dimensions maximize the area?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">54.</span> A rancher has 180 meters of fencing to build a rectangular corral against a river (the river forms one side, so only three sides need fencing). What dimensions maximize the enclosed area?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">55.</span> A parking lot is to be built along the side of a building, using the building as one side. The lot will be rectangular with 400 feet of available fencing for the other three sides. What dimensions maximize the parking area?</p>
+            </div>
+            
+            <p><em>Revenue (Problems 56-57)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">56.</span> A bookstore sells 150 copies of a bestseller per week at 20 dollars each. For each 1 dollar decrease in price, 10 more copies are sold. What price maximizes weekly revenue?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">57.</span> A software company sells a program for 50 dollars and gets 200 purchases per month. Market research shows that for every 5 dollar price reduction, 25 more units are sold. What price maximizes monthly revenue? (Calculator recommended)</p>
+            </div>
+            
+            <p><em>Geometric Problems (Problems 58-60)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">58.</span> The length of a rectangle is 3 meters more than twice its width. The area is 77 m&sup2;. Find the dimensions.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">59.</span> The legs of a right triangle are consecutive even integers. The hypotenuse is 10 cm. Find the legs.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">60.</span> A rectangular photo is 4 inches longer than it is wide. It is mounted on a mat that adds a 2-inch border on all sides. If the total area (photo plus mat) is 260 square inches, what are the dimensions of the photo?</p>
+            </div>
+            
+            <p><em>Circuits (Problem 61)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">61.</span> You need a total resistance of 6 ohms for a circuit. You have resistors available in multiples of 5 ohms: 5, 10, 15, 20, ... ohms. If you wire two resistors in parallel (where one is 5 ohms more than the other), what values should you use? (Recall: $\frac{1}{R} = \frac{1}{R_1} + \frac{1}{R_2}$)</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- 16.11 SECTION SUMMARY                                        -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-16-11">16.11 Section Summary</h2>
+        
+        <p>
+            This section covered quadratic equations from multiple angles: what they are, how to solve them, how to graph them, and where they appear in applications. Here's a consolidated reference.
+        </p>
+        
+        <!-- Key Formulas Box -->
+        <div class="formula-box">
+            <h4>Key Formulas for Quadratic Equations</h4>
+            
+            <p style="text-align: left; margin: 15px 20px;"><strong>Standard Form:</strong> &nbsp; $ax^2 + bx + c = 0$ &nbsp; (where $a \neq 0$)</p>
+            
+            <p style="text-align: left; margin: 15px 20px;"><strong>Quadratic Formula:</strong> &nbsp; $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$</p>
+            
+            <p style="text-align: left; margin: 15px 20px;"><strong>Discriminant:</strong> &nbsp; $D = b^2 - 4ac$</p>
+            <p style="text-align: left; margin: 0 40px; font-size: 0.95em;">
+                $D > 0$: two real solutions &nbsp;&nbsp;|&nbsp;&nbsp; $D = 0$: one real solution &nbsp;&nbsp;|&nbsp;&nbsp; $D < 0$: no real solutions
+            </p>
+            
+            <p style="text-align: left; margin: 15px 20px;"><strong>Vertex of $y = ax^2 + bx + c$:</strong> &nbsp; $x = -\frac{b}{2a}$ &nbsp; (then substitute to find $y$)</p>
+            
+            <p style="text-align: left; margin: 15px 20px;"><strong>Parabola Direction:</strong> &nbsp; Opens up if $a > 0$ (vertex is minimum); opens down if $a < 0$ (vertex is maximum)</p>
+        </div>
+        
+        <h3>Choosing a Solution Method</h3>
+        
+        <p>
+            We've learned three methods for solving quadratic equations. Here's a decision guide:
+        </p>
+        
+        <!-- Decision Tree: HTML/CSS version -->
+        <div class="figure-container">
+            <div class="decision-tree">
+                <div class="tree-node tree-decision">
+                    <strong>Is the equation easily factorable?</strong><br>
+                    <span style="font-size: 0.9em;">(Small integer coefficients, you can spot factors quickly)</span>
+                </div>
+                
+                <div class="tree-connector">
+                    <div class="tree-branch">
+                        <div class="tree-label">YES</div>
+                        <div class="tree-arrow">&#8595;</div>
+                        <div class="tree-node tree-action">
+                            <strong>Factor and use Zero Product Property</strong><br>
+                            <span style="font-size: 0.9em;">Set each factor = 0</span>
+                        </div>
+                    </div>
+                    <div class="tree-branch">
+                        <div class="tree-label">NO</div>
+                        <div class="tree-arrow">&#8595;</div>
+                        <div class="tree-node tree-decision">
+                            <strong>Is it of the form $x^2 = k$?</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="decision-tree" style="margin-top: -15px;">
+                <div class="tree-connector" style="margin-left: 200px;">
+                    <div class="tree-branch">
+                        <div class="tree-label">YES</div>
+                        <div class="tree-arrow">&#8595;</div>
+                        <div class="tree-node tree-action">
+                            <strong>Take square roots</strong><br>
+                            $x = \pm\sqrt{k}$
+                        </div>
+                    </div>
+                    <div class="tree-branch">
+                        <div class="tree-label">NO</div>
+                        <div class="tree-arrow">&#8595;</div>
+                        <div class="tree-node tree-action">
+                            <strong>Use the Quadratic Formula</strong><br>
+                            <span style="font-size: 0.9em;">Always works!</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="figure-caption">
+                <span class="figure-number">Fig. 16.9:</span> Decision tree for solving quadratic equations. Factoring is fastest when it works; the quadratic formula is the reliable fallback.
+            </p>
+        </div>
+        
+        <p>
+            <strong>Completing the square</strong> is also available but is typically used for specific purposes: deriving the quadratic formula, converting to vertex form, or when the equation is already close to a perfect square.
+        </p>
+        
+        <h3>Connecting Algebra and Geometry</h3>
+        
+        <p>
+            One of the key themes of this section is the connection between algebraic solutions and geometric interpretation:
+        </p>
+        
+        <table style="margin: 20px auto;">
+            <tr>
+                <th>Algebraic Question</th>
+                <th>Geometric Interpretation</th>
+            </tr>
+            <tr>
+                <td>Solutions of $ax^2 + bx + c = 0$</td>
+                <td>$x$-intercepts of $y = ax^2 + bx + c$</td>
+            </tr>
+            <tr>
+                <td>Number of real solutions</td>
+                <td>How many times parabola crosses $x$-axis</td>
+            </tr>
+            <tr>
+                <td>Discriminant $D$</td>
+                <td>$D > 0$: crosses twice; $D = 0$: touches once; $D < 0$: doesn't reach</td>
+            </tr>
+            <tr>
+                <td>Vertex ($x = -b/2a$)</td>
+                <td>Maximum or minimum point of parabola</td>
+            </tr>
+            <tr>
+                <td>Sign of $a$</td>
+                <td>Parabola opens up ($a > 0$) or down ($a < 0$)</td>
+            </tr>
+        </table>
+        
+        <h3>Looking Ahead</h3>
+        
+        <p>
+            Quadratic equations are foundational for much of mathematics:
+        </p>
+        
+        <p>
+            <strong>Section 17 (Functions)</strong> will formalize the relationship between equations and their graphs. The parabola $y = ax^2 + bx + c$ is an example of a <em>quadratic function</em>, and you'll learn about function notation, domain, range, and transformations.
+        </p>
+        
+        <p>
+            <strong>Trigonometry</strong> uses quadratic equations frequently. Many trig identities lead to quadratics, and solving triangles often requires quadratic techniques.
+        </p>
+        
+        <p>
+            <strong>Calculus</strong> provides another way to find vertices: the derivative of a function equals zero at maximum and minimum points. For $f(x) = ax^2 + bx + c$, the derivative is $f'(x) = 2ax + b$, and setting this to zero gives $x = -b/(2a)$&mdash;the same vertex formula, derived by a completely different method.
+        </p>
+        
+        <p>
+            <strong>Science and Engineering</strong> are full of quadratic relationships: projectile motion, energy equations, optimization problems, circuit analysis, and statistical curve fitting all use the techniques you've learned here.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS                                                    -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <div class="solution">
+                <p><span class="problem-number">50.</span> Ball thrown straight up, $v_0 = 64$ ft/s from ground level.</p>
+                <p>Height function: $h(t) = -16t^2 + 64t$</p>
+                <p><strong>(a)</strong> Max height at $t = -\frac{64}{2(-16)} = 2$ seconds</p>
+                <p><strong>(b)</strong> $h(2) = -16(4) + 64(2) = -64 + 128 = 64$ feet</p>
+                <p><strong>(c)</strong> Returns when $h(t) = 0$: $-16t^2 + 64t = 0 \Rightarrow -16t(t - 4) = 0 \Rightarrow t = 0$ or $t = 4$</p>
+                <p><strong>Answer:</strong> (a) 2 seconds; (b) 64 feet; (c) 4 seconds</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">51.</span> Stone dropped from 80 feet.</p>
+                <p><strong>(a)</strong> $h(t) = -16t^2 + 80$ (initial velocity is 0)</p>
+                <p><strong>(b)</strong> Solve $-16t^2 + 80 = 0$:</p>
+                <p style="margin-left: 20px;">$16t^2 = 80 \Rightarrow t^2 = 5 \Rightarrow t = \sqrt{5} \approx 2.24$ seconds</p>
+                <p><strong>Answer:</strong> (a) $h(t) = -16t^2 + 80$; (b) $\sqrt{5} \approx 2.24$ seconds</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">52.</span> Projectile: $h_0 = 5$ m, $v_{0y} = 25$ m/s, $v_{0x} = 15$ m/s.</p>
+                <p>Height: $h(t) = -4.9t^2 + 25t + 5$</p>
+                <p><strong>(a)</strong> Max height at $t = \frac{25}{9.8} \approx 2.551$ seconds</p>
+                <p style="margin-left: 20px;">$h(2.551) = -4.9(6.508) + 25(2.551) + 5 \approx -31.89 + 63.78 + 5 = 36.89$ meters</p>
+                <p><strong>(b)</strong> Solve $-4.9t^2 + 25t + 5 = 0$:</p>
+                <p style="margin-left: 20px;">$t = \frac{-25 \pm \sqrt{625 + 98}}{-9.8} = \frac{-25 \pm \sqrt{723}}{-9.8} = \frac{-25 \pm 26.89}{-9.8}$</p>
+                <p style="margin-left: 20px;">Take $t = \frac{-25 - 26.89}{-9.8} = \frac{-51.89}{-9.8} \approx 5.30$ seconds</p>
+                <p><strong>(c)</strong> Horizontal distance: $15 \times 5.30 \approx 79.5$ meters</p>
+                <p><strong>Answer:</strong> (a) About 36.9 meters; (b) About 5.30 seconds; (c) About 79.5 meters</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">53.</span> 200 feet of fencing, four sides.</p>
+                <p>Let $w$ = width. Perimeter: $2w + 2\ell = 200 \Rightarrow \ell = 100 - w$</p>
+                <p>Area: $A = w(100 - w) = -w^2 + 100w$</p>
+                <p>Vertex at $w = \frac{100}{2} = 50$ feet. Then $\ell = 50$ feet.</p>
+                <p><strong>Answer:</strong> 50 ft &times; 50 ft (a square) with area 2500 sq ft</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">54.</span> 180 meters, three sides (river on fourth).</p>
+                <p>Let $w$ = width. Then $2w + \ell = 180 \Rightarrow \ell = 180 - 2w$</p>
+                <p>Area: $A = w(180 - 2w) = -2w^2 + 180w$</p>
+                <p>Vertex at $w = \frac{180}{4} = 45$ meters. Then $\ell = 180 - 90 = 90$ meters.</p>
+                <p><strong>Answer:</strong> 45 m &times; 90 m with area 4050 m&sup2;</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">55.</span> 400 feet, three sides (building on fourth).</p>
+                <p>Let $w$ = width (perpendicular to building). Then $2w + \ell = 400 \Rightarrow \ell = 400 - 2w$</p>
+                <p>Area: $A = w(400 - 2w) = -2w^2 + 400w$</p>
+                <p>Vertex at $w = \frac{400}{4} = 100$ feet. Then $\ell = 200$ feet.</p>
+                <p><strong>Answer:</strong> 100 ft &times; 200 ft with area 20,000 sq ft</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">56.</span> Bookstore: 150 copies at 20 dollars; each 1 dollar decrease adds 10 sales.</p>
+                <p>Let $x$ = number of 1 dollar decreases.</p>
+                <p>Price $= 20 - x$; &nbsp; Copies $= 150 + 10x$</p>
+                <p>Revenue: $R = (20 - x)(150 + 10x) = 3000 + 200x - 150x - 10x^2 = -10x^2 + 50x + 3000$</p>
+                <p>Vertex at $x = \frac{50}{20} = 2.5$</p>
+                <p>Price $= 20 - 2.5 = 17.50$ dollars</p>
+                <p><strong>Answer:</strong> 17.50 dollars per book maximizes revenue</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">57.</span> Software: 200 units at 50 dollars; each 5 dollar decrease adds 25 sales.</p>
+                <p>Let $x$ = number of 5 dollar decreases.</p>
+                <p>Price $= 50 - 5x$; &nbsp; Units $= 200 + 25x$</p>
+                <p>Revenue: $R = (50 - 5x)(200 + 25x) = 10000 + 1250x - 1000x - 125x^2 = -125x^2 + 250x + 10000$</p>
+                <p>Vertex at $x = \frac{250}{250} = 1$</p>
+                <p>Price $= 50 - 5(1) = 45$ dollars</p>
+                <p>Max revenue $= -125 + 250 + 10000 = 10125$ dollars</p>
+                <p><strong>Answer:</strong> 45 dollars per unit maximizes revenue at 10,125 dollars/month</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">58.</span> Rectangle: length = $2w + 3$, area = 77 m&sup2;.</p>
+                <p>$w(2w + 3) = 77 \Rightarrow 2w^2 + 3w - 77 = 0$</p>
+                <p>Using quadratic formula: $w = \frac{-3 \pm \sqrt{9 + 616}}{4} = \frac{-3 \pm 25}{4}$</p>
+                <p>$w = \frac{22}{4} = 5.5$ m (reject negative). Length $= 2(5.5) + 3 = 14$ m.</p>
+                <p><strong>Check:</strong> $5.5 \times 14 = 77$ m&sup2; &#10003;</p>
+                <p><strong>Answer:</strong> Width 5.5 m, length 14 m</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">59.</span> Right triangle with consecutive even integer legs, hypotenuse 10.</p>
+                <p>Let legs be $x$ and $x + 2$.</p>
+                <p>$x^2 + (x + 2)^2 = 100$</p>
+                <p>$x^2 + x^2 + 4x + 4 = 100$</p>
+                <p>$2x^2 + 4x - 96 = 0 \Rightarrow x^2 + 2x - 48 = 0$</p>
+                <p>$(x + 8)(x - 6) = 0 \Rightarrow x = 6$ (reject $-8$)</p>
+                <p><strong>Check:</strong> $6^2 + 8^2 = 36 + 64 = 100 = 10^2$ &#10003;</p>
+                <p><strong>Answer:</strong> The legs are 6 cm and 8 cm</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">60.</span> Photo: width $w$, length $w + 4$. With 2-inch border on all sides, total dimensions are $(w + 4)$ by $(w + 8)$. Total area = 260 in&sup2;.</p>
+                <p>$(w + 4)(w + 8) = 260$</p>
+                <p>$w^2 + 12w + 32 = 260$</p>
+                <p>$w^2 + 12w - 228 = 0$</p>
+                <p>Using quadratic formula: $w = \frac{-12 \pm \sqrt{144 + 912}}{2} = \frac{-12 \pm \sqrt{1056}}{2} = \frac{-12 \pm 32.50}{2}$</p>
+                <p>$w \approx 10.25$ inches (reject negative). Length $\approx 14.25$ inches.</p>
+                <p><strong>Check:</strong> Total: $(10.25 + 4)(10.25 + 8) = 14.25 \times 18.25 \approx 260$ &#10003;</p>
+                <p><strong>Answer:</strong> Photo is approximately 10.25 in &times; 14.25 in</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">61.</span> Need 6 ohms total, resistors in multiples of 5 ohms, consecutive sizes (differ by 5).</p>
+                <p>Let $R_1 = x$ and $R_2 = x + 5$.</p>
+                <p>$\frac{1}{6} = \frac{1}{x} + \frac{1}{x + 5}$</p>
+                <p>Multiply by $6x(x + 5)$:</p>
+                <p>$x(x + 5) = 6(x + 5) + 6x$</p>
+                <p>$x^2 + 5x = 6x + 30 + 6x$</p>
+                <p>$x^2 + 5x = 12x + 30$</p>
+                <p>$x^2 - 7x - 30 = 0$</p>
+                <p>Factor: $(x - 10)(x + 3) = 0$</p>
+                <p>$x = 10$ or $x = -3$. Since resistance must be positive, $x = 10$ ohms.</p>
+                <p><strong>Check:</strong> $\frac{1}{10} + \frac{1}{15} = \frac{3}{30} + \frac{2}{30} = \frac{5}{30} = \frac{1}{6}$, so $R = 6$ ohms. &#10003;</p>
+                <p><strong>Answer:</strong> Use a 10-ohm resistor and a 15-ohm resistor in parallel.</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- END OF BATCH 4                                               -->
+        <!-- ============================================================ -->
+        
+        <hr style="margin: 40px 0; border: none; border-top: 2px dashed #ccc;">
+        
+        <p style="text-align: center; color: #666; font-style: italic;">
+            End of Section 16 (Quadratic Equations). Section 17 continues with Functions.
+        </p>
+        
+    </div>
+    
+</body>
+</html>

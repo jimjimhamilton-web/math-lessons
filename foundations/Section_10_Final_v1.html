@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 9 (Variables and Expressions) - FINAL
+      Version: 1.0
+      Date: 2026-01-26
+      Guidelines Version: Technical Document Implementation v2.1
+      
+      Status: FINAL - Ready for deployment
+      Source: Extracted from Math_Basics_Part_II_chapters9-10-v4.html
+      
+      History:
+        Version 1.0 (2026-01-26): FINAL - Extracted as standalone section.
+          Split from combined sections 9-10 file. Full validation performed.
+        Source v4 (2026-01-03): Improved 9.1 variable intro, calculator guidance,
+          clearer solutions, fixed forward references
+      
+      Figure Inventory:
+        Fig. 9.1: Area model for distributive property (SVG)
+      
+      Validation Status: PASSED
+        - Document structure: PASS
+        - MathJax configuration: PASS
+        - SVG diagrams: PASS (1 diagram, proper viewBox/xmlns)
+        - Encoding (whitelist): PASS
+        - No JSXGraph/Plotly required
+    -->
+    
+    <title>Mathematics Fundamentals: Part II, Section 10 - Linear Equations (v1 Final)</title>
+    
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .section-nav {
+            background-color: #f0f9f0;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border: 1px solid #c3e6cb;
+            font-size: 0.95em;
+        }
+        .section-nav a {
+            color: #1a5f2a;
+            text-decoration: none;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .example {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #ff9800;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .warning {
+            background-color: #ffebee;
+            padding: 20px;
+            border-left: 4px solid #f44336;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #2196f3;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .tech-note {
+            background-color: #f3f4f6;
+            padding: 20px;
+            border: 1px dashed #6b7280;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .tech-note::before {
+            content: "Programming Connection";
+            display: block;
+            font-weight: bold;
+            color: #4b5563;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        .problems {
+            background-color: #fffde7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #fbc02d;
+        }
+        .problems h3 {
+            margin-top: 0;
+            color: #f57f17;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #fff59d;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #f57f17;
+        }
+        .solution {
+            margin-top: 12px;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        .figure-container {
+            margin: 25px 0;
+            padding: 15px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        .figure-caption {
+            text-align: center;
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: #1a5f2a;
+        }
+        
+        code {
+            background-color: #f3f4f6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', Consolas, monospace;
+            font-size: 0.95em;
+        }
+        
+        .step-annotation {
+            color: #666;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .container { padding: 20px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.3em; }
+            code {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section-nav">
+            <a href="Section_09_Final_v1.html">&larr; Section 9: Variables and Expressions</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 10: Linear Equations</span> | 
+            <a href="Section_11_Final_v1.html">Section 11: Inequalities &rarr;</a>
+        </div>
+        
+        <h1 id="section-10">Section 10: Linear Equations</h1>
+        
+        <p>
+            In Section 9, we learned to simplify expressions-but an expression by itself is just a recipe for calculation. When we set two expressions <em>equal</em> to each other, we create an <strong>equation</strong>-a statement that can be true or false depending on the value of the variable. Our job now becomes finding which values make the statement true.
+        </p>
+        
+        <h2 id="sec-10-1">10.1 What Equations Mean</h2>
+        
+        <p>
+            An <strong>equation</strong> is a statement that two expressions have the same value. The key feature is the equals sign: something on the left equals something on the right.
+        </p>
+        
+        <div class="definition">
+            <h4>Equations and Solutions</h4>
+            <p>An <strong>equation</strong> is a mathematical statement that two expressions are equal.</p>
+            <p>A <strong>solution</strong> is a value of the variable that makes the equation true.</p>
+            <p>To <strong>solve</strong> an equation is to find all its solutions, or to show that no solutions exist.</p>
+            <p>Some equations have no solution. Others have exactly one solution, several solutions, or even infinitely many solutions. Part of solving an equation is determining which case applies.</p>
+        </div>
+        
+        <p>
+            Think of an equation as a balance scale. The expression on the left has a certain "weight" (value), and the expression on the right has a weight too. The equation asserts that these weights are equal-the scale is balanced. When an equation involves a variable, changing the variable's value changes the "weight" on one or both sides. Solving an equation means finding values of the variable that make both sides balance, or determining that no such values exist.
+        </p>
+        
+        <div class="figure-container">
+            <svg width="600" height="220" viewBox="0 0 600 220" style="display: block; margin: 0 auto;">
+                <!-- SCALE 1: Unknown (level, with question mark) -->
+                <!-- Base/stand -->
+                <polygon points="100,200 70,200 85,180 115,180 130,200" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                <rect x="95" y="120" width="10" height="60" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                
+                <!-- Balance beam (level) -->
+                <line x1="30" y1="110" x2="170" y2="110" stroke="#666" stroke-width="5" stroke-linecap="round"/>
+                
+                <!-- Fulcrum triangle -->
+                <polygon points="100,110 92,120 108,120" fill="#666"/>
+                
+                <!-- Left pan -->
+                <ellipse cx="50" cy="115" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="30" y1="110" x2="30" y2="115" stroke="#666" stroke-width="2"/>
+                <line x1="70" y1="110" x2="70" y2="115" stroke="#666" stroke-width="2"/>
+                
+                <!-- Right pan -->
+                <ellipse cx="150" cy="115" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="130" y1="110" x2="130" y2="115" stroke="#666" stroke-width="2"/>
+                <line x1="170" y1="110" x2="170" y2="115" stroke="#666" stroke-width="2"/>
+                
+                <!-- Content -->
+                <text x="50" y="95" text-anchor="middle" font-size="14" font-style="italic" fill="#1a5f2a">3x + 5</text>
+                <text x="150" y="95" text-anchor="middle" font-size="14" fill="#1a5f2a">14</text>
+                
+                <!-- Question mark equals -->
+                <text x="100" y="70" text-anchor="middle" font-size="16" fill="#333">=?</text>
+                
+                <!-- Label -->
+                <text x="100" y="215" text-anchor="middle" font-size="11" fill="#666">What value of x?</text>
+                
+                
+                <!-- SCALE 2: x=2, tips right (14 is heavier) -->
+                <!-- Base/stand -->
+                <polygon points="300,200 270,200 285,180 315,180 330,200" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                <rect x="295" y="120" width="10" height="60" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                
+                <!-- Balance beam (tilted - right side down) -->
+                <line x1="230" y1="100" x2="370" y2="125" stroke="#666" stroke-width="5" stroke-linecap="round"/>
+                
+                <!-- Fulcrum triangle -->
+                <polygon points="300,112 292,122 308,122" fill="#666"/>
+                
+                <!-- Left pan (higher) -->
+                <ellipse cx="250" cy="105" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="230" y1="100" x2="230" y2="105" stroke="#666" stroke-width="2"/>
+                <line x1="270" y1="104" x2="270" y2="109" stroke="#666" stroke-width="2"/>
+                
+                <!-- Right pan (lower) -->
+                <ellipse cx="350" cy="130" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="330" y1="121" x2="330" y2="126" stroke="#666" stroke-width="2"/>
+                <line x1="370" y1="125" x2="370" y2="130" stroke="#666" stroke-width="2"/>
+                
+                <!-- Content -->
+                <text x="250" y="85" text-anchor="middle" font-size="14" fill="#c62828">3(2) + 5 = 11</text>
+                <text x="350" y="150" text-anchor="middle" font-size="14" fill="#1a5f2a">14</text>
+                
+                <!-- Not equal -->
+                <text x="300" y="70" text-anchor="middle" font-size="16" fill="#c62828">≠</text>
+                
+                <!-- Label -->
+                <text x="300" y="215" text-anchor="middle" font-size="11" fill="#c62828">x = 2: Too light!</text>
+                
+                
+                <!-- SCALE 3: x=3, balanced -->
+                <!-- Base/stand -->
+                <polygon points="500,200 470,200 485,180 515,180 530,200" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                <rect x="495" y="120" width="10" height="60" fill="#8B4513" stroke="#5D3A1A" stroke-width="2"/>
+                
+                <!-- Balance beam (level) -->
+                <line x1="430" y1="110" x2="570" y2="110" stroke="#666" stroke-width="5" stroke-linecap="round"/>
+                
+                <!-- Fulcrum triangle -->
+                <polygon points="500,110 492,120 508,120" fill="#666"/>
+                
+                <!-- Left pan -->
+                <ellipse cx="450" cy="115" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="430" y1="110" x2="430" y2="115" stroke="#666" stroke-width="2"/>
+                <line x1="470" y1="110" x2="470" y2="115" stroke="#666" stroke-width="2"/>
+                
+                <!-- Right pan -->
+                <ellipse cx="550" cy="115" rx="30" ry="6" fill="#CD853F" stroke="#8B4513" stroke-width="2"/>
+                <line x1="530" y1="110" x2="530" y2="115" stroke="#666" stroke-width="2"/>
+                <line x1="570" y1="110" x2="570" y2="115" stroke="#666" stroke-width="2"/>
+                
+                <!-- Content -->
+                <text x="450" y="95" text-anchor="middle" font-size="14" fill="#2d8a4e">3(3) + 5 = 14</text>
+                <text x="550" y="95" text-anchor="middle" font-size="14" fill="#2d8a4e">14</text>
+                
+                <!-- Equals (checkmark) -->
+                <text x="500" y="70" text-anchor="middle" font-size="16" fill="#2d8a4e">=  ✓</text>
+                
+                <!-- Label -->
+                <text x="500" y="215" text-anchor="middle" font-size="11" fill="#2d8a4e">x = 3: Balanced!</text>
+            </svg>
+            <div class="figure-caption">Fig. 10.1: An equation is like a balance scale. Solving means finding the value of the variable that makes both sides balance.</div>
+        </div>
+        
+        <div class="example">
+            <h4>Checking Solutions</h4>
+            
+            <p><strong>Is $x = 3$ a solution to $2x + 1 = 7$?</strong></p>
+            <p>Substitute: $2(3) + 1 = 6 + 1 = 7$ (matches right side)</p>
+            <p>Yes, $x = 3$ is a solution.</p>
+            
+            <p><strong>Is $x = 4$ a solution to $2x + 1 = 7$?</strong></p>
+            <p>Substitute: $2(4) + 1 = 8 + 1 = 9 \neq 7$</p>
+            <p>No, $x = 4$ is not a solution.</p>
+            
+            <p><strong>Is $y = -2$ a solution to $y^2 - 3y = 10$?</strong></p>
+            <p>Substitute: $(-2)^2 - 3(-2) = 4 + 6 = 10$ (matches)</p>
+            <p>Yes, $y = -2$ is a solution.</p>
+        </div>
+        
+        <h2 id="sec-10-2">10.2 The Landscape of Equations</h2>
+        
+        <p>
+            Not all equations are created equal. They come in different types, and each type requires different techniques to solve. Before we focus on the simplest type, let's see the broader landscape.
+        </p>
+        
+        <div class="figure-container">
+            <svg width="500" height="280" viewBox="0 0 500 280" style="display: block; margin: 0 auto;">
+                <!-- Title -->
+                <text x="250" y="25" text-anchor="middle" font-size="16" font-weight="bold" fill="#1a5f2a">Types of Equations</text>
+                
+                <!-- Linear box -->
+                <rect x="20" y="45" width="140" height="70" rx="8" fill="#e8f5e9" stroke="#2d8a4e" stroke-width="2"/>
+                <text x="90" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a5f2a">Linear</text>
+                <text x="90" y="90" text-anchor="middle" font-size="12" fill="#333">3x + 5 = 14</text>
+                <text x="90" y="105" text-anchor="middle" font-size="10" fill="#666">(Section 10)</text>
+                
+                <!-- Quadratic box -->
+                <rect x="180" y="45" width="140" height="70" rx="8" fill="#e3f2fd" stroke="#2196f3" stroke-width="2"/>
+                <text x="250" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#1565c0">Quadratic</text>
+                <text x="250" y="90" text-anchor="middle" font-size="12" fill="#333">x^2 - 5x + 6 = 0</text>
+                <text x="250" y="105" text-anchor="middle" font-size="10" fill="#666">(Section 17)</text>
+                
+                <!-- Polynomial box -->
+                <rect x="340" y="45" width="140" height="70" rx="8" fill="#fff3e0" stroke="#ff9800" stroke-width="2"/>
+                <text x="410" y="70" text-anchor="middle" font-size="13" font-weight="bold" fill="#e65100">Polynomial</text>
+                <text x="410" y="90" text-anchor="middle" font-size="12" fill="#333">x^3 - 2x^2 + x = 0</text>
+                <text x="410" y="105" text-anchor="middle" font-size="10" fill="#666">(Sections 15-16)</text>
+                
+                <!-- Transcendental boxes -->
+                <rect x="20" y="135" width="220" height="70" rx="8" fill="#faf5ff" stroke="#9c27b0" stroke-width="2"/>
+                <text x="130" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#7b1fa2">Transcendental</text>
+                <text x="130" y="180" text-anchor="middle" font-size="12" fill="#333">sin(x) = 0.5,  2^x = 8,  log(x) = 2</text>
+                <text x="130" y="195" text-anchor="middle" font-size="10" fill="#666">(Trig and Exp/Log lessons)</text>
+                
+                <!-- Differential equations box -->
+                <rect x="260" y="135" width="220" height="70" rx="8" fill="#ffebee" stroke="#f44336" stroke-width="2"/>
+                <text x="370" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#c62828">Differential</text>
+                <text x="370" y="180" text-anchor="middle" font-size="12" fill="#333">dy/dx = 2y</text>
+                <text x="370" y="195" text-anchor="middle" font-size="10" fill="#666">(Calculus lesson)</text>
+                
+                <!-- Complexity arrow -->
+                <line x1="50" y1="240" x2="450" y2="240" stroke="#999" stroke-width="2" marker-end="url(#arrowhead)"/>
+                <text x="250" y="265" text-anchor="middle" font-size="12" fill="#666">Increasing complexity of solution methods</text>
+                
+                <!-- Arrow marker definition -->
+                <defs>
+                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#999"/>
+                    </marker>
+                </defs>
+            </svg>
+            <div class="figure-caption">Fig. 10.2: Equations come in different types, each requiring different solution techniques.</div>
+        </div>
+        
+        <p>
+            <strong>Linear equations</strong> (like $3x + 5 = 14$) have the variable only to the first power-no $x^2$, no $x^3$, no $x$ in a denominator or under a root. These are the simplest equations and always yield to systematic methods.
+        </p>
+        
+        <p>
+            <strong>Quadratic equations</strong> (like $x^2 - 5x + 6 = 0$) have the variable squared. They can have zero, one, or two solutions. We'll tackle these in Section 17.
+        </p>
+        
+        <p>
+            <strong>Polynomial equations</strong> of higher degree (cubic, quartic, etc.) involve $x^3$, $x^4$, and beyond. Their solution methods range from factoring to specialized formulas to numerical approximation.
+        </p>
+        
+        <p>
+            <strong>Transcendental equations</strong> involve functions like $\sin$, $\cos$, $\log$, or exponentials. These often require techniques from trigonometry or logarithms-see the companion lessons on those topics.
+        </p>
+        
+        <p>
+            <strong>Differential equations</strong> go a step further-they involve not just variables, but how variables <em>change</em>. An equation like $\frac{dy}{dx} = 2y$ relates a quantity to its own rate of change. These equations require entirely new concepts from calculus. See the box below if you're curious about where this leads.
+        </p>
+        
+        <div class="enrichment">
+            <h4>The Bigger Picture: Equations with Rates of Change</h4>
+            <p>
+                The equations above all ask "what value of $x$ makes this true?" But some of the most powerful equations in science describe how things <em>change</em>. A <strong>differential equation</strong> like $\frac{dy}{dx} = 2y$ says "the rate of change of $y$ is proportional to $y$ itself." Such equations model population growth, radioactive decay, compound interest, and much more.
+            </p>
+            <p>
+                Solving differential equations requires calculus-specifically, finding functions whose derivatives have specified properties. The companion calculus lesson introduces derivatives (the instantaneous rate of change) and shows how they become mathematical objects in their own right. Understanding linear and quadratic equations first provides essential foundation for that journey.
+            </p>
+        </div>
+        
+        <h2 id="sec-10-3">10.3 Properties of Equality</h2>
+        
+        <p>
+            Before we focus on specific types of equations, let's establish the fundamental rules that apply to <em>all</em> equations. The balance scale metaphor tells us what we can do to an equation without breaking it: whatever we do to one side, we must do to the other to keep the scale balanced.
+        </p>
+        
+        <div class="key-point">
+            <h4>Properties of Equality</h4>
+            
+            <p><strong>Addition Property:</strong> If $a = b$, then $a + c = b + c$</p>
+            <p style="margin-left: 20px;">You can add the same quantity to both sides.</p>
+            
+            <p><strong>Subtraction Property:</strong> If $a = b$, then $a - c = b - c$</p>
+            <p style="margin-left: 20px;">You can subtract the same quantity from both sides.</p>
+            
+            <p><strong>Multiplication Property:</strong> If $a = b$, then $ac = bc$</p>
+            <p style="margin-left: 20px;">You can multiply both sides by the same quantity.</p>
+            
+            <p><strong>Division Property:</strong> If $a = b$ and $c \neq 0$, then $\frac{a}{c} = \frac{b}{c}$</p>
+            <p style="margin-left: 20px;">You can divide both sides by the same nonzero quantity.</p>
+        </div>
+        
+        <p>
+            These properties are universal-they work for linear equations, quadratic equations, and every other type. They're the fundamental tools for equation-solving. Notice that division requires $c \neq 0$-you can never divide by zero.
+        </p>
+        
+        <h2 id="sec-10-4">10.4 Focus: Linear Equations</h2>
+        
+        <p>
+            For the rest of this section, we focus on <strong>linear equations</strong>-equations where the variable appears only to the first power, not multiplied by itself or inside other functions.
+        </p>
+        
+        <div class="definition">
+            <h4>Linear Equation in One Variable</h4>
+            <p>A <strong>linear equation in one variable</strong> is an equation that can be written in the form</p>
+            <p style="text-align: center;">$ax + b = c$</p>
+            <p>where $a$, $b$, and $c$ are constants and $a \neq 0$.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Linear or Not?</h4>
+            
+            <p><strong>$2x + 5 = 11$</strong> - Linear (variable to first power only)</p>
+            
+            <p><strong>$x^2 = 9$</strong> - Not linear (variable is squared)</p>
+            
+            <p><strong>$\frac{x}{3} + 4 = 7$</strong> - Linear ($\frac{x}{3} = \frac{1}{3}x$, still first power)</p>
+            
+            <p><strong>$\frac{5}{x} = 2$</strong> - Not linear (variable in denominator means $x^{-1}$)</p>
+            
+            <p><strong>$3(x - 2) = x + 4$</strong> - Linear. Since $3(x-2) = 3x - 6$, this equation can be rewritten as $3x - 6 = x + 4$, which simplifies to $2x = 10$. All terms have $x$ to the first power.</p>
+            
+            <p><strong>$\sqrt{x} = 4$</strong> - Not linear (square root means $x^{1/2}$)</p>
+        </div>
+        
+        <p>
+            Why start with linear equations? Because they have a wonderful property: there's a systematic method that <em>always works</em>. Every linear equation has exactly one solution (with rare special cases we'll address). And the technique for solving them-using inverse operations to isolate the variable-extends to more complex equations later.
+        </p>
+        
+        <h2 id="sec-10-5">10.5 Solving One-Step Equations</h2>
+        
+        <p>
+            The goal of solving an equation is to <strong>isolate the variable</strong>-get the variable alone on one side with a number on the other. For one-step equations, a single operation does the job.
+        </p>
+        
+        <p>
+            The key insight is using <strong>inverse operations</strong>: operations that undo each other. Addition and subtraction are inverses; multiplication and division are inverses.
+        </p>
+        
+        <div class="example">
+            <h4>One-Step Equations</h4>
+            
+            <p><strong>Solve $x + 8 = 15$:</strong></p>
+            <p>$x + 8 - 8 = 15 - 8$</p>
+            <p>$x = 7$</p>
+            <p class="step-annotation">Check: $7 + 8 = 15$ (correct)</p>
+            
+            <p><strong>Solve $y - 3 = 10$:</strong></p>
+            <p>$y - 3 + 3 = 10 + 3$</p>
+            <p>$y = 13$</p>
+            <p class="step-annotation">Check: $13 - 3 = 10$ (correct)</p>
+            
+            <p><strong>Solve $5x = 35$:</strong></p>
+            <p>$\frac{5x}{5} = \frac{35}{5}$</p>
+            <p>$x = 7$</p>
+            <p class="step-annotation">Check: $5(7) = 35$ (correct)</p>
+            
+            <p><strong>Solve $\frac{n}{4} = 6$:</strong></p>
+            <p>$\frac{n}{4} \cdot 4 = 6 \cdot 4$</p>
+            <p>$n = 24$</p>
+            <p class="step-annotation">Check: $\frac{24}{4} = 6$ (correct)</p>
+        </div>
+        
+        <h2 id="sec-10-6">10.6 Solving Two-Step Equations</h2>
+        
+        <p>
+            When an equation requires two operations to solve, we typically undo addition/subtraction first, then multiplication/division. Think of it as "peeling off layers" from the variable.
+        </p>
+        
+        <div class="key-point">
+            <h4>Two-Step Strategy</h4>
+            <ol>
+                <li>Undo addition or subtraction (isolate the term containing the variable)</li>
+                <li>Undo multiplication or division (isolate the variable itself)</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Two-Step Equations</h4>
+            
+            <p><strong>Solve $2x + 5 = 13$:</strong></p>
+            <p>$2x + 5 - 5 = 13 - 5$ <span class="step-annotation">(subtract 5)</span></p>
+            <p>$2x = 8$</p>
+            <p>$x = 4$ <span class="step-annotation">(divide by 2)</span></p>
+            <p class="step-annotation">Check: $2(4) + 5 = 8 + 5 = 13$ (correct)</p>
+            
+            <p><strong>Solve $\frac{x}{3} - 7 = 2$:</strong></p>
+            <p>$\frac{x}{3} = 9$ <span class="step-annotation">(add 7)</span></p>
+            <p>$x = 27$ <span class="step-annotation">(multiply by 3)</span></p>
+            <p class="step-annotation">Check: $\frac{27}{3} - 7 = 9 - 7 = 2$ (correct)</p>
+            
+            <p><strong>Solve $15 - 4y = 3$:</strong></p>
+            <p>$-4y = -12$ <span class="step-annotation">(subtract 15)</span></p>
+            <p>$y = 3$ <span class="step-annotation">(divide by $-4$)</span></p>
+            <p class="step-annotation">Check: $15 - 4(3) = 15 - 12 = 3$ (correct)</p>
+        </div>
+        
+        <h2 id="sec-10-7">10.7 Solving Multi-Step Equations</h2>
+        
+        <p>
+            More complex equations require simplifying each side first, then applying our solving techniques.
+        </p>
+        
+        <div class="key-point">
+            <h4>Multi-Step Strategy</h4>
+            <ol>
+                <li><strong>Simplify each side</strong> (distribute, combine like terms)</li>
+                <li><strong>Collect variable terms on one side</strong></li>
+                <li><strong>Collect constants on the other side</strong></li>
+                <li><strong>Isolate the variable</strong> (divide by the coefficient)</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Equations Requiring Distribution</h4>
+            
+            <p><strong>Solve $3(x + 4) = 21$:</strong></p>
+            <p>$3x + 12 = 21$ <span class="step-annotation">(distribute)</span></p>
+            <p>$3x = 9$, so $x = 3$</p>
+            <p class="step-annotation">Check: $3(3 + 4) = 3(7) = 21$ (correct)</p>
+            
+            <p><strong>Solve $5x + 3 = 2x + 15$:</strong></p>
+            <p>$3x + 3 = 15$ <span class="step-annotation">(subtract $2x$)</span></p>
+            <p>$3x = 12$, so $x = 4$</p>
+            <p class="step-annotation">Check: $5(4) + 3 = 23$ and $2(4) + 15 = 23$ (both equal)</p>
+        </div>
+        
+        <div class="example">
+            <h4>Clearing Fractions</h4>
+            
+            <p>Equations with fractions can look intimidating, but there's a systematic approach: multiply every term by a common multiple of the denominators to eliminate all fractions at once. Using the least common denominator (LCD) keeps the numbers smallest, but any common multiple works. A simple approach is to just multiply all the denominators together-it's larger than the LCD, but always works.</p>
+            
+            <p><strong>Solve $\frac{x}{2} + \frac{x}{3} = 10$:</strong></p>
+            <p>Multiply by LCD (6): $3x + 2x = 60$</p>
+            <p>$5x = 60$, so $x = 12$</p>
+            <p class="step-annotation">Check: $\frac{12}{2} + \frac{12}{3} = 6 + 4 = 10$ (correct)</p>
+            
+            <p><strong>Solve $\frac{2x - 1}{3} = \frac{x + 4}{5}$:</strong></p>
+            <p>Multiply by LCD (15): $5(2x - 1) = 3(x + 4)$</p>
+            <p>$10x - 5 = 3x + 12$</p>
+            <p>$7x = 17$</p>
+            <p>$x = \frac{17}{7}$</p>
+            <p class="step-annotation">Check: $\frac{2(\frac{17}{7}) - 1}{3} = \frac{\frac{34}{7} - \frac{7}{7}}{3} = \frac{\frac{27}{7}}{3} = \frac{27}{21} = \frac{9}{7}$</p>
+            <p class="step-annotation">And $\frac{\frac{17}{7} + 4}{5} = \frac{\frac{17}{7} + \frac{28}{7}}{5} = \frac{\frac{45}{7}}{5} = \frac{45}{35} = \frac{9}{7}$ (both equal)</p>
+            
+            <p><strong>Solve $\frac{3x + 2}{4} - \frac{x - 1}{6} = 2$:</strong></p>
+            <p>Multiply by LCD (12): $3(3x + 2) - 2(x - 1) = 24$</p>
+            <p>$9x + 6 - 2x + 2 = 24$</p>
+            <p>$7x + 8 = 24$</p>
+            <p>$7x = 16$</p>
+            <p>$x = \frac{16}{7}$</p>
+            <p class="step-annotation">This is approximately $2.286$. Not a "nice" number, but perfectly valid!</p>
+            
+            <p><strong>Solve $0.4x + 1.5 = 0.6x - 0.3$:</strong></p>
+            <p>Decimals are just fractions in disguise. Multiply by 10 to clear them:</p>
+            <p>$4x + 15 = 6x - 3$</p>
+            <p>$18 = 2x$</p>
+            <p>$x = 9$</p>
+            <p class="step-annotation">Check: $0.4(9) + 1.5 = 3.6 + 1.5 = 5.1$ and $0.6(9) - 0.3 = 5.4 - 0.3 = 5.1$ (correct)</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Don't Expect Nice Numbers!</h4>
+            <p>In real applications, solutions are often fractions or decimals, not convenient integers. The solutions $x = \frac{17}{7}$ or $x = -2.783$ are just as valid as $x = 3$-they simply mean the check requires more work. A non-integer answer isn't a sign that you've made an error.</p>
+            <p>Some solutions can't even be written exactly as fractions or terminating decimals. Consider the equation $x^2 = 2$. The exact solution is $x = \sqrt{2}$. As we'll see in a later lesson, $\sqrt{2}$ is <em>irrational</em>-its decimal expansion goes on forever without repeating: $1.41421356...$</p>
+            <p>In practice, an engineer or scientist decides how much precision is needed. The approximation $1.414$ might suffice for rough work, since $1.414^2 = 1.999396$, pretty close to 2. For greater accuracy, you might use $1.41421$, giving $1.41421^2 = 1.9999899...$. No matter how many digits you use, your decimal answer will never be <em>exactly</em> right-but it can be as close as you need.</p>
+        </div>
+        
+        <h2 id="sec-10-8">10.8 Special Cases</h2>
+        
+        <p>
+            Most linear equations have exactly one solution. But two special cases can occur:
+        </p>
+        
+        <div class="definition">
+            <h4>Special Cases</h4>
+            <p><strong>No solution (contradiction):</strong> The equation simplifies to a false statement like $5 = 3$. No value of the variable works.</p>
+            <p><strong>Infinitely many solutions (identity):</strong> The equation simplifies to a true statement like $5 = 5$. Every value of the variable works.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Recognizing Special Cases</h4>
+            
+            <p><strong>Solve $2(x + 3) = 2x + 5$:</strong></p>
+            <p>$2x + 6 = 2x + 5$</p>
+            <p>$6 = 5$ <span class="step-annotation">(subtract $2x$)</span></p>
+            <p>This is false! <strong>No solution.</strong></p>
+            
+            <p><strong>Solve $3(x - 2) = 3x - 6$:</strong></p>
+            <p>$3x - 6 = 3x - 6$</p>
+            <p>$0 = 0$</p>
+            <p>This is always true! <strong>Infinitely many solutions.</strong></p>
+        </div>
+        
+        <h2 id="sec-10-9">10.9 Word Problems and Applications</h2>
+        
+        <p>
+            The real power of algebra is solving problems stated in words. Many students find word problems challenging, but they follow a systematic process.
+        </p>
+        
+        <div class="key-point">
+            <h4>Translating Word Problems</h4>
+            <ol>
+                <li><strong>Read carefully</strong> and identify what you're looking for</li>
+                <li><strong>Define a variable:</strong> "Let $x$ = ..." (be specific about units!)</li>
+                <li><strong>Translate</strong> the relationships into an equation</li>
+                <li><strong>Solve</strong> the equation</li>
+                <li><strong>Check</strong> your answer against the original problem (not just the equation)</li>
+                <li><strong>State your answer</strong> with appropriate units and precision</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Number Problems</h4>
+            
+            <p><strong>"Three more than twice a number is 17. Find the number."</strong></p>
+            <p>Let $n$ = the number. Equation: $2n + 3 = 17$</p>
+            <p>$2n = 14$, so $n = 7$</p>
+            <p>Check: Three more than twice 7 is $2(7) + 3 = 17$ (correct)</p>
+            
+            <p><strong>"When a number is increased by 20% of itself, the result is 54. Find the number."</strong></p>
+            <p>Let $n$ = the number. "Increased by 20% of itself" means $n + 0.20n = 1.20n$</p>
+            <p>Equation: $1.20n = 54$</p>
+            <p>$n = \frac{54}{1.20} = 45$</p>
+            <p>Check: $45 + 0.20(45) = 45 + 9 = 54$ (correct)</p>
+        </div>
+        
+        <div class="example">
+            <h4>Geometry Problems</h4>
+            
+            <p><strong>"A rectangle's length is 4 more than its width. The perimeter is 56 cm. Find the dimensions."</strong></p>
+            <p>Let $w$ = width. Length $= w + 4$</p>
+            <p>Perimeter: $2w + 2(w + 4) = 56$</p>
+            <p>$4w + 8 = 56$, so $4w = 48$, $w = 12$</p>
+            <p>Width = 12 cm, Length = 16 cm</p>
+            
+            <p><strong>"A triangle has a perimeter of 50 inches. The second side is twice the first side, and the third side is 5 inches longer than the first. Find all three sides."</strong></p>
+            <p>Let $x$ = first side. Second side $= 2x$. Third side $= x + 5$.</p>
+            <p>Equation: $x + 2x + (x + 5) = 50$</p>
+            <p>$4x + 5 = 50$</p>
+            <p>$4x = 45$</p>
+            <p>$x = \frac{45}{4} = 11.25$ inches</p>
+            <p>First side: 11.25 in, Second side: 22.5 in, Third side: 16.25 in</p>
+            <p>Check: $11.25 + 22.5 + 16.25 = 50$ (correct)</p>
+            
+            <p><strong>"A circular garden has a circumference of 25 feet. What is its diameter?"</strong></p>
+            <p>Let $d$ = diameter. Circumference formula: $C = \pi d$</p>
+            <p>Equation: $\pi d = 25$</p>
+            <p>$d = \frac{25}{\pi}$</p>
+            <p>This is an <em>exact</em> answer, but since $\pi$ is irrational, the decimal never terminates:</p>
+            <p>$d \approx 7.96$ feet (rounded to two decimal places)</p>
+            <p>$d \approx 7.958$ feet (to three decimal places)</p>
+            <p class="step-annotation">Note: $\frac{25}{\pi}$ is the exact answer. The decimal approximations are for practical use.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Money and Business Problems</h4>
+            
+            <p><strong>"A store marks up items by 35%. If a shirt sells for 48.60 dollars, what was the wholesale cost?"</strong></p>
+            <p>Let $c$ = wholesale cost. After 35% markup: $c + 0.35c = 1.35c$</p>
+            <p>Equation: $1.35c = 48.60$</p>
+            <p>$c = \frac{48.60}{1.35} = 36$</p>
+            <p class="step-annotation">Calculator tip: Just compute $48.60 \div 1.35$. Or simplify the fraction: $\frac{48.60}{1.35} = \frac{4860}{135} = \frac{972}{27}$ (divide by 5) $= \frac{324}{9}$ (divide by 3) $= 36$.</p>
+            <p>Wholesale cost: 36.00 dollars</p>
+            <p>Check: $36 + 0.35(36) = 36 + 12.60 = 48.60$ (correct)</p>
+            
+            <p><strong>"You invest a total of 5,000 dollars in two accounts. One pays 4% annual interest, the other pays 6%. After one year, your total interest is 248 dollars. How much did you invest in each account?"</strong></p>
+            <p>Let $x$ = amount at 4%. Then $5000 - x$ = amount at 6%.</p>
+            <p>Interest equation: $0.04x + 0.06(5000 - x) = 248$</p>
+            <p>$0.04x + 300 - 0.06x = 248$</p>
+            <p>$-0.02x = -52$</p>
+            <p>$x = 2600$</p>
+            <p>Answer: 2,600 dollars at 4%, 2,400 dollars at 6%</p>
+            <p>Check: $0.04(2600) + 0.06(2400) = 104 + 144 = 248$ (correct)</p>
+        </div>
+        
+        <div class="example">
+            <h4>Mixture and Rate Problems</h4>
+            
+            <p><strong>"How many liters of a 40% acid solution must be mixed with 8 liters of a 70% acid solution to produce a 50% acid solution?"</strong></p>
+            <p>Let $x$ = liters of 40% solution. Note: The final mixture will contain $x + 8$ liters total.</p>
+            <p>Acid content: (acid in 40%) + (acid in 70%) = (acid in mixture)</p>
+            <p>$0.40x + 0.70(8) = 0.50(x + 8)$</p>
+            <p>$0.40x + 5.6 = 0.50x + 4$</p>
+            <p>$1.6 = 0.10x$</p>
+            <p>$x = 16$ liters</p>
+            <p>Check: $0.40(16) + 0.70(8) = 6.4 + 5.6 = 12$ liters of acid</p>
+            <p>Total mixture: $16 + 8 = 24$ liters. Concentration: $\frac{12}{24} = 0.50 = 50\%$ (correct)</p>
+            
+            <p><strong>"A car travels at 55 mph for part of a trip and 70 mph for the rest. The total trip is 180 miles and takes 3 hours. How long was each part?"</strong></p>
+            <p>Let $t$ = time at 55 mph (in hours). Then $3 - t$ = time at 70 mph.</p>
+            <p>Distance equation: $55t + 70(3 - t) = 180$</p>
+            <p>$55t + 210 - 70t = 180$</p>
+            <p>$-15t = -30$</p>
+            <p>$t = 2$ hours</p>
+            <p>Answer: 2 hours at 55 mph, 1 hour at 70 mph</p>
+            <p>Check: $55(2) + 70(1) = 110 + 70 = 180$ miles (correct)</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Real-World Answers Aren't Always "Nice"</h4>
+            <p>In textbook problems, answers are often chosen to come out as integers. In real applications, expect decimals, fractions, and sometimes irrational numbers. A measurement of $11.25$ inches or $\frac{25}{\pi}$ feet is just as valid as $12$ inches. When an answer involves $\pi$, $\sqrt{2}$, or similar constants, you may need to:</p>
+            <ul>
+                <li>Give the exact answer (like $\frac{25}{\pi}$) for mathematical precision</li>
+                <li>Give a decimal approximation (like $7.96$ feet) for practical use</li>
+                <li>State the precision (how many decimal places) appropriate to the situation</li>
+            </ul>
+        </div>
+        
+        <div class="tech-note">
+            <p>
+                Equations appear constantly in programming. When you write <code>if score + bonus == 100</code>, you're checking whether an equation is satisfied. Game physics, financial calculations, and data validation all involve setting up and solving equations-often the same kinds of linear equations we've been studying, just computed thousands of times per second.
+            </p>
+        </div>
+        
+        <div class="historical-note">
+            <p>
+                The word "algebra" comes from <em>al-jabr</em>, meaning "restoration" or "completion," from the title of a 9th-century book by Persian mathematician Muhammad ibn Musa al-Khwarizmi. His name also gave us the word "algorithm." Al-Khwarizmi's book systematically solved linear and quadratic equations-not with our modern notation (that came centuries later), but with verbal recipes. The systematic approach-identify the equation type, apply the appropriate method-is essentially what we still do today.
+            </p>
+        </div>
+        
+        <h2 id="sec-10-10">10.10 Practice Problems</h2>
+        
+        <div class="problems">
+            <h3>Section 10 Practice: Equations</h3>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> Determine whether each value is a solution:</p>
+                <p>(a) $3x - 5 = 7$; is $x = 4$ a solution?</p>
+                <p>(b) $2y + 8 = 3y + 5$; is $y = 3$ a solution?</p>
+                <p>(c) $0.5x + 1.5 = 3$; is $x = 3$ a solution?</p>
+                <p>(d) $\frac{2x - 1}{3} = 1$; is $x = 2$ a solution?</p>
+                <p>(e) $4x - 7 = 2x + 3$; is $x = 4$ a solution?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> Classify as linear or not linear:</p>
+                <p>(a) $4x - 9 = 15$ (b) $x^2 + 3x = 10$ (c) $\frac{x + 1}{5} = 3$ (d) $2^x = 16$ (e) $0.3x - 1.7 = 2.5$ (f) $\frac{3}{x} = 6$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> Solve each one-step equation:</p>
+                <p>(a) $x + 9 = 17$ (b) $y - 5 = -3$ (c) $4m = -28$ (d) $\frac{n}{6} = 8$</p>
+                <p>(e) $x + 3.7 = 5.2$ (f) $y - 0.45 = 1.8$ (g) $1.5m = 9$ (h) $\frac{n}{2.5} = 4$</p>
+                <p>(i) $x + \frac{2}{3} = \frac{5}{6}$ (j) $\frac{3}{4}y = 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> Solve each two-step equation:</p>
+                <p>(a) $3x + 7 = 22$ (b) $\frac{y}{4} - 3 = 5$ (c) $20 - 5t = 0$ (d) $-2w + 9 = 1$</p>
+                <p>(e) $2.5x + 3 = 13$ (f) $\frac{y}{0.5} + 4 = 10$ (g) $0.4x - 1.6 = 2.8$ (h) $\frac{2x}{3} + 5 = 11$</p>
+                <p>(i) $\frac{3}{4}x - 2 = 7$ (j) $15 - \frac{x}{3} = 9$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> Solve each multi-step equation:</p>
+                <p>(a) $5(x - 2) = 20$ (b) $4x + 3 = x + 15$ (c) $7 - 3m = 2m + 22$</p>
+                <p>(d) $2(3x + 1) = 5(x - 2)$ (e) $0.3(x + 10) = 0.5x - 2$ (f) $1.2x - 0.8 = 0.4x + 2.4$</p>
+                <p>(g) $\frac{x}{3} + \frac{x}{4} = 7$ (h) $\frac{2x - 1}{5} = \frac{x + 2}{3}$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Solve (watch for special cases):</p>
+                <p>(a) $2(x + 4) = 2x + 8$ (b) $3(x - 1) = 3x + 5$ (c) $\frac{x}{2} + \frac{x}{4} = 6$</p>
+                <p>(d) $0.5(4x - 2) = 2x - 1$ (e) $\frac{2x + 3}{4} = \frac{2x - 1}{4} + 1$</p>
+            </div>
+            
+            <h3>Section 10 Practice: Word Problems</h3>
+            
+            <p><em>For each problem: define a variable, write an equation, solve, and check your answer against the original problem. Important: When a problem asks for multiple quantities (like "find the dimensions" or "find all three sides"), don't stop after finding $x$-use your answer to find all requested values.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> Five less than three times a number is 16. Find the number.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> The length of a rectangle is twice its width. If the perimeter is 48 meters, find the dimensions.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> A cell phone plan charges 20 dollars per month plus 0.10 dollars per text. Last month's bill was 35 dollars. How many texts were sent?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> The sum of two consecutive even integers is 54. Find the integers.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> When a number is increased by 15% of itself, the result is 46. Find the number.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> A triangle's perimeter is 84 cm. The second side is $\frac{2}{3}$ of the first side, and the third side is 4 cm longer than the first. Find the length of each side.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> A store sells a jacket for 78.75 dollars after applying a 25% discount. What was the original price?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> You have 45 coins, all quarters and dimes. The total value is 8.55 dollars. How many of each coin do you have?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> A cyclist travels at 12 mph for part of a journey and 18 mph for the rest. If the total distance is 54 miles and the total time is 4 hours, how long did each part take?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> How many liters of pure water must be added to 10 liters of a 30% salt solution to produce a 12% salt solution?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> The average of three test scores is 82. The first two scores are 78 and 85. What is the third score?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> A wire 120 cm long is bent into a rectangle whose length is 1.5 times its width. Find the dimensions.</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">19.</span> An investor puts a total of 12,000 dollars into two accounts. One earns 3.5% annual interest, the other 5%. After one year, the total interest earned is 492 dollars. How much was invested in each account?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">20.</span> A circular track has a circumference of 400 meters. What is its diameter? (Give both the exact answer and a decimal approximation to two decimal places.)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">21.</span> A rope is cut into two pieces. One piece is 2.4 meters longer than the other. If the total length is 10 meters, how long is each piece?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">22.</span> <strong>Challenge:</strong> A chemist has 100 mL of a 45% acid solution. How much pure acid (100% solution) must be added to produce a 60% acid solution?</p>
+            </div>
+            
+            <h3>Calculator Problems</h3>
+            <p><em>These problems have realistic numbers. Set up the equation, then use a calculator to solve and verify. Round answers to two decimal places where appropriate.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">23.</span> <strong>(Calculator)</strong> A laptop originally priced at 1,247.99 dollars is on sale for 18% off. What is the sale price?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">24.</span> <strong>(Calculator)</strong> You drive 247 miles and use 8.3 gallons of gas. What was your fuel efficiency in miles per gallon?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">25.</span> <strong>(Calculator)</strong> A company's revenue increased from 3,847,500 dollars to 4,125,200 dollars. What was the percent increase?</p>
+            </div>
+            
+            <h3>Solutions</h3>
+            
+            <div class="solution">
+                <p><span class="problem-number">1.</span> (a) $3(4) - 5 = 7$ ✓ Yes; (b) Both sides equal 14 ✓ Yes; (c) $0.5(3) + 1.5 = 3$ ✓ Yes; (d) $\frac{2(2)-1}{3} = 1$ ✓ Yes; (e) $4(4) - 7 = 9$ but $2(4) + 3 = 11$, No (9 ≠ 11)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">2.</span> (a) Linear (b) Not linear (c) Linear (d) Not linear (e) Linear (f) Not linear (variable in denominator)</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">3.</span> (a) $x = 8$ (b) $y = 2$ (c) $m = -7$ (d) $n = 48$ (e) $x = 1.5$ (f) $y = 2.25$ (g) $m = 6$ (h) $n = 10$ (i) $x = \frac{5}{6} - \frac{4}{6} = \frac{1}{6}$ (j) $y = 16$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">4.</span> (a) $x = 5$ (b) $y = 32$ (c) $t = 4$ (d) $w = 4$ (e) $x = 4$ (f) $y = 3$ (g) $x = 11$ (h) $x = 9$ (i) $x = 12$ (j) $x = 18$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">5.</span> (a) $x = 6$ (b) $x = 4$ (c) $m = -3$ (d) $6x + 2 = 5x - 10$, $x = -12$ (e) $0.3x + 3 = 0.5x - 2$, $5 = 0.2x$, $x = 25$ (f) $0.8x = 3.2$, $x = 4$ (g) LCD is 12: $4x + 3x = 84$, $x = 12$ (h) $3(2x-1) = 5(x+2)$, $6x - 3 = 5x + 10$, $x = 13$</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">6.</span> (a) Any value of $x$ works-infinitely many solutions; (b) No value works-no solution (contradiction); (c) $x = 8$; (d) Any value of $x$ works-infinitely many solutions; (e) Any value of $x$ works-infinitely many solutions</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">7.</span> $3n - 5 = 16$, $n = 7$. Check: $3(7) - 5 = 16$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">8.</span> Let $w$ = width. $2w + 2(2w) = 48$, $6w = 48$, $w = 8$. Width = 8 m, Length = 16 m.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">9.</span> $20 + 0.10t = 35$, $t = 150$ texts.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">10.</span> $n + (n+2) = 54$, $n = 26$. The integers are 26 and 28.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">11.</span> $x + 0.15x = 46$, $1.15x = 46$, $x = 40$. Check: $40 + 6 = 46$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">12.</span> Let $x$ = first side. $x + \frac{2}{3}x + (x+4) = 84$. $\frac{8}{3}x + 4 = 84$, $\frac{8}{3}x = 80$, $x = 30$. Sides: 30 cm, 20 cm, 34 cm. Check: $30 + 20 + 34 = 84$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">13.</span> Let $p$ = original price. After 25% discount: $0.75p = 78.75$, $p = 105$. Original price: 105.00 dollars.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">14.</span> Let $q$ = quarters. $25q + 10(45-q) = 855$ cents. $15q + 450 = 855$, $q = 27$. 27 quarters, 18 dimes. Check: $27(0.25) + 18(0.10) = 6.75 + 1.80 = 8.55$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">15.</span> Let $t$ = hours at 12 mph. $12t + 18(4-t) = 54$. $12t + 72 - 18t = 54$, $-6t = -18$, $t = 3$. 3 hours at 12 mph, 1 hour at 18 mph. Check: $36 + 18 = 54$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">16.</span> Let $x$ = liters of water. Salt stays same: $0.30(10) = 0.12(10+x)$. $3 = 1.2 + 0.12x$, $0.12x = 1.8$, $x = 15$ liters of water.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">17.</span> $\frac{78 + 85 + x}{3} = 82$. $163 + x = 246$, $x = 83$.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">18.</span> Let $w$ = width. Perimeter: $2w + 2(1.5w) = 120$. $5w = 120$, $w = 24$. Width = 24 cm, Length = 36 cm.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">19.</span> Let $x$ = amount at 3.5%. $0.035x + 0.05(12000-x) = 492$. $0.035x + 600 - 0.05x = 492$, $-0.015x = -108$, $x = 7200$. Answer: 7,200 dollars at 3.5%, 4,800 dollars at 5%. Check: $252 + 240 = 492$ ✓</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">20.</span> $C = \pi d$, so $400 = \pi d$, $d = \frac{400}{\pi}$ (exact). Decimal: $d \approx 127.32$ meters.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">21.</span> Let $x$ = shorter piece. $x + (x + 2.4) = 10$. $2x = 7.6$, $x = 3.8$. Pieces: 3.8 m and 6.2 m.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">22.</span> Let $x$ = mL of pure acid added. Acid equation: $0.45(100) + 1.00(x) = 0.60(100 + x)$. $45 + x = 60 + 0.6x$, $0.4x = 15$, $x = 37.5$ mL of pure acid.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">23.</span> Sale price $= 1247.99 \times (1 - 0.18) = 1247.99 \times 0.82 = 1023.35$ (calculator). Answer: 1,023.35 dollars.</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">24.</span> Fuel efficiency $= \frac{247}{8.3} \approx 29.76$ mpg (calculator).</p>
+            </div>
+            
+            <div class="solution">
+                <p><span class="problem-number">25.</span> Increase $= 4125200 - 3847500 = 277700$. Percent increase $= \frac{277700}{3847500} \approx 0.0722 = 7.22\%$ (calculator).</p>
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,3031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 15 (Factoring) - FINAL
+      Version: 1.1
+      Date: 2026-01-15
+      Guidelines Version: Technical Document Implementation v2.1
+      
+      Status: FINAL - Sections 15.1-15.3 ready for integration
+      Note: This is a standalone wrapper for proofing. Content will be
+            integrated into Math_Basics_Part_II when complete.
+      
+      Follows: Section_14_Final_v1.html (Complete Section 14)
+      
+      Figure Inventory:
+        - Fig. 15.1: Area model for factoring x^2 + 7x + 12 (JSXGraph, 2-panel)
+      
+      History:
+        Version 1.1: Added "Factoring in Action" motivating example before
+                     15.3 practice. Added word problems (garden, consecutive
+                     integers, rocket). Separated problems from solutions
+                     throughout (15.1, 15.2, 15.3) to prevent peeking.
+        Version 1.0: FINAL - Approved for integration. Fixed vertical label
+                     rotation on Fig. 15.1.
+        Draft 0.2: Per review feedback: Examples 3-4 now show explicit
+                   factorization verification. Sum-Product Pattern adds
+                   "m and n" explicitly; Method adds "provided it exists".
+                   Fig. 15.1 bounding box expanded, vertical labels rotated.
+                   Practice problems 15, 16, 17, 20 now show trial-and-error
+                   with wrong attempts before correct solution.
+        Draft 0.1: Initial draft of sections 15.1-15.3. What is factoring
+                   (with Going Deeper box on forward/reverse asymmetry),
+                   factoring out GCF, factoring simple trinomials with
+                   area model figure. Practice problems with full solutions.
+    -->
+    
+    <title>Section 15: Factoring</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- JSXGraph 1.4.6 for geometric diagrams -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .draft-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .draft-notice h3 {
+            color: #b45309;
+            margin: 0 0 10px 0;
+        }
+        
+        .section-nav {
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #0369a1;
+        }
+        .section-nav a {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1a5f2a;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .going-deeper {
+            background-color: #f3e8ff;
+            padding: 20px;
+            border: 2px solid #9333ea;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .going-deeper::before {
+            content: "Going Deeper";
+            display: block;
+            font-weight: bold;
+            color: #7c3aed;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        .going-deeper h4 {
+            color: #6b21a8;
+            margin-top: 15px;
+        }
+        .going-deeper h4:first-of-type {
+            margin-top: 5px;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: #1a5f2a;
+            font-weight: bold;
+        }
+        td {
+            text-align: left;
+        }
+        
+        .problems {
+            background-color: #fffde7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #fbc02d;
+        }
+        .problems h4 {
+            margin-top: 0;
+            color: #f57f17;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #fff59d;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #f57f17;
+        }
+        
+        .solutions {
+            background-color: #e8f5e9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #4caf50;
+        }
+        .solutions h4 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .solution-item {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .figure-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .graph-title {
+            font-weight: bold;
+            color: #1a5f2a;
+            margin-bottom: 10px;
+            font-size: 1.05em;
+        }
+        .graph-caption {
+            font-size: 0.95em;
+            color: #555;
+            margin-top: 10px;
+            font-style: italic;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .two-panel {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .panel {
+            flex: 0 1 auto;
+        }
+        .panel-label {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 8px;
+        }
+        .jxgbox {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 12px;
+        }
+        
+        ul, ol { margin-left: 20px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+            .two-panel {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="section-nav">
+            <a href="Section_14_Final_v1.html">&larr; Section 14: Polynomials</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 15: Factoring</span> | 
+            <a href="Section_16_Final_v1.html">Section 16: Quadratic Equations &rarr;</a>
+        </div>
+        
+        <h1>Section 15: Factoring</h1>
+        
+        <p>
+            In Section 14, we learned to multiply polynomials. We expanded products like $(x + 3)(x + 5)$ into $x^2 + 8x + 15$ by multiplying each term by each term and combining like terms. Now we learn to go in reverse: given a polynomial like $x^2 + 8x + 15$, can we write it as a product of simpler factors?
+        </p>
+        
+        <p>
+            This reverse process is called <strong>factoring</strong>, and it's one of the most important skills in algebra. Factoring transforms complicated expressions into simpler pieces, and&mdash;as we'll see in Section 16&mdash;it gives us a powerful method for solving equations.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.1: WHAT IS FACTORING? -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-15-1">15.1 What Is Factoring?</h2>
+        
+        <div class="definition">
+            <h4>Factoring</h4>
+            <p>
+                <strong>Factoring</strong> is the process of writing an expression as a product of simpler expressions. To factor a polynomial means to express it as a product of polynomials of lower degree.
+            </p>
+        </div>
+        
+        <p>
+            You've already factored numbers. When you write $12 = 3 \times 4$ or $12 = 2 \times 2 \times 3$, you're expressing 12 as a product of smaller numbers. Factoring polynomials works the same way:
+        </p>
+        
+        <ul>
+            <li>$x^2 + 8x + 15 = (x + 3)(x + 5)$</li>
+            <li>$x^2 - 9 = (x + 3)(x - 3)$</li>
+            <li>$6x^2 + 9x = 3x(2x + 3)$</li>
+        </ul>
+        
+        <p>
+            In each case, we've written the polynomial on the left as a product of simpler polynomials on the right.
+        </p>
+        
+        <h3>Why Factoring Matters</h3>
+        
+        <p>
+            Factoring isn't just an algebraic exercise&mdash;it's a tool with real applications:
+        </p>
+        
+        <p>
+            <strong>Solving equations:</strong> In Section 16, we'll solve quadratic equations by factoring. If $x^2 + 8x + 15 = 0$, then $(x + 3)(x + 5) = 0$. A product equals zero only when at least one factor equals zero, so either $x + 3 = 0$ (giving $x = -3$) or $x + 5 = 0$ (giving $x = -5$). Factoring transforms a quadratic equation into two simple linear equations.
+        </p>
+        
+        <p>
+            <strong>Simplifying fractions:</strong> In more advanced algebra, you'll encounter fractions with polynomials in the numerator and denominator. Factoring lets you cancel common factors, just as $\frac{12}{18} = \frac{2 \cdot 6}{3 \cdot 6} = \frac{2}{3}$.
+        </p>
+        
+        <p>
+            <strong>Understanding graphs:</strong> The factored form of a polynomial reveals where its graph crosses the $x$-axis. If $y = (x + 3)(x + 5)$, the graph crosses at $x = -3$ and $x = -5$ (because those values make $y = 0$).
+        </p>
+        
+        <div class="going-deeper">
+            <h4>Why Factoring Feels Different</h4>
+            
+            <p>
+                <em>This box explores a deeper pattern. Skip it if you just want to learn the techniques.</em>
+            </p>
+            
+            <p>
+                You may have noticed that some mathematical operations feel <em>mechanical</em>, while others feel more like <em>puzzle-solving</em>. This isn't your imagination&mdash;it reflects a deep truth about mathematics.
+            </p>
+            
+            <p>
+                <strong>Forward operations are algorithmic.</strong> When you multiply $(2x + 3)(x - 5)$, you follow a procedure: multiply each term by each term, then combine like terms. You don't need creativity or insight. A computer could do it. You could do it half-asleep. The procedure <em>always works</em>, and it <em>always terminates</em> with the correct answer.
+            </p>
+            
+            <p>
+                <strong>Reverse operations are heuristic.</strong> When you're given $2x^2 - 7x - 15$ and asked to factor it, there's no comparable procedure. You have to <em>recognize patterns</em>, <em>try possibilities</em>, and <em>check whether they work</em>. You might find the answer quickly, or you might struggle. Two equally skilled people might approach it differently. The path forward isn't clear until you've found it.
+            </p>
+            
+            <p>
+                Yet here's the remarkable thing: even though <em>finding</em> the factorization is hard, <em>checking</em> it is easy. Once someone claims that $2x^2 - 7x - 15 = (2x + 3)(x - 5)$, you can verify it in seconds by multiplying. The forward direction serves as a check on the reverse direction.
+            </p>
+            
+            <h4>Why Does This Asymmetry Exist?</h4>
+            
+            <p>
+                When you multiply polynomials, information gets <em>compressed</em>. The terms $-10x$ and $+3x$ combine into $-7x$, and the structure that produced them disappears. Factoring requires you to <em>reconstruct</em> that hidden structure&mdash;to figure out that $-7x$ secretly came from $-10x + 3x$. It's like trying to un-mix paint, or figure out a recipe by tasting a cake.
+            </p>
+            
+            <p>
+                This pattern&mdash;easy forward, hard reverse&mdash;appears throughout mathematics:
+            </p>
+            
+            <ul>
+                <li><strong>Arithmetic:</strong> Multiplying $97 \times 89 = 8633$ is tedious but straightforward. Given $8633$, finding its prime factors requires trial and error.</li>
+                <li><strong>Calculus (later):</strong> Differentiating functions follows clear rules. Finding antiderivatives often requires clever guessing.</li>
+                <li><strong>Cryptography:</strong> Modern internet security relies on exactly this asymmetry. Multiplying two 300-digit prime numbers takes milliseconds. Factoring the result would take longer than the age of the universe with current methods.</li>
+            </ul>
+            
+            <h4>What This Means for You</h4>
+            
+            <p>
+                Don't be frustrated if factoring feels harder than multiplying polynomials did. It <em>is</em> harder&mdash;not because you're missing some trick, but because the reverse direction genuinely requires different skills. You're not following a recipe anymore; you're doing detective work. The techniques in this section will give you <em>strategies</em> rather than <em>guarantees</em>. Learning when to apply which strategy, and developing intuition for patterns, is part of becoming mathematically mature.
+            </p>
+            
+            <p>
+                And take comfort in this: you can always check your answer by multiplying. If you factor correctly, the forward operation will confirm it.
+            </p>
+        </div>
+        
+        <h3>The Verification Principle</h3>
+        
+        <p>
+            Because multiplying is easy and reliable, we have a built-in safety net:
+        </p>
+        
+        <div class="key-point">
+            <h4>Always Check by Multiplying</h4>
+            <p>
+                After factoring any polynomial, verify your answer by multiplying the factors back together. If you get the original polynomial, your factoring is correct. If not, try again.
+            </p>
+        </div>
+        
+        <p>
+            Let's see this principle in action:
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Verifying a Factorization</h4>
+            <p>Verify that $x^2 + 8x + 15 = (x + 3)(x + 5)$.</p>
+            <p style="margin-top: 15px;">
+                Multiply the factors:
+            </p>
+            <p style="text-align: center;">
+                $(x + 3)(x + 5) = x \cdot x + x \cdot 5 + 3 \cdot x + 3 \cdot 5$
+            </p>
+            <p style="text-align: center;">
+                $= x^2 + 5x + 3x + 15 = x^2 + 8x + 15$ &nbsp; &#10003;
+            </p>
+            <p>The factorization is correct.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Verifying a Factorization with Negatives</h4>
+            <p>Verify that $x^2 + 5x - 14 = (x - 2)(x + 7)$.</p>
+            <p style="margin-top: 15px;">
+                Multiply the factors:
+            </p>
+            <p style="text-align: center;">
+                $(x - 2)(x + 7) = x \cdot x + x \cdot 7 + (-2) \cdot x + (-2) \cdot 7$
+            </p>
+            <p style="text-align: center;">
+                $= x^2 + 7x - 2x - 14 = x^2 + 5x - 14$ &nbsp; &#10003;
+            </p>
+            <p>The factorization is correct.</p>
+        </div>
+        
+        <h3>Not Everything Factors Nicely</h3>
+        
+        <p>
+            Just as some numbers are prime (like 7, 11, or 23), some polynomials cannot be factored into simpler polynomials with integer coefficients. We call such polynomials <strong>prime</strong> or <strong>irreducible</strong> (over the integers).
+        </p>
+        
+        <p>
+            For example, $x^2 + x + 1$ cannot be written as a product of two binomials with integer coefficients. No matter what integers $m$ and $n$ you try, $(x + m)(x + n)$ will not equal $x^2 + x + 1$. We'll see how to recognize these cases as we develop factoring techniques.
+        </p>
+        
+        <div class="problems">
+            <h4>Practice: Verifying Factorizations (Section 15.1)</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> Verify by multiplying: $x^2 + 9x + 20 = (x + 4)(x + 5)$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> Verify by multiplying: $x^2 - 2x - 35 = (x + 5)(x - 7)$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> Verify by multiplying: $x^2 - 49 = (x + 7)(x - 7)$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.2: FACTORING OUT THE GCF -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-15-2">15.2 Factoring Out the Greatest Common Factor</h2>
+        
+        <p>
+            The simplest and most fundamental factoring technique is to identify a common factor in all terms and "factor it out." This reverses the distributive property we learned in Section 9.
+        </p>
+        
+        <p>
+            Recall that the distributive property says:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $a(b + c) = ab + ac$
+        </p>
+        
+        <p>
+            Reading this equation from right to left gives us a factoring pattern:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $ab + ac = a(b + c)$
+        </p>
+        
+        <p>
+            The common factor $a$ is "factored out," leaving the remaining factors inside parentheses.
+        </p>
+        
+        <div class="key-point">
+            <h4>Always Look for a GCF First</h4>
+            <p>
+                Before attempting any other factoring technique, always check whether all terms share a common factor. Factoring out the GCF first simplifies what remains and often makes further factoring easier.
+            </p>
+        </div>
+        
+        <h3>Finding the Greatest Common Factor</h3>
+        
+        <p>
+            For polynomial terms, the GCF has two parts:
+        </p>
+        
+        <p>
+            <strong>Numerical part:</strong> The GCF of the coefficients. This is the same GCF you learned in Section 3.
+        </p>
+        
+        <p>
+            <strong>Variable part:</strong> For each variable that appears in <em>all</em> terms, take the <em>lowest</em> power that appears.
+        </p>
+        
+        <div class="example">
+            <h4>Example 3: Finding the GCF of Terms</h4>
+            <p>Find the GCF of $12x^3$ and $18x^2$.</p>
+            <p style="margin-top: 15px;">
+                <strong>Numerical GCF:</strong> GCF of 12 and 18 is 6.
+            </p>
+            <p>
+                <strong>Variable GCF:</strong> Both terms have $x$. The powers are 3 and 2, so we take the lower: $x^2$.
+            </p>
+            <p><strong>Combined GCF:</strong> $6x^2$</p>
+            <p style="margin-top: 10px;">
+                <strong>Verification:</strong> $12x^3 = 6x^2 \cdot 2x$ and $18x^2 = 6x^2 \cdot 3$, confirming that $6x^2$ divides both terms.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: GCF with Multiple Variables</h4>
+            <p>Find the GCF of $15a^3b^2$ and $20a^2b^4$.</p>
+            <p style="margin-top: 15px;">
+                <strong>Numerical GCF:</strong> GCF of 15 and 20 is 5.
+            </p>
+            <p>
+                <strong>Variable $a$:</strong> Powers are 3 and 2; take $a^2$.
+            </p>
+            <p>
+                <strong>Variable $b$:</strong> Powers are 2 and 4; take $b^2$.
+            </p>
+            <p><strong>Combined GCF:</strong> $5a^2b^2$</p>
+            <p style="margin-top: 10px;">
+                <strong>Verification:</strong> $15a^3b^2 = 5a^2b^2 \cdot 3a$ and $20a^2b^4 = 5a^2b^2 \cdot 4b^2$, confirming that $5a^2b^2$ divides both terms.
+            </p>
+        </div>
+        
+        <h3>The Factoring Process</h3>
+        
+        <p>
+            Once you've identified the GCF, follow these steps:
+        </p>
+        
+        <ol>
+            <li>Write the GCF outside parentheses.</li>
+            <li>Divide each original term by the GCF to find what goes inside the parentheses.</li>
+            <li>Check by distributing the GCF back through the parentheses.</li>
+        </ol>
+        
+        <div class="example">
+            <h4>Example 5: Factoring Out a Numerical GCF</h4>
+            <p>Factor: $6x + 9$</p>
+            <p style="margin-top: 15px;">
+                <strong>Find the GCF:</strong> GCF of 6 and 9 is 3. (No variable is common to both terms since the second term has no $x$.)
+            </p>
+            <p><strong>Factor:</strong> $6x + 9 = 3(2x + 3)$</p>
+            <p><strong>Check:</strong> $3(2x + 3) = 6x + 9$ &nbsp; &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Factoring Out a Variable GCF</h4>
+            <p>Factor: $x^3 + x^2$</p>
+            <p style="margin-top: 15px;">
+                <strong>Find the GCF:</strong> Both terms have $x$; the lower power is $x^2$. GCF = $x^2$.
+            </p>
+            <p><strong>Factor:</strong> $x^3 + x^2 = x^2(x + 1)$</p>
+            <p><strong>Check:</strong> $x^2(x + 1) = x^3 + x^2$ &nbsp; &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 7: Factoring Out a Combined GCF</h4>
+            <p>Factor: $4x^3 - 8x^2 + 12x$</p>
+            <p style="margin-top: 15px;">
+                <strong>Find the GCF:</strong> Coefficients are 4, 8, 12; GCF is 4. Variable powers are 3, 2, 1; lowest is $x^1 = x$. GCF = $4x$.
+            </p>
+            <p><strong>Divide each term:</strong></p>
+            <ul>
+                <li>$4x^3 \div 4x = x^2$</li>
+                <li>$-8x^2 \div 4x = -2x$</li>
+                <li>$12x \div 4x = 3$</li>
+            </ul>
+            <p><strong>Factor:</strong> $4x^3 - 8x^2 + 12x = 4x(x^2 - 2x + 3)$</p>
+            <p><strong>Check:</strong> $4x(x^2 - 2x + 3) = 4x^3 - 8x^2 + 12x$ &nbsp; &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: GCF with Two Variables</h4>
+            <p>Factor: $15a^2b - 10ab^2$</p>
+            <p style="margin-top: 15px;">
+                <strong>Find the GCF:</strong> 
+            </p>
+            <ul>
+                <li>Coefficients: GCF(15, 10) = 5</li>
+                <li>Variable $a$: powers 2 and 1; take $a^1 = a$</li>
+                <li>Variable $b$: powers 1 and 2; take $b^1 = b$</li>
+            </ul>
+            <p>GCF = $5ab$</p>
+            <p><strong>Factor:</strong> $15a^2b - 10ab^2 = 5ab(3a - 2b)$</p>
+            <p><strong>Check:</strong> $5ab(3a - 2b) = 15a^2b - 10ab^2$ &nbsp; &#10003;</p>
+        </div>
+        
+        <h3>Factoring Out a Negative</h3>
+        
+        <p>
+            Sometimes it's useful to factor out a negative GCF to make the leading term positive. This is especially common when preparing for further factoring.
+        </p>
+        
+        <div class="example">
+            <h4>Example 9: Factoring Out a Negative</h4>
+            <p>Factor: $-x^2 + 5x - 6$</p>
+            <p style="margin-top: 15px;">
+                The leading coefficient is negative. Factor out $-1$:
+            </p>
+            <p style="text-align: center;">$-x^2 + 5x - 6 = -1(x^2 - 5x + 6)$</p>
+            <p style="text-align: center;">$= -(x^2 - 5x + 6)$</p>
+            <p>
+                The expression inside the parentheses now has a positive leading coefficient, which may be easier to factor further. (We'll return to this in Section 15.3.)
+            </p>
+        </div>
+        
+        <h3>When the GCF Is One of the Terms</h3>
+        
+        <p>
+            Sometimes the GCF equals one of the terms. Don't forget the 1 that remains!
+        </p>
+        
+        <div class="example">
+            <h4>Example 10: GCF Equals a Term</h4>
+            <p>Factor: $5x^2 + 5x$</p>
+            <p style="margin-top: 15px;">
+                <strong>Find the GCF:</strong> GCF = $5x$
+            </p>
+            <p><strong>Divide each term:</strong></p>
+            <ul>
+                <li>$5x^2 \div 5x = x$</li>
+                <li>$5x \div 5x = 1$</li>
+            </ul>
+            <p><strong>Factor:</strong> $5x^2 + 5x = 5x(x + 1)$</p>
+            <p>
+                <strong>Important:</strong> Don't write $5x(x)$&mdash;the second term becomes $1$, not nothing!
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>Common Error: Incomplete Factoring</h4>
+            <p>
+                Make sure you've factored out the <em>greatest</em> common factor, not just <em>a</em> common factor.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Incomplete:</strong> $12x^3 + 18x^2 = 2(6x^3 + 9x^2)$<br>
+                (Correct, but $6x^3 + 9x^2$ still has a common factor of $3x^2$.)
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Complete:</strong> $12x^3 + 18x^2 = 6x^2(2x + 3)$
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Factoring Out the GCF (Section 15.2)</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> Factor: $8x + 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> Factor: $x^4 - x^3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Factor: $6y^2 + 15y$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> Factor: $10x^3 - 25x^2 + 15x$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> Factor: $14a^3b^2 + 21a^2b^3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> Factor: $-3x^2 + 9x - 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> Factor: $18x^4y - 12x^3y^2 + 24x^2y^3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> Factor: $7x + 7$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.3: FACTORING TRINOMIALS (x^2 + bx + c) -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-15-3">15.3 Factoring Trinomials: $x^2 + bx + c$</h2>
+        
+        <p>
+            The most common factoring task is to factor a trinomial of the form $x^2 + bx + c$&mdash;a quadratic expression where the coefficient of $x^2$ is 1. These trinomials arise when multiplying two binomials of the form $(x + m)(x + n)$.
+        </p>
+        
+        <h3>The Pattern</h3>
+        
+        <p>
+            Let's expand $(x + m)(x + n)$ to see what we're reversing:
+        </p>
+        
+        <p style="text-align: center;">
+            $(x + m)(x + n) = x^2 + nx + mx + mn = x^2 + (m + n)x + mn$
+        </p>
+        
+        <p>
+            This tells us something important:
+        </p>
+        
+        <div class="key-point">
+            <h4>The Sum-Product Pattern</h4>
+            <p>
+                For a trinomial $x^2 + bx + c$:
+            </p>
+            <ul>
+                <li>$b$ is the <strong>sum</strong> of the two numbers: $m + n = b$</li>
+                <li>$c$ is the <strong>product</strong> of the two numbers: $m \cdot n = c$</li>
+            </ul>
+            <p>
+                To factor $x^2 + bx + c$, find two numbers $m$ and $n$ whose product is $c$ and whose sum is $b$. Then: $x^2 + bx + c = (x + m)(x + n)$
+            </p>
+        </div>
+        
+        <h3>The Method</h3>
+        
+        <ol>
+            <li>List the factor pairs of $c$ (the constant term).</li>
+            <li>Find the pair that adds to $b$ (the coefficient of $x$), provided such a pair exists.</li>
+            <li>Write the factored form using those numbers.</li>
+            <li>Check by multiplying.</li>
+        </ol>
+        
+        <div class="example">
+            <h4>Example 11: Both Numbers Positive</h4>
+            <p>Factor: $x^2 + 7x + 12$</p>
+            <p style="margin-top: 15px;">
+                <strong>Step 1:</strong> We need two numbers whose product is $12$ and whose sum is $7$.
+            </p>
+            <p><strong>Step 2:</strong> Factor pairs of 12: &nbsp; $1 \times 12$, &nbsp; $2 \times 6$, &nbsp; $3 \times 4$</p>
+            <p>Which pair sums to 7? &nbsp; $3 + 4 = 7$ &nbsp; &#10003;</p>
+            <p><strong>Step 3:</strong> $x^2 + 7x + 12 = (x + 3)(x + 4)$</p>
+            <p><strong>Check:</strong> $(x + 3)(x + 4) = x^2 + 4x + 3x + 12 = x^2 + 7x + 12$ &nbsp; &#10003;</p>
+        </div>
+        
+        <h3>Sign Analysis</h3>
+        
+        <p>
+            The signs of $b$ and $c$ tell you about the signs of the numbers you're looking for:
+        </p>
+        
+        <table>
+            <tr>
+                <th>If $c$ is...</th>
+                <th>And $b$ is...</th>
+                <th>Then the two numbers are...</th>
+            </tr>
+            <tr>
+                <td>Positive</td>
+                <td>Positive</td>
+                <td>Both positive</td>
+            </tr>
+            <tr>
+                <td>Positive</td>
+                <td>Negative</td>
+                <td>Both negative</td>
+            </tr>
+            <tr>
+                <td>Negative</td>
+                <td>Either</td>
+                <td>One positive, one negative (larger absolute value matches sign of $b$)</td>
+            </tr>
+        </table>
+        
+        <div class="example">
+            <h4>Example 12: Both Numbers Negative</h4>
+            <p>Factor: $x^2 - 9x + 20$</p>
+            <p style="margin-top: 15px;">
+                Here $c = 20 > 0$ and $b = -9 < 0$, so both numbers are negative.
+            </p>
+            <p>We need two negative numbers whose product is $20$ and whose sum is $-9$.</p>
+            <p>Factor pairs: $(-1)(-20)$, $(-2)(-10)$, $(-4)(-5)$</p>
+            <p>$(-4) + (-5) = -9$ &nbsp; &#10003;</p>
+            <p>$x^2 - 9x + 20 = (x - 4)(x - 5)$</p>
+            <p><strong>Check:</strong> $(x - 4)(x - 5) = x^2 - 5x - 4x + 20 = x^2 - 9x + 20$ &nbsp; &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 13: Opposite Signs</h4>
+            <p>Factor: $x^2 + 2x - 15$</p>
+            <p style="margin-top: 15px;">
+                Here $c = -15 < 0$, so the numbers have opposite signs. Since $b = 2 > 0$, the positive number has larger absolute value.
+            </p>
+            <p>We need numbers whose product is $-15$ and sum is $+2$:</p>
+            <p>$(5)(-3) = -15$ and $5 + (-3) = 2$ &nbsp; &#10003;</p>
+            <p>$x^2 + 2x - 15 = (x + 5)(x - 3)$</p>
+            <p><strong>Check:</strong> $(x + 5)(x - 3) = x^2 - 3x + 5x - 15 = x^2 + 2x - 15$ &nbsp; &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 14: A Prime Trinomial</h4>
+            <p>Factor: $x^2 + 3x + 5$</p>
+            <p style="margin-top: 15px;">
+                We need two numbers whose product is $5$ and whose sum is $3$.
+            </p>
+            <p>Factor pairs of 5: $(1)(5)$ with sum $6$, $(-1)(-5)$ with sum $-6$</p>
+            <p>No pair sums to 3. This trinomial is <strong>prime</strong>&mdash;it does not factor over the integers.</p>
+        </div>
+        
+        <h3>Visualizing with the Area Model</h3>
+        
+        <p>
+            Just as we used the area model to understand polynomial multiplication in Section 14, we can use it to visualize factoring. The trinomial represents the total area, and factoring finds the dimensions.
+        </p>
+        
+        <div class="figure-container">
+            <p class="graph-title">Figure 15.1: Area Model for Factoring $x^2 + 7x + 12$</p>
+            <div class="two-panel">
+                <div class="panel">
+                    <div id="areaModel-question" class="jxgbox" style="width: 220px; height: 220px;"></div>
+                    <p class="panel-label">(a) The Question: Total area $x^2 + 7x + 12$</p>
+                </div>
+                <div class="panel">
+                    <div id="areaModel-answer" class="jxgbox" style="width: 220px; height: 220px;"></div>
+                    <p class="panel-label">(b) The Answer: Dimensions $(x + 3)$ by $(x + 4)$</p>
+                </div>
+            </div>
+            <p class="graph-caption">
+                The left panel shows a rectangle with total area $x^2 + 7x + 12$, decomposed into regions. The right panel reveals the dimensions: the rectangle is $(x + 3)$ by $(x + 4)$, confirming that $x^2 + 7x + 12 = (x + 3)(x + 4)$.
+            </p>
+        </div>
+        
+        <script>
+        (function() {
+            // Panel (a): The question - showing the areas
+            const board_a = JXG.JSXGraph.initBoard('areaModel-question', {
+                boundingbox: [-1.2, 8.5, 8.5, -1.2],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: { symbol: '\u26F6', scale: 0.95 },
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Dimensions (using representative values)
+            const xP = 4;  // represents "x"
+            const p3 = 1.5; // represents "3"
+            const p4 = 2;   // represents "4"
+            const w = xP + p4;
+            const h = xP + p3;
+            
+            // x^2 region (blue)
+            board_a.create('polygon', [[0, 0], [xP, 0], [xP, xP], [0, xP]], {
+                fillColor: '#dbeafe', fillOpacity: 0.8, 
+                borders: {strokeColor: '#2563eb', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_a.create('text', [xP/2, xP/2, 'x²'], {
+                fontSize: 16, fontWeight: 'bold', color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // 4x region (green, right)
+            board_a.create('polygon', [[xP, 0], [w, 0], [w, xP], [xP, xP]], {
+                fillColor: '#dcfce7', fillOpacity: 0.8,
+                borders: {strokeColor: '#16a34a', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_a.create('text', [xP + p4/2, xP/2, '4x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#166534', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // 3x region (green, top)
+            board_a.create('polygon', [[0, xP], [xP, xP], [xP, h], [0, h]], {
+                fillColor: '#dcfce7', fillOpacity: 0.8,
+                borders: {strokeColor: '#16a34a', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_a.create('text', [xP/2, xP + p3/2, '3x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#166534', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // 12 region (yellow, corner)
+            board_a.create('polygon', [[xP, xP], [w, xP], [w, h], [xP, h]], {
+                fillColor: '#fef9c3', fillOpacity: 0.8,
+                borders: {strokeColor: '#ca8a04', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_a.create('text', [xP + p4/2, xP + p3/2, '12'], {
+                fontSize: 14, fontWeight: 'bold', color: '#854d0e', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Question marks for dimensions
+            board_a.create('text', [w/2, -0.5, '?'], {
+                fontSize: 16, fontWeight: 'bold', color: '#6b7280', fixed: true, anchorX: 'middle'
+            });
+            board_a.create('text', [-0.5, h/2, '?'], {
+                fontSize: 16, fontWeight: 'bold', color: '#6b7280', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+        })();
+        
+        (function() {
+            // Panel (b): The answer - showing the dimensions
+            const board_b = JXG.JSXGraph.initBoard('areaModel-answer', {
+                boundingbox: [-1.2, 8.5, 8.5, -1.2],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: { symbol: '\u26F6', scale: 0.95 },
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            const xP = 4;
+            const p3 = 1.5;
+            const p4 = 2;
+            const w = xP + p4;
+            const h = xP + p3;
+            
+            // Same four regions
+            board_b.create('polygon', [[0, 0], [xP, 0], [xP, xP], [0, xP]], {
+                fillColor: '#dbeafe', fillOpacity: 0.8,
+                borders: {strokeColor: '#2563eb', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_b.create('text', [xP/2, xP/2, 'x²'], {
+                fontSize: 16, fontWeight: 'bold', color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            board_b.create('polygon', [[xP, 0], [w, 0], [w, xP], [xP, xP]], {
+                fillColor: '#dcfce7', fillOpacity: 0.8,
+                borders: {strokeColor: '#16a34a', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_b.create('text', [xP + p4/2, xP/2, '4x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#166534', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            board_b.create('polygon', [[0, xP], [xP, xP], [xP, h], [0, h]], {
+                fillColor: '#dcfce7', fillOpacity: 0.8,
+                borders: {strokeColor: '#16a34a', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_b.create('text', [xP/2, xP + p3/2, '3x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#166534', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            board_b.create('polygon', [[xP, xP], [w, xP], [w, h], [xP, h]], {
+                fillColor: '#fef9c3', fillOpacity: 0.8,
+                borders: {strokeColor: '#ca8a04', strokeWidth: 2},
+                vertices: {visible: false}
+            });
+            board_b.create('text', [xP + p4/2, xP + p3/2, '12'], {
+                fontSize: 14, fontWeight: 'bold', color: '#854d0e', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Bottom dimension labels
+            board_b.create('text', [xP/2, -0.4, 'x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board_b.create('text', [xP + p4/2, -0.4, '4'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            
+            // Left dimension labels (rotated 90 degrees for vertical orientation)
+            board_b.create('text', [-0.5, xP/2, 'x'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, 
+                anchorX: 'middle', anchorY: 'middle', rotate: 90
+            });
+            board_b.create('text', [-0.5, xP + p3/2, '3'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, 
+                anchorX: 'middle', anchorY: 'middle', rotate: 90
+            });
+            
+            // Top dimension label (the factor x + 4)
+            board_b.create('text', [w/2, h + 0.5, 'x + 4'], {
+                fontSize: 14, fontWeight: 'bold', color: '#1a5f2a', fixed: true, anchorX: 'middle'
+            });
+            
+            // Right dimension label (the factor x + 3, rotated counterclockwise)
+            board_b.create('text', [w + 0.7, h/2, 'x + 3'], {
+                fontSize: 14, fontWeight: 'bold', color: '#1a5f2a', fixed: true, 
+                anchorX: 'middle', anchorY: 'middle', rotate: -90
+            });
+        })();
+        </script>
+        
+        <p>
+            The area model shows visually what the sum-product pattern tells us algebraically: the middle term $7x$ is the sum of the cross-products $3x + 4x$, and the constant $12$ is the product $3 \times 4$.
+        </p>
+        
+        <!-- FACTORING IN ACTION: A PREVIEW -->
+        
+        <h3>Factoring in Action: A Preview</h3>
+        
+        <p>
+            We've been learning the mechanics of factoring, but you might be wondering: what's the payoff? Before continuing with more practice, let's see factoring in action by solving a real problem. This previews techniques we'll develop fully in Section 16.
+        </p>
+        
+        <div class="example">
+            <h4>Example 15: The Garden Problem</h4>
+            <p>A rectangular community garden is 5 feet longer than it is wide. The total area of the garden is 84 square feet. What are the dimensions of the garden?</p>
+            
+            <p style="margin-top: 15px;"><strong>Setting up the equation:</strong></p>
+            <p>Let $x$ = the width of the garden (in feet).</p>
+            <p>Then $x + 5$ = the length (since it's 5 feet longer than the width).</p>
+            <p>Area = width $\times$ length, so:</p>
+            <p style="text-align: center;">$x(x + 5) = 84$</p>
+            <p>Expanding: $x^2 + 5x = 84$</p>
+            <p>Rearranging to standard form: $x^2 + 5x - 84 = 0$</p>
+            
+            <p style="margin-top: 15px;"><strong>Factoring:</strong></p>
+            <p>We need two numbers whose product is $-84$ and whose sum is $5$.</p>
+            <p>Since the product is negative, the numbers have opposite signs. Since the sum is positive, the positive number has larger absolute value.</p>
+            <p>Factor pairs of 84: $1 \times 84$, $2 \times 42$, $3 \times 28$, $4 \times 21$, $6 \times 14$, $7 \times 12$...</p>
+            <p>We need them to differ by 5 when we subtract: $12 - 7 = 5$ &#10003;</p>
+            <p>So: $(12)(-7) = -84$ and $12 + (-7) = 5$</p>
+            <p style="text-align: center;">$x^2 + 5x - 84 = (x + 12)(x - 7)$</p>
+            
+            <p style="margin-top: 15px;"><strong>Solving:</strong></p>
+            <p>We now have $(x + 12)(x - 7) = 0$.</p>
+            <p>A product equals zero when at least one factor equals zero:</p>
+            <ul>
+                <li>$x + 12 = 0$ gives $x = -12$</li>
+                <li>$x - 7 = 0$ gives $x = 7$</li>
+            </ul>
+            <p>Since width can't be negative, $x = 7$ feet.</p>
+            
+            <p style="margin-top: 15px;"><strong>Answer:</strong> The garden is <strong>7 feet wide and 12 feet long</strong>.</p>
+            
+            <p><strong>Check:</strong> $7 \times 12 = 84$ square feet &#10003;, and $12 = 7 + 5$ &#10003;</p>
+        </div>
+        
+        <p>
+            This example shows why factoring matters: it transforms a quadratic equation into a form where we can read off the solutions. We'll develop these equation-solving techniques fully in Section 16. For now, let's practice the factoring skills themselves.
+        </p>
+        
+        <div class="problems">
+            <h4>Practice: Factoring Trinomials (Section 15.3)</h4>
+            
+            <p><em>Factor each trinomial. If it cannot be factored over the integers, write "prime."</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> Factor: $x^2 + 8x + 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> Factor: $x^2 + 11x + 24$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> Factor: $x^2 - 10x + 21$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> Factor: $x^2 - 8x + 16$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> Factor: $x^2 + x - 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> Factor: $x^2 - 5x - 24$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> Factor: $y^2 + 6y - 27$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">19.</span> Factor: $a^2 - 12a + 35$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">20.</span> Factor: $x^2 + 2x - 48$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">21.</span> Factor: $x^2 + 5x + 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">22.</span> Factor: $x^2 - x - 30$</p>
+            </div>
+            
+            <h4 style="margin-top: 25px;">Word Problems</h4>
+            
+            <p><em>For each problem, set up and solve a quadratic equation using factoring. (These preview Section 16 techniques.)</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">23.</span> The product of two consecutive even integers is 48. Find the integers. (Hint: If the first even integer is $n$, the next is $n + 2$.)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">24.</span> A model rocket is launched straight up from ground level with an initial velocity of 64 feet per second. The height $h$ (in feet) after $t$ seconds is given by the formula $h = -16t^2 + 64t$. At what time(s) will the rocket be at a height of 48 feet?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">25.</span> A company finds that if it prices a product at $p$ dollars, it will sell $(120 - 2p)$ units per month. At what price(s) will the monthly revenue be 1600 dollars? (Hint: Revenue = price $\times$ quantity sold.)</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS SECTION -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <p><strong>Section 15.1: Verifying Factorizations</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">1.</span> $(x + 4)(x + 5) = x^2 + 5x + 4x + 20 = x^2 + 9x + 20$ &nbsp; &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">2.</span> $(x + 5)(x - 7) = x^2 - 7x + 5x - 35 = x^2 - 2x - 35$ &nbsp; &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">3.</span> $(x + 7)(x - 7) = x^2 - 7x + 7x - 49 = x^2 - 49$ &nbsp; &#10003;</p>
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Section 15.2: Factoring Out the GCF</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">4.</span> GCF of 8 and 12 is 4.</p>
+                <p>$8x + 12 = 4(2x + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">5.</span> GCF = $x^3$ (lowest power of $x$)</p>
+                <p>$x^4 - x^3 = x^3(x - 1)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">6.</span> GCF = $3y$ (GCF of 6, 15 is 3; both have $y$)</p>
+                <p>$6y^2 + 15y = 3y(2y + 5)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">7.</span> GCF = $5x$ (GCF of 10, 25, 15 is 5; lowest $x$ power is 1)</p>
+                <p>$10x^3 - 25x^2 + 15x = 5x(2x^2 - 5x + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">8.</span> GCF = $7a^2b^2$ (GCF of 14, 21 is 7; $a^2$; $b^2$)</p>
+                <p>$14a^3b^2 + 21a^2b^3 = 7a^2b^2(2a + 3b)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">9.</span> GCF = $-3$ (or $3$; factor out $-3$ to make leading coefficient positive inside)</p>
+                <p>$-3x^2 + 9x - 12 = -3(x^2 - 3x + 4)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">10.</span> GCF = $6x^2y$ (GCF of 18, 12, 24 is 6; $x^2$; $y$)</p>
+                <p>$18x^4y - 12x^3y^2 + 24x^2y^3 = 6x^2y(3x^2 - 2xy + 4y^2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">11.</span> GCF = $7$</p>
+                <p>$7x + 7 = 7(x + 1)$</p>
+                <p>(Don't forget the 1!)</p>
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Section 15.3: Factoring Trinomials</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">12.</span> Need: product = 15, sum = 8</p>
+                <p>Factor pairs of 15: $(1)(15)$, $(3)(5)$</p>
+                <p>$3 + 5 = 8$ &#10003;</p>
+                <p>$x^2 + 8x + 15 = (x + 3)(x + 5)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">13.</span> Need: product = 24, sum = 11</p>
+                <p>Factor pairs: $(1)(24)$, $(2)(12)$, $(3)(8)$, $(4)(6)$</p>
+                <p>$3 + 8 = 11$ &#10003;</p>
+                <p>$x^2 + 11x + 24 = (x + 3)(x + 8)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">14.</span> $c > 0$, $b < 0$: both factors negative</p>
+                <p>Need: product = 21, sum = $-10$</p>
+                <p>$(-3)(-7) = 21$ and $(-3) + (-7) = -10$ &#10003;</p>
+                <p>$x^2 - 10x + 21 = (x - 3)(x - 7)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">15.</span> Need: product = 16, sum = $-8$. Since $c > 0$ and $b < 0$, both factors are negative.</p>
+                <p>Let's try factor pairs of 16:</p>
+                <p style="margin-left: 20px;">Try $(-2)(-8)$: product = $16$ &#10003;, but sum = $-10$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(-4)(-4)$: product = $16$ &#10003;, sum = $-8$ &#10003;</p>
+                <p>$x^2 - 8x + 16 = (x - 4)(x - 4) = (x - 4)^2$</p>
+                <p>(This is a perfect square trinomial&mdash;more on these in Section 15.6.)</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">16.</span> Need: product = $-12$, sum = $1$</p>
+                <p>Since $c < 0$, the factors have opposite signs. Let's try some pairs:</p>
+                <p style="margin-left: 20px;">Try $(3)(4)$: product = $12$ &#10007; (wrong sign for product&mdash;we need $-12$)</p>
+                <p style="margin-left: 20px;">Try $(3)(-4)$: product = $-12$ &#10003;, but sum = $-1$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(-3)(4)$: product = $-12$ &#10003;, sum = $1$ &#10003;</p>
+                <p>$x^2 + x - 12 = (x - 3)(x + 4)$</p>
+                <p><strong>Check:</strong> $(x - 3)(x + 4) = x^2 + 4x - 3x - 12 = x^2 + x - 12$ &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">17.</span> Need: product = $-24$, sum = $-5$. Since $c < 0$, the factors have opposite signs.</p>
+                <p>Let's try factor pairs of $-24$:</p>
+                <p style="margin-left: 20px;">Try $(4)(-6)$: product = $-24$ &#10003;, but sum = $-2$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(-4)(6)$: product = $-24$ &#10003;, but sum = $2$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(3)(-8)$: product = $-24$ &#10003;, sum = $-5$ &#10003;</p>
+                <p>$x^2 - 5x - 24 = (x + 3)(x - 8)$</p>
+                <p><strong>Check:</strong> $(x + 3)(x - 8) = x^2 - 8x + 3x - 24 = x^2 - 5x - 24$ &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">18.</span> Need: product = $-27$, sum = $6$</p>
+                <p>$(9)(-3) = -27$ and $9 + (-3) = 6$ &#10003;</p>
+                <p>$y^2 + 6y - 27 = (y + 9)(y - 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">19.</span> Need: product = 35, sum = $-12$</p>
+                <p>$(-5)(-7) = 35$ and $(-5) + (-7) = -12$ &#10003;</p>
+                <p>$a^2 - 12a + 35 = (a - 5)(a - 7)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">20.</span> Need: product = $-48$, sum = $2$. Since $c < 0$, the factors have opposite signs. Since $b > 0$, the positive factor has larger absolute value.</p>
+                <p>Factor pairs of 48: $1 \times 48$, $2 \times 24$, $3 \times 16$, $4 \times 12$, $6 \times 8$</p>
+                <p>Let's try making one negative:</p>
+                <p style="margin-left: 20px;">Try $(-4)(12)$: product = $-48$ &#10003;, but sum = $8$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(-3)(16)$: product = $-48$ &#10003;, but sum = $13$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(-6)(8)$: product = $-48$ &#10003;, sum = $2$ &#10003;</p>
+                <p>$x^2 + 2x - 48 = (x - 6)(x + 8)$</p>
+                <p><strong>Check:</strong> $(x - 6)(x + 8) = x^2 + 8x - 6x - 48 = x^2 + 2x - 48$ &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">21.</span> Need: product = 8, sum = 5</p>
+                <p>Factor pairs of 8: $(1)(8)$ sum 9, $(2)(4)$ sum 6</p>
+                <p>No pair sums to 5. This trinomial is <strong>prime</strong> (does not factor over integers).</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">22.</span> Need: product = $-30$, sum = $-1$</p>
+                <p>$(5)(-6) = -30$ and $5 + (-6) = -1$ &#10003;</p>
+                <p>$x^2 - x - 30 = (x + 5)(x - 6)$</p>
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Word Problems</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">23.</span> <strong>Consecutive Even Integers</strong></p>
+                <p>Let $n$ = first even integer, so $n + 2$ = second even integer.</p>
+                <p>$n(n + 2) = 48$</p>
+                <p>$n^2 + 2n = 48$</p>
+                <p>$n^2 + 2n - 48 = 0$</p>
+                <p>Factor: Need product $= -48$, sum $= 2$. We have $(-6)(8) = -48$ and $-6 + 8 = 2$.</p>
+                <p>$(n - 6)(n + 8) = 0$</p>
+                <p>$n = 6$ or $n = -8$</p>
+                <p><strong>Answer:</strong> The integers are <strong>6 and 8</strong>, or <strong>$-8$ and $-6$</strong>.</p>
+                <p><strong>Check:</strong> $6 \times 8 = 48$ &#10003;; $(-8) \times (-6) = 48$ &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">24.</span> <strong>Rocket Problem</strong></p>
+                <p>Set $h = 48$: $-16t^2 + 64t = 48$</p>
+                <p>$-16t^2 + 64t - 48 = 0$</p>
+                <p>Divide by $-16$: $t^2 - 4t + 3 = 0$</p>
+                <p>Factor: Need product $= 3$, sum $= -4$. We have $(-1)(-3) = 3$ and $-1 + (-3) = -4$.</p>
+                <p>$(t - 1)(t - 3) = 0$</p>
+                <p>$t = 1$ or $t = 3$</p>
+                <p><strong>Answer:</strong> The rocket is at 48 feet at <strong>$t = 1$ second</strong> (on the way up) and <strong>$t = 3$ seconds</strong> (on the way down).</p>
+                <p><strong>Check:</strong> At $t = 1$: $h = -16(1) + 64(1) = 48$ &#10003;; At $t = 3$: $h = -16(9) + 64(3) = -144 + 192 = 48$ &#10003;</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">25.</span> <strong>Pricing Problem</strong></p>
+                <p>Revenue = price $\times$ quantity = $p(120 - 2p) = 1600$</p>
+                <p>$120p - 2p^2 = 1600$</p>
+                <p>$-2p^2 + 120p - 1600 = 0$</p>
+                <p>Divide by $-2$: $p^2 - 60p + 800 = 0$</p>
+                <p>Factor: Need product $= 800$, sum $= -60$. We have $(-20)(-40) = 800$ and $-20 + (-40) = -60$.</p>
+                <p>$(p - 20)(p - 40) = 0$</p>
+                <p>$p = 20$ or $p = 40$</p>
+                <p><strong>Answer:</strong> The revenue is 1600 dollars when the price is <strong>20 dollars</strong> or <strong>40 dollars</strong>.</p>
+                <p><strong>Check:</strong> At $p = 20$: Revenue $= 20(120 - 40) = 20(80) = 1600$ &#10003;</p>
+                <p>At $p = 40$: Revenue $= 40(120 - 80) = 40(40) = 1600$ &#10003;</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <h2>15.4 Factoring Trinomials: $ax^2 + bx + c$</h2>
+        
+        <p>
+            In Section 15.3, we factored trinomials where the leading coefficient was 1&mdash;expressions like $x^2 + 7x + 12$. Now we tackle the harder case: trinomials where the coefficient of $x^2$ is something other than 1, such as $2x^2 + 7x + 3$ or $6x^2 + 11x + 4$.
+        </p>
+        
+        <h3>Why This Is Harder</h3>
+        
+        <p>
+            When we factor $x^2 + bx + c$, we look for $(x + m)(x + n)$ where $mn = c$ and $m + n = b$. We only need to find factors of $c$ that add to $b$.
+        </p>
+        
+        <p>
+            When we factor $ax^2 + bx + c$ with $a \neq 1$, we need $(px + m)(qx + n)$ where:
+        </p>
+        
+        <ul>
+            <li>$pq = a$ (the product of the $x$-coefficients gives the leading coefficient)</li>
+            <li>$mn = c$ (the product of the constants gives the constant term)</li>
+            <li>$pn + qm = b$ (the cross terms must add to the middle coefficient)</li>
+        </ul>
+        
+        <p>
+            That third condition is the tricky part. We have more combinations to consider, because we need to coordinate the factors of $a$ with the factors of $c$ to get the right middle term.
+        </p>
+        
+        <p>
+            And remember what we learned in Section 15.1: not every trinomial can be factored over the integers. When we attempt to factor $ax^2 + bx + c$, we might discover that no combination of factors works. In that case, the trinomial is <strong>prime</strong>. The method we'll learn will tell us definitively whether a factorization exists.
+        </p>
+        
+        <h3>The Method: Trial and Error (Systematic Search)</h3>
+        
+        <p>
+            The name "trial and error" might sound haphazard, but the method is actually systematic. There are only finitely many ways to factor the coefficients $a$ and $c$, so we can check all possibilities. If one works, we've found the factorization. If none work, the trinomial is prime.
+        </p>
+        
+        <p>
+            In fact, you could write a computer program to do this: it would generate all possible combinations of factors and test each one. The program would either find the factorization or conclude that none exists. We're doing the same thing, just by hand.
+        </p>
+        
+        <div class="definition">
+            <h4>Factoring $ax^2 + bx + c$ by Systematic Search</h4>
+            <ol>
+                <li>List the factor pairs of $a$ (these are candidates for the $x$-coefficients)</li>
+                <li>List the factor pairs of $c$ (these are candidates for the constants)</li>
+                <li>Try combinations, checking whether the cross terms add to $b$</li>
+                <li>If a combination works, you've found the factorization</li>
+                <li>If no combination works, the trinomial is prime</li>
+            </ol>
+        </div>
+        
+        <p>
+            The method works best when $a$ and $c$ have few factors. When they have many factors, there are more combinations to check, but the process is still finite and systematic.
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Factor $6x^2 + 11x + 4$</h4>
+            
+            <p>We need $(px + m)(qx + n)$ where $pq = 6$, $mn = 4$, and the cross terms $pn + qm = 11$.</p>
+            
+            <p><strong>Step 1:</strong> Factor pairs of $a = 6$: $(1, 6)$ and $(2, 3)$</p>
+            <p><strong>Step 2:</strong> Factor pairs of $c = 4$: $(1, 4)$ and $(2, 2)$</p>
+            
+            <p><strong>Step 3:</strong> Since both $b = 11$ and $c = 4$ are positive, all signs are positive. Let's try combinations:</p>
+            
+            <p style="margin-left: 20px;">
+                Try $(x + 1)(6x + 4)$: outer + inner = $4x + 6x = 10x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x + 4)(6x + 1)$: outer + inner = $x + 24x = 25x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(2x + 1)(3x + 4)$: outer + inner = $8x + 3x = 11x$ &#10003;
+            </p>
+            
+            <p><strong>Answer:</strong> $6x^2 + 11x + 4 = (2x + 1)(3x + 4)$</p>
+            
+            <p><strong>Check:</strong> $(2x + 1)(3x + 4) = 6x^2 + 8x + 3x + 4 = 6x^2 + 11x + 4$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Factor $2x^2 + 7x + 3$</h4>
+            
+            <p>Factor pairs of $a = 2$: $(1, 2)$</p>
+            <p>Factor pairs of $c = 3$: $(1, 3)$</p>
+            
+            <p style="margin-left: 20px;">
+                Try $(x + 1)(2x + 3)$: outer + inner = $3x + 2x = 5x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x + 3)(2x + 1)$: outer + inner = $x + 6x = 7x$ &#10003;
+            </p>
+            
+            <p><strong>Answer:</strong> $2x^2 + 7x + 3 = (x + 3)(2x + 1)$</p>
+            
+            <p><strong>Check:</strong> $(x + 3)(2x + 1) = 2x^2 + x + 6x + 3 = 2x^2 + 7x + 3$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Factor $3x^2 - 10x + 8$</h4>
+            
+            <p>Here $b < 0$ and $c > 0$, so both constants in the factors will be negative (their product is positive, their sum is negative).</p>
+            
+            <p>Factor pairs of $a = 3$: $(1, 3)$</p>
+            <p>Factor pairs of $c = 8$: $(1, 8)$, $(2, 4)$</p>
+            
+            <p>We need factors with negative signs:</p>
+            <p style="margin-left: 20px;">
+                Try $(x - 1)(3x - 8)$: outer + inner = $-8x + (-3x) = -11x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x - 8)(3x - 1)$: outer + inner = $-x + (-24x) = -25x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x - 2)(3x - 4)$: outer + inner = $-4x + (-6x) = -10x$ &#10003;
+            </p>
+            
+            <p><strong>Answer:</strong> $3x^2 - 10x + 8 = (x - 2)(3x - 4)$</p>
+            
+            <p><strong>Check:</strong> $(x - 2)(3x - 4) = 3x^2 - 4x - 6x + 8 = 3x^2 - 10x + 8$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: Factor $5x^2 + 7x - 6$</h4>
+            
+            <p>Here $c < 0$, so the constants have opposite signs.</p>
+            
+            <p>Factor pairs of $a = 5$: $(1, 5)$</p>
+            <p>Factor pairs of $c = 6$: $(1, 6)$, $(2, 3)$</p>
+            
+            <p>We need opposite signs in the constants:</p>
+            <p style="margin-left: 20px;">
+                Try $(x + 1)(5x - 6)$: outer + inner = $-6x + 5x = -x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x - 1)(5x + 6)$: outer + inner = $6x + (-5x) = x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x + 2)(5x - 3)$: outer + inner = $-3x + 10x = 7x$ &#10003;
+            </p>
+            
+            <p><strong>Answer:</strong> $5x^2 + 7x - 6 = (x + 2)(5x - 3)$</p>
+            
+            <p><strong>Check:</strong> $(x + 2)(5x - 3) = 5x^2 - 3x + 10x - 6 = 5x^2 + 7x - 6$ &#10003;</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Don't Forget the GCF!</h4>
+            <p>
+                Before attempting trial and error, always check whether all terms share a common factor. Factoring out the GCF first makes the remaining trinomial simpler&mdash;smaller coefficients mean fewer combinations to try.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 5: Factor $4x^2 + 10x + 6$</h4>
+            
+            <p><strong>Step 1:</strong> Check for GCF. All coefficients (4, 10, 6) are divisible by 2.</p>
+            <p>$$4x^2 + 10x + 6 = 2(2x^2 + 5x + 3)$$</p>
+            
+            <p><strong>Step 2:</strong> Factor the trinomial $2x^2 + 5x + 3$.</p>
+            <p>Factor pairs of 2: $(1, 2)$</p>
+            <p>Factor pairs of 3: $(1, 3)$</p>
+            
+            <p style="margin-left: 20px;">
+                Try $(x + 1)(2x + 3)$: outer + inner = $3x + 2x = 5x$ &#10003;
+            </p>
+            
+            <p><strong>Answer:</strong> $4x^2 + 10x + 6 = 2(x + 1)(2x + 3)$</p>
+            
+            <p><strong>Check:</strong> $2(x + 1)(2x + 3) = 2(2x^2 + 3x + 2x + 3) = 2(2x^2 + 5x + 3) = 4x^2 + 10x + 6$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Factor $2x^2 + 5x + 7$ (Prime Example)</h4>
+            
+            <p>Factor pairs of $a = 2$: $(1, 2)$</p>
+            <p>Factor pairs of $c = 7$: $(1, 7)$ (7 is prime, so only one pair)</p>
+            
+            <p>Let's try all combinations:</p>
+            <p style="margin-left: 20px;">
+                Try $(x + 1)(2x + 7)$: outer + inner = $7x + 2x = 9x$ &#10007;
+            </p>
+            <p style="margin-left: 20px;">
+                Try $(x + 7)(2x + 1)$: outer + inner = $x + 14x = 15x$ &#10007;
+            </p>
+            
+            <p>We've tried all possible combinations and none gives $5x$ for the middle term.</p>
+            
+            <p><strong>Conclusion:</strong> $2x^2 + 5x + 7$ is <strong>prime</strong>&mdash;it does not factor over the integers.</p>
+        </div>
+        
+        <div class="going-deeper">
+            <h4>Why Learn Factoring When Calculators Exist?</h4>
+            
+            <p>
+                A fair question: if calculators and computers can solve equations, why learn to factor by hand? The answer is that factoring reveals <em>structure</em> that numerical computation hides.
+            </p>
+            
+            <p>
+                Consider the expression $\displaystyle\frac{x^2 - 1}{x - 1}$. You could plug in values&mdash;try $x = 2$ and get $\frac{3}{1} = 3$; try $x = 5$ and get $\frac{24}{4} = 6$&mdash;but you'd just have a collection of numbers. You wouldn't see the pattern.
+            </p>
+            
+            <p>
+                But if you factor the numerator using the difference of squares (which we'll cover in Section 15.6):
+            </p>
+            
+            <p style="text-align: center;">
+                $\displaystyle\frac{x^2 - 1}{x - 1} = \frac{(x+1)(x-1)}{x-1} = x + 1$ &nbsp; (when $x \neq 1$)
+            </p>
+            
+            <p>
+                Now you understand <em>why</em> $x = 2$ gives 3 and $x = 5$ gives 6. The expression simplifies to $x + 1$. This insight&mdash;that the complicated fraction is really just "one more than $x$"&mdash;is invisible to pure computation.
+            </p>
+            
+            <p>
+                Factoring is about understanding patterns, not just finding numerical answers. That understanding becomes essential in advanced mathematics, science, and engineering, where you need to manipulate expressions symbolically, not just evaluate them.
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Factoring Trinomials $ax^2 + bx + c$ (Section 15.4)</h4>
+            
+            <p><em>Factor each trinomial completely. If it cannot be factored over the integers, write "prime." Check your answers in the Solutions section after attempting the problems yourself.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">26.</span> Factor: $2x^2 + 9x + 4$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">27.</span> Factor: $3x^2 + 11x + 6$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">28.</span> Factor: $5x^2 + 13x + 6$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">29.</span> Factor: $4x^2 + 8x + 3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">30.</span> Factor: $2x^2 - 7x + 3$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">31.</span> Factor: $3x^2 - 14x + 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">32.</span> Factor: $6x^2 - 7x + 2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">33.</span> Factor: $2x^2 + 3x - 9$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">34.</span> Factor: $3x^2 - 2x - 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">35.</span> Factor: $6x^2 + 14x + 4$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">36.</span> Factor: $12x^2 - 10x - 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">37.</span> Factor: $3x^2 + 8x + 7$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.5: Factoring by Grouping                          -->
+        <!-- ============================================================ -->
+        
+        <h2>15.5 Factoring by Grouping</h2>
+        
+        <p>
+            So far we've factored trinomials (three terms). What about polynomials with four terms? When a polynomial has four terms, we can sometimes use a technique called <strong>factoring by grouping</strong>.
+        </p>
+        
+        <div class="definition">
+            <h4>Factoring by Grouping</h4>
+            <ol>
+                <li>Group the terms in pairs (usually the first two and the last two)</li>
+                <li>Factor the GCF out of each pair</li>
+                <li>If both pairs contain the same binomial factor, factor it out</li>
+                <li>If not, try a different grouping or conclude that the polynomial doesn't factor by this method</li>
+            </ol>
+        </div>
+        
+        <div class="example">
+            <h4>Example 7: Factor $x^3 + 2x^2 + 3x + 6$</h4>
+            
+            <p><strong>Step 1:</strong> Group in pairs.</p>
+            <p>$$(x^3 + 2x^2) + (3x + 6)$$</p>
+            
+            <p><strong>Step 2:</strong> Factor the GCF from each pair.</p>
+            <p>$$x^2(x + 2) + 3(x + 2)$$</p>
+            
+            <p><strong>Step 3:</strong> Both groups contain $(x + 2)$, so factor it out.</p>
+            <p>$$= (x + 2)(x^2 + 3)$$</p>
+            
+            <p><strong>Answer:</strong> $x^3 + 2x^2 + 3x + 6 = (x + 2)(x^2 + 3)$</p>
+            
+            <p><strong>Check:</strong> $(x + 2)(x^2 + 3) = x^3 + 3x + 2x^2 + 6 = x^3 + 2x^2 + 3x + 6$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: Factor $xy + 3x + 2y + 6$</h4>
+            
+            <p><strong>Step 1:</strong> Group in pairs.</p>
+            <p>$$(xy + 3x) + (2y + 6)$$</p>
+            
+            <p><strong>Step 2:</strong> Factor the GCF from each pair.</p>
+            <p>$$x(y + 3) + 2(y + 3)$$</p>
+            
+            <p><strong>Step 3:</strong> Both groups contain $(y + 3)$, so factor it out.</p>
+            <p>$$= (y + 3)(x + 2)$$</p>
+            
+            <p><strong>Answer:</strong> $xy + 3x + 2y + 6 = (y + 3)(x + 2)$</p>
+        </div>
+        
+        <div class="warning">
+            <h4>Watch the Signs!</h4>
+            <p>
+                When the third term is negative, you may need to factor out a negative GCF from the second group to make the binomial factors match. This is the most common source of errors in factoring by grouping.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 9: Factor $x^3 - 2x^2 + 3x - 6$</h4>
+            
+            <p><strong>Step 1:</strong> Group in pairs.</p>
+            <p>$$(x^3 - 2x^2) + (3x - 6)$$</p>
+            
+            <p><strong>Step 2:</strong> Factor the GCF from each pair.</p>
+            <p>$$x^2(x - 2) + 3(x - 2)$$</p>
+            
+            <p><strong>Step 3:</strong> Both groups contain $(x - 2)$.</p>
+            <p>$$= (x - 2)(x^2 + 3)$$</p>
+            
+            <p><strong>Answer:</strong> $x^3 - 2x^2 + 3x - 6 = (x - 2)(x^2 + 3)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 10: Factor $x^3 + 2x^2 - 3x - 6$</h4>
+            
+            <p><strong>Step 1:</strong> Group in pairs.</p>
+            <p>$$(x^3 + 2x^2) + (-3x - 6)$$</p>
+            
+            <p><strong>Step 2:</strong> Factor the GCF from each pair.</p>
+            <p>The first group: $x^2(x + 2)$</p>
+            <p>The second group: If we factor out $+3$, we get $3(-x - 2)$. That gives us $(x + 2)$ and $(-x - 2)$&mdash;these don't match!</p>
+            <p>Instead, factor out $-3$: $-3(x + 2)$</p>
+            <p>$$x^2(x + 2) - 3(x + 2)$$</p>
+            
+            <p><strong>Step 3:</strong> Now both groups contain $(x + 2)$.</p>
+            <p>$$= (x + 2)(x^2 - 3)$$</p>
+            
+            <p><strong>Answer:</strong> $x^3 + 2x^2 - 3x - 6 = (x + 2)(x^2 - 3)$</p>
+            
+            <p><strong>Check:</strong> $(x + 2)(x^2 - 3) = x^3 - 3x + 2x^2 - 6 = x^3 + 2x^2 - 3x - 6$ &#10003;</p>
+        </div>
+        
+        <h3>When Grouping Doesn't Work</h3>
+        
+        <p>
+            Not every four-term polynomial factors by grouping. Sometimes no grouping produces a common binomial factor.
+        </p>
+        
+        <div class="example">
+            <h4>Example 11: Factor $x^3 + x^2 + 2x + 5$ (Doesn't Factor)</h4>
+            
+            <p>Try grouping the first two and last two:</p>
+            <p>$$(x^3 + x^2) + (2x + 5) = x^2(x + 1) + (2x + 5)$$</p>
+            <p>The binomial factors $(x + 1)$ and $(2x + 5)$ don't match.</p>
+            
+            <p>Try grouping differently:</p>
+            <p>$$(x^3 + 2x) + (x^2 + 5) = x(x^2 + 2) + (x^2 + 5)$$</p>
+            <p>These don't match either.</p>
+            
+            <p><strong>Conclusion:</strong> This polynomial does not factor by grouping (and in fact does not factor over the integers).</p>
+        </div>
+        
+        <h3>Rearrangement Sometimes Needed</h3>
+        
+        <p>
+            Occasionally the terms aren't in the right order for grouping. Rearranging can help.
+        </p>
+        
+        <div class="example">
+            <h4>Example 12: Factor $ax + by + ay + bx$</h4>
+            
+            <p>Try grouping as given:</p>
+            <p>$$(ax + by) + (ay + bx)$$</p>
+            <p>No common factor in the first group, no common factor in the second. This doesn't work.</p>
+            
+            <p><strong>Rearrange</strong> by collecting $a$-terms and $b$-terms:</p>
+            <p>$$ax + ay + bx + by = (ax + ay) + (bx + by)$$</p>
+            <p>$$= a(x + y) + b(x + y)$$</p>
+            <p>$$= (x + y)(a + b)$$</p>
+            
+            <p><strong>Answer:</strong> $ax + by + ay + bx = (x + y)(a + b)$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Factoring by Grouping (Section 15.5)</h4>
+            
+            <p><em>Factor each polynomial by grouping. If it cannot be factored by grouping, say so. Check your answers in the Solutions section after attempting the problems yourself.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">38.</span> Factor: $x^3 + 4x^2 + 2x + 8$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">39.</span> Factor: $x^3 + 5x^2 + 3x + 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">40.</span> Factor: $2x^3 + 6x^2 + 5x + 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">41.</span> Factor: $x^3 - 3x^2 + 4x - 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">42.</span> Factor: $x^3 + 4x^2 - 5x - 20$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">43.</span> Factor: $2x^3 - 8x^2 - 3x + 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">44.</span> Factor: $xy + 5x + 3y + 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">45.</span> Factor: $ab - 4a + 3b - 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">46.</span> Factor: $x^3 + 2x^2 + 4x + 3$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS SECTION -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions">
+            <h4>Solutions</h4>
+            
+            <p><strong>Section 15.4: Factoring Trinomials $ax^2 + bx + c$</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">26.</span> Factor pairs of 2: $(1, 2)$. Factor pairs of 4: $(1, 4)$, $(2, 2)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 4)(2x + 1)$: outer + inner = $x + 8x = 9x$ &#10003;</p>
+                <p>$2x^2 + 9x + 4 = (x + 4)(2x + 1)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">27.</span> Factor pairs of 3: $(1, 3)$. Factor pairs of 6: $(1, 6)$, $(2, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 3)(3x + 2)$: outer + inner = $2x + 9x = 11x$ &#10003;</p>
+                <p>$3x^2 + 11x + 6 = (x + 3)(3x + 2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">28.</span> Factor pairs of 5: $(1, 5)$. Factor pairs of 6: $(1, 6)$, $(2, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 1)(5x + 6)$: outer + inner = $6x + 5x = 11x$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(x + 2)(5x + 3)$: outer + inner = $3x + 10x = 13x$ &#10003;</p>
+                <p>$5x^2 + 13x + 6 = (x + 2)(5x + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">29.</span> Factor pairs of 4: $(1, 4)$, $(2, 2)$. Factor pairs of 3: $(1, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 1)(4x + 3)$: outer + inner = $3x + 4x = 7x$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(2x + 1)(2x + 3)$: outer + inner = $6x + 2x = 8x$ &#10003;</p>
+                <p>$4x^2 + 8x + 3 = (2x + 1)(2x + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">30.</span> $c > 0$ and $b < 0$: both constants negative.</p>
+                <p>Factor pairs of 2: $(1, 2)$. Factor pairs of 3: $(1, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x - 3)(2x - 1)$: outer + inner = $-x + (-6x) = -7x$ &#10003;</p>
+                <p>$2x^2 - 7x + 3 = (x - 3)(2x - 1)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">31.</span> $c > 0$ and $b < 0$: both constants negative.</p>
+                <p>Factor pairs of 3: $(1, 3)$. Factor pairs of 8: $(1, 8)$, $(2, 4)$.</p>
+                <p style="margin-left: 20px;">Try $(x - 2)(3x - 4)$: outer + inner = $-4x + (-6x) = -10x$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(x - 4)(3x - 2)$: outer + inner = $-2x + (-12x) = -14x$ &#10003;</p>
+                <p>$3x^2 - 14x + 8 = (x - 4)(3x - 2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">32.</span> $c > 0$ and $b < 0$: both constants negative.</p>
+                <p>Factor pairs of 6: $(1, 6)$, $(2, 3)$. Factor pairs of 2: $(1, 2)$.</p>
+                <p style="margin-left: 20px;">Try $(2x - 1)(3x - 2)$: outer + inner = $-4x + (-3x) = -7x$ &#10003;</p>
+                <p>$6x^2 - 7x + 2 = (2x - 1)(3x - 2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">33.</span> $c < 0$: constants have opposite signs.</p>
+                <p>Factor pairs of 2: $(1, 2)$. Factor pairs of 9: $(1, 9)$, $(3, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 3)(2x - 3)$: outer + inner = $-3x + 6x = 3x$ &#10003;</p>
+                <p>$2x^2 + 3x - 9 = (x + 3)(2x - 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">34.</span> $c < 0$: constants have opposite signs.</p>
+                <p>Factor pairs of 3: $(1, 3)$. Factor pairs of 8: $(1, 8)$, $(2, 4)$.</p>
+                <p style="margin-left: 20px;">Try $(x - 2)(3x + 4)$: outer + inner = $4x + (-6x) = -2x$ &#10003;</p>
+                <p>$3x^2 - 2x - 8 = (x - 2)(3x + 4)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">35.</span> <strong>First, check for GCF:</strong> All coefficients divisible by 2.</p>
+                <p>$6x^2 + 14x + 4 = 2(3x^2 + 7x + 2)$</p>
+                <p>Now factor $3x^2 + 7x + 2$:</p>
+                <p>Factor pairs of 3: $(1, 3)$. Factor pairs of 2: $(1, 2)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 2)(3x + 1)$: outer + inner = $x + 6x = 7x$ &#10003;</p>
+                <p>$6x^2 + 14x + 4 = 2(x + 2)(3x + 1)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">36.</span> <strong>First, check for GCF:</strong> All coefficients divisible by 2.</p>
+                <p>$12x^2 - 10x - 8 = 2(6x^2 - 5x - 4)$</p>
+                <p>Now factor $6x^2 - 5x - 4$. Since $c < 0$, constants have opposite signs.</p>
+                <p>Factor pairs of 6: $(1, 6)$, $(2, 3)$. Factor pairs of 4: $(1, 4)$, $(2, 2)$.</p>
+                <p style="margin-left: 20px;">Try $(2x + 1)(3x - 4)$: outer + inner = $-8x + 3x = -5x$ &#10003;</p>
+                <p>$12x^2 - 10x - 8 = 2(2x + 1)(3x - 4)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">37.</span> Factor pairs of 3: $(1, 3)$. Factor pairs of 7: $(1, 7)$ (7 is prime).</p>
+                <p style="margin-left: 20px;">Try $(x + 1)(3x + 7)$: outer + inner = $7x + 3x = 10x$ &#10007;</p>
+                <p style="margin-left: 20px;">Try $(x + 7)(3x + 1)$: outer + inner = $x + 21x = 22x$ &#10007;</p>
+                <p>No combination gives $8x$. This trinomial is <strong>prime</strong>.</p>
+            </div>
+            
+            <p style="margin-top: 25px;"><strong>Section 15.5: Factoring by Grouping</strong></p>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">38.</span> $(x^3 + 4x^2) + (2x + 8) = x^2(x + 4) + 2(x + 4) = (x + 4)(x^2 + 2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">39.</span> $(x^3 + 5x^2) + (3x + 15) = x^2(x + 5) + 3(x + 5) = (x + 5)(x^2 + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">40.</span> $(2x^3 + 6x^2) + (5x + 15) = 2x^2(x + 3) + 5(x + 3) = (x + 3)(2x^2 + 5)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">41.</span> $(x^3 - 3x^2) + (4x - 12) = x^2(x - 3) + 4(x - 3) = (x - 3)(x^2 + 4)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">42.</span> $(x^3 + 4x^2) + (-5x - 20)$</p>
+                <p>Factor $-5$ from the second group (not $+5$) to make binomials match:</p>
+                <p>$= x^2(x + 4) - 5(x + 4) = (x + 4)(x^2 - 5)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">43.</span> $(2x^3 - 8x^2) + (-3x + 12)$</p>
+                <p>$= 2x^2(x - 4) - 3(x - 4)$</p>
+                <p>$= (x - 4)(2x^2 - 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">44.</span> $(xy + 5x) + (3y + 15) = x(y + 5) + 3(y + 5) = (y + 5)(x + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">45.</span> $(ab - 4a) + (3b - 12) = a(b - 4) + 3(b - 4) = (b - 4)(a + 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">46.</span> $(x^3 + 2x^2) + (4x + 3) = x^2(x + 2) + (4x + 3)$</p>
+                <p>The second group has no common factor, and $(x + 2)$ doesn't match anything.</p>
+                <p>Try different grouping: $(x^3 + 4x) + (2x^2 + 3) = x(x^2 + 4) + (2x^2 + 3)$</p>
+                <p>Still no match.</p>
+                <p>This polynomial <strong>does not factor by grouping</strong>.</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <h2>15.6 Factoring Special Forms</h2>
+        
+        <p>
+            In Section 14, we learned to expand special products&mdash;the square of a sum, the square of a difference, and the product of a sum and difference. Now we reverse those patterns: when we recognize these special forms, we can factor them immediately without the trial-and-error search of the previous sections.
+        </p>
+        
+        <p>
+            This is the payoff for memorizing those patterns in Section 14. Recognition is instant; factoring follows automatically.
+        </p>
+        
+        <h3>Difference of Squares</h3>
+        
+        <p>
+            Recall from Section 14 that $(a + b)(a - b) = a^2 - b^2$. Reading this equation from right to left gives us the factoring pattern:
+        </p>
+        
+        <div class="formula-box">
+            <h4>Difference of Squares</h4>
+            <p style="font-size: 1.2em;">$$a^2 - b^2 = (a + b)(a - b)$$</p>
+        </div>
+        
+        <p>
+            <strong>Recognition:</strong> Look for two perfect squares separated by subtraction. When you see this pattern, the factored form writes itself: the square roots, one added and one subtracted.
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Factor $x^2 - 49$</h4>
+            
+            <p><strong>Recognize the pattern:</strong> Is this a difference of squares?</p>
+            <ul>
+                <li>$x^2$ is a perfect square (it's $x$ squared)</li>
+                <li>$49$ is a perfect square (it's $7$ squared)</li>
+                <li>They're connected by subtraction</li>
+            </ul>
+            
+            <p>Yes! This is $a^2 - b^2$ with $a = x$ and $b = 7$.</p>
+            
+            <p><strong>Apply the pattern:</strong> $a^2 - b^2 = (a + b)(a - b)$</p>
+            
+            <p><strong>Answer:</strong> $x^2 - 49 = (x + 7)(x - 7)$</p>
+            
+            <p><strong>Check:</strong> $(x + 7)(x - 7) = x^2 - 7x + 7x - 49 = x^2 - 49$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Factor $4x^2 - 25$</h4>
+            
+            <p><strong>Recognize the pattern:</strong></p>
+            <ul>
+                <li>$4x^2 = (2x)^2$ &mdash; perfect square</li>
+                <li>$25 = 5^2$ &mdash; perfect square</li>
+                <li>Subtraction between them</li>
+            </ul>
+            
+            <p>This is $a^2 - b^2$ with $a = 2x$ and $b = 5$.</p>
+            
+            <p><strong>Answer:</strong> $4x^2 - 25 = (2x + 5)(2x - 5)$</p>
+            
+            <p><strong>Check:</strong> $(2x + 5)(2x - 5) = 4x^2 - 10x + 10x - 25 = 4x^2 - 25$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Factor $9a^2 - 16b^2$</h4>
+            
+            <p><strong>Recognize the pattern:</strong></p>
+            <ul>
+                <li>$9a^2 = (3a)^2$</li>
+                <li>$16b^2 = (4b)^2$</li>
+            </ul>
+            
+            <p><strong>Answer:</strong> $9a^2 - 16b^2 = (3a + 4b)(3a - 4b)$</p>
+        </div>
+        
+        <div class="warning">
+            <h4>&#9888; Sum of Squares Does NOT Factor</h4>
+            <p>
+                The expression $a^2 + b^2$ (sum of squares) does <strong>not</strong> factor over the real numbers. There is no way to write $x^2 + 9$ as a product of simpler polynomials with real coefficients.
+            </p>
+            <p>
+                Don't confuse $a^2 - b^2$ (factors) with $a^2 + b^2$ (doesn't factor). The difference of one symbol makes all the difference.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: Factor $x^4 - 16$</h4>
+            
+            <p><strong>Recognize the pattern:</strong> $x^4 = (x^2)^2$ and $16 = 4^2$, so this is a difference of squares.</p>
+            
+            <p><strong>First factorization:</strong> $x^4 - 16 = (x^2 + 4)(x^2 - 4)$</p>
+            
+            <p><strong>But wait&mdash;is the factoring complete?</strong></p>
+            <ul>
+                <li>$x^2 + 4$ is a sum of squares&mdash;doesn't factor further</li>
+                <li>$x^2 - 4$ is another difference of squares! $x^2 - 4 = (x + 2)(x - 2)$</li>
+            </ul>
+            
+            <p><strong>Complete factorization:</strong> $x^4 - 16 = (x^2 + 4)(x + 2)(x - 2)$</p>
+        </div>
+        
+        <!-- CAUTION BOX: Incomplete Factorization (Added in v2) -->
+        <div class="caution">
+            <h4>&#9888; Don't Stop Too Soon!</h4>
+            <p>
+                A common error is stopping before the factorization is complete. After each step, ask yourself: <em>Can any of these factors be factored further?</em>
+            </p>
+            <p>
+                <strong>Example:</strong> Factor $3x^3 - 12x$
+            </p>
+            <p style="margin-left: 20px;">
+                <strong>Incomplete:</strong> $3x^3 - 12x = 3x(x^2 - 4)$ &larr; Stop here and you've missed something!
+            </p>
+            <p style="margin-left: 20px;">
+                <strong>Complete:</strong> $3x^3 - 12x = 3x(x^2 - 4) = 3x(x + 2)(x - 2)$
+            </p>
+            <p>
+                <strong>Example:</strong> Factor $2x^3 + 6x^2 + 4x$
+            </p>
+            <p style="margin-left: 20px;">
+                <strong>Incomplete:</strong> $2x^3 + 6x^2 + 4x = 2x(x^2 + 3x + 2)$ &larr; The trinomial still factors!
+            </p>
+            <p style="margin-left: 20px;">
+                <strong>Complete:</strong> $2x^3 + 6x^2 + 4x = 2x(x^2 + 3x + 2) = 2x(x + 1)(x + 2)$
+            </p>
+            <p>
+                Always check each factor to see if it matches a pattern you know. Factoring isn't finished until every factor is prime.
+            </p>
+        </div>
+        
+        <h3>Perfect Square Trinomials</h3>
+        
+        <p>
+            Recall from Section 14:
+        </p>
+        <ul>
+            <li>$(a + b)^2 = a^2 + 2ab + b^2$</li>
+            <li>$(a - b)^2 = a^2 - 2ab + b^2$</li>
+        </ul>
+        
+        <p>
+            Reading these from right to left gives us the factoring patterns:
+        </p>
+        
+        <div class="formula-box">
+            <h4>Perfect Square Trinomials</h4>
+            <p style="font-size: 1.1em; margin: 10px 0;">$$a^2 + 2ab + b^2 = (a + b)^2$$</p>
+            <p style="font-size: 1.1em; margin: 10px 0;">$$a^2 - 2ab + b^2 = (a - b)^2$$</p>
+        </div>
+        
+        <p>
+            <strong>Recognition test:</strong> A trinomial is a perfect square if:
+        </p>
+        <ol>
+            <li>The first term is a perfect square: $a^2$</li>
+            <li>The last term is a perfect square: $b^2$</li>
+            <li>The middle term is $\pm 2 \times \sqrt{\text{first}} \times \sqrt{\text{last}}$ (that is, $\pm 2ab$)</li>
+        </ol>
+        
+        <div class="example">
+            <h4>Example 5: Factor $x^2 + 10x + 25$</h4>
+            
+            <p><strong>Test for perfect square:</strong></p>
+            <ol>
+                <li>First term: $x^2 = (x)^2$ &#10003;</li>
+                <li>Last term: $25 = (5)^2$ &#10003;</li>
+                <li>Middle term: $2 \times x \times 5 = 10x$ &#10003;</li>
+            </ol>
+            
+            <p>All three conditions are met! The middle term is positive, so we use $(a + b)^2$.</p>
+            
+            <p><strong>Answer:</strong> $x^2 + 10x + 25 = (x + 5)^2$</p>
+            
+            <p><strong>Check:</strong> $(x + 5)^2 = x^2 + 10x + 25$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Factor $9x^2 - 12x + 4$</h4>
+            
+            <p><strong>Test for perfect square:</strong></p>
+            <ol>
+                <li>First term: $9x^2 = (3x)^2$ &#10003;</li>
+                <li>Last term: $4 = (2)^2$ &#10003;</li>
+                <li>Expected middle term: $2 \times 3x \times 2 = 12x$</li>
+                <li>Actual middle term: $-12x$ &mdash; same magnitude, negative sign &#10003;</li>
+            </ol>
+            
+            <p>This is a perfect square trinomial with $a = 3x$, $b = 2$, and a negative middle term.</p>
+            
+            <p><strong>Answer:</strong> $9x^2 - 12x + 4 = (3x - 2)^2$</p>
+            
+            <p><strong>Check:</strong> $(3x - 2)^2 = 9x^2 - 12x + 4$ &#10003;</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 7: Is $x^2 + 6x + 10$ a perfect square trinomial?</h4>
+            
+            <p><strong>Test:</strong></p>
+            <ol>
+                <li>First term: $x^2 = (x)^2$ &#10003;</li>
+                <li>Last term: $10$ is not a perfect square &#10007;</li>
+            </ol>
+            
+            <p><strong>Conclusion:</strong> Not a perfect square trinomial. We would need to use the sum-product method from Section 15.3, but since $10 = 2 \times 5$ and $2 + 5 = 7 \neq 6$, this trinomial doesn't factor over integers. It's prime.</p>
+        </div>
+        
+        <h3>Combining Techniques</h3>
+        
+        <p>
+            Sometimes factoring requires multiple steps: extract the GCF first, then recognize a special form.
+        </p>
+        
+        <div class="key-point">
+            <h4>Always Check for GCF First</h4>
+            <p>
+                Before looking for special patterns, always ask: "Do all terms share a common factor?" Extracting the GCF first often reveals a special form hiding inside.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: Factor $2x^3 - 18x$</h4>
+            
+            <p><strong>Step 1:</strong> Check for GCF. Both terms have factor of $2x$.</p>
+            <p>$$2x^3 - 18x = 2x(x^2 - 9)$$</p>
+            
+            <p><strong>Step 2:</strong> Look at what remains. Is $x^2 - 9$ a special form?</p>
+            <p>Yes! $x^2 - 9 = x^2 - 3^2$ is a difference of squares.</p>
+            <p>$$x^2 - 9 = (x + 3)(x - 3)$$</p>
+            
+            <p><strong>Complete factorization:</strong> $2x^3 - 18x = 2x(x + 3)(x - 3)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 9: Factor $3x^2 + 30x + 75$</h4>
+            
+            <p><strong>Step 1:</strong> Check for GCF. All coefficients divisible by 3.</p>
+            <p>$$3x^2 + 30x + 75 = 3(x^2 + 10x + 25)$$</p>
+            
+            <p><strong>Step 2:</strong> Is $x^2 + 10x + 25$ a perfect square?</p>
+            <ul>
+                <li>First: $x^2 = (x)^2$ &#10003;</li>
+                <li>Last: $25 = (5)^2$ &#10003;</li>
+                <li>Middle: $2(x)(5) = 10x$ &#10003;</li>
+            </ul>
+            
+            <p>Yes! So $x^2 + 10x + 25 = (x + 5)^2$</p>
+            
+            <p><strong>Complete factorization:</strong> $3x^2 + 30x + 75 = 3(x + 5)^2$</p>
+        </div>
+        
+        <!-- FIGURE 15.2: Factoring Strategy Flowchart -->
+        <div class="figure-container">
+            <h4 style="text-align: center; margin-top: 0;">Figure 15.2: Factoring Strategy Flowchart</h4>
+            
+            <div class="flowchart">
+                <div class="flowchart-node flowchart-start">Start: Given a polynomial to factor</div>
+                <div class="flowchart-arrow">&#8595;</div>
+                
+                <div class="flowchart-node flowchart-decision">Step 1: Is there a GCF?</div>
+                <div class="flowchart-branch">
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">Yes</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.9em;">Factor out the GCF</div>
+                    </div>
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">No</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.9em;">Continue to Step 2</div>
+                    </div>
+                </div>
+                <div class="flowchart-arrow">&#8595;</div>
+                
+                <div class="flowchart-node flowchart-decision">Step 2: How many terms?</div>
+                <div class="flowchart-branch">
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">2 terms</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.85em;">Check for<br>difference of squares<br>$a^2 - b^2$</div>
+                    </div>
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">3 terms</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.85em;">Check for perfect square<br>or use trinomial<br>methods (15.3&ndash;15.4)</div>
+                    </div>
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">4 terms</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.85em;">Try factoring<br>by grouping<br>(Section 15.5)</div>
+                    </div>
+                </div>
+                <div class="flowchart-arrow">&#8595;</div>
+                
+                <div class="flowchart-node flowchart-decision">Step 3: Can any factor be factored further?</div>
+                <div class="flowchart-branch">
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">Yes</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.9em;">Return to Step 2<br>for that factor</div>
+                    </div>
+                    <div class="flowchart-branch-item">
+                        <div class="flowchart-label">No</div>
+                        <div class="flowchart-node flowchart-action" style="font-size: 0.9em;">Continue to Step 4</div>
+                    </div>
+                </div>
+                <div class="flowchart-arrow">&#8595;</div>
+                
+                <div class="flowchart-node flowchart-end">Step 4: Verify by multiplying</div>
+            </div>
+            
+            <p class="figure-caption">
+                <strong>Fig. 15.2:</strong> A systematic approach to factoring polynomials. Always start by checking for a GCF, then select a technique based on the number of terms.
+            </p>
+        </div>
+        
+        <!-- Optional Enrichment: Sum and Difference of Cubes -->
+        <div class="going-deeper">
+            <h4>Sum and Difference of Cubes (Optional)</h4>
+            
+            <p>
+                Beyond squares, there are also patterns for factoring sums and differences of <em>cubes</em>:
+            </p>
+            
+            <p style="text-align: center; font-size: 1.1em;">
+                $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$
+            </p>
+            <p style="text-align: center; font-size: 1.1em;">
+                $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$
+            </p>
+            
+            <p>
+                <strong>The SOAP mnemonic</strong> helps remember the signs: <strong>S</strong>ame, <strong>O</strong>pposite, <strong>A</strong>lways <strong>P</strong>ositive.
+            </p>
+            <ul>
+                <li><strong>Same:</strong> The sign in the binomial $(a \pm b)$ matches the sign in the original expression</li>
+                <li><strong>Opposite:</strong> The sign of the middle term in the trinomial is opposite to the binomial's sign</li>
+                <li><strong>Always Positive:</strong> The last term in the trinomial is always positive</li>
+            </ul>
+            
+            <p><strong>Example:</strong> Factor $x^3 + 8$</p>
+            <p>
+                Recognize: $x^3 + 8 = x^3 + 2^3$ (sum of cubes with $a = x$, $b = 2$)
+            </p>
+            <p>
+                Apply SOAP: $(x + 2)(x^2 - 2x + 4)$
+            </p>
+            <ul>
+                <li>Same: $+$ in binomial matches $+$ in $x^3 + 8$</li>
+                <li>Opposite: middle term in trinomial is $-2x$</li>
+                <li>Always Positive: last term $+4$ is positive</li>
+            </ul>
+            
+            <p><strong>Example:</strong> Factor $27x^3 - 1$</p>
+            <p>
+                Recognize: $27x^3 - 1 = (3x)^3 - 1^3$ (difference of cubes)
+            </p>
+            <p>
+                Apply SOAP: $(3x - 1)(9x^2 + 3x + 1)$
+            </p>
+            
+            <p>
+                <em>Note:</em> The trinomial factors $(a^2 - ab + b^2$ and $a^2 + ab + b^2)$ do not factor further over the real numbers. These cube formulas appear in engineering, physics, and computer science applications. You don't need to memorize them&mdash;you can look them up when needed&mdash;but recognizing when they apply is useful.
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Factoring Special Forms (Section 15.6)</h4>
+            
+            <p><em>Factor completely. Check your answers in the Solutions section after attempting the problems yourself.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">47.</span> Factor: $x^2 - 36$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">48.</span> Factor: $x^2 - 81$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">49.</span> Factor: $25x^2 - 4$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">50.</span> Factor: $16a^2 - 49b^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">51.</span> Factor: $x^2 + 14x + 49$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">52.</span> Factor: $x^2 - 16x + 64$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">53.</span> Factor: $4x^2 + 20x + 25$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">54.</span> Factor: $9x^2 - 30x + 25$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">55.</span> Factor: $5x^2 - 45$ (requires GCF first)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">56.</span> Factor: $2x^2 + 20x + 50$ (requires GCF first)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">57.</span> Factor: $x^4 - 81$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">58.</span> Factor: $x^3 - 27$ (sum/difference of cubes)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">59.</span> Factor: $8x^3 + 1$ (sum/difference of cubes)</p>
+            </div>
+        </div>
+        
+        <!-- Solutions for Section 15.6 -->
+        <div class="solutions">
+            <h4>Solutions (Section 15.6)</h4>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">47.</span> $x^2 - 36 = x^2 - 6^2 = (x + 6)(x - 6)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">48.</span> $x^2 - 81 = x^2 - 9^2 = (x + 9)(x - 9)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">49.</span> $25x^2 - 4 = (5x)^2 - 2^2 = (5x + 2)(5x - 2)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">50.</span> $16a^2 - 49b^2 = (4a)^2 - (7b)^2 = (4a + 7b)(4a - 7b)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">51.</span> Perfect square: $x^2 + 14x + 49$</p>
+                <p>Check: $(x)^2$ &#10003;, $(7)^2 = 49$ &#10003;, $2(x)(7) = 14x$ &#10003;</p>
+                <p>$x^2 + 14x + 49 = (x + 7)^2$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">52.</span> Perfect square: $x^2 - 16x + 64$</p>
+                <p>Check: $(x)^2$ &#10003;, $(8)^2 = 64$ &#10003;, $2(x)(8) = 16x$ &#10003; (middle term is negative)</p>
+                <p>$x^2 - 16x + 64 = (x - 8)^2$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">53.</span> Perfect square: $4x^2 + 20x + 25$</p>
+                <p>Check: $(2x)^2 = 4x^2$ &#10003;, $(5)^2 = 25$ &#10003;, $2(2x)(5) = 20x$ &#10003;</p>
+                <p>$4x^2 + 20x + 25 = (2x + 5)^2$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">54.</span> Perfect square: $9x^2 - 30x + 25$</p>
+                <p>Check: $(3x)^2 = 9x^2$ &#10003;, $(5)^2 = 25$ &#10003;, $2(3x)(5) = 30x$ &#10003;</p>
+                <p>$9x^2 - 30x + 25 = (3x - 5)^2$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">55.</span> GCF first: $5x^2 - 45 = 5(x^2 - 9)$</p>
+                <p>Now $x^2 - 9$ is a difference of squares: $x^2 - 9 = (x + 3)(x - 3)$</p>
+                <p>$5x^2 - 45 = 5(x + 3)(x - 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">56.</span> GCF first: $2x^2 + 20x + 50 = 2(x^2 + 10x + 25)$</p>
+                <p>Now $x^2 + 10x + 25$ is a perfect square: $(x + 5)^2$</p>
+                <p>$2x^2 + 20x + 50 = 2(x + 5)^2$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">57.</span> $x^4 - 81 = (x^2)^2 - 9^2 = (x^2 + 9)(x^2 - 9)$</p>
+                <p>$x^2 + 9$ doesn't factor (sum of squares), but $x^2 - 9 = (x + 3)(x - 3)$</p>
+                <p>$x^4 - 81 = (x^2 + 9)(x + 3)(x - 3)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">58.</span> Difference of cubes: $x^3 - 27 = x^3 - 3^3$</p>
+                <p>Using $a^3 - b^3 = (a - b)(a^2 + ab + b^2)$ with $a = x$, $b = 3$:</p>
+                <p>$x^3 - 27 = (x - 3)(x^2 + 3x + 9)$</p>
+            </div>
+            
+            <div class="solution-item">
+                <p><span class="problem-number">59.</span> Sum of cubes: $8x^3 + 1 = (2x)^3 + 1^3$</p>
+                <p>Using $a^3 + b^3 = (a + b)(a^2 - ab + b^2)$ with $a = 2x$, $b = 1$:</p>
+                <p>$8x^3 + 1 = (2x + 1)(4x^2 - 2x + 1)$</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.7: Comprehensive Practice                         -->
+        <!-- ============================================================ -->
+        
+        <h2>15.7 Comprehensive Practice</h2>
+        
+        <p>
+            The problems below cover all the factoring techniques from Section 15. Unlike the earlier practice sets, these problems are <em>not</em> sorted by type. Part of the challenge is identifying which technique to use. Follow the flowchart from Figure 15.2:
+        </p>
+        
+        <ol>
+            <li>Always check for a GCF first</li>
+            <li>Count the terms to guide your approach</li>
+            <li>Check whether any factor can be factored further</li>
+            <li>Verify by multiplying</li>
+        </ol>
+        
+        <div class="problems-section">
+            <h3>Section 15.7 Practice Problems</h3>
+            
+            <p><em>Factor each expression completely. If it cannot be factored over the integers, write "prime." Solutions follow in a separate section.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">60.</span> Factor: $6x^3 - 15x^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">61.</span> Factor: $12a^2b - 8ab^2 + 4ab$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">62.</span> Factor: $-3x^2 + 12x - 9$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">63.</span> Factor: $7x^4y^2 + 14x^3y^3 - 21x^2y^4$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">64.</span> Factor: $x^2 + 9x + 20$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">65.</span> Factor: $x^2 - 7x + 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">66.</span> Factor: $x^2 + 3x - 28$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">67.</span> Factor: $y^2 - 2y - 35$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">68.</span> Factor: $2x^2 + 11x + 5$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">69.</span> Factor: $3x^2 - 11x + 6$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">70.</span> Factor: $6x^2 + x - 12$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">71.</span> Factor: $8x^2 + 18x + 9$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">72.</span> Factor: $x^3 + 2x^2 + 5x + 10$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">73.</span> Factor: $2x^3 - 6x^2 - 5x + 15$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">74.</span> Factor: $xy - 4x + 6y - 24$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">75.</span> Factor: $x^2 - 100$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">76.</span> Factor: $36x^2 - 25y^2$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">77.</span> Factor: $x^2 + 18x + 81$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">78.</span> Factor: $16x^2 - 40x + 25$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">79.</span> Factor: $3x^3 - 27x$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">80.</span> Factor: $4x^2 - 36$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">81.</span> Factor: $2x^2 + 12x + 18$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">82.</span> Factor: $5x^3 + 10x^2 - 15x$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">83.</span> Factor: $x^2 + 5x + 7$</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">84.</span> Factor: $x^2 + 16$</p>
+            </div>
+            
+            <h4>Calculator Section</h4>
+            
+            <p><em>These problems have decimal coefficients. Use a calculator to check your work by expanding the factored form.</em></p>
+            
+            <div class="problem">
+                <p><span class="problem-number">85.</span> Factor: $x^2 - 2.25$ (Hint: $2.25 = 1.5^2$)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">86.</span> Factor: $x^2 + 3.4x + 2.89$ (Hint: Check if this is a perfect square)</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">87.</span> Verify by expansion: Is $(2.5x + 1.2)(x - 0.8) = 2.5x^2 + 0.2x - 0.96$?</p>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">88.</span> Verify by expansion: Is $(1.5x - 2)^2 = 2.25x^2 - 6x + 4$?</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SOLUTIONS SECTION                                            -->
+        <!-- ============================================================ -->
+        
+        <div class="solutions-section">
+            <h3>Section 15.7 Solutions</h3>
+            
+            <h4>GCF Focus (Problems 60&ndash;63)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 60:</strong> $6x^3 - 15x^2$</p>
+                <p>GCF is $3x^2$: $6x^3 - 15x^2 = 3x^2(2x - 5)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 61:</strong> $12a^2b - 8ab^2 + 4ab$</p>
+                <p>GCF is $4ab$: $12a^2b - 8ab^2 + 4ab = 4ab(3a - 2b + 1)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 62:</strong> $-3x^2 + 12x - 9$</p>
+                <p>GCF is $-3$ (factor out negative to make leading coefficient positive):</p>
+                <p>$= -3(x^2 - 4x + 3)$</p>
+                <p>Now factor the trinomial: need product = 3, sum = $-4$ &rarr; $(-1)(-3)$</p>
+                <p>$-3x^2 + 12x - 9 = -3(x - 1)(x - 3)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 63:</strong> $7x^4y^2 + 14x^3y^3 - 21x^2y^4$</p>
+                <p>GCF is $7x^2y^2$: $= 7x^2y^2(x^2 + 2xy - 3y^2)$</p>
+                <p>Factor the trinomial: need product = $-3$, sum = $2$ &rarr; $(3)(-1)$</p>
+                <p>$= 7x^2y^2(x + 3y)(x - y)$</p>
+            </div>
+            
+            <h4>Simple Trinomials (Problems 64&ndash;67)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 64:</strong> $x^2 + 9x + 20$</p>
+                <p>Need: product = 20, sum = 9. Factor pairs: $(4)(5) = 20$ and $4 + 5 = 9$ &#10003;</p>
+                <p>$x^2 + 9x + 20 = (x + 4)(x + 5)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 65:</strong> $x^2 - 7x + 12$</p>
+                <p>Need: product = 12, sum = $-7$. Both negative: $(-3)(-4) = 12$, $-3 + (-4) = -7$ &#10003;</p>
+                <p>$x^2 - 7x + 12 = (x - 3)(x - 4)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 66:</strong> $x^2 + 3x - 28$</p>
+                <p>Need: product = $-28$, sum = 3. Opposite signs: $(7)(-4) = -28$, $7 + (-4) = 3$ &#10003;</p>
+                <p>$x^2 + 3x - 28 = (x + 7)(x - 4)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 67:</strong> $y^2 - 2y - 35$</p>
+                <p>Need: product = $-35$, sum = $-2$. Try: $(5)(-7) = -35$, $5 + (-7) = -2$ &#10003;</p>
+                <p>$y^2 - 2y - 35 = (y + 5)(y - 7)$</p>
+            </div>
+            
+            <h4>Harder Trinomials (Problems 68&ndash;71)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 68:</strong> $2x^2 + 11x + 5$</p>
+                <p>Factor pairs of 2: $(1, 2)$. Factor pairs of 5: $(1, 5)$.</p>
+                <p style="margin-left: 20px;">Try $(x + 5)(2x + 1)$: outer + inner = $x + 10x = 11x$ &#10003;</p>
+                <p>$2x^2 + 11x + 5 = (x + 5)(2x + 1)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 69:</strong> $3x^2 - 11x + 6$</p>
+                <p>Both constants negative (product positive, sum negative).</p>
+                <p>Factor pairs of 3: $(1, 3)$. Factor pairs of 6: $(1, 6)$, $(2, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(x - 2)(3x - 3)$: has common factor, skip</p>
+                <p style="margin-left: 20px;">Try $(x - 3)(3x - 2)$: outer + inner = $-2x + (-9x) = -11x$ &#10003;</p>
+                <p>$3x^2 - 11x + 6 = (x - 3)(3x - 2)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 70:</strong> $6x^2 + x - 12$</p>
+                <p>Constants have opposite signs.</p>
+                <p>Factor pairs of 6: $(1, 6)$, $(2, 3)$. Factor pairs of 12: $(1, 12)$, $(2, 6)$, $(3, 4)$.</p>
+                <p style="margin-left: 20px;">Try $(2x + 3)(3x - 4)$: outer + inner = $-8x + 9x = x$ &#10003;</p>
+                <p>$6x^2 + x - 12 = (2x + 3)(3x - 4)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 71:</strong> $8x^2 + 18x + 9$</p>
+                <p>Factor pairs of 8: $(1, 8)$, $(2, 4)$. Factor pairs of 9: $(1, 9)$, $(3, 3)$.</p>
+                <p style="margin-left: 20px;">Try $(2x + 3)(4x + 3)$: outer + inner = $6x + 12x = 18x$ &#10003;</p>
+                <p>$8x^2 + 18x + 9 = (2x + 3)(4x + 3)$</p>
+            </div>
+            
+            <h4>Factoring by Grouping (Problems 72&ndash;74)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 72:</strong> $x^3 + 2x^2 + 5x + 10$</p>
+                <p>$(x^3 + 2x^2) + (5x + 10) = x^2(x + 2) + 5(x + 2) = (x + 2)(x^2 + 5)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 73:</strong> $2x^3 - 6x^2 - 5x + 15$</p>
+                <p>$(2x^3 - 6x^2) + (-5x + 15) = 2x^2(x - 3) - 5(x - 3) = (x - 3)(2x^2 - 5)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 74:</strong> $xy - 4x + 6y - 24$</p>
+                <p>$(xy - 4x) + (6y - 24) = x(y - 4) + 6(y - 4) = (y - 4)(x + 6)$</p>
+            </div>
+            
+            <h4>Special Forms (Problems 75&ndash;78)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 75:</strong> $x^2 - 100 = x^2 - 10^2 = (x + 10)(x - 10)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 76:</strong> $36x^2 - 25y^2 = (6x)^2 - (5y)^2 = (6x + 5y)(6x - 5y)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 77:</strong> $x^2 + 18x + 81$</p>
+                <p>Perfect square check: $(x)^2$ &#10003;, $(9)^2 = 81$ &#10003;, $2(x)(9) = 18x$ &#10003;</p>
+                <p>$x^2 + 18x + 81 = (x + 9)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 78:</strong> $16x^2 - 40x + 25$</p>
+                <p>Perfect square check: $(4x)^2 = 16x^2$ &#10003;, $(5)^2 = 25$ &#10003;, $2(4x)(5) = 40x$ &#10003;</p>
+                <p>$16x^2 - 40x + 25 = (4x - 5)^2$</p>
+            </div>
+            
+            <h4>Mixed/Multi-Step (Problems 79&ndash;82)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 79:</strong> $3x^3 - 27x$</p>
+                <p>GCF: $3x^3 - 27x = 3x(x^2 - 9)$</p>
+                <p>Difference of squares: $x^2 - 9 = (x + 3)(x - 3)$</p>
+                <p>$3x^3 - 27x = 3x(x + 3)(x - 3)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 80:</strong> $4x^2 - 36$</p>
+                <p>GCF: $4x^2 - 36 = 4(x^2 - 9)$</p>
+                <p>Difference of squares: $x^2 - 9 = (x + 3)(x - 3)$</p>
+                <p>$4x^2 - 36 = 4(x + 3)(x - 3)$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 81:</strong> $2x^2 + 12x + 18$</p>
+                <p>GCF: $2x^2 + 12x + 18 = 2(x^2 + 6x + 9)$</p>
+                <p>Perfect square check: $(x)^2$ &#10003;, $(3)^2 = 9$ &#10003;, $2(x)(3) = 6x$ &#10003;</p>
+                <p>$2x^2 + 12x + 18 = 2(x + 3)^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 82:</strong> $5x^3 + 10x^2 - 15x$</p>
+                <p>GCF: $= 5x(x^2 + 2x - 3)$</p>
+                <p>Factor trinomial: product = $-3$, sum = $2$ &rarr; $(3)(-1)$</p>
+                <p>$5x^3 + 10x^2 - 15x = 5x(x + 3)(x - 1)$</p>
+            </div>
+            
+            <h4>Identify as Prime (Problems 83&ndash;84)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 83:</strong> $x^2 + 5x + 7$</p>
+                <p>Need: product = 7, sum = 5. Factor pairs of 7: $(1)(7)$, sum = 8 &#10007;</p>
+                <p>No integer factors work. <strong>Prime</strong>.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 84:</strong> $x^2 + 16$</p>
+                <p>This is a sum of squares. Sum of squares does not factor over the reals.</p>
+                <p><strong>Prime</strong>.</p>
+            </div>
+            
+            <h4>Calculator Section (Problems 85&ndash;88)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 85:</strong> $x^2 - 2.25$</p>
+                <p>Since $2.25 = 1.5^2$, this is a difference of squares:</p>
+                <p>$x^2 - 2.25 = (x + 1.5)(x - 1.5)$</p>
+                <p><strong>Check:</strong> $(x + 1.5)(x - 1.5) = x^2 - 1.5x + 1.5x - 2.25 = x^2 - 2.25$ &#10003;</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 86:</strong> $x^2 + 3.4x + 2.89$</p>
+                <p>Check for perfect square: $\sqrt{2.89} = 1.7$</p>
+                <p>Is middle term $= 2(1)(1.7) = 3.4$? Yes! &#10003;</p>
+                <p>$x^2 + 3.4x + 2.89 = (x + 1.7)^2$</p>
+                <p><strong>Check:</strong> $(x + 1.7)^2 = x^2 + 3.4x + 2.89$ &#10003;</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 87:</strong> Verify $(2.5x + 1.2)(x - 0.8) = 2.5x^2 + 0.2x - 0.96$</p>
+                <p>Expand: $(2.5x + 1.2)(x - 0.8)$</p>
+                <p>$= 2.5x \cdot x + 2.5x \cdot (-0.8) + 1.2 \cdot x + 1.2 \cdot (-0.8)$</p>
+                <p>$= 2.5x^2 - 2x + 1.2x - 0.96$</p>
+                <p>$= 2.5x^2 - 0.8x - 0.96$</p>
+                <p><strong>Result:</strong> No, the middle term is $-0.8x$, not $+0.2x$. The equation is <strong>false</strong>.</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 88:</strong> Verify $(1.5x - 2)^2 = 2.25x^2 - 6x + 4$</p>
+                <p>Expand using $(a - b)^2 = a^2 - 2ab + b^2$:</p>
+                <p>$(1.5x)^2 = 2.25x^2$ &#10003;</p>
+                <p>$2(1.5x)(2) = 6x$ &#10003;</p>
+                <p>$2^2 = 4$ &#10003;</p>
+                <p>$(1.5x - 2)^2 = 2.25x^2 - 6x + 4$ &#10003;</p>
+                <p><strong>Result:</strong> <strong>True</strong>.</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15.8: Factoring and Roots Preview (Added in v2)      -->
+        <!-- ============================================================ -->
+        
+        <h2>15.8 Factoring and Roots: A Glimpse Ahead (Optional)</h2>
+        
+        <p>
+            After learning several factoring techniques, a natural question arises: <em>How do I know when I'm done?</em> When a polynomial doesn't yield to our methods, is it truly unfactorable, or am I just missing something?
+        </p>
+        
+        <p>
+            For now, the practical answer is straightforward: the techniques in this section&mdash;GCF, trinomial methods, grouping, and special forms&mdash;handle the cases you'll encounter in standard algebra. Section 16 will extend your toolkit further when we study the quadratic formula. With practice, you'll develop reliable instincts for when a polynomial factors and when it doesn't.
+        </p>
+        
+        <p>
+            But the deeper answer is surprisingly rich. Factoring connects to fundamental questions about numbers and equations that mathematicians spent centuries exploring. This optional section offers a glimpse of that bigger picture. You aren't expected to master these ideas now&mdash;but if you're curious about where your mathematics journey might lead, read on.
+        </p>
+        
+        <h3>The Connection Between Factors and Solutions</h3>
+        
+        <p>
+            There's a profound link between factoring a polynomial and solving equations. Here's the key insight:
+        </p>
+        
+        <div class="key-point">
+            <h4>Factors and Roots</h4>
+            <p>
+                If $(x - a)$ is a factor of a polynomial, then $x = a$ is a solution of the equation polynomial $= 0$.
+            </p>
+            <p>
+                Conversely, if $x = a$ is a solution, then $(x - a)$ is a factor.
+            </p>
+        </div>
+        
+        <p>
+            Consider $x^2 - 5x + 6$. We can factor this as $(x - 2)(x - 3)$. What does this tell us about solutions to $x^2 - 5x + 6 = 0$?
+        </p>
+        
+        <p>
+            If $(x - 2)(x - 3) = 0$, then one of the factors must equal zero. Either $x - 2 = 0$ (so $x = 2$) or $x - 3 = 0$ (so $x = 3$). The factors reveal the solutions directly: $x = 2$ and $x = 3$.
+        </p>
+        
+        <p>
+            You can verify this by substitution. Plug $x = 2$ into the original: $2^2 - 5(2) + 6 = 4 - 10 + 6 = 0$. It works. Try $x = 3$: $3^2 - 5(3) + 6 = 9 - 15 + 6 = 0$. That works too.
+        </p>
+        
+        <p>
+            This is why factoring matters: it transforms the problem of <em>solving</em> an equation into the problem of <em>finding factors</em>. Section 16 explores this connection in depth.
+        </p>
+        
+        <h3>What Counts as "Factorable" Depends on What Numbers You Allow</h3>
+        
+        <p>
+            Throughout this section, we've focused on factoring with integer coefficients. When we called a polynomial "prime," we meant it couldn't be factored using integers. But factorability isn't absolute&mdash;it depends on what kinds of numbers you're willing to use.
+        </p>
+        
+        <p>
+            Consider $x^2 - 3$. Using our techniques, this appears to be prime. It's not a difference of squares in the usual sense, because 3 isn't a perfect square (no integer multiplied by itself gives 3).
+        </p>
+        
+        <p>
+            But what if we allow irrational numbers? Then $3 = (\sqrt{3})^2$, and suddenly we <em>can</em> write $x^2 - 3$ as a difference of squares:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $x^2 - 3 = x^2 - (\sqrt{3})^2 = (x + \sqrt{3})(x - \sqrt{3})$
+        </p>
+        
+        <p>
+            You can verify this by multiplying out: $(x + \sqrt{3})(x - \sqrt{3}) = x^2 - \sqrt{3}x + \sqrt{3}x - 3 = x^2 - 3$.
+        </p>
+        
+        <p>
+            So $x^2 - 3$ is prime if you only allow integer coefficients, but it factors nicely if you allow real numbers like $\sqrt{3}$. The polynomial hasn't changed&mdash;what changed is the collection of numbers we're drawing from.
+        </p>
+        
+        <p>
+            We've focused on integer coefficients because they're concrete and the patterns are clearest. But be aware that "prime" is always relative to a context.
+        </p>
+        
+        <h3>Previews of Deeper Territory</h3>
+        
+        <p>
+            The following ideas require more advanced mathematics to fully understand. We present them here not as material to learn now, but as signposts for the road ahead. If some of this seems mysterious, that's fine&mdash;it <em>is</em> mysterious until you have more tools.
+        </p>
+        
+        <div class="preview-box">
+            <p>
+                <strong>Quadratics have at most two solutions.</strong> A quadratic equation $ax^2 + bx + c = 0$ has at most two real solutions. If those solutions are $s_1$ and $s_2$ (which might be equal, as when a parabola just touches the x-axis), then the quadratic factors as $a(x - s_1)(x - s_2)$. The solutions and the factors are two views of the same information.
+            </p>
+            
+            <p>
+                <strong>The quadratic formula uses only basic operations.</strong> In Section 16, you'll learn that any quadratic equation can be solved using only addition, subtraction, multiplication, division, and square roots. This is remarkable: no matter how complicated the coefficients, a straightforward formula gives the answer. Higher-degree polynomials are not so cooperative&mdash;there's no similar formula for polynomials of degree five or higher, a fact proved in the 19th century.
+            </p>
+            
+            <p>
+                <strong>Some polynomials have no real solutions.</strong> The equation $x^2 + 1 = 0$ asks: what number, squared, gives $-1$? No real number works&mdash;squaring always gives a non-negative result. We've called such polynomials "prime," but a mathematician would say more precisely that they have no <em>real</em> roots.
+            </p>
+            
+            <p>
+                <strong>Complex numbers complete the picture.</strong> Mathematicians eventually extended the real numbers to include a new kind of number, $i$, defined so that $i^2 = -1$. These "complex numbers" (covered in later lessons on trigonometry and exponentials) have a remarkable property: every polynomial equation has solutions in the complex numbers, and every polynomial factors completely into linear pieces $(x - r)$. This is called the Fundamental Theorem of Algebra, and it took mathematicians until the 1800s to prove it rigorously.
+            </p>
+        </div>
+        
+        <h3>Why This Matters</h3>
+        
+        <p>
+            These aren't just abstract curiosities. The connection between polynomials, their factors, and their roots is foundational to how mathematics is used in science and engineering. Signal processing, control systems, quantum mechanics, and computer graphics all rely on understanding polynomial behavior through their roots and factors.
+        </p>
+        
+        <p>
+            For now, focus on building fluency with the factoring techniques in this section. They're practical tools you'll use repeatedly. But remember that behind these techniques lies a deep and beautiful mathematical landscape&mdash;one you'll explore further as your studies continue.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 15 SUMMARY                                           -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-15-summary">Section 15 Summary</h2>
+        
+        <div class="summary-box">
+            <h3>Key Vocabulary</h3>
+            
+            <table style="width: 100%;">
+                <tr>
+                    <th style="width: 30%;">Term</th>
+                    <th>Definition</th>
+                </tr>
+                <tr>
+                    <td><strong>Factor (verb)</strong></td>
+                    <td>To write an expression as a product of simpler expressions</td>
+                </tr>
+                <tr>
+                    <td><strong>Factor (noun)</strong></td>
+                    <td>One of the expressions being multiplied in a product</td>
+                </tr>
+                <tr>
+                    <td><strong>GCF</strong></td>
+                    <td>Greatest Common Factor&mdash;the largest expression that divides all terms</td>
+                </tr>
+                <tr>
+                    <td><strong>Prime polynomial</strong></td>
+                    <td>A polynomial that cannot be factored over the integers (other than trivial factorizations)</td>
+                </tr>
+                <tr>
+                    <td><strong>Perfect square trinomial</strong></td>
+                    <td>A trinomial of the form $a^2 \pm 2ab + b^2$, which factors as $(a \pm b)^2$</td>
+                </tr>
+                <tr>
+                    <td><strong>Difference of squares</strong></td>
+                    <td>An expression of the form $a^2 - b^2$, which factors as $(a + b)(a - b)$</td>
+                </tr>
+            </table>
+            
+            <h4>Factoring Decision Guide</h4>
+            
+            <ol>
+                <li><strong>Always check for GCF first.</strong> Factor it out before trying anything else.</li>
+                <li><strong>Count the terms:</strong>
+                    <ul>
+                        <li><strong>2 terms:</strong> Check for difference of squares ($a^2 - b^2$) or difference/sum of cubes</li>
+                        <li><strong>3 terms:</strong> Check for perfect square trinomial; otherwise use sum-product method (if $a = 1$) or trial-and-error (if $a \neq 1$)</li>
+                        <li><strong>4 terms:</strong> Try factoring by grouping</li>
+                    </ul>
+                </li>
+                <li><strong>Check if any factor can be factored further.</strong> Continue until all factors are prime.</li>
+                <li><strong>Verify by multiplying.</strong> The factored form should expand to the original expression.</li>
+            </ol>
+            
+            <h4>Key Formulas</h4>
+            
+            <div class="formula-box" style="margin: 15px 0;">
+                <p style="font-size: 1.05em; margin: 8px 0;"><strong>Difference of Squares:</strong> &nbsp; $a^2 - b^2 = (a + b)(a - b)$</p>
+                <p style="font-size: 1.05em; margin: 8px 0;"><strong>Perfect Square (sum):</strong> &nbsp; $a^2 + 2ab + b^2 = (a + b)^2$</p>
+                <p style="font-size: 1.05em; margin: 8px 0;"><strong>Perfect Square (difference):</strong> &nbsp; $a^2 - 2ab + b^2 = (a - b)^2$</p>
+            </div>
+            
+            <h4>Common Errors to Avoid</h4>
+            
+            <ul>
+                <li><strong>Forgetting to check for GCF first:</strong> Always start here. Missing a common factor makes the remaining expression unnecessarily complicated.</li>
+                <li><strong>Stopping before factoring completely:</strong> After each factorization, check whether any factor can be factored further (e.g., $x^4 - 16$ requires two steps).</li>
+                <li><strong>Confusing $a^2 - b^2$ with $a^2 + b^2$:</strong> The difference of squares factors; the sum of squares does <em>not</em> factor over the reals.</li>
+                <li><strong>Sign errors in perfect square trinomials:</strong> The middle term's sign determines whether the factored form uses $+$ or $-$.</li>
+                <li><strong>Not verifying by multiplication:</strong> Always check your answer. If the expansion doesn't match the original, there's an error.</li>
+            </ul>
+        </div>
+        
+        <div class="looking-ahead">
+            <p>
+                <strong>Section 16: Quadratic Equations</strong> is where factoring shows its power. When you need to solve an equation like $x^2 + 5x + 6 = 0$, factoring transforms it into $(x + 2)(x + 3) = 0$.
+            </p>
+            <p style="margin-top: 10px;">
+                The <strong>Zero Product Property</strong> then takes over: if two numbers multiply to zero, at least one of them must be zero. So either $x + 2 = 0$ (giving $x = -2$) or $x + 3 = 0$ (giving $x = -3$).
+            </p>
+            <p style="margin-top: 10px;">
+                What about equations that don't factor nicely? That's where the <strong>quadratic formula</strong> comes in&mdash;a universal method that works even when factoring fails. But even then, factoring remains valuable for understanding the structure of solutions.
+            </p>
+        </div>
+        
+        <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; color: #666; font-style: italic;">
+            End of Section 15: Factoring
+        </p>
+        
+    </div>
+
+</body>
+</html>

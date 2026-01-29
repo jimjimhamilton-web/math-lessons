@@ -1,0 +1,1827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 11 (Inequalities)
+      Version: 1.0 FINAL
+      Date: 2026-01-27
+      Guidelines Version: Technical Document Implementation v2.0
+      
+      Status: FINAL - Ready for deployment
+      
+      
+      History:
+        Draft 3: Added sections 11.5-11.7 (Compound Inequalities, 
+                 Applications, Practice Problems with full solutions).
+        Draft 2: Fixed Fig. 11.1 SVG layering - text labels now render
+                 on top of lines (SVG z-order fix).
+        Draft 1: Initial draft of sections 11.1-11.4.
+    -->
+    
+    <title>Section 11: Inequalities</title>
+    
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .section-nav {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+        }
+        .section-nav a {
+            color: #1a5f2a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1a5f2a;
+        }
+
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .figure-container {
+            margin: 25px 0;
+            text-align: center;
+        }
+        .graph-title {
+            font-weight: bold;
+            color: #1a5f2a;
+            margin-bottom: 10px;
+        }
+        .graph-caption {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 15px auto;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            text-align: left;
+        }
+        th {
+            background-color: #f0f0f0;
+        }
+        
+        ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            body {
+                padding: 10px;
+            }
+            svg {
+                max-width: 100%;
+                height: auto;
+            }
+            code, pre {
+                white-space: pre-wrap;
+                word-break: break-word;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Section Navigation -->
+        <div class="section-nav">
+            <a href="Section_10_Final_v1.html">&larr; Section 10: Linear Equations</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 11: Inequalities</span> | 
+            <a href="Section_12_Final_v1.html">Section 12: Graphing and Linear Functions &rarr;</a>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- SECTION 11: INEQUALITIES -->
+        <!-- ============================================================ -->
+        
+        <h1 id="section-11">Section 11: Inequalities</h1>
+        
+        <p>
+            In Section 10, we solved equations—finding the exact value that makes two expressions equal. But many real situations don't require exact equality. When you check whether you have enough money for a purchase, you don't need <em>exactly</em> the right amount—you need <em>at least</em> that much. When a recipe says "bake for 25-30 minutes," there's a range of acceptable times. When an elevator has a weight limit, any weight <em>below</em> that limit is acceptable.
+        </p>
+        
+        <p>
+            These situations call for <strong>inequalities</strong>—mathematical statements about one quantity being greater than, less than, or not equal to another. Unlike equations, which typically have one solution (or a few), inequalities usually have infinitely many solutions: a whole range of values that work.
+        </p>
+        
+        <h2 id="sec-11-1">11.1 What Inequalities Mean</h2>
+        
+        <p>
+            An <strong>inequality</strong> is a mathematical statement comparing two quantities using one of these symbols:
+        </p>
+        
+        <div class="definition">
+            <h4>Inequality Symbols</h4>
+            <table style="margin: 15px auto;">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Meaning</th>
+                    <th>Example</th>
+                    <th>Read as</th>
+                </tr>
+                <tr>
+                    <td>$<$</td>
+                    <td>less than</td>
+                    <td>$x < 5$</td>
+                    <td>"$x$ is less than 5"</td>
+                </tr>
+                <tr>
+                    <td>$>$</td>
+                    <td>greater than</td>
+                    <td>$x > 3$</td>
+                    <td>"$x$ is greater than 3"</td>
+                </tr>
+                <tr>
+                    <td>$\leq$</td>
+                    <td>less than or equal to</td>
+                    <td>$x \leq 7$</td>
+                    <td>"$x$ is at most 7"</td>
+                </tr>
+                <tr>
+                    <td>$\geq$</td>
+                    <td>greater than or equal to</td>
+                    <td>$x \geq 2$</td>
+                    <td>"$x$ is at least 2"</td>
+                </tr>
+            </table>
+        </div>
+        
+        <p>
+            The symbols $<$ and $>$ are called <strong>strict inequalities</strong>—the boundary value is <em>not</em> included. The symbols $\leq$ and $\geq$ are <strong>non-strict</strong> (or <strong>inclusive</strong>)—the boundary value <em>is</em> included.
+        </p>
+        
+        <p>
+            Every inequality can be read in two directions. The statement $x < 5$ (read left-to-right: "$x$ is less than 5") means exactly the same as $5 > x$ (read left-to-right: "5 is greater than $x$"). The "arrow" always points toward the smaller quantity.
+        </p>
+        
+        <div class="key-point">
+            <h4>Equations vs. Inequalities</h4>
+            <p>An <strong>equation</strong> like $x + 3 = 7$ typically has one solution: $x = 4$.</p>
+            <p>An <strong>inequality</strong> like $x + 3 < 7$ has infinitely many solutions: $x$ can be 3, or 2, or 0, or $-5$, or $3.99$, or any number less than 4.</p>
+            <p>Solving an inequality means describing the entire set of values that make it true.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Translating Between Words and Symbols</h4>
+            
+            <p><strong>"You must be at least 13 years old to create an account."</strong></p>
+            <p>If $a$ represents age: $a \geq 13$</p>
+            <p>Ages 13, 14, 17.5, 42 all satisfy this. Age 12 does not.</p>
+            
+            <p><strong>"The speed limit is 65 mph."</strong></p>
+            <p>If $s$ represents speed: $s \leq 65$</p>
+            <p>Speeds of 60, 65, 45, and 0 are legal. Speed of 66 is not.</p>
+            
+            <p><strong>"You need more than 50 points to advance."</strong></p>
+            <p>If $p$ represents points: $p > 50$</p>
+            <p>Scores of 51, 75, 50.01 all qualify. Exactly 50 does not (it's "more than," not "at least").</p>
+        </div>
+        
+        <h2 id="sec-11-2">11.2 Graphing Inequalities on a Number Line</h2>
+        
+        <p>
+            Since inequalities have infinitely many solutions, we can't list them all. Instead, we show them visually on a number line, shading all the values that satisfy the inequality.
+        </p>
+        
+        <div class="definition">
+            <h4>Graphing Conventions</h4>
+            <p><strong>Open circle (○):</strong> Used for strict inequalities ($<$ or $>$). The boundary point is NOT included.</p>
+            <p><strong>Closed circle (●):</strong> Used for inclusive inequalities ($\leq$ or $\geq$). The boundary point IS included.</p>
+            <p><strong>Shading:</strong> Shade the ray extending toward all the solutions.</p>
+        </div>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 11.1: The Four Inequality Types on Number Lines</div>
+            <svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- x < 3 -->
+                <g transform="translate(0, 30)">
+                    <!-- Lines first (bottom layer) -->
+                    <line x1="80" y1="20" x2="500" y2="20" stroke="#333" stroke-width="2"/>
+                    <line x1="150" y1="15" x2="150" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="250" y1="15" x2="250" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="350" y1="15" x2="350" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="15" x2="450" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="80" y1="20" x2="450" y2="20" stroke="#3b82f6" stroke-width="4"/>
+                    <circle cx="450" cy="20" r="6" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Text labels last (top layer) -->
+                    <text x="30" y="25" font-size="14" fill="#1a5f2a" font-weight="bold" font-family="sans-serif">x &lt; 3</text>
+                    <text x="150" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">0</text>
+                    <text x="250" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">1</text>
+                    <text x="350" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">2</text>
+                    <text x="450" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">3</text>
+                    <text x="520" y="25" font-size="12" fill="#666" font-family="sans-serif">(-∞, 3)</text>
+                </g>
+                
+                <!-- x ≤ 3 -->
+                <g transform="translate(0, 90)">
+                    <!-- Lines first (bottom layer) -->
+                    <line x1="80" y1="20" x2="500" y2="20" stroke="#333" stroke-width="2"/>
+                    <line x1="150" y1="15" x2="150" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="250" y1="15" x2="250" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="350" y1="15" x2="350" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="15" x2="450" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="80" y1="20" x2="450" y2="20" stroke="#3b82f6" stroke-width="4"/>
+                    <circle cx="450" cy="20" r="6" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Text labels last (top layer) -->
+                    <text x="30" y="25" font-size="14" fill="#1a5f2a" font-weight="bold" font-family="sans-serif">x ≤ 3</text>
+                    <text x="150" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">0</text>
+                    <text x="250" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">1</text>
+                    <text x="350" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">2</text>
+                    <text x="450" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">3</text>
+                    <text x="520" y="25" font-size="12" fill="#666" font-family="sans-serif">(-∞, 3]</text>
+                </g>
+                
+                <!-- x > 3 -->
+                <g transform="translate(0, 150)">
+                    <!-- Lines first (bottom layer) -->
+                    <line x1="80" y1="20" x2="500" y2="20" stroke="#333" stroke-width="2"/>
+                    <line x1="150" y1="15" x2="150" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="250" y1="15" x2="250" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="350" y1="15" x2="350" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="15" x2="450" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="20" x2="500" y2="20" stroke="#3b82f6" stroke-width="4"/>
+                    <circle cx="450" cy="20" r="6" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Text labels last (top layer) -->
+                    <text x="30" y="25" font-size="14" fill="#1a5f2a" font-weight="bold" font-family="sans-serif">x &gt; 3</text>
+                    <text x="150" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">0</text>
+                    <text x="250" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">1</text>
+                    <text x="350" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">2</text>
+                    <text x="450" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">3</text>
+                    <text x="520" y="25" font-size="12" fill="#666" font-family="sans-serif">(3, ∞)</text>
+                </g>
+                
+                <!-- x ≥ 3 -->
+                <g transform="translate(0, 210)">
+                    <!-- Lines first (bottom layer) -->
+                    <line x1="80" y1="20" x2="500" y2="20" stroke="#333" stroke-width="2"/>
+                    <line x1="150" y1="15" x2="150" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="250" y1="15" x2="250" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="350" y1="15" x2="350" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="15" x2="450" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="450" y1="20" x2="500" y2="20" stroke="#3b82f6" stroke-width="4"/>
+                    <circle cx="450" cy="20" r="6" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Text labels last (top layer) -->
+                    <text x="30" y="25" font-size="14" fill="#1a5f2a" font-weight="bold" font-family="sans-serif">x ≥ 3</text>
+                    <text x="150" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">0</text>
+                    <text x="250" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">1</text>
+                    <text x="350" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">2</text>
+                    <text x="450" y="45" text-anchor="middle" font-size="12" font-family="sans-serif">3</text>
+                    <text x="520" y="25" font-size="12" fill="#666" font-family="sans-serif">[3, ∞)</text>
+                </g>
+            </svg>
+            <div class="graph-caption">Open circles exclude the boundary; closed circles include it. The interval notation appears at right.</div>
+        </div>
+        
+        <h3>Interval Notation</h3>
+        
+        <p>
+            <strong>Interval notation</strong> is a compact way to describe a range of numbers. It's used throughout mathematics, so it's worth learning now.
+        </p>
+        
+        <div class="definition">
+            <h4>Interval Notation Rules</h4>
+            <p><strong>Parentheses ( ):</strong> The endpoint is NOT included (same as open circle)</p>
+            <p><strong>Brackets [ ]:</strong> The endpoint IS included (same as closed circle)</p>
+            <p><strong>Infinity (∞):</strong> Always uses a parenthesis—you can't "reach" infinity</p>
+            
+            <table style="margin: 15px auto;">
+                <tr>
+                    <th>Inequality</th>
+                    <th>Interval Notation</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td>$x < 5$</td>
+                    <td>$(-\infty, 5)$</td>
+                    <td>All numbers less than 5</td>
+                </tr>
+                <tr>
+                    <td>$x \leq 5$</td>
+                    <td>$(-\infty, 5]$</td>
+                    <td>All numbers less than or equal to 5</td>
+                </tr>
+                <tr>
+                    <td>$x > 2$</td>
+                    <td>$(2, \infty)$</td>
+                    <td>All numbers greater than 2</td>
+                </tr>
+                <tr>
+                    <td>$x \geq 2$</td>
+                    <td>$[2, \infty)$</td>
+                    <td>All numbers greater than or equal to 2</td>
+                </tr>
+                <tr>
+                    <td>$2 < x < 5$</td>
+                    <td>$(2, 5)$</td>
+                    <td>All numbers between 2 and 5 (not including either)</td>
+                </tr>
+                <tr>
+                    <td>$2 \leq x \leq 5$</td>
+                    <td>$[2, 5]$</td>
+                    <td>All numbers from 2 to 5, inclusive</td>
+                </tr>
+            </table>
+        </div>
+        
+        <p>
+            Throughout this section, we'll express solutions in both inequality notation and interval notation. Both are widely used, and being fluent in both will serve you well.
+        </p>
+        
+        <h2 id="sec-11-3">11.3 Solving Linear Inequalities</h2>
+        
+        <p>
+            Solving an inequality is very similar to solving an equation. You use the same operations—adding, subtracting, multiplying, dividing—to isolate the variable. With one crucial exception that we'll address in the next section, everything you learned about solving equations applies here.
+        </p>
+        
+        <div class="key-point">
+            <h4>Operations That Preserve Inequality Direction</h4>
+            <p>You can do any of these to both sides without changing the inequality direction:</p>
+            <ul>
+                <li><strong>Add</strong> the same number to both sides</li>
+                <li><strong>Subtract</strong> the same number from both sides</li>
+                <li><strong>Multiply</strong> both sides by a <em>positive</em> number</li>
+                <li><strong>Divide</strong> both sides by a <em>positive</em> number</li>
+            </ul>
+        </div>
+        
+        <div class="example">
+            <h4>Example: One-Step Inequality (Addition/Subtraction)</h4>
+            
+            <p><strong>Solve $x + 3 > 7$</strong></p>
+            
+            <p>Subtract 3 from both sides:</p>
+            <p>$$x + 3 - 3 > 7 - 3$$</p>
+            <p>$$x > 4$$</p>
+            
+            <p><strong>Solution:</strong> $x > 4$, or in interval notation: $(4, \infty)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                <line x1="200" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+            
+            <p><strong>Check:</strong> Pick a value from the solution set, say $x = 5$. Is $5 + 3 > 7$? Yes, $8 > 7$. ✓</p>
+            <p>Pick a value NOT in the solution set, say $x = 4$. Is $4 + 3 > 7$? No, $7 \not> 7$. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Two-Step Inequality</h4>
+            
+            <p><strong>Solve $3x - 5 \leq 10$</strong></p>
+            
+            <p>Add 5 to both sides:</p>
+            <p>$$3x - 5 + 5 \leq 10 + 5$$</p>
+            <p>$$3x \leq 15$$</p>
+            
+            <p>Divide both sides by 3 (positive, so direction stays the same):</p>
+            <p>$$\frac{3x}{3} \leq \frac{15}{3}$$</p>
+            <p>$$x \leq 5$$</p>
+            
+            <p><strong>Solution:</strong> $x \leq 5$, or $(-\infty, 5]$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                <line x1="20" y1="30" x2="200" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = 3$ (in solution): $3(3) - 5 = 4 \leq 10$. ✓</p>
+            <p>Try $x = 6$ (not in solution): $3(6) - 5 = 13 \not\leq 10$. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Multi-Step Inequality</h4>
+            
+            <p><strong>Solve $2(x - 3) + 4 > x + 1$</strong></p>
+            
+            <p>Distribute on the left:</p>
+            <p>$$2x - 6 + 4 > x + 1$$</p>
+            <p>$$2x - 2 > x + 1$$</p>
+            
+            <p>Subtract $x$ from both sides:</p>
+            <p>$$x - 2 > 1$$</p>
+            
+            <p>Add 2 to both sides:</p>
+            <p>$$x > 3$$</p>
+            
+            <p><strong>Solution:</strong> $x > 3$, or $(3, \infty)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">1</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                <line x1="200" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Inequality with Fractions</h4>
+            
+            <p><strong>Solve $\frac{2x - 1}{3} \geq 5$</strong></p>
+            
+            <p>Multiply both sides by 3 (positive, so direction unchanged):</p>
+            <p>$$2x - 1 \geq 15$$</p>
+            
+            <p>Add 1 to both sides:</p>
+            <p>$$2x \geq 16$$</p>
+            
+            <p>Divide both sides by 2 (positive):</p>
+            <p>$$x \geq 8$$</p>
+            
+            <p><strong>Solution:</strong> $x \geq 8$, or $[8, \infty)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">8</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">9</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">10</text>
+                <line x1="200" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+        </div>
+        
+        <h2 id="sec-11-4">11.4 The Sign-Reversal Rule</h2>
+        
+        <p>
+            There is one critical difference between solving equations and solving inequalities. When you multiply or divide both sides by a <strong>negative number</strong>, you must <strong>reverse the inequality sign</strong>.
+        </p>
+        
+        <div class="warning">
+            <h4>The Sign-Reversal Rule</h4>
+            <p>When you multiply or divide both sides of an inequality by a <strong>negative number</strong>, you must <strong>flip the inequality symbol</strong>:</p>
+            <ul>
+                <li>$<$ becomes $>$</li>
+                <li>$>$ becomes $<$</li>
+                <li>$\leq$ becomes $\geq$</li>
+                <li>$\geq$ becomes $\leq$</li>
+            </ul>
+        </div>
+        
+        <p>
+            <strong>Why does this happen?</strong> Consider the true statement $3 > 2$. If we multiply both sides by $-1$:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $3 > 2$ becomes $-3 \text{ ? } -2$
+        </p>
+        
+        <p>
+            Is $-3 > -2$? No! On the number line, $-3$ is to the <em>left</em> of $-2$, so $-3 < -2$. Multiplying by a negative number reflects values across zero, reversing their order.
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 11.2: Why Multiplying by a Negative Reverses Order</div>
+            <svg width="500" height="140" viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- Number line -->
+                <line x1="30" y1="70" x2="470" y2="70" stroke="#333" stroke-width="2"/>
+                <!-- Tick marks -->
+                <line x1="90" y1="65" x2="90" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="90" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">-3</text>
+                <line x1="150" y1="65" x2="150" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="150" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">-2</text>
+                <line x1="210" y1="65" x2="210" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="210" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">-1</text>
+                <line x1="270" y1="65" x2="270" y2="75" stroke="#333" stroke-width="2"/>
+                <text x="270" y="90" text-anchor="middle" font-size="12" font-weight="bold" font-family="sans-serif">0</text>
+                <line x1="330" y1="65" x2="330" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="330" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">1</text>
+                <line x1="390" y1="65" x2="390" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="390" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">2</text>
+                <line x1="450" y1="65" x2="450" y2="75" stroke="#333" stroke-width="1"/>
+                <text x="450" y="90" text-anchor="middle" font-size="12" font-family="sans-serif">3</text>
+                
+                <!-- Points for 2 and 3 (original) -->
+                <circle cx="390" cy="70" r="6" fill="#10b981" stroke="#10b981"/>
+                <text x="390" y="55" text-anchor="middle" font-size="11" fill="#10b981" font-family="sans-serif">2</text>
+                <circle cx="450" cy="70" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+                <text x="450" y="55" text-anchor="middle" font-size="11" fill="#3b82f6" font-family="sans-serif">3</text>
+                <text x="420" y="35" text-anchor="middle" font-size="13" fill="#333" font-family="sans-serif">3 > 2</text>
+                
+                <!-- Points for -2 and -3 (reflected) -->
+                <circle cx="150" cy="70" r="6" fill="#10b981" stroke="#10b981"/>
+                <text x="150" y="55" text-anchor="middle" font-size="11" fill="#10b981" font-family="sans-serif">-2</text>
+                <circle cx="90" cy="70" r="6" fill="#3b82f6" stroke="#3b82f6"/>
+                <text x="90" y="55" text-anchor="middle" font-size="11" fill="#3b82f6" font-family="sans-serif">-3</text>
+                <text x="120" y="35" text-anchor="middle" font-size="13" fill="#333" font-family="sans-serif">-3 < -2</text>
+                
+                <!-- Reflection arrows -->
+                <path d="M 390 105 Q 270 130 150 105" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                <polygon points="153,108 145,105 150,98" fill="#ef4444"/>
+                <path d="M 450 105 Q 270 135 90 105" stroke="#ef4444" stroke-width="2" fill="none" stroke-dasharray="5,3"/>
+                <polygon points="93,108 85,105 90,98" fill="#ef4444"/>
+                <text x="270" y="125" text-anchor="middle" font-size="11" fill="#ef4444" font-family="sans-serif">×(-1) reflects across 0</text>
+            </svg>
+            <div class="graph-caption">Multiplying by -1 reflects points across zero. Since 3 is to the right of 2, their reflections (-3 and -2) have reversed positions: -3 is now to the LEFT of -2.</div>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Inequality Requiring Sign Reversal</h4>
+            
+            <p><strong>Solve $-2x < 6$</strong></p>
+            
+            <p>Divide both sides by $-2$. Since we're dividing by a <em>negative</em> number, <strong>reverse the inequality</strong>:</p>
+            <p>$$\frac{-2x}{-2} \color{red}{>} \frac{6}{-2}$$</p>
+            <p>$$x > -3$$</p>
+            
+            <p><strong>Solution:</strong> $x > -3$, or $(-3, \infty)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-5</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-4</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-3</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-1</text>
+                <line x1="200" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = 0$ (should work): $-2(0) = 0 < 6$. ✓</p>
+            <p>Try $x = -4$ (should NOT work): $-2(-4) = 8 \not< 6$. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Multi-Step with Sign Reversal</h4>
+            
+            <p><strong>Solve $7 - 3x \geq 16$</strong></p>
+            
+            <p>Subtract 7 from both sides:</p>
+            <p>$$-3x \geq 9$$</p>
+            
+            <p>Divide both sides by $-3$. <strong>Reverse the inequality:</strong></p>
+            <p>$$x \leq -3$$</p>
+            
+            <p><strong>Solution:</strong> $x \leq -3$, or $(-\infty, -3]$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="100" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-5</text>
+                <line x1="150" y1="25" x2="150" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="150" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-4</text>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-3</text>
+                <line x1="250" y1="25" x2="250" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="250" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                <line x1="300" y1="25" x2="300" y2="35" stroke="#333" stroke-width="1"/>
+                <text x="300" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-1</text>
+                <line x1="20" y1="30" x2="200" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = -5$: $7 - 3(-5) = 7 + 15 = 22 \geq 16$. ✓</p>
+            <p>Try $x = 0$: $7 - 3(0) = 7 \not\geq 16$. ✓</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>Common Mistake Alert</h4>
+            <p>Forgetting to reverse the inequality when dividing by a negative is one of the most common errors in algebra. Always ask yourself: "Am I multiplying or dividing by a negative?" If yes, flip the sign!</p>
+            <p><strong>Tip:</strong> If you're unsure whether your answer is correct, check it by substituting a value from your solution set into the original inequality.</p>
+        </div>
+
+        <h2 id="sec-11-5">11.5 Compound Inequalities</h2>
+        
+        <p>
+            Sometimes a quantity must satisfy two conditions at once. A <strong>compound inequality</strong> combines two inequalities using the words <strong>AND</strong> or <strong>OR</strong>.
+        </p>
+        
+        <h3>"And" Inequalities (Intersection)</h3>
+        
+        <p>
+            An "and" inequality requires <em>both</em> conditions to be true simultaneously. For example, "$x > 2$ AND $x < 7$" means $x$ must be greater than 2 <em>and also</em> less than 7. The solution is the <strong>overlap</strong> (intersection) of the two individual solutions.
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 11.3: AND Inequalities — The Intersection</div>
+            <svg width="550" height="200" viewBox="0 0 550 200" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- First condition: x > 2 -->
+                <g transform="translate(0, 25)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="20" x2="480" y2="20" stroke="#ef4444" stroke-width="4" opacity="0.7"/>
+                    <circle cx="180" cy="20" r="5" fill="white" stroke="#ef4444" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#ef4444" font-weight="bold" font-family="sans-serif">x > 2</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">8</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">10</text>
+                </g>
+                
+                <!-- Second condition: x < 7 -->
+                <g transform="translate(0, 75)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="330" y1="15" x2="330" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="60" y1="20" x2="330" y2="20" stroke="#3b82f6" stroke-width="4" opacity="0.7"/>
+                    <circle cx="330" cy="20" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#3b82f6" font-weight="bold" font-family="sans-serif">x < 7</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                    <text x="330" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">8</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">10</text>
+                </g>
+                
+                <!-- Combined: 2 < x < 7 (intersection) -->
+                <g transform="translate(0, 140)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="330" y1="15" x2="330" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="20" x2="330" y2="20" stroke="#10b981" stroke-width="5"/>
+                    <circle cx="180" cy="20" r="5" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <circle cx="330" cy="20" r="5" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#10b981" font-weight="bold" font-family="sans-serif">Both</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                    <text x="330" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">8</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">10</text>
+                    <text x="500" y="25" font-size="12" fill="#10b981" font-family="sans-serif">(2, 7)</text>
+                </g>
+            </svg>
+            <div class="graph-caption">The AND solution (green) is where both conditions overlap: numbers that are simultaneously greater than 2 and less than 7.</div>
+        </div>
+        
+        <p>
+            Since "and" inequalities describe values between two bounds, we often write them in <strong>compact notation</strong>:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $x > 2$ AND $x < 7$ is the same as $2 < x < 7$
+        </p>
+        
+        <p>
+            Read "$2 < x < 7$" as "$x$ is between 2 and 7" (exclusive on both ends). In interval notation: $(2, 7)$.
+        </p>
+        
+        <div class="example">
+            <h4>Example: Solving an "And" Compound Inequality</h4>
+            
+            <p><strong>Solve $-1 \leq 2x + 3 < 9$</strong></p>
+            
+            <p>This is a three-part inequality. We solve it by isolating $x$ in the middle, performing the same operation on all three parts:</p>
+            
+            <p>Subtract 3 from all parts:</p>
+            <p>$$-1 - 3 \leq 2x + 3 - 3 < 9 - 3$$</p>
+            <p>$$-4 \leq 2x < 6$$</p>
+            
+            <p>Divide all parts by 2 (positive, so no sign reversal):</p>
+            <p>$$-2 \leq x < 3$$</p>
+            
+            <p><strong>Solution:</strong> $-2 \leq x < 3$, or $[-2, 3)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="30" x2="260" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-3</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = 0$ (should work): $-1 \leq 2(0) + 3 < 9$ gives $-1 \leq 3 < 9$. ✓</p>
+            <p>Try $x = -2$ (boundary, should work): $-1 \leq 2(-2) + 3 < 9$ gives $-1 \leq -1 < 9$. ✓</p>
+            <p>Try $x = 3$ (boundary, should NOT work): $-1 \leq 2(3) + 3 < 9$ gives $-1 \leq 9 \not< 9$. ✓</p>
+        </div>
+        
+        <h3>"Or" Inequalities (Union)</h3>
+        
+        <p>
+            An "or" inequality requires <em>at least one</em> condition to be true. For example, "$x < 1$ OR $x > 5$" means $x$ satisfies the inequality if it's less than 1, <em>or</em> if it's greater than 5. The solution is the <strong>union</strong> of the two individual solutions.
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 11.4: OR Inequalities — The Union</div>
+            <svg width="550" height="200" viewBox="0 0 550 200" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- First condition: x < 1 -->
+                <g transform="translate(0, 25)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="60" y1="20" x2="180" y2="20" stroke="#ef4444" stroke-width="4" opacity="0.7"/>
+                    <circle cx="180" cy="20" r="5" fill="white" stroke="#ef4444" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#ef4444" font-weight="bold" font-family="sans-serif">x < 1</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">-1</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">1</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">9</text>
+                </g>
+                
+                <!-- Second condition: x > 5 -->
+                <g transform="translate(0, 75)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="20" x2="480" y2="20" stroke="#3b82f6" stroke-width="4" opacity="0.7"/>
+                    <circle cx="300" cy="20" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#3b82f6" font-weight="bold" font-family="sans-serif">x > 5</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">-1</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">1</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">9</text>
+                </g>
+                
+                <!-- Combined: x < 1 OR x > 5 (union) -->
+                <g transform="translate(0, 140)">
+                    <!-- Lines first -->
+                    <line x1="60" y1="20" x2="480" y2="20" stroke="#333" stroke-width="1.5"/>
+                    <line x1="120" y1="15" x2="120" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="60" y1="20" x2="180" y2="20" stroke="#10b981" stroke-width="5"/>
+                    <line x1="300" y1="20" x2="480" y2="20" stroke="#10b981" stroke-width="5"/>
+                    <circle cx="180" cy="20" r="5" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <circle cx="300" cy="20" r="5" fill="white" stroke="#10b981" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#10b981" font-weight="bold" font-family="sans-serif">Either</text>
+                    <text x="120" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">-1</text>
+                    <text x="180" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">1</text>
+                    <text x="240" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                    <text x="300" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                    <text x="360" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">7</text>
+                    <text x="420" y="45" text-anchor="middle" font-size="11" font-family="sans-serif">9</text>
+                </g>
+            </svg>
+            <div class="graph-caption">The OR solution (green) includes both regions: any number less than 1 or greater than 5 satisfies the compound inequality.</div>
+        </div>
+        
+        <p>
+            In interval notation, we use the <strong>union symbol</strong> $\cup$ to join separate intervals:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.1em;">
+            $x < 1$ OR $x > 5$ is written as $(-\infty, 1) \cup (5, \infty)$
+        </p>
+        
+        <div class="example">
+            <h4>Example: Solving an "Or" Compound Inequality</h4>
+            
+            <p><strong>Solve $3x + 2 < -4$ OR $2x - 1 \geq 5$</strong></p>
+            
+            <p>Solve each inequality separately:</p>
+            
+            <p><strong>First inequality:</strong> $3x + 2 < -4$</p>
+            <p>Subtract 2: $3x < -6$</p>
+            <p>Divide by 3: $x < -2$</p>
+            
+            <p><strong>Second inequality:</strong> $2x - 1 \geq 5$</p>
+            <p>Add 1: $2x \geq 6$</p>
+            <p>Divide by 2: $x \geq 3$</p>
+            
+            <p><strong>Solution:</strong> $x < -2$ OR $x \geq 3$, or $(-\infty, -2) \cup [3, \infty)$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="20" y1="30" x2="140" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <line x1="260" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-4</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = -3$ (should work via first part): $3(-3) + 2 = -7 < -4$. ✓</p>
+            <p>Try $x = 0$ (should NOT work—between the intervals): $3(0) + 2 = 2 \not< -4$ and $2(0) - 1 = -1 \not\geq 5$. ✓</p>
+            <p>Try $x = 3$ (boundary, should work via second part): $2(3) - 1 = 5 \geq 5$. ✓</p>
+        </div>
+        
+        <h3>Three-Part Inequalities</h3>
+        
+        <p>
+            A <strong>three-part inequality</strong> like $-3 < 2x + 1 \leq 7$ is really an "and" compound inequality written in compact form. It means "$2x + 1$ is greater than $-3$ AND less than or equal to 7."
+        </p>
+        
+        <div class="figure-container">
+            <div class="graph-title">Fig. 11.5: Solving a Three-Part Inequality</div>
+            <svg width="550" height="180" viewBox="0 0 550 180" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 0 auto;">
+                <!-- Step 1: Original -->
+                <g transform="translate(0, 20)">
+                    <text x="30" y="15" font-size="13" fill="#333" font-weight="bold" font-family="sans-serif">Start:</text>
+                    <text x="120" y="15" font-size="14" fill="#1a5f2a" font-family="sans-serif">-3 < 2x + 1 ≤ 7</text>
+                </g>
+                
+                <!-- Step 2: Subtract 1 -->
+                <g transform="translate(0, 55)">
+                    <text x="30" y="15" font-size="13" fill="#333" font-weight="bold" font-family="sans-serif">Step 1:</text>
+                    <text x="120" y="15" font-size="14" fill="#333" font-family="sans-serif">Subtract 1 from all three parts</text>
+                    <text x="120" y="35" font-size="14" fill="#1a5f2a" font-family="sans-serif">-4 < 2x ≤ 6</text>
+                </g>
+                
+                <!-- Step 3: Divide by 2 -->
+                <g transform="translate(0, 100)">
+                    <text x="30" y="15" font-size="13" fill="#333" font-weight="bold" font-family="sans-serif">Step 2:</text>
+                    <text x="120" y="15" font-size="14" fill="#333" font-family="sans-serif">Divide all three parts by 2</text>
+                    <text x="120" y="35" font-size="14" fill="#1a5f2a" font-family="sans-serif">-2 < x ≤ 3</text>
+                </g>
+                
+                <!-- Result with number line -->
+                <g transform="translate(0, 140)">
+                    <!-- Lines first -->
+                    <line x1="120" y1="20" x2="480" y2="20" stroke="#333" stroke-width="2"/>
+                    <line x1="180" y1="15" x2="180" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="15" x2="240" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="300" y1="15" x2="300" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="360" y1="15" x2="360" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="420" y1="15" x2="420" y2="25" stroke="#333" stroke-width="1"/>
+                    <line x1="240" y1="20" x2="360" y2="20" stroke="#3b82f6" stroke-width="4"/>
+                    <circle cx="240" cy="20" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                    <circle cx="360" cy="20" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                    <!-- Labels last -->
+                    <text x="30" y="25" font-size="13" fill="#333" font-weight="bold" font-family="sans-serif">Solution:</text>
+                    <text x="180" y="40" text-anchor="middle" font-size="11" font-family="sans-serif">-4</text>
+                    <text x="240" y="40" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                    <text x="300" y="40" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                    <text x="360" y="40" text-anchor="middle" font-size="11" font-family="sans-serif">3</text>
+                    <text x="420" y="40" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+                    <text x="500" y="25" font-size="12" fill="#3b82f6" font-family="sans-serif">(-2, 3]</text>
+                </g>
+            </svg>
+            <div class="graph-caption">Whatever you do to the middle, do to all three parts. The solution is the interval from -2 (exclusive) to 3 (inclusive).</div>
+        </div>
+        
+        <div class="key-point">
+            <h4>Solving Three-Part Inequalities</h4>
+            <p>Perform the same operation on <strong>all three parts</strong> simultaneously:</p>
+            <p>If you add 5 to the middle, add 5 to the left and right.</p>
+            <p>If you divide the middle by 2, divide the left and right by 2.</p>
+            <p>If you multiply or divide by a negative, reverse <strong>both</strong> inequality signs.</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Three-Part Inequality with Sign Reversal</h4>
+            
+            <p><strong>Solve $5 \leq -2x + 1 < 11$</strong></p>
+            
+            <p>Subtract 1 from all parts:</p>
+            <p>$$4 \leq -2x < 10$$</p>
+            
+            <p>Divide all parts by $-2$. <strong>Reverse both inequality signs:</strong></p>
+            <p>$$-2 \geq x > -5$$</p>
+            
+            <p>Rewrite in standard order (smaller value on left):</p>
+            <p>$$-5 < x \leq -2$$</p>
+            
+            <p><strong>Solution:</strong> $-5 < x \leq -2$, or $(-5, -2]$</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="30" x2="260" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="30" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-7</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-5</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-3</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">-2</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+            </svg>
+            
+            <p><strong>Check:</strong> Try $x = -3$: $5 \leq -2(-3) + 1 < 11$ gives $5 \leq 7 < 11$. ✓</p>
+        </div>
+        
+        <div class="definition">
+            <h4>Summary: AND vs. OR</h4>
+            <table style="margin: 10px auto;">
+                <tr>
+                    <th>Type</th>
+                    <th>Meaning</th>
+                    <th>Graphical Result</th>
+                    <th>Interval Notation</th>
+                </tr>
+                <tr>
+                    <td><strong>AND</strong></td>
+                    <td>Both conditions must be true</td>
+                    <td>Intersection (overlap)</td>
+                    <td>Single interval: $(a, b)$</td>
+                </tr>
+                <tr>
+                    <td><strong>OR</strong></td>
+                    <td>At least one condition must be true</td>
+                    <td>Union (combine both)</td>
+                    <td>Union of intervals using $\cup$</td>
+                </tr>
+            </table>
+        </div>
+        
+        <h2 id="sec-11-6">11.6 Applications</h2>
+        
+        <p>
+            Inequalities appear whenever we deal with limits, ranges, or requirements—situations where there's no single "right" answer, but rather a range of acceptable values.
+        </p>
+        
+        <div class="example">
+            <h4>Example: Budget Constraint</h4>
+            
+            <p><strong>Problem:</strong> You're buying supplies for a project. You have 75 dollars to spend. Each supply kit costs 12 dollars, and you also need to pay a one-time shipping fee of 8 dollars. How many kits can you buy?</p>
+            
+            <p><strong>Setup:</strong> Let $n$ = number of kits. Total cost = $12n + 8$. This must be at most 75 dollars:</p>
+            <p>$$12n + 8 \leq 75$$</p>
+            
+            <p><strong>Solve:</strong></p>
+            <p>Subtract 8: $12n \leq 67$</p>
+            <p>Divide by 12: $n \leq 5.58...$</p>
+            
+            <p>Since you can't buy a fraction of a kit, and $n$ must be a whole number:</p>
+            <p><strong>Answer:</strong> You can buy at most <strong>5 kits</strong>.</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="308" y1="25" x2="308" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="80" y1="30" x2="308" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="80" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="308" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Dots for valid integer values -->
+                <circle cx="80" cy="22" r="3" fill="#10b981"/>
+                <circle cx="140" cy="22" r="3" fill="#10b981"/>
+                <circle cx="200" cy="22" r="3" fill="#10b981"/>
+                <circle cx="260" cy="22" r="3" fill="#10b981"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">0</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">2</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">4</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">5</text>
+                <text x="308" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">5.58</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">6</text>
+            </svg>
+            
+            <p><strong>Verify:</strong> 5 kits cost $12(5) + 8 = 68$ dollars. ✓ (under budget)</p>
+            <p>6 kits would cost $12(6) + 8 = 80$ dollars. ✗ (over budget)</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Grade Requirement</h4>
+            
+            <p><strong>Problem:</strong> Your test scores so far are 78, 85, and 72. You need an average of at least 80 to get a B in the class. What score do you need on the fourth (final) test?</p>
+            
+            <p><strong>Setup:</strong> Let $x$ = score on the fourth test. The average of all four tests must be at least 80:</p>
+            <p>$$\frac{78 + 85 + 72 + x}{4} \geq 80$$</p>
+            
+            <p><strong>Solve:</strong></p>
+            <p>Simplify the numerator: $\frac{235 + x}{4} \geq 80$</p>
+            <p>Multiply both sides by 4: $235 + x \geq 320$</p>
+            <p>Subtract 235: $x \geq 85$</p>
+            
+            <p><strong>Answer:</strong> You need at least <strong>85</strong> on the final test.</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="30" x2="380" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">75</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">80</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">85</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">90</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">95</text>
+            </svg>
+            
+            <p><strong>Verify:</strong> If $x = 85$: average $= \frac{235 + 85}{4} = \frac{320}{4} = 80$. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example: Temperature Range</h4>
+            
+            <p><strong>Problem:</strong> A laboratory experiment requires the temperature to stay between 15°C and 25°C. The temperature in Fahrenheit is related to Celsius by $F = \frac{9}{5}C + 32$. What is the acceptable range in Fahrenheit?</p>
+            
+            <p><strong>Setup:</strong> We need $15 \leq C \leq 25$. Substitute $C = \frac{5}{9}(F - 32)$:</p>
+            <p>$$15 \leq \frac{5}{9}(F - 32) \leq 25$$</p>
+            
+            <p><strong>Solve:</strong></p>
+            <p>Multiply all parts by $\frac{9}{5}$: $\frac{9}{5}(15) \leq F - 32 \leq \frac{9}{5}(25)$</p>
+            <p>$$27 \leq F - 32 \leq 45$$</p>
+            <p>Add 32 to all parts: $59 \leq F \leq 77$</p>
+            
+            <p><strong>Answer:</strong> The temperature must stay between <strong>59°F and 77°F</strong> (inclusive).</p>
+            
+            <svg width="400" height="60" viewBox="0 0 400 60" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <!-- Lines first -->
+                <line x1="20" y1="30" x2="380" y2="30" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="25" x2="80" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="140" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="200" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="25" x2="260" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="25" x2="320" y2="35" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="30" x2="260" y2="30" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="30" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <!-- Labels last -->
+                <text x="80" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">50°F</text>
+                <text x="140" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">59°F</text>
+                <text x="200" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">68°F</text>
+                <text x="260" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">77°F</text>
+                <text x="320" y="50" text-anchor="middle" font-size="11" font-family="sans-serif">86°F</text>
+            </svg>
+            
+            <p><strong>Verify:</strong> At 59°F: $C = \frac{5}{9}(59-32) = \frac{5}{9}(27) = 15$°C. ✓</p>
+            <p>At 77°F: $C = \frac{5}{9}(77-32) = \frac{5}{9}(45) = 25$°C. ✓</p>
+        </div>
+        
+        <h2 id="sec-11-7">11.7 Practice Problems</h2>
+        
+        <p>
+            Solve each inequality and express your answer in both inequality notation and interval notation. Show your work.
+        </p>
+        
+        <h3>Graphing Inequalities (Problems 1–4)</h3>
+        
+        <p><strong>1.</strong> Graph $x \geq -2$ on a number line and write in interval notation.</p>
+        
+        <p><strong>2.</strong> Graph $x < 4$ on a number line and write in interval notation.</p>
+        
+        <p><strong>3.</strong> Graph $-3 < x \leq 5$ on a number line and write in interval notation.</p>
+        
+        <p><strong>4.</strong> Graph $x \leq -1$ OR $x > 3$ on a number line and write in interval notation.</p>
+        
+        <h3>One-Step Inequalities (Problems 5–8)</h3>
+        
+        <p><strong>5.</strong> Solve: $x + 7 > 12$</p>
+        
+        <p><strong>6.</strong> Solve: $x - 4 \leq 9$</p>
+        
+        <p><strong>7.</strong> Solve: $-5x < 20$</p>
+        
+        <p><strong>8.</strong> Solve: $\frac{x}{-3} \geq 6$</p>
+        
+        <h3>Multi-Step Inequalities (Problems 9–12)</h3>
+        
+        <p><strong>9.</strong> Solve: $3x - 7 > 8$</p>
+        
+        <p><strong>10.</strong> Solve: $5 - 2x \leq 13$</p>
+        
+        <p><strong>11.</strong> Solve: $4(x + 2) - 3 < 2x + 9$</p>
+        
+        <p><strong>12.</strong> Solve: $\frac{2x + 5}{3} \geq 7$</p>
+        
+        <h3>Compound Inequalities (Problems 13–16)</h3>
+        
+        <p><strong>13.</strong> Solve: $-4 < 2x + 2 \leq 10$</p>
+        
+        <p><strong>14.</strong> Solve: $1 \leq 3 - x < 7$</p>
+        
+        <p><strong>15.</strong> Solve: $4x + 1 < -3$ OR $2x - 5 > 7$</p>
+        
+        <p><strong>16.</strong> Solve: $-6 \leq \frac{x - 2}{2} < 3$</p>
+        
+        <h3>Word Problems (Problems 17–20)</h3>
+        
+        <p><strong>17.</strong> A phone plan charges 25 dollars per month plus 0.05 dollars per text message. If you want to spend no more than 40 dollars per month, how many text messages can you send?</p>
+        
+        <p><strong>18.</strong> To get an A in a course, you need an average of at least 90. Your first three test scores are 88, 92, and 85. What score do you need on the fourth test to get an A?</p>
+        
+        <p><strong>19.</strong> A rental car costs 35 dollars per day plus 0.20 dollars per mile. You have a budget of 100 dollars for a one-day rental. How many miles can you drive?</p>
+        
+        <p><strong>20.</strong> A recipe works if the oven temperature is within 15°F of 350°F. Write and solve an inequality to find the acceptable temperature range.</p>
+        
+        <h3>Calculator Problems (Problems 21–23)</h3>
+        
+        <p><strong>21.</strong> Solve: $2.7x - 4.3 < 8.6$ (Round your answer to two decimal places.)</p>
+        
+        <p><strong>22.</strong> Solve: $1.5 \leq 0.4x + 0.7 \leq 3.9$ (Round your answers to two decimal places.)</p>
+        
+        <p><strong>23.</strong> A savings account pays 3.5% annual interest. You currently have 1,250 dollars and want to have at least 1,500 dollars after one year (including interest). How much more do you need to deposit? Use the formula $A = P(1 + r)$ where $A$ is the final amount, $P$ is the principal (initial deposit), and $r = 0.035$.</p>
+        
+        <hr style="margin: 40px 0;">
+        
+        <h2>Solutions</h2>
+        
+        <h3>Graphing Inequalities</h3>
+        
+        <div class="example">
+            <h4>Problem 1 Solution</h4>
+            <p><strong>Graph $x \geq -2$</strong></p>
+            <p>Closed circle at $-2$ (included), shade right.</p>
+            <p><strong>Interval notation:</strong> $[-2, \infty)$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="330" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-4</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-2</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 2 Solution</h4>
+            <p><strong>Graph $x < 4$</strong></p>
+            <p>Open circle at 4 (excluded), shade left.</p>
+            <p><strong>Interval notation:</strong> $(-\infty, 4)$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="20" y1="25" x2="260" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="260" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">3</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 3 Solution</h4>
+            <p><strong>Graph $-3 < x \leq 5$</strong></p>
+            <p>Open circle at $-3$, closed circle at 5, shade between.</p>
+            <p><strong>Interval notation:</strong> $(-3, 5]$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="80" y1="25" x2="320" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="80" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="320" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-3</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-1</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">1</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">3</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">5</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 4 Solution</h4>
+            <p><strong>Graph $x \leq -1$ OR $x > 3$</strong></p>
+            <p>Two separate regions: closed circle at $-1$ shading left, open circle at 3 shading right.</p>
+            <p><strong>Interval notation:</strong> $(-\infty, -1] \cup (3, \infty)$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="20" y1="25" x2="140" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <line x1="260" y1="25" x2="380" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-3</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-1</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">1</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">3</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">5</text>
+            </svg>
+        </div>
+        
+        <h3>One-Step Inequalities</h3>
+        
+        <div class="example">
+            <h4>Problem 5 Solution</h4>
+            <p><strong>Solve $x + 7 > 12$</strong></p>
+            <p>Subtract 7: $x > 5$</p>
+            <p><strong>Solution:</strong> $x > 5$, or $(5, \infty)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 6 Solution</h4>
+            <p><strong>Solve $x - 4 \leq 9$</strong></p>
+            <p>Add 4: $x \leq 13$</p>
+            <p><strong>Solution:</strong> $x \leq 13$, or $(-\infty, 13]$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 7 Solution</h4>
+            <p><strong>Solve $-5x < 20$</strong></p>
+            <p>Divide by $-5$ (reverse the inequality): $x > -4$</p>
+            <p><strong>Solution:</strong> $x > -4$, or $(-4, \infty)$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="330" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-6</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-4</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-2</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 8 Solution</h4>
+            <p><strong>Solve $\frac{x}{-3} \geq 6$</strong></p>
+            <p>Multiply by $-3$ (reverse the inequality): $x \leq -18$</p>
+            <p><strong>Solution:</strong> $x \leq -18$, or $(-\infty, -18]$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="20" y1="25" x2="200" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-24</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-21</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-18</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-15</text>
+            </svg>
+        </div>
+        
+        <h3>Multi-Step Inequalities</h3>
+        
+        <div class="example">
+            <h4>Problem 9 Solution</h4>
+            <p><strong>Solve $3x - 7 > 8$</strong></p>
+            <p>Add 7: $3x > 15$</p>
+            <p>Divide by 3: $x > 5$</p>
+            <p><strong>Solution:</strong> $x > 5$, or $(5, \infty)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 10 Solution</h4>
+            <p><strong>Solve $5 - 2x \leq 13$</strong></p>
+            <p>Subtract 5: $-2x \leq 8$</p>
+            <p>Divide by $-2$ (reverse): $x \geq -4$</p>
+            <p><strong>Solution:</strong> $x \geq -4$, or $[-4, \infty)$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="330" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-6</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-4</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-2</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 11 Solution</h4>
+            <p><strong>Solve $4(x + 2) - 3 < 2x + 9$</strong></p>
+            <p>Distribute: $4x + 8 - 3 < 2x + 9$</p>
+            <p>Simplify: $4x + 5 < 2x + 9$</p>
+            <p>Subtract $2x$: $2x + 5 < 9$</p>
+            <p>Subtract 5: $2x < 4$</p>
+            <p>Divide by 2: $x < 2$</p>
+            <p><strong>Solution:</strong> $x < 2$, or $(-\infty, 2)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 12 Solution</h4>
+            <p><strong>Solve $\frac{2x + 5}{3} \geq 7$</strong></p>
+            <p>Multiply by 3: $2x + 5 \geq 21$</p>
+            <p>Subtract 5: $2x \geq 16$</p>
+            <p>Divide by 2: $x \geq 8$</p>
+            <p><strong>Solution:</strong> $x \geq 8$, or $[8, \infty)$</p>
+            
+            <svg width="350" height="50" viewBox="0 0 350 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="330" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="25" x2="330" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="200" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">6</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">8</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">10</text>
+            </svg>
+        </div>
+        
+        <h3>Compound Inequalities</h3>
+        
+        <div class="example">
+            <h4>Problem 13 Solution</h4>
+            <p><strong>Solve $-4 < 2x + 2 \leq 10$</strong></p>
+            <p>Subtract 2 from all parts: $-6 < 2x \leq 8$</p>
+            <p>Divide all parts by 2: $-3 < x \leq 4$</p>
+            <p><strong>Solution:</strong> $-3 < x \leq 4$, or $(-3, 4]$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="80" y1="25" x2="320" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="80" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="320" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-3</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-1</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">1</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">3</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 14 Solution</h4>
+            <p><strong>Solve $1 \leq 3 - x < 7$</strong></p>
+            <p>Subtract 3 from all parts: $-2 \leq -x < 4$</p>
+            <p>Multiply all parts by $-1$ (reverse both inequalities): $2 \geq x > -4$</p>
+            <p>Rewrite in standard order: $-4 < x \leq 2$</p>
+            <p><strong>Solution:</strong> $-4 < x \leq 2$, or $(-4, 2]$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="80" y1="25" x2="260" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="80" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-4</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-2</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 15 Solution</h4>
+            <p><strong>Solve $4x + 1 < -3$ OR $2x - 5 > 7$</strong></p>
+            
+            <p><strong>First inequality:</strong> $4x + 1 < -3$</p>
+            <p>Subtract 1: $4x < -4$</p>
+            <p>Divide by 4: $x < -1$</p>
+            
+            <p><strong>Second inequality:</strong> $2x - 5 > 7$</p>
+            <p>Add 5: $2x > 12$</p>
+            <p>Divide by 2: $x > 6$</p>
+            
+            <p><strong>Solution:</strong> $x < -1$ OR $x > 6$, or $(-\infty, -1) \cup (6, \infty)$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="20" y1="25" x2="140" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <line x1="320" y1="25" x2="380" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="320" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-3</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-1</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">6</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 16 Solution</h4>
+            <p><strong>Solve $-6 \leq \frac{x - 2}{2} < 3$</strong></p>
+            <p>Multiply all parts by 2: $-12 \leq x - 2 < 6$</p>
+            <p>Add 2 to all parts: $-10 \leq x < 8$</p>
+            <p><strong>Solution:</strong> $-10 \leq x < 8$, or $[-10, 8)$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="60" y1="20" x2="60" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="220" y1="20" x2="220" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="300" y1="20" x2="300" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="340" y1="20" x2="340" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="60" y1="25" x2="340" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="60" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="340" cy="25" r="5" fill="white" stroke="#3b82f6" stroke-width="2"/>
+                <text x="60" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-10</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">-4</text>
+                <text x="220" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+                <text x="300" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">6</text>
+                <text x="340" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">8</text>
+            </svg>
+        </div>
+        
+        <h3>Word Problems</h3>
+        
+        <div class="example">
+            <h4>Problem 17 Solution</h4>
+            <p><strong>Phone plan: 25 dollars/month + 0.05 dollars/text, budget at most 40 dollars</strong></p>
+            
+            <p>Let $t$ = number of texts.</p>
+            <p>$$25 + 0.05t \leq 40$$</p>
+            <p>Subtract 25: $0.05t \leq 15$</p>
+            <p>Divide by 0.05: $t \leq 300$</p>
+            
+            <p><strong>Answer:</strong> You can send at most <strong>300 text messages</strong>.</p>
+            
+            <p><strong>Check:</strong> 300 texts: $25 + 0.05(300) = 25 + 15 = 40$ dollars. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 18 Solution</h4>
+            <p><strong>Need average at least 90; current scores: 88, 92, 85</strong></p>
+            
+            <p>Let $x$ = fourth test score.</p>
+            <p>$$\frac{88 + 92 + 85 + x}{4} \geq 90$$</p>
+            <p>$$\frac{265 + x}{4} \geq 90$$</p>
+            <p>Multiply by 4: $265 + x \geq 360$</p>
+            <p>Subtract 265: $x \geq 95$</p>
+            
+            <p><strong>Answer:</strong> You need at least <strong>95</strong> on the fourth test.</p>
+            
+            <p><strong>Check:</strong> If $x = 95$: average $= \frac{265 + 95}{4} = \frac{360}{4} = 90$. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 19 Solution</h4>
+            <p><strong>Rental: 35 dollars/day + 0.20 dollars/mile, budget = 100 dollars</strong></p>
+            
+            <p>Let $m$ = miles driven.</p>
+            <p>$$35 + 0.20m \leq 100$$</p>
+            <p>Subtract 35: $0.20m \leq 65$</p>
+            <p>Divide by 0.20: $m \leq 325$</p>
+            
+            <p><strong>Answer:</strong> You can drive at most <strong>325 miles</strong>.</p>
+            
+            <p><strong>Check:</strong> 325 miles: $35 + 0.20(325) = 35 + 65 = 100$ dollars. ✓</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 20 Solution</h4>
+            <p><strong>Temperature within 15°F of 350°F</strong></p>
+            
+            <p>Let $T$ = oven temperature. "Within 15°F of 350°F" means the distance from 350 is at most 15:</p>
+            <p>$$|T - 350| \leq 15$$</p>
+            
+            <p>This means: $-15 \leq T - 350 \leq 15$</p>
+            <p>Add 350: $335 \leq T \leq 365$</p>
+            
+            <p><strong>Answer:</strong> The acceptable range is <strong>335°F to 365°F</strong>, or $[335, 365]$.</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="260" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="260" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">320</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">335</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">350</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">365</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">380</text>
+            </svg>
+        </div>
+        
+        <h3>Calculator Problems</h3>
+        
+        <div class="example">
+            <h4>Problem 21 Solution</h4>
+            <p><strong>Solve $2.7x - 4.3 < 8.6$</strong></p>
+            <p>Add 4.3: $2.7x < 12.9$</p>
+            <p>Divide by 2.7: $x < 4.777...$</p>
+            <p><strong>Solution:</strong> $x < 4.78$ (rounded), or $(-\infty, 4.78)$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 22 Solution</h4>
+            <p><strong>Solve $1.5 \leq 0.4x + 0.7 \leq 3.9$</strong></p>
+            <p>Subtract 0.7 from all parts: $0.8 \leq 0.4x \leq 3.2$</p>
+            <p>Divide all parts by 0.4: $2 \leq x \leq 8$</p>
+            <p><strong>Solution:</strong> $2 \leq x \leq 8$, or $[2, 8]$</p>
+            
+            <svg width="400" height="50" viewBox="0 0 400 50" xmlns="http://www.w3.org/2000/svg" style="display: block; margin: 10px auto;">
+                <line x1="20" y1="25" x2="380" y2="25" stroke="#333" stroke-width="2"/>
+                <line x1="80" y1="20" x2="80" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="20" x2="140" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="200" y1="20" x2="200" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="260" y1="20" x2="260" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="320" y1="20" x2="320" y2="30" stroke="#333" stroke-width="1"/>
+                <line x1="140" y1="25" x2="320" y2="25" stroke="#3b82f6" stroke-width="4"/>
+                <circle cx="140" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <circle cx="320" cy="25" r="5" fill="#3b82f6" stroke="#3b82f6" stroke-width="2"/>
+                <text x="80" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">0</text>
+                <text x="140" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">2</text>
+                <text x="200" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">4</text>
+                <text x="260" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">6</text>
+                <text x="320" y="45" text-anchor="middle" font-size="10" font-family="sans-serif">8</text>
+            </svg>
+        </div>
+        
+        <div class="example">
+            <h4>Problem 23 Solution</h4>
+            <p><strong>Savings: current 1,250 dollars, want at least 1,500 dollars after 3.5% interest</strong></p>
+            
+            <p>Let $d$ = additional deposit needed. Total principal = $1250 + d$.</p>
+            <p>After interest: $(1250 + d)(1.035) \geq 1500$</p>
+            <p>Divide by 1.035: $1250 + d \geq 1449.28$</p>
+            <p>Subtract 1250: $d \geq 199.28$</p>
+            
+            <p><strong>Answer:</strong> You need to deposit at least <strong>199.28 dollars</strong> more (or round up to 199.29 dollars or 200 dollars to be safe).</p>
+            
+            <p><strong>Check:</strong> Total principal = $1250 + 199.28 = 1449.28$ dollars.</p>
+            <p>After interest: $1449.28 \times 1.035 = 1500.00$ dollars. ✓</p>
+        </div>
+        
+        <hr style="margin: 40px 0;">
+        
+        <h2>Section 11 Summary</h2>
+        
+        <div class="key-point">
+            <h4>Key Concepts</h4>
+            <p><strong>Inequalities</strong> describe ranges of values, not single answers. The four symbols are: $<$ (less than), $>$ (greater than), $\leq$ (less than or equal), $\geq$ (greater than or equal).</p>
+            
+            <p><strong>Interval notation</strong> expresses solution sets compactly:</p>
+            <ul>
+                <li>Parentheses ( ) for excluded endpoints; brackets [ ] for included endpoints</li>
+                <li>Infinity always uses parentheses: $(-\infty, 5]$ or $[3, \infty)$</li>
+            </ul>
+            
+            <p><strong>Solving inequalities</strong> works like solving equations, with one critical exception:</p>
+            <ul>
+                <li>When you multiply or divide by a <em>negative</em> number, reverse the inequality sign</li>
+            </ul>
+            
+            <p><strong>Compound inequalities</strong> combine conditions:</p>
+            <ul>
+                <li><strong>AND:</strong> Both must be true — find the intersection (overlap)</li>
+                <li><strong>OR:</strong> At least one must be true — find the union (combine both regions)</li>
+            </ul>
+        </div>
+        
+    </div>
+</body>
+</html>

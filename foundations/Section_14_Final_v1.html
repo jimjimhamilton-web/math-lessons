@@ -1,0 +1,2399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!--
+    Document Provenance:
+      Title: Mathematics Fundamentals: A Practical Foundation
+      Part: II - Introduction to Algebra
+      Section: 14 (Polynomials) - FINAL
+      Version: 1.0
+      Date: 2026-01-13
+      Guidelines Version: Technical Document Implementation v2.1
+      
+      Status: FINAL - Sections 14.1-14.3 ready for integration
+      Note: This is a standalone wrapper for proofing. Content will be
+            integrated into Math_Basics_Part_II when complete.
+      
+      Follows: Section_13_Final_v1.html (Complete Section 13)
+      
+      History:
+        Version 1.0: FINAL - Approved for integration. Fixed unclear reference
+                     to multi-variable polynomial in 14.1.
+        Draft 0.1: Initial draft of sections 14.1-14.3. Terminology,
+                   adding polynomials, subtracting polynomials. Historical
+                   note on algebra origins (al-Khwarizmi). Practice problems
+                   with full solutions for each subsection.
+    -->
+    
+    <title>Section 14: Polynomials</title>
+    
+    <!-- MathJax v4 for LaTeX equation rendering -->
+    <script>
+    window.MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true
+        },
+        chtml: {
+            displayOverflow: 'linebreak',
+            displayAlign: 'left',
+            scale: 1,
+            minScale: 0.5,
+            linebreaks: {
+                inline: true,
+                width: '100%',
+                lineleading: 0.2
+            }
+        },
+        options: {
+            enableMenu: true,
+            menuOptions: {
+                settings: {
+                    assistiveMml: true
+                }
+            }
+        }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" id="MathJax-script" async></script>
+    
+    <!-- JSXGraph 1.4.6 for geometric diagrams -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraph.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph@1.4.6/distrib/jsxgraphcore.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-nav {
+            background: #f0f9ff;
+            border: 1px solid #0284c7;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #0369a1;
+        }
+        .section-nav a {
+            color: #0284c7;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .section-nav a:hover {
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1a5f2a;
+        }
+        
+        h1 { 
+            color: #1a5f2a; 
+            border-bottom: 3px solid #2d8a4e; 
+            padding-bottom: 10px; 
+            font-size: 1.8em;
+        }
+        h2 { 
+            color: #1a5f2a; 
+            margin-top: 35px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 { 
+            color: #374151; 
+            margin-top: 25px;
+        }
+        h4 {
+            color: #4b5563;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .draft-notice {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .draft-notice h3 {
+            color: #b45309;
+            margin: 0 0 10px 0;
+        }
+        
+        .definition {
+            background-color: #e8f5e9;
+            padding: 20px;
+            border-left: 4px solid #2d8a4e;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .definition h4 {
+            color: #1a5f2a;
+            margin-top: 0;
+        }
+        
+        .key-point {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-left: 4px solid #1976d2;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .key-point h4 {
+            color: #1565c0;
+            margin-top: 0;
+        }
+        
+        .warning {
+            background-color: #fff3e0;
+            padding: 20px;
+            border-left: 4px solid #f57c00;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .example {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        .example h4 {
+            color: #495057;
+            margin-top: 0;
+            border-bottom: 1px solid #dee2e6;
+            padding-bottom: 10px;
+        }
+        
+        .historical-note {
+            background-color: #fffbeb;
+            padding: 20px;
+            border: 1px dashed #d97706;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        .historical-note::before {
+            content: "Historical Note";
+            display: block;
+            font-weight: bold;
+            color: #b45309;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+        
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #d1d5db;
+            padding: 10px 15px;
+            text-align: center;
+        }
+        th {
+            background-color: #e8f5e9;
+            color: #1a5f2a;
+            font-weight: bold;
+        }
+        td {
+            text-align: left;
+        }
+        
+        .problems {
+            background-color: #fffde7;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 2px solid #fbc02d;
+        }
+        .problems h4 {
+            margin-top: 0;
+            color: #f57f17;
+        }
+        .problem {
+            margin: 15px 0;
+            padding: 12px 15px;
+            background-color: white;
+            border-radius: 4px;
+            border: 1px solid #fff59d;
+        }
+        .problem-number {
+            font-weight: bold;
+            color: #f57f17;
+        }
+        .solution {
+            margin-top: 12px;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        
+        ul, ol { margin-left: 20px; }
+        
+        @media (max-width: 768px) {
+            .container { padding: 20px; }
+        }
+    </style>
+<body>
+    <div class="container">
+        
+        <div class="section-nav">
+            <a href="Section_13_Final_v1.html">&larr; Section 13: Systems of Linear Equations</a> | 
+            Part II: Introduction to Algebra | 
+            <span class="current">Section 14: Polynomials</span> | 
+            <a href="Section_15_Final_v1.html">Section 15: Factoring &rarr;</a>
+        </div>
+        
+        <h1>Section 14: Polynomials</h1>
+        
+        <p>
+            In Section 9, we learned to work with algebraic expressions&mdash;combinations of numbers, variables, and operations. We saw how to evaluate expressions by substituting values, and how to simplify them by combining like terms. Now we give a formal name to an important class of expressions that appears throughout mathematics: <strong>polynomials</strong>.
+        </p>
+        
+        <p>
+            Polynomials are the building blocks of algebra. They show up in area and volume calculations, in physics equations describing motion, in economics models, and in countless other applications. Learning to work with polynomials fluently&mdash;adding, subtracting, multiplying, and eventually factoring them&mdash;opens the door to solving a much wider range of problems than we could tackle with linear equations alone.
+        </p>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 14.1: WHAT IS A POLYNOMIAL? -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-14-1">14.1 What Is a Polynomial?</h2>
+        
+        <div class="definition">
+            <h4>Polynomial</h4>
+            <p>
+                A <strong>polynomial</strong> is an expression that is a sum of <strong>terms</strong>, where each term is a product of a numerical coefficient and variables raised to non-negative integer powers.
+            </p>
+            <p>
+                More simply: a polynomial is built from numbers and variables using only addition, subtraction, and multiplication&mdash;no division by variables, no square roots of variables, no variables in exponents.
+            </p>
+        </div>
+        
+        <p>
+            Here are some examples of polynomials:
+        </p>
+        
+        <ul>
+            <li>$3x + 5$</li>
+            <li>$x^2 - 4x + 7$</li>
+            <li>$2y^3 + y^2 - 3y + 1$</li>
+            <li>$5$ (a constant is a polynomial with no variable part)</li>
+            <li>$x$ (a single variable is a polynomial)</li>
+            <li>$x^2y + 3xy^2 - 2xy$ (polynomials can have multiple variables)</li>
+        </ul>
+        
+        <p>
+            And here are some expressions that are <em>not</em> polynomials:
+        </p>
+        
+        <ul>
+            <li>$\dfrac{1}{x}$ or $x^{-1}$ (negative exponent means division by $x$)</li>
+            <li>$\sqrt{x}$ or $x^{1/2}$ (fractional exponent)</li>
+            <li>$2^x$ (variable in the exponent)</li>
+            <li>$\dfrac{x+1}{x-2}$ (variable in the denominator)</li>
+        </ul>
+        
+        <h3>Anatomy of a Polynomial</h3>
+        
+        <p>
+            Let's dissect a polynomial to understand its parts. Consider:
+        </p>
+        
+        <p style="text-align: center; font-size: 1.2em;">
+            $5x^3 - 2x^2 + 7x - 4$
+        </p>
+        
+        <p>
+            <strong>Terms</strong> are the pieces being added or subtracted. This polynomial has four terms: $5x^3$, $-2x^2$, $7x$, and $-4$. Notice that we include the sign with each term&mdash;the second term is $-2x^2$, not $2x^2$.
+        </p>
+        
+        <p>
+            <strong>Coefficients</strong> are the numerical factors in each term. The coefficients here are $5$, $-2$, $7$, and $-4$. The coefficient of $x^3$ is $5$; the coefficient of $x^2$ is $-2$.
+        </p>
+        
+        <p>
+            <strong>Degree of a term</strong> is the sum of the exponents on the variables in that term. In a single-variable polynomial, this is just the exponent on the variable:
+        </p>
+        
+        <ul>
+            <li>$5x^3$ has degree 3</li>
+            <li>$-2x^2$ has degree 2</li>
+            <li>$7x$ has degree 1 (since $x = x^1$)</li>
+            <li>$-4$ has degree 0 (since $-4 = -4x^0$)</li>
+        </ul>
+        
+        <p>
+            <strong>Degree of a polynomial</strong> is the highest degree among all its terms. The polynomial $5x^3 - 2x^2 + 7x - 4$ has degree 3.
+        </p>
+        
+        <p>
+            <strong>Leading term</strong> is the term with the highest degree. Here, it's $5x^3$.
+        </p>
+        
+        <p>
+            <strong>Leading coefficient</strong> is the coefficient of the leading term. Here, it's $5$.
+        </p>
+        
+        <p>
+            <strong>Constant term</strong> is the term with no variable (degree 0). Here, it's $-4$.
+        </p>
+        
+        <h3>Standard Form</h3>
+        
+        <p>
+            A polynomial is in <strong>standard form</strong> when its terms are written in descending order of degree (highest power first). The polynomial $5x^3 - 2x^2 + 7x - 4$ is already in standard form.
+        </p>
+        
+        <p>
+            The polynomial $3 + 2x^2 - x$ is <em>not</em> in standard form. Rewriting it in standard form gives: $2x^2 - x + 3$.
+        </p>
+        
+        <h3>Classifying Polynomials</h3>
+        
+        <p>
+            Polynomials are often classified by how many terms they have:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Number of Terms</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td><strong>Monomial</strong></td>
+                <td>1</td>
+                <td>$5x^3$, &nbsp; $-2y$, &nbsp; $7$</td>
+            </tr>
+            <tr>
+                <td><strong>Binomial</strong></td>
+                <td>2</td>
+                <td>$x + 3$, &nbsp; $2x^2 - 5x$, &nbsp; $a^2 - b^2$</td>
+            </tr>
+            <tr>
+                <td><strong>Trinomial</strong></td>
+                <td>3</td>
+                <td>$x^2 + 2x + 1$, &nbsp; $3a - 2b + c$</td>
+            </tr>
+            <tr>
+                <td><strong>Polynomial</strong></td>
+                <td>Any number</td>
+                <td>(general term for all of these)</td>
+            </tr>
+        </table>
+        
+        <p>
+            Polynomials are also classified by their degree:
+        </p>
+        
+        <table>
+            <tr>
+                <th>Degree</th>
+                <th>Name</th>
+                <th>Examples</th>
+            </tr>
+            <tr>
+                <td>0</td>
+                <td><strong>Constant</strong></td>
+                <td>$7$, &nbsp; $-3$, &nbsp; $\frac{1}{2}$</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><strong>Linear</strong></td>
+                <td>$3x + 2$, &nbsp; $-y + 5$</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>Quadratic</strong></td>
+                <td>$x^2 - 4x + 3$, &nbsp; $2y^2 + 1$</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>Cubic</strong></td>
+                <td>$x^3 + x^2 - x + 1$</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td><strong>Quartic</strong></td>
+                <td>$x^4 - 1$</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td><strong>Quintic</strong></td>
+                <td>$x^5 + 2x^3 - x$</td>
+            </tr>
+        </table>
+        
+        <p>
+            The linear equations we studied in Sections 10&ndash;13 all involved polynomials of degree 1. In Section 16, we'll focus specifically on quadratic equations (degree 2), which have rich properties and many applications.
+        </p>
+        
+        <div class="historical-note">
+            <p>
+                The word "polynomial" combines Greek <em>poly-</em> ("many") with Latin <em>nomen</em> ("name" or "term")&mdash;literally "many terms."
+            </p>
+            <p>
+                The word "algebra" has a more specific origin. Around 830 CE, the Persian mathematician Muhammad ibn Musa al-Khwarizmi wrote <em>Al-Kitab al-mukhtasar fi hisab al-jabr wa'l-muqabala</em> ("The Compendious Book on Calculation by Completion and Balancing"). The Arabic word <em>al-jabr</em> ("completion" or "restoration") in the title became "algebra" when the book was translated into Latin in the 12th century.
+            </p>
+            <p>
+                Al-Khwarizmi worked at the House of Wisdom in Baghdad and systematized methods for solving equations that had been developed over centuries by Babylonian, Greek, and Indian mathematicians. His book was practical&mdash;focused on inheritance calculations, land division, and trade&mdash;and became the standard algebra text in European universities for centuries.
+            </p>
+            <p>
+                His name also gave us another word: "algorithm." A different book of his, on Hindu-Arabic numerals, was titled <em>Algoritmi de numero Indorum</em> in Latin, and "Algoritmi" evolved into our modern term for step-by-step procedures.
+            </p>
+            <p style="font-style: italic; margin-top: 15px; margin-bottom: 0;">
+                The history of algebra is explored more fully in the Math History appendix.
+            </p>
+        </div>
+        
+        <h3>Polynomials with Multiple Variables</h3>
+        
+        <p>
+            So far, most of our examples have used a single variable. Polynomials can also involve multiple variables:
+        </p>
+        
+        <p style="text-align: center;">
+            $3x^2y + 2xy^2 - 5xy + 4$
+        </p>
+        
+        <p>
+            For multi-variable polynomials, the degree of a term is the <em>sum</em> of all the exponents:
+        </p>
+        
+        <ul>
+            <li>$3x^2y$ has degree $2 + 1 = 3$</li>
+            <li>$2xy^2$ has degree $1 + 2 = 3$</li>
+            <li>$-5xy$ has degree $1 + 1 = 2$</li>
+            <li>$4$ has degree $0$</li>
+        </ul>
+        
+        <p>
+            The degree of this polynomial, $3x^2y + 2xy^2 - 5xy + 4$, is 3 (the highest term degree).
+        </p>
+        
+        <div class="problems">
+            <h4>Practice: Polynomial Terminology</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> For the polynomial $4x^3 - 7x^2 + 2x - 9$:</p>
+                <p>(a) How many terms does it have?</p>
+                <p>(b) What is the coefficient of $x^2$?</p>
+                <p>(c) What is the degree of the polynomial?</p>
+                <p>(d) What is the leading coefficient?</p>
+                <p>(e) What is the constant term?</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) Four terms: $4x^3$, $-7x^2$, $2x$, and $-9$</p>
+                    <p>(b) The coefficient of $x^2$ is $-7$ (including the negative sign)</p>
+                    <p>(c) Degree 3 (the highest exponent)</p>
+                    <p>(d) Leading coefficient is $4$ (the coefficient of the highest-degree term)</p>
+                    <p>(e) Constant term is $-9$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> Classify each polynomial by number of terms (monomial, binomial, trinomial) and by degree:</p>
+                <p>(a) $5x^2 - 3$</p>
+                <p>(b) $7y^4$</p>
+                <p>(c) $x^2 + 4x - 1$</p>
+                <p>(d) $8$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) Binomial (2 terms), quadratic (degree 2)</p>
+                    <p>(b) Monomial (1 term), quartic (degree 4)</p>
+                    <p>(c) Trinomial (3 terms), quadratic (degree 2)</p>
+                    <p>(d) Monomial (1 term), constant (degree 0)</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> Write each polynomial in standard form:</p>
+                <p>(a) $3 - 2x + x^2$</p>
+                <p>(b) $5x - x^3 + 2x^2 - 1$</p>
+                <p>(c) $y + 4y^3 - 2y^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) $x^2 - 2x + 3$</p>
+                    <p>(b) $-x^3 + 2x^2 + 5x - 1$</p>
+                    <p>(c) $4y^3 - 2y^2 + y$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> Which of the following are polynomials? For those that are not, explain why.</p>
+                <p>(a) $x^3 + 2x - \sqrt{5}$</p>
+                <p>(b) $\dfrac{3}{x} + x^2$</p>
+                <p>(c) $4x^{-2} + x$</p>
+                <p>(d) $\sqrt{x} + 1$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) <strong>Yes</strong>, this is a polynomial. The $\sqrt{5}$ is just a constant coefficient (approximately 2.236); the variables have only non-negative integer exponents.</p>
+                    <p>(b) <strong>No</strong>. The term $\frac{3}{x} = 3x^{-1}$ has a negative exponent, which means division by $x$.</p>
+                    <p>(c) <strong>No</strong>. The term $4x^{-2}$ has a negative exponent.</p>
+                    <p>(d) <strong>No</strong>. The term $\sqrt{x} = x^{1/2}$ has a fractional exponent.</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> Find the degree of each term and the degree of the polynomial $2x^2y^3 - 5xy + 3x - 7$.</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Term $2x^2y^3$: degree = $2 + 3 = 5$</p>
+                    <p>Term $-5xy$: degree = $1 + 1 = 2$</p>
+                    <p>Term $3x$: degree = $1$</p>
+                    <p>Term $-7$: degree = $0$</p>
+                    <p><strong>Degree of polynomial: 5</strong> (the highest term degree)</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 14.2: ADDING POLYNOMIALS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-14-2">14.2 Adding Polynomials</h2>
+        
+        <p>
+            Adding polynomials is something we already know how to do&mdash;it's combining like terms, which we learned in Section 9.4. The key insight remains the same: we can only combine terms that have exactly the same variable parts (the same variables raised to the same powers).
+        </p>
+        
+        <div class="key-point">
+            <h4>Adding Polynomials</h4>
+            <p>
+                To add polynomials, combine like terms by adding their coefficients. Terms are "like" if they have exactly the same variable parts.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Like terms:</strong> $3x^2$ and $-5x^2$; &nbsp; $7xy$ and $2xy$
+            </p>
+            <p>
+                <strong>Unlike terms:</strong> $3x^2$ and $3x$ (different powers); &nbsp; $xy$ and $x^2y$ (different variable parts)
+            </p>
+        </div>
+        
+        <p>
+            There are two common ways to organize the work: the horizontal method and the vertical method.
+        </p>
+        
+        <h3>Horizontal Method</h3>
+        
+        <p>
+            Write the polynomials side by side, remove parentheses, and combine like terms.
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Adding Binomials</h4>
+            <p>Add: $(3x + 5) + (2x + 4)$</p>
+            <p style="margin-top: 15px;">
+                <strong>Step 1:</strong> Remove parentheses (nothing changes because we're adding):
+            </p>
+            <p style="text-align: center;">$3x + 5 + 2x + 4$</p>
+            <p><strong>Step 2:</strong> Group like terms:</p>
+            <p style="text-align: center;">$(3x + 2x) + (5 + 4)$</p>
+            <p><strong>Step 3:</strong> Combine:</p>
+            <p style="text-align: center;">$5x + 9$</p>
+            <p><strong>Answer:</strong> $5x + 9$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Adding Trinomials</h4>
+            <p>Add: $(x^2 + 3x + 2) + (2x^2 - x + 5)$</p>
+            <p style="margin-top: 15px;">
+                Remove parentheses:
+            </p>
+            <p style="text-align: center;">$x^2 + 3x + 2 + 2x^2 - x + 5$</p>
+            <p>Group like terms:</p>
+            <p style="text-align: center;">$(x^2 + 2x^2) + (3x - x) + (2 + 5)$</p>
+            <p>Combine:</p>
+            <p style="text-align: center;">$3x^2 + 2x + 7$</p>
+            <p><strong>Answer:</strong> $3x^2 + 2x + 7$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 3: Polynomials with "Missing" Terms</h4>
+            <p>Add: $(4x^3 - 2x + 7) + (x^2 + 3x - 4)$</p>
+            <p style="margin-top: 15px;">
+                The first polynomial has no $x^2$ term; the second has no $x^3$ term. That's fine&mdash;we just combine what we can.
+            </p>
+            <p style="text-align: center;">$4x^3 - 2x + 7 + x^2 + 3x - 4$</p>
+            <p>Group like terms (the $x^3$ and $x^2$ terms have no partners):</p>
+            <p style="text-align: center;">$4x^3 + x^2 + (-2x + 3x) + (7 - 4)$</p>
+            <p>Combine:</p>
+            <p style="text-align: center;">$4x^3 + x^2 + x + 3$</p>
+            <p><strong>Answer:</strong> $4x^3 + x^2 + x + 3$</p>
+        </div>
+        
+        <h3>Vertical Method</h3>
+        
+        <p>
+            Align like terms in columns and add down each column, similar to adding multi-digit numbers.
+        </p>
+        
+        <div class="example">
+            <h4>Example 4: Adding with the Vertical Method</h4>
+            <p>Add: $(3x^2 + 5x - 2) + (x^2 - 3x + 7)$</p>
+            <p style="margin-top: 15px;">
+                Align like terms:
+            </p>
+            <pre style="font-family: 'Courier New', monospace; text-align: center; margin: 15px 0; line-height: 1.8;">
+    3x² + 5x - 2
++   x² - 3x + 7
+─────────────────
+    4x² + 2x + 5</pre>
+            <p><strong>Answer:</strong> $4x^2 + 2x + 5$</p>
+        </div>
+        
+        <p>
+            The vertical method is especially helpful when adding polynomials with many terms, or when some terms are "missing"&mdash;you can leave blanks in the appropriate columns.
+        </p>
+        
+        <div class="example">
+            <h4>Example 5: Adding Polynomials with Fractions</h4>
+            <p>Add: $\left(\dfrac{1}{2}x^2 + \dfrac{1}{3}x\right) + \left(\dfrac{1}{4}x^2 - \dfrac{2}{3}x\right)$</p>
+            <p style="margin-top: 15px;">
+                Group like terms:
+            </p>
+            <p style="text-align: center;">$\left(\dfrac{1}{2}x^2 + \dfrac{1}{4}x^2\right) + \left(\dfrac{1}{3}x - \dfrac{2}{3}x\right)$</p>
+            <p>Add the $x^2$ coefficients: $\dfrac{1}{2} + \dfrac{1}{4} = \dfrac{2}{4} + \dfrac{1}{4} = \dfrac{3}{4}$</p>
+            <p>Add the $x$ coefficients: $\dfrac{1}{3} - \dfrac{2}{3} = -\dfrac{1}{3}$</p>
+            <p><strong>Answer:</strong> $\dfrac{3}{4}x^2 - \dfrac{1}{3}x$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Adding Polynomials</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Add: $(5x + 7) + (3x - 2)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$5x + 7 + 3x - 2$</p>
+                    <p>$= (5x + 3x) + (7 - 2)$</p>
+                    <p>$= 8x + 5$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> Add: $(2x^2 - 4x + 1) + (x^2 + 5x - 3)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$2x^2 - 4x + 1 + x^2 + 5x - 3$</p>
+                    <p>$= (2x^2 + x^2) + (-4x + 5x) + (1 - 3)$</p>
+                    <p>$= 3x^2 + x - 2$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> Add: $(x^3 + 2x) + (3x^2 - x + 4)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x^3 + 2x + 3x^2 - x + 4$</p>
+                    <p>$= x^3 + 3x^2 + (2x - x) + 4$</p>
+                    <p>$= x^3 + 3x^2 + x + 4$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> Add: $(4y^3 - y^2 + 2y) + (-2y^3 + 3y^2 - y + 5)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$4y^3 - y^2 + 2y - 2y^3 + 3y^2 - y + 5$</p>
+                    <p>$= (4y^3 - 2y^3) + (-y^2 + 3y^2) + (2y - y) + 5$</p>
+                    <p>$= 2y^3 + 2y^2 + y + 5$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> Add: $\left(\dfrac{2}{3}x^2 - \dfrac{1}{2}x + 1\right) + \left(\dfrac{1}{3}x^2 + \dfrac{3}{2}x - 4\right)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x^2$ terms: $\dfrac{2}{3} + \dfrac{1}{3} = 1$</p>
+                    <p>$x$ terms: $-\dfrac{1}{2} + \dfrac{3}{2} = \dfrac{2}{2} = 1$</p>
+                    <p>Constants: $1 - 4 = -3$</p>
+                    <p><strong>Answer:</strong> $x^2 + x - 3$</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 14.3: SUBTRACTING POLYNOMIALS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-14-3">14.3 Subtracting Polynomials</h2>
+        
+        <p>
+            Subtracting polynomials requires one additional step: we must distribute the subtraction (the minus sign) to every term in the polynomial being subtracted. This changes the sign of each term in that polynomial.
+        </p>
+        
+        <div class="key-point">
+            <h4>Subtracting Polynomials</h4>
+            <p>
+                To subtract a polynomial, <strong>add its opposite</strong>. That is, change the sign of every term in the polynomial being subtracted, then combine like terms.
+            </p>
+            <p style="text-align: center; margin-top: 15px; font-size: 1.1em;">
+                $A - B = A + (-B)$
+            </p>
+        </div>
+        
+        <div class="warning">
+            <h4>Common Error: Forgetting to Distribute the Minus Sign</h4>
+            <p>The most frequent mistake when subtracting polynomials is changing the sign of only the first term instead of all terms.</p>
+            <p style="margin-top: 15px;">
+                <strong>Wrong:</strong> $(3x^2 + 2x) - (x^2 + 5x) = 3x^2 + 2x - x^2 + 5x$ &nbsp; ✗
+            </p>
+            <p>
+                <strong>Right:</strong> $(3x^2 + 2x) - (x^2 + 5x) = 3x^2 + 2x - x^2 - 5x$ &nbsp; ✓
+            </p>
+            <p style="margin-top: 10px;">
+                In the wrong version, only the $x^2$ got its sign changed. The $5x$ should also become $-5x$.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Subtracting Binomials</h4>
+            <p>Subtract: $(5x + 3) - (2x + 1)$</p>
+            <p style="margin-top: 15px;">
+                <strong>Step 1:</strong> Distribute the minus sign to both terms in the second polynomial:
+            </p>
+            <p style="text-align: center;">$5x + 3 - 2x - 1$</p>
+            <p><strong>Step 2:</strong> Combine like terms:</p>
+            <p style="text-align: center;">$(5x - 2x) + (3 - 1) = 3x + 2$</p>
+            <p><strong>Answer:</strong> $3x + 2$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 7: Subtracting Trinomials</h4>
+            <p>Subtract: $(x^2 + 4x - 3) - (2x^2 - x + 5)$</p>
+            <p style="margin-top: 15px;">
+                Distribute the minus sign (every sign in the second polynomial changes):
+            </p>
+            <p style="text-align: center;">$x^2 + 4x - 3 - 2x^2 + x - 5$</p>
+            <p>Combine like terms:</p>
+            <p style="text-align: center;">$(x^2 - 2x^2) + (4x + x) + (-3 - 5)$</p>
+            <p style="text-align: center;">$= -x^2 + 5x - 8$</p>
+            <p><strong>Answer:</strong> $-x^2 + 5x - 8$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: Subtracting with Missing Terms</h4>
+            <p>Subtract: $(3x^3 + x) - (x^3 + 2x^2 - 4x + 1)$</p>
+            <p style="margin-top: 15px;">
+                Distribute the minus sign to all four terms in the second polynomial:
+            </p>
+            <p style="text-align: center;">$3x^3 + x - x^3 - 2x^2 + 4x - 1$</p>
+            <p>Combine like terms:</p>
+            <p style="text-align: center;">$(3x^3 - x^3) - 2x^2 + (x + 4x) - 1$</p>
+            <p style="text-align: center;">$= 2x^3 - 2x^2 + 5x - 1$</p>
+            <p><strong>Answer:</strong> $2x^3 - 2x^2 + 5x - 1$</p>
+        </div>
+        
+        <h3>Vertical Method for Subtraction</h3>
+        
+        <p>
+            When using the vertical method, you can either change all signs in the second polynomial before aligning, or align first and then subtract column by column.
+        </p>
+        
+        <div class="example">
+            <h4>Example 9: Vertical Subtraction</h4>
+            <p>Subtract: $(4x^2 + 3x - 5) - (x^2 + 6x - 2)$</p>
+            <p style="margin-top: 15px;">
+                <strong>Method:</strong> Change signs, then add:
+            </p>
+            <pre style="font-family: 'Courier New', monospace; text-align: center; margin: 15px 0; line-height: 1.8;">
+    4x² + 3x - 5
+-  (x² + 6x - 2)
+─────────────────</pre>
+            <p>Change signs in the bottom polynomial:</p>
+            <pre style="font-family: 'Courier New', monospace; text-align: center; margin: 15px 0; line-height: 1.8;">
+    4x² + 3x - 5
++  -x² - 6x + 2
+─────────────────
+    3x² - 3x - 3</pre>
+            <p><strong>Answer:</strong> $3x^2 - 3x - 3$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 10: Subtracting Polynomials with Decimals</h4>
+            <p>Subtract: $(2.5x^2 + 1.8x) - (0.7x^2 + 3.2x)$</p>
+            <p style="margin-top: 15px;">
+                Distribute the minus sign:
+            </p>
+            <p style="text-align: center;">$2.5x^2 + 1.8x - 0.7x^2 - 3.2x$</p>
+            <p>Combine like terms:</p>
+            <p style="text-align: center;">$(2.5 - 0.7)x^2 + (1.8 - 3.2)x$</p>
+            <p style="text-align: center;">$= 1.8x^2 - 1.4x$</p>
+            <p><strong>Answer:</strong> $1.8x^2 - 1.4x$</p>
+        </div>
+        
+        <h3>Subtracting in Either Order</h3>
+        
+        <p>
+            Unlike addition, subtraction is <em>not</em> commutative: $A - B \neq B - A$ in general. If you reverse the order, you get the opposite result.
+        </p>
+        
+        <div class="example">
+            <h4>Example 11: Order Matters</h4>
+            <p>Compare $(3x + 5) - (x + 2)$ with $(x + 2) - (3x + 5)$.</p>
+            <p style="margin-top: 15px;">
+                <strong>First way:</strong> $(3x + 5) - (x + 2) = 3x + 5 - x - 2 = 2x + 3$
+            </p>
+            <p>
+                <strong>Second way:</strong> $(x + 2) - (3x + 5) = x + 2 - 3x - 5 = -2x - 3$
+            </p>
+            <p style="margin-top: 10px;">
+                The answers are opposites: $2x + 3$ and $-(2x + 3) = -2x - 3$.
+            </p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Subtracting Polynomials</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> Subtract: $(7x + 4) - (3x + 1)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$7x + 4 - 3x - 1$</p>
+                    <p>$= (7x - 3x) + (4 - 1)$</p>
+                    <p>$= 4x + 3$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> Subtract: $(4x^2 - 2x + 5) - (x^2 + 3x - 2)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$4x^2 - 2x + 5 - x^2 - 3x + 2$</p>
+                    <p>$= (4x^2 - x^2) + (-2x - 3x) + (5 + 2)$</p>
+                    <p>$= 3x^2 - 5x + 7$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> Subtract: $(5x^3 - 3x) - (2x^3 - x^2 + x - 4)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$5x^3 - 3x - 2x^3 + x^2 - x + 4$</p>
+                    <p>$= (5x^3 - 2x^3) + x^2 + (-3x - x) + 4$</p>
+                    <p>$= 3x^3 + x^2 - 4x + 4$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> Subtract: $(6y^2 - y + 3) - (6y^2 + 2y - 1)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$6y^2 - y + 3 - 6y^2 - 2y + 1$</p>
+                    <p>$= (6y^2 - 6y^2) + (-y - 2y) + (3 + 1)$</p>
+                    <p>$= 0 - 3y + 4$</p>
+                    <p>$= -3y + 4$</p>
+                    <p>(Note: The $y^2$ terms cancelled out, leaving a linear polynomial.)</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> Subtract: $\left(\dfrac{3}{4}x^2 + 2x\right) - \left(\dfrac{1}{4}x^2 + \dfrac{5}{2}x\right)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x^2$ terms: $\dfrac{3}{4} - \dfrac{1}{4} = \dfrac{2}{4} = \dfrac{1}{2}$</p>
+                    <p>$x$ terms: $2 - \dfrac{5}{2} = \dfrac{4}{2} - \dfrac{5}{2} = -\dfrac{1}{2}$</p>
+                    <p><strong>Answer:</strong> $\dfrac{1}{2}x^2 - \dfrac{1}{2}x$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> Subtract: $(1.5a^2 + 3.2a - 0.5) - (2.1a^2 - 1.4a + 2.5)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$1.5a^2 + 3.2a - 0.5 - 2.1a^2 + 1.4a - 2.5$</p>
+                    <p>$a^2$ terms: $1.5 - 2.1 = -0.6$</p>
+                    <p>$a$ terms: $3.2 + 1.4 = 4.6$</p>
+                    <p>Constants: $-0.5 - 2.5 = -3.0$</p>
+                    <p><strong>Answer:</strong> $-0.6a^2 + 4.6a - 3$</p>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Combined Operations</h3>
+        
+        <p>
+            Sometimes you'll need to both add and subtract polynomials in the same problem. Work left to right, being careful with signs.
+        </p>
+        
+        <div class="example">
+            <h4>Example 12: Combined Addition and Subtraction</h4>
+            <p>Simplify: $(2x^2 + 3x) + (x^2 - 5x + 1) - (4x^2 - x)$</p>
+            <p style="margin-top: 15px;">
+                Handle the addition first (no sign changes), then the subtraction (change signs):
+            </p>
+            <p style="text-align: center;">$2x^2 + 3x + x^2 - 5x + 1 - 4x^2 + x$</p>
+            <p>Combine like terms:</p>
+            <p style="text-align: center;">$(2x^2 + x^2 - 4x^2) + (3x - 5x + x) + 1$</p>
+            <p style="text-align: center;">$= -x^2 - x + 1$</p>
+            <p><strong>Answer:</strong> $-x^2 - x + 1$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Combined Operations</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> Simplify: $(3x^2 - x) - (x^2 + 2x) + (4x - 5)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$3x^2 - x - x^2 - 2x + 4x - 5$</p>
+                    <p>$= (3x^2 - x^2) + (-x - 2x + 4x) - 5$</p>
+                    <p>$= 2x^2 + x - 5$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> Simplify: $(y^3 + 2y) - (y^3 - y^2 + y) + (3y^2 - y + 1)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$y^3 + 2y - y^3 + y^2 - y + 3y^2 - y + 1$</p>
+                    <p>$= (y^3 - y^3) + (y^2 + 3y^2) + (2y - y - y) + 1$</p>
+                    <p>$= 0 + 4y^2 + 0 + 1$</p>
+                    <p>$= 4y^2 + 1$</p>
+                </div>
+            </div>
+        </div>
+        
+        
+        <h2 id="sec-14-4">14.4 Multiplying Polynomials</h2>
+        
+        <p>
+            Multiplying polynomials uses the distributive property&mdash;the same principle we've been using since Section 9. The key idea: every term in the first polynomial multiplies every term in the second polynomial.
+        </p>
+        
+        <div class="key-point">
+            <h4>Multiplying Polynomials</h4>
+            <p>
+                To multiply two polynomials, multiply each term of the first polynomial by each term of the second polynomial, then combine like terms.
+            </p>
+            <p style="margin-top: 10px;">
+                If the first polynomial has $m$ terms and the second has $n$ terms, you'll have $m \times n$ products before combining.
+            </p>
+        </div>
+        
+        <h3>Monomial &times; Polynomial</h3>
+        
+        <p>
+            The simplest case is multiplying a monomial (single term) by a polynomial. This is just the distributive property applied directly.
+        </p>
+        
+        <div class="example">
+            <h4>Example 1: Monomial Times Binomial</h4>
+            <p>Multiply: $3x(x + 4)$</p>
+            <p style="margin-top: 15px;">
+                Distribute $3x$ to each term inside the parentheses:
+            </p>
+            <p style="text-align: center;">$3x \cdot x + 3x \cdot 4 = 3x^2 + 12x$</p>
+            <p><strong>Answer:</strong> $3x^2 + 12x$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 2: Monomial Times Trinomial</h4>
+            <p>Multiply: $-2x^2(x^2 - 3x + 5)$</p>
+            <p style="margin-top: 15px;">
+                Distribute $-2x^2$ to each term:
+            </p>
+            <p style="text-align: center;">$-2x^2 \cdot x^2 + (-2x^2) \cdot (-3x) + (-2x^2) \cdot 5$</p>
+            <p style="text-align: center;">$= -2x^4 + 6x^3 - 10x^2$</p>
+            <p><strong>Answer:</strong> $-2x^4 + 6x^3 - 10x^2$</p>
+        </div>
+        
+        <h3>Binomial &times; Binomial</h3>
+        
+        <p>
+            When multiplying two binomials, each of the two terms in the first binomial must multiply each of the two terms in the second binomial. That gives $2 \times 2 = 4$ products.
+        </p>
+        
+        <div class="example">
+            <h4>Example 3: Binomial Times Binomial (Full Distribution)</h4>
+            <p>Multiply: $(x + 3)(x + 5)$</p>
+            <p style="margin-top: 15px;">
+                <strong>First term of $(x + 3)$ times both terms of $(x + 5)$:</strong>
+            </p>
+            <p style="text-align: center;">$x \cdot x + x \cdot 5 = x^2 + 5x$</p>
+            <p><strong>Second term of $(x + 3)$ times both terms of $(x + 5)$:</strong></p>
+            <p style="text-align: center;">$3 \cdot x + 3 \cdot 5 = 3x + 15$</p>
+            <p><strong>Add all four products:</strong></p>
+            <p style="text-align: center;">$x^2 + 5x + 3x + 15 = x^2 + 8x + 15$</p>
+            <p><strong>Answer:</strong> $x^2 + 8x + 15$</p>
+        </div>
+        
+        <div class="key-point">
+            <h4>The FOIL Mnemonic</h4>
+            <p>
+                For binomial &times; binomial specifically, some people use the mnemonic <strong>FOIL</strong> to remember the four products:
+            </p>
+            <ul style="margin-top: 10px;">
+                <li><strong>F</strong>irst terms: $x \cdot x = x^2$</li>
+                <li><strong>O</strong>uter terms: $x \cdot 5 = 5x$</li>
+                <li><strong>I</strong>nner terms: $3 \cdot x = 3x$</li>
+                <li><strong>L</strong>ast terms: $3 \cdot 5 = 15$</li>
+            </ul>
+            <p style="margin-top: 15px;">
+                <strong>Important:</strong> FOIL is just a memory aid for the four products in a binomial &times; binomial. It's not a separate method&mdash;it's the distributive property organized in a particular order. If you forget FOIL, you can always fall back on "every term times every term."
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Limitation:</strong> FOIL only works for binomial &times; binomial. For larger products, you must use the general distribution method.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 4: Binomial with Mixed Signs</h4>
+            <p>Multiply: $(x - 3)(x + 5)$</p>
+            <p style="margin-top: 15px;">
+                Using distribution (or FOIL):
+            </p>
+            <p style="text-align: center;">$x \cdot x + x \cdot 5 + (-3) \cdot x + (-3) \cdot 5$</p>
+            <p style="text-align: center;">$= x^2 + 5x - 3x - 15$</p>
+            <p style="text-align: center;">$= x^2 + 2x - 15$</p>
+            <p><strong>Answer:</strong> $x^2 + 2x - 15$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 5: Both Binomials with Subtraction</h4>
+            <p>Multiply: $(x - 4)(x - 2)$</p>
+            <p style="margin-top: 15px;">
+                $x \cdot x + x \cdot (-2) + (-4) \cdot x + (-4) \cdot (-2)$
+            </p>
+            <p style="text-align: center;">$= x^2 - 2x - 4x + 8$</p>
+            <p style="text-align: center;">$= x^2 - 6x + 8$</p>
+            <p><strong>Answer:</strong> $x^2 - 6x + 8$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 6: Non-Unit Leading Coefficients</h4>
+            <p>Multiply: $(2x + 1)(3x - 4)$</p>
+            <p style="margin-top: 15px;">
+                $2x \cdot 3x + 2x \cdot (-4) + 1 \cdot 3x + 1 \cdot (-4)$
+            </p>
+            <p style="text-align: center;">$= 6x^2 - 8x + 3x - 4$</p>
+            <p style="text-align: center;">$= 6x^2 - 5x - 4$</p>
+            <p><strong>Answer:</strong> $6x^2 - 5x - 4$</p>
+        </div>
+        
+        <h3>Larger Products</h3>
+        
+        <p>
+            For products larger than binomial &times; binomial, the same principle applies: every term times every term. FOIL doesn't work here&mdash;you need the general approach.
+        </p>
+        
+        <div class="example">
+            <h4>Example 7: Binomial Times Trinomial</h4>
+            <p>Multiply: $(x + 2)(x^2 - 3x + 1)$</p>
+            <p style="margin-top: 15px;">
+                The first polynomial has 2 terms; the second has 3 terms. That's $2 \times 3 = 6$ products.
+            </p>
+            <p><strong>$x$ times each term of $(x^2 - 3x + 1)$:</strong></p>
+            <p style="text-align: center;">$x \cdot x^2 + x \cdot (-3x) + x \cdot 1 = x^3 - 3x^2 + x$</p>
+            <p><strong>$2$ times each term of $(x^2 - 3x + 1)$:</strong></p>
+            <p style="text-align: center;">$2 \cdot x^2 + 2 \cdot (-3x) + 2 \cdot 1 = 2x^2 - 6x + 2$</p>
+            <p><strong>Add all products:</strong></p>
+            <p style="text-align: center;">$x^3 - 3x^2 + x + 2x^2 - 6x + 2$</p>
+            <p><strong>Combine like terms:</strong></p>
+            <p style="text-align: center;">$x^3 + (-3x^2 + 2x^2) + (x - 6x) + 2 = x^3 - x^2 - 5x + 2$</p>
+            <p><strong>Answer:</strong> $x^3 - x^2 - 5x + 2$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 8: Binomial with Fractions</h4>
+            <p>Multiply: $\left(\dfrac{1}{2}x + 3\right)(4x - 2)$</p>
+            <p style="margin-top: 15px;">
+                $\dfrac{1}{2}x \cdot 4x + \dfrac{1}{2}x \cdot (-2) + 3 \cdot 4x + 3 \cdot (-2)$
+            </p>
+            <p style="text-align: center;">$= 2x^2 - x + 12x - 6$</p>
+            <p style="text-align: center;">$= 2x^2 + 11x - 6$</p>
+            <p><strong>Answer:</strong> $2x^2 + 11x - 6$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Multiplying Polynomials</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">1.</span> Multiply: $5x(2x - 3)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$5x \cdot 2x + 5x \cdot (-3)$</p>
+                    <p>$= 10x^2 - 15x$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">2.</span> Multiply: $-3x^2(x^2 + 2x - 4)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$-3x^2 \cdot x^2 + (-3x^2) \cdot 2x + (-3x^2) \cdot (-4)$</p>
+                    <p>$= -3x^4 - 6x^3 + 12x^2$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">3.</span> Multiply: $(x + 6)(x + 2)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x^2 + 2x + 6x + 12$</p>
+                    <p>$= x^2 + 8x + 12$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">4.</span> Multiply: $(x - 5)(x + 3)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x^2 + 3x - 5x - 15$</p>
+                    <p>$= x^2 - 2x - 15$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">5.</span> Multiply: $(2x - 3)(x + 4)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$2x \cdot x + 2x \cdot 4 + (-3) \cdot x + (-3) \cdot 4$</p>
+                    <p>$= 2x^2 + 8x - 3x - 12$</p>
+                    <p>$= 2x^2 + 5x - 12$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">6.</span> Multiply: $(3x - 2)(2x - 5)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$3x \cdot 2x + 3x \cdot (-5) + (-2) \cdot 2x + (-2) \cdot (-5)$</p>
+                    <p>$= 6x^2 - 15x - 4x + 10$</p>
+                    <p>$= 6x^2 - 19x + 10$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">7.</span> Multiply: $(x - 1)(x^2 + x + 1)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$x$ times each term: $x^3 + x^2 + x$</p>
+                    <p>$-1$ times each term: $-x^2 - x - 1$</p>
+                    <p>Add: $x^3 + x^2 + x - x^2 - x - 1$</p>
+                    <p>$= x^3 - 1$</p>
+                    <p>(Note: This is an example of a "difference of cubes" factoring pattern in reverse!)</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">8.</span> Multiply: $(2y + 3)(y^2 - 2y + 4)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>$2y$ times each term: $2y^3 - 4y^2 + 8y$</p>
+                    <p>$3$ times each term: $3y^2 - 6y + 12$</p>
+                    <p>Add: $2y^3 - 4y^2 + 8y + 3y^2 - 6y + 12$</p>
+                    <p>$= 2y^3 + (-4y^2 + 3y^2) + (8y - 6y) + 12$</p>
+                    <p>$= 2y^3 - y^2 + 2y + 12$</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 14.5: SPECIAL PRODUCTS -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-14-5">14.5 Special Products</h2>
+        
+        <p>
+            Some polynomial products occur so frequently that it's worth memorizing their patterns. Recognizing these special products serves two purposes: it speeds up multiplication, and&mdash;more importantly&mdash;it prepares us for <em>factoring</em> in Section 15, where we'll reverse these patterns.
+        </p>
+        
+        <div class="looking-ahead">
+            <p>
+                <strong>Why memorize these patterns?</strong>
+            </p>
+            <ul>
+                <li><strong>Speed:</strong> Once you recognize a pattern, you can write the answer directly without multiplying out all the terms.</li>
+                <li><strong>Factoring:</strong> In Section 15, we'll reverse these patterns. When you see $x^2 - 9$, you'll recognize it as $(x + 3)(x - 3)$. When you see $x^2 + 6x + 9$, you'll recognize it as $(x + 3)^2$.</li>
+                <li><strong>Ubiquity:</strong> These patterns appear constantly in calculus, physics, engineering, and computer science.</li>
+            </ul>
+        </div>
+        
+        <h3>Special Product 1: Square of a Sum</h3>
+        
+        <div class="formula-box">
+            <h4>Square of a Sum</h4>
+            <p style="font-size: 1.3em;">$(a + b)^2 = a^2 + 2ab + b^2$</p>
+        </div>
+        
+        <p>
+            Let's verify this by multiplying it out:
+        </p>
+        
+        <p style="text-align: center;">
+            $(a + b)^2 = (a + b)(a + b)$
+        </p>
+        <p style="text-align: center;">
+            $= a \cdot a + a \cdot b + b \cdot a + b \cdot b$
+        </p>
+        <p style="text-align: center;">
+            $= a^2 + ab + ab + b^2$
+        </p>
+        <p style="text-align: center;">
+            $= a^2 + 2ab + b^2$
+        </p>
+        
+        <p>
+            The middle term $2ab$ comes from the two "cross products" ($a \cdot b$ and $b \cdot a$). This pattern has a beautiful geometric interpretation.
+        </p>
+        
+        <!-- Figure 14.1: Area Model for (a+b)^2 -->
+        <div class="figure-container">
+            <div class="graph-title">Fig. 14.1 &mdash; Area Model for $(a + b)^2$</div>
+            <div id="fig14-1" class="jxgbox" style="width:100%; max-width:400px; aspect-ratio:1; margin:0 auto;"></div>
+            <div class="graph-caption">
+                A square with side $(a + b)$ has total area $(a + b)^2$. Dividing it into four regions shows that this equals $a^2 + ab + ab + b^2 = a^2 + 2ab + b^2$.
+            </div>
+        </div>
+        
+        <script>
+        (function() {
+            const board = JXG.JSXGraph.initBoard('fig14-1', {
+                boundingbox: [-0.5, 5.5, 5.5, -0.8],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: true,
+                fullscreen: {
+                    symbol: '\u26F6',
+                    scale: 0.95
+                },
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Dimensions: a = 3, b = 2, so total side = 5
+            const a = 3;
+            const b = 2;
+            const total = a + b;
+            
+            // Draw the main square outline
+            board.create('polygon', [[0, 0], [total, 0], [total, total], [0, total]], {
+                fillColor: 'none',
+                borders: {strokeColor: '#1a5f2a', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Draw the a^2 region (bottom-left)
+            board.create('polygon', [[0, 0], [a, 0], [a, a], [0, a]], {
+                fillColor: '#bfdbfe',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#1e40af', strokeWidth: 1.5, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Draw the ab region (bottom-right)
+            board.create('polygon', [[a, 0], [total, 0], [total, a], [a, a]], {
+                fillColor: '#fde68a',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#b45309', strokeWidth: 1.5, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Draw the ab region (top-left)
+            board.create('polygon', [[0, a], [a, a], [a, total], [0, total]], {
+                fillColor: '#fde68a',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#b45309', strokeWidth: 1.5, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Draw the b^2 region (top-right)
+            board.create('polygon', [[a, a], [total, a], [total, total], [a, total]], {
+                fillColor: '#bbf7d0',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#16a34a', strokeWidth: 1.5, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Labels for regions
+            board.create('text', [a/2, a/2, 'a²'], {
+                fontSize: 18, fontWeight: 'bold', color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            board.create('text', [a + b/2, a/2, 'ab'], {
+                fontSize: 16, fontWeight: 'bold', color: '#b45309', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            board.create('text', [a/2, a + b/2, 'ab'], {
+                fontSize: 16, fontWeight: 'bold', color: '#b45309', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            board.create('text', [a + b/2, a + b/2, 'b²'], {
+                fontSize: 16, fontWeight: 'bold', color: '#16a34a', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Dimension labels
+            board.create('text', [a/2, -0.4, 'a'], {
+                fontSize: 16, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board.create('text', [a + b/2, -0.4, 'b'], {
+                fontSize: 16, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board.create('text', [-0.3, a/2, 'a'], {
+                fontSize: 16, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+            board.create('text', [-0.3, a + b/2, 'b'], {
+                fontSize: 16, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+        })();
+        </script>
+        
+        <div class="warning">
+            <h4>Critical Error: $(a + b)^2 \neq a^2 + b^2$</h4>
+            <p>
+                A very common mistake is to "distribute" the exponent and write $(a + b)^2 = a^2 + b^2$. This is <strong>wrong</strong>. The middle term $2ab$ is essential.
+            </p>
+            <p style="margin-top: 15px;">
+                <strong>Numerical check:</strong> Let $a = 3$ and $b = 4$.
+            </p>
+            <ul>
+                <li>Correct: $(3 + 4)^2 = 7^2 = 49$</li>
+                <li>Using the formula: $3^2 + 2(3)(4) + 4^2 = 9 + 24 + 16 = 49$ &nbsp; ✓</li>
+                <li>Wrong way: $3^2 + 4^2 = 9 + 16 = 25 \neq 49$ &nbsp; ✗</li>
+            </ul>
+            <p style="margin-top: 10px;">
+                <strong>Remember:</strong> Exponents do not distribute over addition. Squaring means multiplying $(a + b)$ by itself, which produces cross-product terms.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 9: Square of a Sum</h4>
+            <p>Expand: $(x + 5)^2$</p>
+            <p style="margin-top: 15px;">
+                Using the pattern $(a + b)^2 = a^2 + 2ab + b^2$ with $a = x$ and $b = 5$:
+            </p>
+            <p style="text-align: center;">$(x)^2 + 2(x)(5) + (5)^2 = x^2 + 10x + 25$</p>
+            <p><strong>Answer:</strong> $x^2 + 10x + 25$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 10: Square of a Sum with Coefficient</h4>
+            <p>Expand: $(2x + 3)^2$</p>
+            <p style="margin-top: 15px;">
+                Here $a = 2x$ and $b = 3$:
+            </p>
+            <p style="text-align: center;">$(2x)^2 + 2(2x)(3) + (3)^2 = 4x^2 + 12x + 9$</p>
+            <p><strong>Answer:</strong> $4x^2 + 12x + 9$</p>
+        </div>
+        
+        <h3>Special Product 2: Square of a Difference</h3>
+        
+        <div class="formula-box">
+            <h4>Square of a Difference</h4>
+            <p style="font-size: 1.3em;">$(a - b)^2 = a^2 - 2ab + b^2$</p>
+        </div>
+        
+        <p>
+            This is the same pattern as the square of a sum, except the middle term is negative (because $(-b) + (-b) = -2b$). Note that the last term is still $+b^2$ because $(-b)^2 = +b^2$.
+        </p>
+        
+        <div class="example">
+            <h4>Example 11: Square of a Difference</h4>
+            <p>Expand: $(x - 4)^2$</p>
+            <p style="margin-top: 15px;">
+                Using $(a - b)^2 = a^2 - 2ab + b^2$ with $a = x$ and $b = 4$:
+            </p>
+            <p style="text-align: center;">$(x)^2 - 2(x)(4) + (4)^2 = x^2 - 8x + 16$</p>
+            <p><strong>Answer:</strong> $x^2 - 8x + 16$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 12: Square of a Difference with Coefficient</h4>
+            <p>Expand: $(3x - 2)^2$</p>
+            <p style="margin-top: 15px;">
+                Here $a = 3x$ and $b = 2$:
+            </p>
+            <p style="text-align: center;">$(3x)^2 - 2(3x)(2) + (2)^2 = 9x^2 - 12x + 4$</p>
+            <p><strong>Answer:</strong> $9x^2 - 12x + 4$</p>
+        </div>
+        
+        <h3>Special Product 3: Difference of Squares</h3>
+        
+        <div class="formula-box">
+            <h4>Difference of Squares</h4>
+            <p style="font-size: 1.3em;">$(a + b)(a - b) = a^2 - b^2$</p>
+        </div>
+        
+        <p>
+            When you multiply the sum and difference of the same two terms, the middle terms cancel:
+        </p>
+        
+        <p style="text-align: center;">
+            $(a + b)(a - b) = a^2 - ab + ab - b^2 = a^2 - b^2$
+        </p>
+        
+        <p>
+            The result is remarkably simple: just the difference of the squares, with no middle term at all. This pattern also has a geometric interpretation, though it requires a bit more visualization.
+        </p>
+        
+        <!-- Figure 14.2: Area Model for Difference of Squares -->
+        <div class="figure-container">
+            <div class="graph-title">Fig. 14.2 &mdash; Area Model for $(a + b)(a - b) = a^2 - b^2$</div>
+            <div class="three-panel">
+                <div class="panel">
+                    <div id="fig14-2a" class="jxgbox" style="width:100%; max-width:200px; aspect-ratio:1; margin:0 auto;"></div>
+                    <div class="panel-label">(a) Start with square $a^2$</div>
+                </div>
+                <div class="panel">
+                    <div id="fig14-2b" class="jxgbox" style="width:100%; max-width:200px; aspect-ratio:1; margin:0 auto;"></div>
+                    <div class="panel-label">(b) Remove $b^2$; cut along dashed line</div>
+                </div>
+                <div class="panel">
+                    <div id="fig14-2c" class="jxgbox" style="width:100%; max-width:200px; aspect-ratio:1; margin:0 auto;"></div>
+                    <div class="panel-label">(c) Move top piece to form rectangle</div>
+                </div>
+            </div>
+            <div class="graph-caption">
+                The L-shaped region with area $a^2 - b^2$ can be cut and rearranged into a rectangle with dimensions $(a + b)$ by $(a - b)$.
+            </div>
+        </div>
+        
+        <script>
+        (function() {
+            // Common dimensions for all panels (consistent scale)
+            const a = 4;
+            const b = 1.5;
+            const boxSize = 5.5; // Use same bounding box for all panels
+            
+            // Panel (a): Square a^2
+            const board_a = JXG.JSXGraph.initBoard('fig14-2a', {
+                boundingbox: [-0.8, boxSize, boxSize, -0.8],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Draw the a^2 square
+            board_a.create('polygon', [[0, 0], [a, 0], [a, a], [0, a]], {
+                fillColor: '#bfdbfe',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#1e40af', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Label
+            board_a.create('text', [a/2, a/2, 'a²'], {
+                fontSize: 18, fontWeight: 'bold', color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Dimension labels
+            board_a.create('text', [a/2, -0.4, 'a'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board_a.create('text', [-0.4, a/2, 'a'], {
+                fontSize: 14, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+        })();
+        
+        (function() {
+            const a = 4;
+            const b = 1.5;
+            const boxSize = 5.5;
+            
+            // Panel (b): Square a^2 with b^2 removed, showing cut line
+            const board_b = JXG.JSXGraph.initBoard('fig14-2b', {
+                boundingbox: [-1.3, boxSize, boxSize, -0.8],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Bottom part of L (stays in place) - light blue
+            board_b.create('polygon', [[0, 0], [a, 0], [a, a - b], [0, a - b]], {
+                fillColor: '#bfdbfe',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#1e40af', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Top-left part of L (will be moved) - purple to match panel (c)
+            board_b.create('polygon', [[0, a - b], [a - b, a - b], [a - b, a], [0, a]], {
+                fillColor: '#c4b5fd',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#7c3aed', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Draw the removed b^2 square (dashed red outline, faded)
+            board_b.create('polygon', [[a - b, a - b], [a, a - b], [a, a], [a - b, a]], {
+                fillColor: '#fecaca',
+                fillOpacity: 0.4,
+                borders: {strokeColor: '#dc2626', strokeWidth: 2, dash: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Cut line (dashed) showing where to separate
+            board_b.create('segment', [[0, a - b], [a - b, a - b]], {
+                strokeColor: '#374151', strokeWidth: 2, dash: 3, fixed: true
+            });
+            
+            // Labels for the regions
+            board_b.create('text', [a/2, (a-b)/2 - 0.1, 'stays'], {
+                fontSize: 11, color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            board_b.create('text', [(a-b)/2, a - b/2, 'moves'], {
+                fontSize: 11, color: '#7c3aed', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            board_b.create('text', [a - b/2, a - b/2, 'b²'], {
+                fontSize: 12, fontWeight: 'bold', color: '#dc2626', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+            
+            // Left side dimension labels: b on top, (a-b) on bottom
+            board_b.create('text', [-0.15, a - b/2, 'b'], {
+                fontSize: 12, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+            board_b.create('text', [-0.15, (a-b)/2, 'a\u2212b'], {
+                fontSize: 12, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+            
+            // Arrow showing movement direction
+            board_b.create('arrow', [[a - b + 0.3, a - 0.2], [a + 0.7, a - 0.2]], {
+                strokeColor: '#7c3aed', strokeWidth: 2, fixed: true
+            });
+        })();
+        
+        (function() {
+            const a = 4;
+            const b = 1.5;
+            const width = a + b;  // 5.5
+            const height = a - b; // 2.5
+            
+            // Panel (c): Rearranged into rectangle (a+b) x (a-b)
+            const board_c = JXG.JSXGraph.initBoard('fig14-2c', {
+                boundingbox: [-1.3, 5.5, 6.3, -0.8],
+                axis: false,
+                showCopyright: false,
+                showNavigation: false,
+                showFullscreen: false,
+                drag: {enabled: false},
+                pan: {enabled: false},
+                zoom: {enabled: false},
+                keyboard: {enabled: false}
+            });
+            
+            // Left rectangle (was bottom of L) - same light blue
+            board_c.create('polygon', [[0, 0], [a, 0], [a, height], [0, height]], {
+                fillColor: '#bfdbfe',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#1e40af', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Right rectangle (was top-left of L, now moved) - purple to match panel (b)
+            board_c.create('polygon', [[a, 0], [width, 0], [width, height], [a, height]], {
+                fillColor: '#c4b5fd',
+                fillOpacity: 0.7,
+                borders: {strokeColor: '#7c3aed', strokeWidth: 2, fixed: true},
+                vertices: {visible: false},
+                fixed: true
+            });
+            
+            // Labels for dimensions
+            board_c.create('text', [width/2, -0.4, 'a + b'], {
+                fontSize: 13, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'middle'
+            });
+            board_c.create('text', [-0.15, height/2, 'a\u2212b'], {
+                fontSize: 13, fontWeight: 'bold', color: '#374151', fixed: true, anchorX: 'right', anchorY: 'middle'
+            });
+            
+            // Area label
+            board_c.create('text', [width/2, height/2, 'Area = (a+b)(a\u2212b)'], {
+                fontSize: 12, fontWeight: 'bold', color: '#1e40af', fixed: true, anchorX: 'middle', anchorY: 'middle'
+            });
+        })();
+        </script>
+        
+        <p>
+            The geometry shows why the formula works: the area of the L-shaped region (what remains after removing a $b \times b$ square from an $a \times a$ square) can be rearranged into a rectangle with dimensions $(a + b)$ by $(a - b)$.
+        </p>
+        
+        <div class="looking-ahead">
+            <p>
+                In Section 15, we'll use this pattern in reverse: when you see an expression like $x^2 - 25$, you'll recognize it as a difference of squares and immediately write $(x + 5)(x - 5)$.
+            </p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 13: Difference of Squares</h4>
+            <p>Multiply: $(x + 6)(x - 6)$</p>
+            <p style="margin-top: 15px;">
+                Using $(a + b)(a - b) = a^2 - b^2$ with $a = x$ and $b = 6$:
+            </p>
+            <p style="text-align: center;">$x^2 - 6^2 = x^2 - 36$</p>
+            <p><strong>Answer:</strong> $x^2 - 36$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 14: Difference of Squares with Coefficients</h4>
+            <p>Multiply: $(3x + 4)(3x - 4)$</p>
+            <p style="margin-top: 15px;">
+                Here $a = 3x$ and $b = 4$:
+            </p>
+            <p style="text-align: center;">$(3x)^2 - (4)^2 = 9x^2 - 16$</p>
+            <p><strong>Answer:</strong> $9x^2 - 16$</p>
+        </div>
+        
+        <div class="example">
+            <h4>Example 15: Difference of Squares with Two Variables</h4>
+            <p>Multiply: $(2x + 5y)(2x - 5y)$</p>
+            <p style="margin-top: 15px;">
+                Here $a = 2x$ and $b = 5y$:
+            </p>
+            <p style="text-align: center;">$(2x)^2 - (5y)^2 = 4x^2 - 25y^2$</p>
+            <p><strong>Answer:</strong> $4x^2 - 25y^2$</p>
+        </div>
+        
+        <h3>Recognizing Special Products</h3>
+        
+        <p>
+            Part of mastering these patterns is recognizing when they apply. Not every product is a special product&mdash;but when one is, you can save time by using the pattern directly.
+        </p>
+        
+        <div class="example">
+            <h4>Example 16: Which Pattern Applies?</h4>
+            <p>For each product, identify if it's a special product (and which one) or requires general multiplication:</p>
+            <p style="margin-top: 10px;">(a) $(x + 7)^2$</p>
+            <p>(b) $(x + 7)(x - 7)$</p>
+            <p>(c) $(x + 7)(x + 3)$</p>
+            <p>(d) $(x - 5)^2$</p>
+            
+            <p style="margin-top: 15px;"><strong>Solutions:</strong></p>
+            <p>(a) <strong>Square of a sum:</strong> $(x + 7)^2 = x^2 + 2(x)(7) + 7^2 = x^2 + 14x + 49$</p>
+            <p>(b) <strong>Difference of squares:</strong> $(x + 7)(x - 7) = x^2 - 7^2 = x^2 - 49$</p>
+            <p>(c) <strong>Not a special product</strong> (the binomials are different). Use distribution/FOIL:</p>
+            <p style="margin-left: 20px;">$x \cdot x + x \cdot 3 + 7 \cdot x + 7 \cdot 3 = x^2 + 3x + 7x + 21 = x^2 + 10x + 21$</p>
+            <p>(d) <strong>Square of a difference:</strong> $(x - 5)^2 = x^2 - 2(x)(5) + 5^2 = x^2 - 10x + 25$</p>
+        </div>
+        
+        <div class="problems">
+            <h4>Practice: Special Products</h4>
+            
+            <div class="problem">
+                <p><span class="problem-number">9.</span> Expand using the appropriate special product formula: $(x + 8)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Square of a sum: $a = x$, $b = 8$</p>
+                    <p>$x^2 + 2(x)(8) + 8^2 = x^2 + 16x + 64$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">10.</span> Expand: $(y - 6)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Square of a difference: $a = y$, $b = 6$</p>
+                    <p>$y^2 - 2(y)(6) + 6^2 = y^2 - 12y + 36$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">11.</span> Expand: $(x + 9)(x - 9)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Difference of squares: $a = x$, $b = 9$</p>
+                    <p>$x^2 - 81$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">12.</span> Expand: $(4x + 1)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Square of a sum: $a = 4x$, $b = 1$</p>
+                    <p>$(4x)^2 + 2(4x)(1) + 1^2 = 16x^2 + 8x + 1$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">13.</span> Expand: $(5x - 3)(5x + 3)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Difference of squares: $a = 5x$, $b = 3$</p>
+                    <p>$(5x)^2 - 3^2 = 25x^2 - 9$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">14.</span> Expand: $(2x - 7)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Square of a difference: $a = 2x$, $b = 7$</p>
+                    <p>$(2x)^2 - 2(2x)(7) + 7^2 = 4x^2 - 28x + 49$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">15.</span> Expand: $(3a + 2b)(3a - 2b)$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Difference of squares: first term = $3a$, second term = $2b$</p>
+                    <p>$(3a)^2 - (2b)^2 = 9a^2 - 4b^2$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">16.</span> Expand: $\left(x + \dfrac{1}{2}\right)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Square of a sum: $a = x$, $b = \frac{1}{2}$</p>
+                    <p>$x^2 + 2(x)\left(\frac{1}{2}\right) + \left(\frac{1}{2}\right)^2 = x^2 + x + \frac{1}{4}$</p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">17.</span> For each, identify the pattern and expand:</p>
+                <p>(a) $(x + 4)(x - 4)$</p>
+                <p>(b) $(x + 4)^2$</p>
+                <p>(c) $(x - 4)^2$</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>(a) Difference of squares: $x^2 - 16$</p>
+                    <p>(b) Square of a sum: $x^2 + 8x + 16$</p>
+                    <p>(c) Square of a difference: $x^2 - 8x + 16$</p>
+                    <p style="margin-top: 10px;"><em>Note how all three involve $x$ and $4$, but produce quite different results!</em></p>
+                </div>
+            </div>
+            
+            <div class="problem">
+                <p><span class="problem-number">18.</span> A square room has sides of length $(x + 3)$ feet. What is the area of the room in terms of $x$?</p>
+                
+                <div class="solution">
+                    <p><strong>Solution:</strong></p>
+                    <p>Area of a square = (side)$^2$</p>
+                    <p>Area $= (x + 3)^2 = x^2 + 6x + 9$ square feet</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="key-point">
+            <h4>When in Doubt: Use Distribution</h4>
+            <p>
+                If you forget the special product formulas, you can always fall back on the general distributive method&mdash;it works for all polynomial multiplication. The special formulas just make common cases faster.
+            </p>
+            <p style="margin-top: 15px;">
+                <strong>Example:</strong> Consider Problem 15, $(3a + 2b)(3a - 2b)$.
+            </p>
+            <p style="margin-top: 10px;">
+                <strong>Using the special formula:</strong> This is a difference of squares with first term $= 3a$ and second term $= 2b$:
+            </p>
+            <p style="text-align: center;">$(3a)^2 - (2b)^2 = 9a^2 - 4b^2$</p>
+            <p style="margin-top: 10px;">
+                <strong>Using distribution:</strong> Multiply every term by every term:
+            </p>
+            <p style="text-align: center;">$3a \cdot 3a + 3a \cdot (-2b) + 2b \cdot 3a + 2b \cdot (-2b)$</p>
+            <p style="text-align: center;">$= 9a^2 - 6ab + 6ab - 4b^2$</p>
+            <p style="text-align: center;">$= 9a^2 - 4b^2$</p>
+            <p style="margin-top: 10px;">
+                Both methods give the same answer. The special formula is faster once you recognize the pattern, but distribution always works.
+            </p>
+        </div>
+        </p>
+        
+        <h2 id="sec-14-6">14.6 Practice Problems</h2>
+        
+        <p>
+            These problems cover all the skills from Section 14. Full solutions follow the problem set.
+        </p>
+        
+        <!-- ======================== PROBLEMS ======================== -->
+        
+        <div class="problems-section">
+            <h3>Problems</h3>
+            
+            <h4>Terminology and Classification (Problems 1&ndash;4)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">1.</span> For the polynomial $-3x^4 + 5x^2 - x + 8$:
+                (a) What is the degree?
+                (b) What is the leading coefficient?
+                (c) What is the constant term?
+                (d) How many terms does it have?
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">2.</span> Classify each polynomial by (i) number of terms and (ii) degree:
+                (a) $7x^3 - 2x$ &nbsp;&nbsp;
+                (b) $-5$ &nbsp;&nbsp;
+                (c) $y^2 + 3y - 10$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">3.</span> Write in standard form: $4 - 3x^2 + x^4 - 2x$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">4.</span> Find the degree of the polynomial $4x^3y^2 - 2x^2y^3 + xy - 5$.
+            </div>
+            
+            <h4>Adding Polynomials (Problems 5&ndash;8)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">5.</span> Add: $(4x^2 - 3x + 7) + (2x^2 + 5x - 2)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">6.</span> Add: $(x^3 - 4x + 1) + (3x^2 + 2x - 5)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">7.</span> Add: $\left(\dfrac{2}{3}x^2 + \dfrac{1}{4}x\right) + \left(\dfrac{1}{3}x^2 - \dfrac{3}{4}x + 2\right)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">8.</span> Add: $(5a^2b - 3ab + 2) + (2a^2b + ab - 4)$
+            </div>
+            
+            <h4>Subtracting Polynomials (Problems 9&ndash;12)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">9.</span> Subtract: $(5x^2 + 2x - 3) - (2x^2 - 4x + 1)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">10.</span> Subtract: $(x^3 + 2x^2 - x) - (x^3 - 3x^2 + 2x - 5)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">11.</span> Subtract: $(8y^2 - 3y + 1) - (8y^2 + 5y - 6)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">12.</span> Simplify: $(3x^2 + 2x) - (x^2 - x) + (4x - 5)$
+            </div>
+            
+            <h4>Multiplying Polynomials (Problems 13&ndash;18)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">13.</span> Multiply: $4x^2(3x - 5)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">14.</span> Multiply: $(x + 5)(x - 2)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">15.</span> Multiply: $(3x - 4)(2x + 7)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">16.</span> Multiply: $(x + 3)(x^2 - 2x + 4)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">17.</span> Multiply: $(2x - 1)(x^2 + 3x - 2)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">18.</span> Multiply: $\left(\dfrac{1}{2}x + 4\right)(6x - 2)$
+            </div>
+            
+            <h4>Special Products (Problems 19&ndash;23)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">19.</span> Expand: $(x + 9)^2$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">20.</span> Expand: $(2x - 5)^2$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">21.</span> Expand: $(x + 7)(x - 7)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">22.</span> Expand: $(4x + 3y)(4x - 3y)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">23.</span> Identify the pattern and expand each:
+                (a) $(x - 6)^2$ &nbsp;&nbsp;
+                (b) $(x + 6)(x - 6)$ &nbsp;&nbsp;
+                (c) $(3x + 2)^2$
+            </div>
+            
+            <h4>Word Problems (Problems 24&ndash;25)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">24.</span> A rectangular garden has length $(x + 5)$ meters and width $(x + 2)$ meters. Write a polynomial expression for the area of the garden, expanded and simplified.
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">25.</span> A square has sides of length $(2x - 3)$ cm. A smaller square with sides of length $(x - 1)$ cm is cut from one corner. Write a simplified polynomial expression for the remaining area.
+            </div>
+        </div>
+        
+        <div class="calculator-note">
+            <p>The following problems involve decimals. Use a calculator as needed. Round intermediate calculations to at least 6 decimal places, and round final answers to 4 decimal places unless the answer is exact.</p>
+        </div>
+        
+        <div class="problems-section" style="border-color: #c4b5fd; background-color: #faf5ff;">
+            <h4 style="color: #7c3aed; margin-top: 0;">Calculator Problems (Problems 26&ndash;31)</h4>
+            
+            <div class="problem">
+                <span class="problem-number">26.</span> Add: $(3.5x^2 - 2.7x + 1.2) + (1.8x^2 + 4.3x - 0.9)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">27.</span> Subtract: $(6.4x^2 + 3.1x) - (2.9x^2 + 5.6x - 1.5)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">28.</span> Multiply: $(1.5x + 2.4)(2x - 1.5)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">29.</span> Add: $(0.3847x^2 - 1.2956x + 0.7123) + (0.9284x^2 + 0.4817x - 0.2935)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">30.</span> Multiply: $(2.7183x + 1.4142)(1.7321x - 0.5774)$
+            </div>
+            
+            <div class="problem">
+                <span class="problem-number">31.</span> Expand using the special product formula: $(1.6180x + 2.2361)^2$
+            </div>
+        </div>
+        
+        <!-- ======================== SOLUTIONS ======================== -->
+        
+        <div class="solutions-section">
+            <h3>Solutions</h3>
+            
+            <h4>Terminology and Classification (Problems 1&ndash;4)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 1:</strong> For $-3x^4 + 5x^2 - x + 8$:</p>
+                <p>(a) Degree 4 (highest exponent)</p>
+                <p>(b) Leading coefficient is $-3$ (coefficient of the $x^4$ term)</p>
+                <p>(c) Constant term is $8$</p>
+                <p>(d) Four terms: $-3x^4$, $5x^2$, $-x$, and $8$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 2:</strong> Classify each polynomial:</p>
+                <p>(a) $7x^3 - 2x$: Binomial (2 terms), cubic (degree 3)</p>
+                <p>(b) $-5$: Monomial (1 term), constant (degree 0)</p>
+                <p>(c) $y^2 + 3y - 10$: Trinomial (3 terms), quadratic (degree 2)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 3:</strong> Write $4 - 3x^2 + x^4 - 2x$ in standard form.</p>
+                <p>Arrange terms in descending order of degree:</p>
+                <p><strong>Answer:</strong> $x^4 - 3x^2 - 2x + 4$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 4:</strong> Find the degree of $4x^3y^2 - 2x^2y^3 + xy - 5$.</p>
+                <p>Find the degree of each term by adding exponents:</p>
+                <p>$4x^3y^2$: degree $= 3 + 2 = 5$</p>
+                <p>$-2x^2y^3$: degree $= 2 + 3 = 5$</p>
+                <p>$xy$: degree $= 1 + 1 = 2$</p>
+                <p>$-5$: degree $= 0$</p>
+                <p><strong>Answer:</strong> Degree 5</p>
+            </div>
+            
+            <h4>Adding Polynomials (Problems 5&ndash;8)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 5:</strong> $(4x^2 - 3x + 7) + (2x^2 + 5x - 2)$</p>
+                <p>$= (4x^2 + 2x^2) + (-3x + 5x) + (7 - 2)$</p>
+                <p><strong>Answer:</strong> $6x^2 + 2x + 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 6:</strong> $(x^3 - 4x + 1) + (3x^2 + 2x - 5)$</p>
+                <p>$= x^3 + 3x^2 + (-4x + 2x) + (1 - 5)$</p>
+                <p><strong>Answer:</strong> $x^3 + 3x^2 - 2x - 4$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 7:</strong> $\left(\dfrac{2}{3}x^2 + \dfrac{1}{4}x\right) + \left(\dfrac{1}{3}x^2 - \dfrac{3}{4}x + 2\right)$</p>
+                <p>$x^2$ terms: $\dfrac{2}{3} + \dfrac{1}{3} = 1$</p>
+                <p>$x$ terms: $\dfrac{1}{4} - \dfrac{3}{4} = -\dfrac{2}{4} = -\dfrac{1}{2}$</p>
+                <p>Constant: $0 + 2 = 2$</p>
+                <p><strong>Answer:</strong> $x^2 - \dfrac{1}{2}x + 2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 8:</strong> $(5a^2b - 3ab + 2) + (2a^2b + ab - 4)$</p>
+                <p>$a^2b$ terms: $5a^2b + 2a^2b = 7a^2b$</p>
+                <p>$ab$ terms: $-3ab + ab = -2ab$</p>
+                <p>Constants: $2 - 4 = -2$</p>
+                <p><strong>Answer:</strong> $7a^2b - 2ab - 2$</p>
+            </div>
+            
+            <h4>Subtracting Polynomials (Problems 9&ndash;12)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 9:</strong> $(5x^2 + 2x - 3) - (2x^2 - 4x + 1)$</p>
+                <p>Distribute the minus sign:</p>
+                <p>$= 5x^2 + 2x - 3 - 2x^2 + 4x - 1$</p>
+                <p>$= (5x^2 - 2x^2) + (2x + 4x) + (-3 - 1)$</p>
+                <p><strong>Answer:</strong> $3x^2 + 6x - 4$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 10:</strong> $(x^3 + 2x^2 - x) - (x^3 - 3x^2 + 2x - 5)$</p>
+                <p>$= x^3 + 2x^2 - x - x^3 + 3x^2 - 2x + 5$</p>
+                <p>$= (x^3 - x^3) + (2x^2 + 3x^2) + (-x - 2x) + 5$</p>
+                <p><strong>Answer:</strong> $5x^2 - 3x + 5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 11:</strong> $(8y^2 - 3y + 1) - (8y^2 + 5y - 6)$</p>
+                <p>$= 8y^2 - 3y + 1 - 8y^2 - 5y + 6$</p>
+                <p>$= (8y^2 - 8y^2) + (-3y - 5y) + (1 + 6)$</p>
+                <p><strong>Answer:</strong> $-8y + 7$</p>
+                <p>(Note: The $y^2$ terms cancelled, leaving a linear polynomial.)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 12:</strong> $(3x^2 + 2x) - (x^2 - x) + (4x - 5)$</p>
+                <p>$= 3x^2 + 2x - x^2 + x + 4x - 5$</p>
+                <p>$= (3x^2 - x^2) + (2x + x + 4x) - 5$</p>
+                <p><strong>Answer:</strong> $2x^2 + 7x - 5$</p>
+            </div>
+            
+            <h4>Multiplying Polynomials (Problems 13&ndash;18)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 13:</strong> $4x^2(3x - 5)$</p>
+                <p>$= 4x^2 \cdot 3x + 4x^2 \cdot (-5)$</p>
+                <p><strong>Answer:</strong> $12x^3 - 20x^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 14:</strong> $(x + 5)(x - 2)$</p>
+                <p>$= x \cdot x + x \cdot (-2) + 5 \cdot x + 5 \cdot (-2)$</p>
+                <p>$= x^2 - 2x + 5x - 10$</p>
+                <p><strong>Answer:</strong> $x^2 + 3x - 10$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 15:</strong> $(3x - 4)(2x + 7)$</p>
+                <p>$= 3x \cdot 2x + 3x \cdot 7 + (-4) \cdot 2x + (-4) \cdot 7$</p>
+                <p>$= 6x^2 + 21x - 8x - 28$</p>
+                <p><strong>Answer:</strong> $6x^2 + 13x - 28$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 16:</strong> $(x + 3)(x^2 - 2x + 4)$</p>
+                <p>$x$ times each term: $x^3 - 2x^2 + 4x$</p>
+                <p>$3$ times each term: $3x^2 - 6x + 12$</p>
+                <p>Add: $x^3 + (-2x^2 + 3x^2) + (4x - 6x) + 12$</p>
+                <p><strong>Answer:</strong> $x^3 + x^2 - 2x + 12$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 17:</strong> $(2x - 1)(x^2 + 3x - 2)$</p>
+                <p>$2x$ times each term: $2x^3 + 6x^2 - 4x$</p>
+                <p>$-1$ times each term: $-x^2 - 3x + 2$</p>
+                <p>Add: $2x^3 + (6x^2 - x^2) + (-4x - 3x) + 2$</p>
+                <p><strong>Answer:</strong> $2x^3 + 5x^2 - 7x + 2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 18:</strong> $\left(\dfrac{1}{2}x + 4\right)(6x - 2)$</p>
+                <p>$= \dfrac{1}{2}x \cdot 6x + \dfrac{1}{2}x \cdot (-2) + 4 \cdot 6x + 4 \cdot (-2)$</p>
+                <p>$= 3x^2 - x + 24x - 8$</p>
+                <p><strong>Answer:</strong> $3x^2 + 23x - 8$</p>
+            </div>
+            
+            <h4>Special Products (Problems 19&ndash;23)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 19:</strong> $(x + 9)^2$</p>
+                <p>Square of a sum: $(a + b)^2 = a^2 + 2ab + b^2$</p>
+                <p>$= x^2 + 2(x)(9) + 9^2$</p>
+                <p><strong>Answer:</strong> $x^2 + 18x + 81$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 20:</strong> $(2x - 5)^2$</p>
+                <p>Square of a difference: $(a - b)^2 = a^2 - 2ab + b^2$</p>
+                <p>$= (2x)^2 - 2(2x)(5) + 5^2$</p>
+                <p><strong>Answer:</strong> $4x^2 - 20x + 25$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 21:</strong> $(x + 7)(x - 7)$</p>
+                <p>Difference of squares: $(a + b)(a - b) = a^2 - b^2$</p>
+                <p><strong>Answer:</strong> $x^2 - 49$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 22:</strong> $(4x + 3y)(4x - 3y)$</p>
+                <p>Difference of squares with $a = 4x$ and $b = 3y$:</p>
+                <p>$= (4x)^2 - (3y)^2$</p>
+                <p><strong>Answer:</strong> $16x^2 - 9y^2$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 23:</strong> Identify pattern and expand:</p>
+                <p>(a) $(x - 6)^2$ &mdash; Square of difference:</p>
+                <p>$= x^2 - 2(x)(6) + 36 = x^2 - 12x + 36$</p>
+                <p>(b) $(x + 6)(x - 6)$ &mdash; Difference of squares:</p>
+                <p>$= x^2 - 36$</p>
+                <p>(c) $(3x + 2)^2$ &mdash; Square of sum:</p>
+                <p>$= (3x)^2 + 2(3x)(2) + 4 = 9x^2 + 12x + 4$</p>
+            </div>
+            
+            <h4>Word Problems (Problems 24&ndash;25)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 24:</strong> Garden with length $(x + 5)$ m and width $(x + 2)$ m.</p>
+                <p>Area = length $\times$ width</p>
+                <p>$= (x + 5)(x + 2)$</p>
+                <p>$= x^2 + 2x + 5x + 10$</p>
+                <p><strong>Answer:</strong> $x^2 + 7x + 10$ square meters</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 25:</strong> Large square $(2x - 3)$ cm, small square $(x - 1)$ cm removed.</p>
+                <p>Area of large square: $(2x - 3)^2 = 4x^2 - 12x + 9$</p>
+                <p>Area of small square: $(x - 1)^2 = x^2 - 2x + 1$</p>
+                <p>Remaining area = large $-$ small:</p>
+                <p>$= (4x^2 - 12x + 9) - (x^2 - 2x + 1)$</p>
+                <p>$= 4x^2 - 12x + 9 - x^2 + 2x - 1$</p>
+                <p><strong>Answer:</strong> $3x^2 - 10x + 8$ square cm</p>
+            </div>
+            
+            <h4>Calculator Problems (Problems 26&ndash;31)</h4>
+            
+            <div class="solution">
+                <p><strong>Problem 26:</strong> $(3.5x^2 - 2.7x + 1.2) + (1.8x^2 + 4.3x - 0.9)$</p>
+                <p>$x^2$ terms: $3.5 + 1.8 = 5.3$</p>
+                <p>$x$ terms: $-2.7 + 4.3 = 1.6$</p>
+                <p>Constants: $1.2 - 0.9 = 0.3$</p>
+                <p><strong>Answer:</strong> $5.3x^2 + 1.6x + 0.3$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 27:</strong> $(6.4x^2 + 3.1x) - (2.9x^2 + 5.6x - 1.5)$</p>
+                <p>$= 6.4x^2 + 3.1x - 2.9x^2 - 5.6x + 1.5$</p>
+                <p>$x^2$ terms: $6.4 - 2.9 = 3.5$</p>
+                <p>$x$ terms: $3.1 - 5.6 = -2.5$</p>
+                <p><strong>Answer:</strong> $3.5x^2 - 2.5x + 1.5$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 28:</strong> $(1.5x + 2.4)(2x - 1.5)$</p>
+                <p>$= 1.5x \cdot 2x + 1.5x \cdot (-1.5) + 2.4 \cdot 2x + 2.4 \cdot (-1.5)$</p>
+                <p>$= 3x^2 - 2.25x + 4.8x - 3.6$</p>
+                <p><strong>Answer:</strong> $3x^2 + 2.55x - 3.6$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 29:</strong> $(0.3847x^2 - 1.2956x + 0.7123) + (0.9284x^2 + 0.4817x - 0.2935)$</p>
+                <p>$x^2$ terms: $0.3847 + 0.9284 = 1.3131$</p>
+                <p>$x$ terms: $-1.2956 + 0.4817 = -0.8139$</p>
+                <p>Constants: $0.7123 - 0.2935 = 0.4188$</p>
+                <p><strong>Answer:</strong> $1.3131x^2 - 0.8139x + 0.4188$</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 30:</strong> $(2.7183x + 1.4142)(1.7321x - 0.5774)$</p>
+                <p>$= 2.7183 \cdot 1.7321 \cdot x^2 + 2.7183 \cdot (-0.5774) \cdot x + 1.4142 \cdot 1.7321 \cdot x + 1.4142 \cdot (-0.5774)$</p>
+                <p>$x^2$ term: $2.7183 \times 1.7321 = 4.708279...$</p>
+                <p>$x$ terms: $-1.569525... + 2.449346... = 0.879821...$</p>
+                <p>Constant: $-0.816553...$</p>
+                <p><strong>Answer:</strong> $4.7083x^2 + 0.8798x - 0.8166$ (rounded to 4 decimal places)</p>
+            </div>
+            
+            <div class="solution">
+                <p><strong>Problem 31:</strong> $(1.6180x + 2.2361)^2$</p>
+                <p>Square of a sum: $a^2 + 2ab + b^2$ where $a = 1.6180x$ and $b = 2.2361$</p>
+                <p>$a^2 = (1.6180)^2 x^2 = 2.617924x^2$</p>
+                <p>$2ab = 2 \times 1.6180 \times 2.2361 \cdot x = 7.235892...x$</p>
+                <p>$b^2 = (2.2361)^2 = 5.000143...$</p>
+                <p><strong>Answer:</strong> $2.6179x^2 + 7.2359x + 5.0001$ (rounded to 4 decimal places)</p>
+            </div>
+        </div>
+        
+        <!-- ============================================================ -->
+        <!-- SECTION 14 SUMMARY -->
+        <!-- ============================================================ -->
+        
+        <h2 id="sec-14-summary">Section 14 Summary</h2>
+        
+        <div class="summary-box">
+            <h3>Key Vocabulary</h3>
+            
+            <table style="width: 100%;">
+                <tr>
+                    <th style="width: 30%;">Term</th>
+                    <th>Definition</th>
+                </tr>
+                <tr>
+                    <td><strong>Polynomial</strong></td>
+                    <td>An expression that is a sum of terms, where each term is a coefficient times variables raised to non-negative integer powers</td>
+                </tr>
+                <tr>
+                    <td><strong>Term</strong></td>
+                    <td>A single piece of a polynomial (e.g., $3x^2$, $-5x$, $7$)</td>
+                </tr>
+                <tr>
+                    <td><strong>Coefficient</strong></td>
+                    <td>The numerical factor in a term</td>
+                </tr>
+                <tr>
+                    <td><strong>Degree</strong></td>
+                    <td>Of a term: the sum of exponents on variables. Of a polynomial: the highest term degree</td>
+                </tr>
+                <tr>
+                    <td><strong>Leading coefficient</strong></td>
+                    <td>The coefficient of the highest-degree term</td>
+                </tr>
+                <tr>
+                    <td><strong>Standard form</strong></td>
+                    <td>Terms written in descending order of degree</td>
+                </tr>
+                <tr>
+                    <td><strong>Monomial</strong></td>
+                    <td>A polynomial with one term</td>
+                </tr>
+                <tr>
+                    <td><strong>Binomial</strong></td>
+                    <td>A polynomial with two terms</td>
+                </tr>
+                <tr>
+                    <td><strong>Trinomial</strong></td>
+                    <td>A polynomial with three terms</td>
+                </tr>
+            </table>
+            
+            <h4>Key Skills</h4>
+            
+            <ul>
+                <li><strong>Adding polynomials:</strong> Combine like terms (same variable parts)</li>
+                <li><strong>Subtracting polynomials:</strong> Distribute the minus sign to all terms being subtracted, then combine like terms</li>
+                <li><strong>Multiplying polynomials:</strong> Multiply each term of the first polynomial by each term of the second, then combine like terms</li>
+            </ul>
+            
+            <h4>Special Products</h4>
+            
+            <div class="formula-box" style="margin: 15px 0;">
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Square of a Sum:</strong> &nbsp; $(a + b)^2 = a^2 + 2ab + b^2$</p>
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Square of a Difference:</strong> &nbsp; $(a - b)^2 = a^2 - 2ab + b^2$</p>
+                <p style="font-size: 1.1em; margin: 10px 0;"><strong>Difference of Squares:</strong> &nbsp; $(a + b)(a - b) = a^2 - b^2$</p>
+            </div>
+            
+            <h4>Common Errors to Avoid</h4>
+            
+            <ul>
+                <li><strong>Forgetting to distribute the minus sign:</strong> When subtracting $(x^2 + 3x)$, change <em>both</em> signs: $-x^2 - 3x$</li>
+                <li><strong>Missing the middle term when squaring:</strong> $(a + b)^2 \neq a^2 + b^2$. Don't forget $2ab$!</li>
+                <li><strong>Confusing addition and multiplication of exponents:</strong> $x^2 + x^3 \neq x^5$ (can't combine unlike terms), but $x^2 \cdot x^3 = x^5$</li>
+                <li><strong>Using FOIL for non-binomials:</strong> FOIL only works for binomial $\times$ binomial. For larger products, use general distribution.</li>
+            </ul>
+        </div>
+        
+        <div class="looking-ahead">
+            <p>
+                <strong>Section 15: Factoring</strong> reverses the skills from this section. Instead of expanding $(x + 3)(x + 5)$ into $x^2 + 8x + 15$, we'll start with $x^2 + 8x + 15$ and write it as $(x + 3)(x + 5)$.
+            </p>
+            <p style="margin-top: 10px;">
+                The special products become especially important:
+            </p>
+            <ul>
+                <li>Seeing $x^2 - 49$ and recognizing it as $(x + 7)(x - 7)$</li>
+                <li>Seeing $x^2 + 10x + 25$ and recognizing it as $(x + 5)^2$</li>
+            </ul>
+            <p style="margin-top: 10px;">
+                Factoring is essential for solving quadratic equations in Section 16.
+            </p>
+        </div>
+        
+        <p style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; color: #666; font-style: italic;">
+            End of Section 14: Polynomials
+        </p>
+        
+    </div>
+
+</body>
+</html>
