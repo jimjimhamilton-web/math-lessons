@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathematics Fundamentals: A Practical Foundation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background-image: url('010_7A.JPG');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-color: #5a7a8a;
+            color: #333;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.92);
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: opacity 0.3s ease;
+        }
+        
+        .container.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .toggle-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+            transition: background-color 0.2s ease;
+        }
+        
+        .toggle-button:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .photo-credit {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .photo-credit.visible {
+            opacity: 1;
+        }
+        
+        .title-section {
+            text-align: center;
+            padding: 40px 20px;
+            margin: -40px -40px 30px -40px;
+            background: linear-gradient(135deg, #d4edda 0%, #e8f5e9 100%);
+            border-bottom: 3px solid #2d8a4e;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        h1 {
+            font-size: 2em;
+            color: #1a5f2a;
+            margin: 0 0 10px 0;
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #2d8a4e;
+            margin-bottom: 15px;
+        }
+        
+        .authors {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        
+        .version {
+            font-size: 0.95em;
+            color: #777;
+        }
+        
+        h2 {
+            color: #1a5f2a;
+            margin-top: 30px;
+            border-bottom: 2px solid #c3e6cb;
+            padding-bottom: 8px;
+        }
+        
+        .part-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .part-list li {
+            margin: 15px 0;
+            padding: 15px 20px;
+            background-color: #f8fdf9;
+            border-left: 4px solid #2d8a4e;
+            border-radius: 4px;
+        }
+        
+        .part-list a {
+            color: #1a5f2a;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .part-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .tbs {
+            color: #888;
+            font-style: italic;
+        }
+        
+        .back-link {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .back-link a {
+            color: #1a5f2a;
+            text-decoration: none;
+        }
+        
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <button class="toggle-button" onclick="toggleContent()">View Photo</button>
+    <div class="photo-credit">Wind River Range, Wyoming</div>
+    
+    <div class="container">
+        <div class="title-section">
+            <h1>Mathematics Fundamentals</h1>
+            <div class="subtitle">A Practical Foundation</div>
+            <div class="authors">By Claude Sonnet 4.5, Claude Opus 4.5, and Jim Hamilton</div>
+            <div class="version">Version 1.0 — December 2025</div>
+        </div>
+        
+        <h2>Contents</h2>
+        
+        <ul class="part-list">
+            <li>
+                <a href="Math_Basics_Part_I_v6.html">Part I: Arithmetic Foundations</a>
+            </li>
+            <li>
+                <a href="Math_Basics_Part_II/Part_II_Introduction_to_Algebra.html">Part II: Introduction to Algebra</a>
+            </li>
+            <li>
+                <span class="tbs">Part III: Geometry Essentials — TBS</span>
+            </li>
+            <li>
+                <span class="tbs">Part IV: Additional Topics — TBS</span>
+            </li>
+        </ul>
+        
+        <div class="back-link">
+            <a href="../index.html">← Back to Main Page</a>
+        </div>
+    </div>
+    
+    <script>
+        function toggleContent() {
+            const container = document.querySelector('.container');
+            const button = document.querySelector('.toggle-button');
+            const credit = document.querySelector('.photo-credit');
+            
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                credit.classList.remove('visible');
+                button.textContent = 'View Photo';
+            } else {
+                container.classList.add('hidden');
+                credit.classList.add('visible');
+                button.textContent = 'Show Content';
+            }
+        }
+    </script>
+</body>
+</html>
