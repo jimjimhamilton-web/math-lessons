@@ -233,37 +233,50 @@
             border-bottom: none;
         }
     .section-nav {
-        background: #f0f9ff;
-        border: 1px solid #0284c7;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
         padding: 15px 20px;
-        margin-bottom: 30px;
+        border-radius: 8px;
+        margin: 30px 0;
         text-align: center;
         font-size: 0.95em;
-        color: #0369a1;
+        border: 1px solid #a5d6a7;
     }
     .section-nav a {
-        color: #0284c7;
+        color: #1a5f2a;
         text-decoration: none;
         font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
     }
     .section-nav a:hover {
+        background-color: rgba(255, 255, 255, 0.6);
         text-decoration: underline;
     }
     .section-nav .current {
         font-weight: 600;
         color: #1a5f2a;
+        font-style: italic;
+    }
+    .section-nav .separator {
+        margin: 0 8px;
+        color: #666;
     }
     </style>
 </head>
 <body>
     <div class="container">
     <div class="section-nav">
-        <a href="Section_15_Final_v1.html">&larr; Section 15: Factoring</a> | 
-        Part II: Introduction to Algebra | 
-        <span class="current">Section 16: Quadratic Equations</span> | 
-        <a href="Section_17_Final_v1.html">Section 17: Functions &rarr;</a>
-    </div>
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_15_Final_v1.html">← Section 15</a>
+            <span class="separator">|</span>
+            <span class="current">Section 16: Quadratic Equations</span>
+            <span class="separator">|</span>
+            <a href="Section_17_Final_v2.html">Section 17 →</a>
+        </div>
 
         
         <!-- ============================================================ -->
@@ -4008,7 +4021,21 @@ print(f"\nBall 2: {result2[0]:.2f} s, {result2[1]:.2f} ft max, {result2[2]:.2f} 
             End of Section 16 (Quadratic Equations). Section 17 continues with Functions.
         </p>
         
+
+
+        <!-- Footer Navigation -->
+        <div class="section-nav">
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_15_Final_v1.html">← Section 15</a>
+            <span class="separator">|</span>
+            <span class="current">Section 16: Quadratic Equations</span>
+            <span class="separator">|</span>
+            <a href="Section_17_Final_v2.html">Section 17 →</a>
+        </div>
+        
     </div>
-    
 </body>
 </html>

@@ -371,26 +371,34 @@
             fill: none;
         }
     .section-nav {
-        background: #f0f9ff;
-        border: 1px solid #0284c7;
-        border-radius: 8px;
+        background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
         padding: 15px 20px;
-        margin-bottom: 30px;
+        border-radius: 8px;
+        margin: 30px 0;
         text-align: center;
         font-size: 0.95em;
-        color: #0369a1;
+        border: 1px solid #a5d6a7;
     }
     .section-nav a {
-        color: #0284c7;
+        color: #1a5f2a;
         text-decoration: none;
         font-weight: 500;
+        padding: 4px 8px;
+        border-radius: 4px;
+        transition: background-color 0.2s;
     }
     .section-nav a:hover {
+        background-color: rgba(255, 255, 255, 0.6);
         text-decoration: underline;
     }
     .section-nav .current {
         font-weight: 600;
         color: #1a5f2a;
+        font-style: italic;
+    }
+    .section-nav .separator {
+        margin: 0 8px;
+        color: #666;
     }
         .transform-step {
             text-align: center;
@@ -418,10 +426,14 @@
 <body>
     <div class="container">
     <div class="section-nav">
-        <a href="Section_16_Final_v1.html">&larr; Section 16: Quadratic Equations</a> | 
-        Part II: Introduction to Algebra | 
-        <span class="current">Section 17: Functions</span>
-    </div>
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_16_Final_v1.html">← Section 16</a>
+            <span class="separator">|</span>
+            <span class="current">Section 17: Functions</span>
+        </div>
 
         
         <h1>Section 17: Functions</h1>
@@ -5064,6 +5076,19 @@
         
         <hr style="margin-top: 40px; border: none; border-top: 2px solid #e5e7eb;">
         
+        
+
+
+        <!-- Footer Navigation -->
+        <div class="section-nav">
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_16_Final_v1.html">← Section 16</a>
+            <span class="separator">|</span>
+            <span class="current">Section 17: Functions</span>
+        </div>
         
     </div>
 </body>

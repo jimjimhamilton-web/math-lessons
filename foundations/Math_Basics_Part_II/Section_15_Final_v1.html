@@ -130,26 +130,34 @@
         }
         
         .section-nav {
-            background: #f0f9ff;
-            border: 1px solid #0284c7;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
             padding: 15px 20px;
-            margin-bottom: 30px;
+            border-radius: 8px;
+            margin: 30px 0;
             text-align: center;
             font-size: 0.95em;
-            color: #0369a1;
+            border: 1px solid #a5d6a7;
         }
         .section-nav a {
-            color: #0284c7;
+            color: #1a5f2a;
             text-decoration: none;
             font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
         }
         .section-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.6);
             text-decoration: underline;
         }
         .section-nav .current {
             font-weight: 600;
             color: #1a5f2a;
+            font-style: italic;
+        }
+        .section-nav .separator {
+            margin: 0 8px;
+            color: #666;
         }
         
         .definition {
@@ -340,10 +348,15 @@
     <div class="container">
         
         <div class="section-nav">
-            <a href="Section_14_Final_v1.html">&larr; Section 14: Polynomials</a> | 
-            Part II: Introduction to Algebra | 
-            <span class="current">Section 15: Factoring</span> | 
-            <a href="Section_16_Final_v1.html">Section 16: Quadratic Equations &rarr;</a>
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_14_Final_v1.html">← Section 14</a>
+            <span class="separator">|</span>
+            <span class="current">Section 15: Factoring</span>
+            <span class="separator">|</span>
+            <a href="Section_16_Final_v1.html">Section 16 →</a>
         </div>
         
         <h1>Section 15: Factoring</h1>
@@ -3025,7 +3038,21 @@
             End of Section 15: Factoring
         </p>
         
-    </div>
 
+
+        <!-- Footer Navigation -->
+        <div class="section-nav">
+            <a href="../../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Part_II_Introduction_to_Algebra.html">📚 Part II Contents</a>
+            <span class="separator">|</span>
+            <a href="Section_14_Final_v1.html">← Section 14</a>
+            <span class="separator">|</span>
+            <span class="current">Section 15: Factoring</span>
+            <span class="separator">|</span>
+            <a href="Section_16_Final_v1.html">Section 16 →</a>
+        </div>
+        
+    </div>
 </body>
 </html>
