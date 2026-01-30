@@ -319,6 +319,37 @@
             color: #856404;
         }
         
+        .section-nav {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 0.95em;
+            border: 1px solid #93c5fd;
+        }
+        .section-nav a {
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .section-nav a:hover {
+            background-color: rgba(255, 255, 255, 0.6);
+            text-decoration: underline;
+        }
+        .section-nav .current {
+            font-weight: 600;
+            color: #1e40af;
+            font-style: italic;
+        }
+        .section-nav .separator {
+            margin: 0 8px;
+            color: #666;
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 768px) {
             body {
@@ -359,6 +390,17 @@
             <div class="subtitle">An Historical Perspective</div>
             <div class="module-info">Module A1: From Counting to Coordinates</div>
             <div class="version-info">Version 4 - December 12, 2025</div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="section-nav">
+            <a href="../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Calculus_Lesson_Title20251226.html">📚 Calculus</a>
+            <span class="separator">|</span>
+            <span class="current">Module A1: From Counting to Coordinates</span>
+            <span class="separator">|</span>
+            <a href="Foundations_Module_A2_v5_20251219.html">Module A2 →</a>
         </div>
         
         <!-- Table of Contents -->
@@ -1598,6 +1640,17 @@
         <p>
             These questions drove nineteenth-century mathematics toward rigor. The answers transformed not only our understanding of numbers but our understanding of mathematics itself. That story continues in the modules to come.
         </p>
+        
+        <!-- Navigation -->
+        <div class="section-nav">
+            <a href="../index.html">🏠 Home</a>
+            <span class="separator">|</span>
+            <a href="Calculus_Lesson_Title20251226.html">📚 Calculus</a>
+            <span class="separator">|</span>
+            <span class="current">Module A1: From Counting to Coordinates</span>
+            <span class="separator">|</span>
+            <a href="Foundations_Module_A2_v5_20251219.html">Module A2 →</a>
+        </div>
         
     </div>
 </body>
